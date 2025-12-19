@@ -180,7 +180,7 @@ def main(args):
     
     # Unfreeze x2_vit_block
     for p in model.x2_vit_block.parameters():
-        p.requires_grad = False
+        p.requires_grad = True
         
     # Unfreeze projections if they exist
     if model.x2_vit_proj_in is not None:
