@@ -369,7 +369,8 @@ class DiT(nn.Module):
         # Pool x2 from shape (N, 4T, D) to (N, T, D) to match x
         # Need to transpose for avg_pool1d which expects (N, C, L) format
         x2 = x2.transpose(1, 2)  # (N, D, 4T)
-        x2 = torch.avg_pool1d(x2, kernel_size=4, stride=4) 
+        # x2 = torch.avg_pool1d(x2, kernel_size=4, stride=4) # my approach
+        x2 = -torch.max_pool1d(-x2, kernel_size=4, stride=4) # min pooling (rezghi approach)
         x2 = x2.transpose(1, 2)  # (N, T, D)
         # Inject positional info so x2 tokens carry spatial cues like x
         x2 = x2 + self.pos_embed # turn off for now because it increases FID
