@@ -381,28 +381,34 @@ class DiT(nn.Module):
         t = self.t_embedder(t)                   # (N, D)
         y = self.y_embedder(y, self.training)    # (N, D)
         c = t + y                                # (N, D)
-        # Pool x2 from shape (N, 5T, D) to (N, T, D) to match x
-        # Extract CLS tokens before pooling: take every 5th row starting from index 4
-        x2 = x2[:, 4::5]  # (N, T, D) - Extract CLS tokens
-        # self.x2_cls_tokens.data = x2_cls.data
-        # Need to transpose for avg_pool1d which expects (N, C, L) format
-        # x2 = x2.transpose(1, 2)  # (N, D, 5T)
-        # # x2 = torch.avg_pool1d(x2, kernel_size=5, stride=5) # my approach
-        # x2 = -torch.max_pool1d(-x2, kernel_size=5, stride=5) # min pooling (rezghi approach)
-        # x2 = x2.transpose(1, 2)  # (N, T, D)
         # Inject positional info so x2 tokens carry spatial cues like x
         # x2 = x2 + self.pos_embed # turn off for now because it increases FID
         # Optionally condition x2 on c via FiLM before the ViT block
         if self.x2_film is not None:
             shift, scale = self.x2_film(c).chunk(2, dim=1)
             x2 = modulate(x2, shift, scale)
-        # Apply ViT block to x2 to ensure same processing as x
+        # Apply ViT block to x2 (with CLS tokens): (N, 5T, D) -> (N, 5T, D)
         # Use projection layers if dimensions don't match
         if self.x2_vit_proj_in is not None:
             x2 = self.x2_vit_proj_in(x2)  # Project to pre-trained ViT dimension
-        x2 = self.x2_vit_block(x2)  # (N, T, D) - processed by pre-trained ViT block
+        x2 = self.x2_vit_block(x2)  # (N, 5T, D) - processed by pre-trained ViT block
         if self.x2_vit_proj_out is not None:
             x2 = self.x2_vit_proj_out(x2)  # Project back to hidden_size
+        
+        # Extract CLS tokens after ViT processing: take every 5th row starting from index 4
+        x2_cls = x2[:, 4::5]  # (N, T, D) - Extract CLS tokens
+        
+        # Remove CLS tokens from x2: reshape to (N, T, 5, D) and take only first 4 (non-CLS) tokens
+        x2 = x2.reshape(N, T, 5, D)
+        x2 = x2[:, :, :4, :]  # Remove CLS tokens: (N, T, 4, D)
+        x2 = x2.reshape(N, 4 * T, D)  # (N, 4T, D)
+        
+        # Pool x2 from shape (N, 4T, D) to (N, T, D) to match x
+        # Need to transpose for avg_pool1d which expects (N, C, L) format
+        x2 = x2.transpose(1, 2)  # (N, D, 4T)
+        # x2 = torch.avg_pool1d(x2, kernel_size=4, stride=4) # my approach
+        x2 = -torch.max_pool1d(-x2, kernel_size=4, stride=4) # min pooling (rezghi approach)
+        x2 = x2.transpose(1, 2)  # (N, T, D)
         for i, block in enumerate(self.blocks):
             x = block(x, c)
             if self.x2_fuse_every and (i + 1) % self.x2_fuse_every == 0:
