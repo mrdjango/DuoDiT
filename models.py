@@ -395,20 +395,34 @@ class DiT(nn.Module):
         if self.x2_vit_proj_out is not None:
             x2 = self.x2_vit_proj_out(x2)  # Project back to hidden_size
         
+        # Get target sequence length from x (which is already embedded)
+        T_target = x.shape[1]  # This is the target T we need to match
+        
+        # Verify x2 has the expected shape (should be 5 * T_target)
+        _, seq_len_after_vit, _ = x2.shape
+        expected_seq_len = 5 * T_target
+        if seq_len_after_vit != expected_seq_len:
+            # If shape doesn't match, we need to handle it - for now, recalculate T
+            T_actual = seq_len_after_vit // 5
+            if T_actual != T_target:
+                raise RuntimeError(f"x2 sequence length {seq_len_after_vit} (5*{T_actual}) doesn't match expected 5*{T_target} from x.shape[1]={T_target}")
+        else:
+            T_actual = T_target
+        
         # Extract CLS tokens after ViT processing: take every 5th row starting from index 4
-        x2_cls = x2[:, 4::5]  # (N, T, D) - Extract CLS tokens
+        x2_cls = x2[:, 4::5]  # (N, T_actual, D) - Extract CLS tokens
         
-        # Remove CLS tokens from x2: reshape to (N, T, 5, D) and take only first 4 (non-CLS) tokens
-        x2 = x2.reshape(N, T, 5, D)
-        x2 = x2[:, :, :4, :]  # Remove CLS tokens: (N, T, 4, D)
-        x2 = x2.reshape(N, 4 * T, D)  # (N, 4T, D)
+        # Remove CLS tokens from x2: reshape to (N, T_actual, 5, D) and take only first 4 (non-CLS) tokens
+        x2 = x2.reshape(N, T_actual, 5, D)
+        x2 = x2[:, :, :4, :]  # Remove CLS tokens: (N, T_actual, 4, D)
+        x2 = x2.reshape(N, 4 * T_actual, D)  # (N, 4T_actual, D)
         
-        # Pool x2 from shape (N, 4T, D) to (N, T, D) to match x
+        # Pool x2 from shape (N, 4T_actual, D) to (N, T_actual, D) to match x
         # Need to transpose for avg_pool1d which expects (N, C, L) format
-        x2 = x2.transpose(1, 2)  # (N, D, 4T)
+        x2 = x2.transpose(1, 2)  # (N, D, 4T_actual)
         # x2 = torch.avg_pool1d(x2, kernel_size=4, stride=4) # my approach
         x2 = -torch.max_pool1d(-x2, kernel_size=4, stride=4) # min pooling (rezghi approach)
-        x2 = x2.transpose(1, 2)  # (N, T, D)
+        x2 = x2.transpose(1, 2)  # (N, T_actual, D)
         for i, block in enumerate(self.blocks):
             x = block(x, c)
             if self.x2_fuse_every and (i + 1) % self.x2_fuse_every == 0:
