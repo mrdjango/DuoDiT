@@ -178,6 +178,8 @@ class DiT(nn.Module):
         num_patches = self.x_embedder.num_patches
         # Will use fixed sin-cos embedding:
         self.pos_embed = nn.Parameter(torch.zeros(1, num_patches, hidden_size), requires_grad=False)
+        # Learnable CLS tokens for x2 (one per group of 4 patches)
+        self.x2_cls_tokens = nn.Parameter(torch.randn(1, num_patches, hidden_size) * 0.02)
 
         self.blocks = nn.ModuleList([
             DiTBlock(hidden_size, num_heads, mlp_ratio=mlp_ratio) for _ in range(depth)
@@ -360,18 +362,33 @@ class DiT(nn.Module):
         """
         
         # skip = self.x_embedder(x)                                 # preserve pre-block representation
-        x2 = self.x2_embedder(x)
+        x2 = self.x2_embedder(x)  # (N, 4T, D)
+        
+        # Insert CLS tokens after every 4 rows: (N, 4T, D) -> (N, 5T, D)
+        N, seq_len, D = x2.shape
+        T = seq_len // 4  # Number of groups
+        # Reshape to group patches in sets of 4: (N, 4T, D) -> (N, T, 4, D)
+        x2 = x2.reshape(N, T, 4, D)
+        # Expand CLS tokens: (1, T, D) -> (N, T, 1, D)
+        cls_tokens = self.x2_cls_tokens.expand(N, -1, -1).unsqueeze(2)  # (N, T, 1, D)
+        # Concatenate CLS tokens after each group of 4: (N, T, 4, D) + (N, T, 1, D) -> (N, T, 5, D)
+        x2 = torch.cat([x2, cls_tokens], dim=2)  # (N, T, 5, D)
+        # Reshape back to sequence: (N, T, 5, D) -> (N, 5T, D)
+        x2 = x2.reshape(N, 5 * T, D)
+        
         # print(f"[DiT Forward] skip: {skip.shape}", flush=True)
         x = self.x_embedder(x) + self.pos_embed  # (N, T, D), where T = H * W / patch_size ** 2
         t = self.t_embedder(t)                   # (N, D)
         y = self.y_embedder(y, self.training)    # (N, D)
         c = t + y                                # (N, D)
-        # Pool x2 from shape (N, 4T, D) to (N, T, D) to match x
+        # Pool x2 from shape (N, 5T, D) to (N, T, D) to match x
+        # Extract CLS tokens before pooling: take every 5th row starting from index 4
+        x2_cls = x2[:, 4::5]  # (N, T, D) - Extract CLS tokens
         # Need to transpose for avg_pool1d which expects (N, C, L) format
-        x2 = x2.transpose(1, 2)  # (N, D, 4T)
-        # x2 = torch.avg_pool1d(x2, kernel_size=4, stride=4) # my approach
-        x2 = -torch.max_pool1d(-x2, kernel_size=4, stride=4) # min pooling (rezghi approach)
-        x2 = x2.transpose(1, 2)  # (N, T, D)
+        # x2 = x2.transpose(1, 2)  # (N, D, 5T)
+        # # x2 = torch.avg_pool1d(x2, kernel_size=5, stride=5) # my approach
+        # x2 = -torch.max_pool1d(-x2, kernel_size=5, stride=5) # min pooling (rezghi approach)
+        # x2 = x2.transpose(1, 2)  # (N, T, D)
         # Inject positional info so x2 tokens carry spatial cues like x
         # x2 = x2 + self.pos_embed # turn off for now because it increases FID
         # Optionally condition x2 on c via FiLM before the ViT block
