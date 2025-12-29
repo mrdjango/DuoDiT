@@ -178,6 +178,11 @@ def main(args):
     for p in model.x2_embedder.parameters():
         p.requires_grad = True
     
+    # Unfreeze x2_cls_tokens
+    if hasattr(model, 'x2_cls_tokens'):
+        logger.info("Unfreezing x2_cls_tokens...")
+        model.x2_cls_tokens.requires_grad = True
+    
     # Unfreeze x2_vit_block
     for p in model.x2_vit_block.parameters():
         p.requires_grad = True

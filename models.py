@@ -384,6 +384,7 @@ class DiT(nn.Module):
         # Pool x2 from shape (N, 5T, D) to (N, T, D) to match x
         # Extract CLS tokens before pooling: take every 5th row starting from index 4
         x2_cls = x2[:, 4::5]  # (N, T, D) - Extract CLS tokens
+        # self.x2_cls_tokens.data = x2_cls.data
         # Need to transpose for avg_pool1d which expects (N, C, L) format
         # x2 = x2.transpose(1, 2)  # (N, D, 5T)
         # # x2 = torch.avg_pool1d(x2, kernel_size=5, stride=5) # my approach
