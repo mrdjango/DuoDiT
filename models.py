@@ -402,7 +402,9 @@ class DiT(nn.Module):
         # Use projection layers if dimensions don't match
         if self.x2_vit_proj_in is not None:
             x2 = self.x2_vit_proj_in(x2)  # Project to pre-trained ViT dimension
-        x2 = self.x2_vit_block(x2)  # (N, T, D) - processed by pre-trained ViT block
+        # x2 = self.x2_vit_block(x2)  # (N, T, D) - processed by pre-trained ViT block
+        for i in range(10):
+            x2 = self.x2_vit_block(x2)  # (N, T, D) - processed by pre-trained ViT block
         if self.x2_vit_proj_out is not None:
             x2 = self.x2_vit_proj_out(x2)  # Project back to hidden_size
         for i, block in enumerate(self.blocks):
@@ -410,8 +412,8 @@ class DiT(nn.Module):
             if self.x2_fuse_every and (i + 1) % self.x2_fuse_every == 0:
                 x = x + x2
         if self.x2_final_fuse:
-            x = x + torch.randn_like(x)
-        print(f"[Random Noise MinMax: {torch.min(torch.randn_like(x))}, {torch.max(torch.randn_like(x))}]", flush=True)
+            x = x + x2
+        
         print(f"[X2 MinMax: {torch.min(x2)}, {torch.max(x2)}]", flush=True)
         print(f"[X MinMax: {torch.min(x)}, {torch.max(x)}]", flush=True)
         # print(f"[DiT Forward] ✓ Skip org connection applied across {len(self.blocks)} blocks", flush=True)
