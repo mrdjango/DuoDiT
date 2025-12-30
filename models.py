@@ -411,7 +411,9 @@ class DiT(nn.Module):
                 x = x + x2
         if self.x2_final_fuse:
             x = x + torch.randn_like(x)
-        
+        print(f"[Random Noise Norm: {torch.norm(torch.randn_like(x))}]", flush=True)
+        print(f"[X2 Norm: {torch.norm(x2)}]", flush=True)
+        print(f"[X Norm: {torch.norm(x)}]", flush=True)
         # print(f"[DiT Forward] ✓ Skip org connection applied across {len(self.blocks)} blocks", flush=True)
         
         x = self.final_layer(x, c)                # (N, T, patch_size ** 2 * out_channels)
