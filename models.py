@@ -405,12 +405,12 @@ class DiT(nn.Module):
         x2 = self.x2_vit_block(x2)  # (N, T, D) - processed by pre-trained ViT block
         if self.x2_vit_proj_out is not None:
             x2 = self.x2_vit_proj_out(x2)  # Project back to hidden_size
-        for i, block in enumerate(self.blocks):
-            x = block(x, c)
-            if self.x2_fuse_every and (i + 1) % self.x2_fuse_every == 0:
-                x = x + x2
-        if self.x2_final_fuse:
-            x = x + x2
+        # for i, block in enumerate(self.blocks):
+        #     x = block(x, c)
+        #     if self.x2_fuse_every and (i + 1) % self.x2_fuse_every == 0:
+        #         x = x + x2
+        # if self.x2_final_fuse:
+        #     x = x + x2
         
         # print(f"[DiT Forward] ✓ Skip org connection applied across {len(self.blocks)} blocks", flush=True)
         
