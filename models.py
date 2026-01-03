@@ -370,9 +370,9 @@ class DiT(nn.Module):
         # Reshape to group patches in sets of 4: (N, 4T, D) -> (N, T, 4, D)
         x2 = x2.reshape(N, T, 4, D)
         # Expand CLS tokens: (1, T, D) -> (N, T, 1, D)
-        cls_tokens = self.x2_cls_tokens.expand(N, -1, -1).unsqueeze(2)  # (N, T, 1, D)
+        self.x2_cls_tokens = self.x2_cls_tokens.expand(N, -1, -1).unsqueeze(2)  # (N, T, 1, D)
         # Concatenate CLS tokens after each group of 4: (N, T, 4, D) + (N, T, 1, D) -> (N, T, 5, D)
-        x2 = torch.cat([x2, cls_tokens], dim=2)  # (N, T, 5, D)
+        x2 = torch.cat([x2, self.x2_cls_tokens], dim=2)  # (N, T, 5, D)
         # Reshape back to sequence: (N, T, 5, D) -> (N, 5T, D)
         x2 = x2.reshape(N, 5 * T, D)
         
