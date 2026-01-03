@@ -383,15 +383,15 @@ class DiT(nn.Module):
         c = t + y                                # (N, D)
         # Pool x2 from shape (N, 5T, D) to (N, T, D) to match x
         # Need to transpose for avg_pool1d which expects (N, C, L) format
-        x2 = x2.transpose(1, 2)  # (N, D, 5T)
+        # x2 = x2.transpose(1, 2)  # (N, D, 5T)
         # x2 = torch.avg_pool1d(x2, kernel_size=5, stride=5) # my approach
-        x2 = -torch.max_pool1d(-x2, kernel_size=5, stride=5) # min pooling (rezghi approach)
+        # x2 = -torch.max_pool1d(-x2, kernel_size=5, stride=5) # min pooling (rezghi approach)
         # Extract CLS tokens: take every 5th row starting from index 4 (before transpose, CLS tokens were at positions 4, 9, 14, ...)
         # After transpose and pooling, we need to extract from the original x2 before pooling
         # So we extract from x2 before the pooling operation
-        x2_cls = x2[:, :, 4::5]  # Extract CLS tokens: (N, D, T)
-        x2_cls = x2_cls.transpose(1, 2)  # (N, T, D)
-        x2 = x2.transpose(1, 2)  # (N, T, D)
+        # x2_cls = x2[:, :, 4::5]  # Extract CLS tokens: (N, D, T)
+        # x2_cls = x2_cls.transpose(1, 2)  # (N, T, D)
+        # x2 = x2.transpose(1, 2)  # (N, T, D)
         # Inject positional info so x2 tokens carry spatial cues like x
         # x2 = x2 + self.pos_embed # turn off for now because it increases FID
         # Optionally condition x2 on c via FiLM before the ViT block
@@ -405,6 +405,8 @@ class DiT(nn.Module):
         x2 = self.x2_vit_block(x2)  # (N, T, D) - processed by pre-trained ViT block
         if self.x2_vit_proj_out is not None:
             x2 = self.x2_vit_proj_out(x2)  # Project back to hidden_size
+        # extract CLS tokens from x2
+        x2 = x2[:, :, 4::5]  # Extract CLS tokens: (N, T, D)
         for i, block in enumerate(self.blocks):
             x = block(x, c)
             if self.x2_fuse_every and (i + 1) % self.x2_fuse_every == 0:
