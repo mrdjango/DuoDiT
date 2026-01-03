@@ -175,37 +175,64 @@ def main(args):
 
     logger.info("Unfreezing x2 components...")
     # Unfreeze x2_embedder
+    logger.info("  - Unfreezing x2_embedder...")
     for p in model.x2_embedder.parameters():
         p.requires_grad = True
     
-    # Unfreeze x2_cls_tokens
+    # Unfreeze x2_cls_tokens (LEARNABLE CLS TOKENS)
     if hasattr(model, 'x2_cls_tokens'):
-        logger.info("Unfreezing x2_cls_tokens...")
+        logger.info("  - Unfreezing x2_cls_tokens (learnable CLS tokens)...")
         model.x2_cls_tokens.requires_grad = True
+        cls_token_params = model.x2_cls_tokens.numel()
+        logger.info(f"    ✓ x2_cls_tokens shape: {model.x2_cls_tokens.shape}, parameters: {cls_token_params:,}")
+        assert model.x2_cls_tokens.requires_grad, "x2_cls_tokens should be trainable!"
+    else:
+        logger.warning("  ⚠️  model.x2_cls_tokens not found! This should not happen.")
     
     # Unfreeze x2_vit_block
+    logger.info("  - Unfreezing x2_vit_block...")
     for p in model.x2_vit_block.parameters():
         p.requires_grad = True
         
     # Unfreeze projections if they exist
     if model.x2_vit_proj_in is not None:
-        logger.info("Unfreezing x2_vit_proj_in...")
+        logger.info("  - Unfreezing x2_vit_proj_in...")
         for p in model.x2_vit_proj_in.parameters():
             p.requires_grad = True
             
     if model.x2_vit_proj_out is not None:
-        logger.info("Unfreezing x2_vit_proj_out...")
+        logger.info("  - Unfreezing x2_vit_proj_out...")
         for p in model.x2_vit_proj_out.parameters():
             p.requires_grad = True
     
     # Unfreeze final_layer to allow output adaptation
-    logger.info("Unfreezing final_layer...")
+    logger.info("  - Unfreezing final_layer...")
     for p in model.final_layer.parameters():
         p.requires_grad = True
-            
+    
+    # Count trainable parameters by component
     trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     total_params = sum(p.numel() for p in model.parameters())
-    logger.info(f"Trainable Parameters: {trainable_params:,} / {total_params:,} ({trainable_params/total_params:.2%})")
+    
+    # Breakdown of trainable parameters
+    x2_embedder_params = sum(p.numel() for p in model.x2_embedder.parameters() if p.requires_grad)
+    x2_cls_token_params = model.x2_cls_tokens.numel() if hasattr(model, 'x2_cls_tokens') and model.x2_cls_tokens.requires_grad else 0
+    x2_vit_block_params = sum(p.numel() for p in model.x2_vit_block.parameters() if p.requires_grad)
+    x2_proj_in_params = sum(p.numel() for p in model.x2_vit_proj_in.parameters() if p.requires_grad) if model.x2_vit_proj_in is not None else 0
+    x2_proj_out_params = sum(p.numel() for p in model.x2_vit_proj_out.parameters() if p.requires_grad) if model.x2_vit_proj_out is not None else 0
+    final_layer_params = sum(p.numel() for p in model.final_layer.parameters() if p.requires_grad)
+    
+    logger.info(f"\n{'='*60}")
+    logger.info(f"Trainable Parameters Breakdown:")
+    logger.info(f"  x2_embedder:        {x2_embedder_params:>12,}")
+    logger.info(f"  x2_cls_tokens:      {x2_cls_token_params:>12,}  ⭐ (LEARNABLE CLS TOKENS)")
+    logger.info(f"  x2_vit_block:       {x2_vit_block_params:>12,}")
+    logger.info(f"  x2_vit_proj_in:     {x2_proj_in_params:>12,}")
+    logger.info(f"  x2_vit_proj_out:    {x2_proj_out_params:>12,}")
+    logger.info(f"  final_layer:        {final_layer_params:>12,}")
+    logger.info(f"  {'-'*60}")
+    logger.info(f"  TOTAL TRAINABLE:    {trainable_params:>12,} / {total_params:,} ({trainable_params/total_params:.2%})")
+    logger.info(f"{'='*60}\n")
     # --- FREEZING LOGIC END ---
 
     ema = deepcopy(model).to(device)  # Create an EMA of the model for use after training
@@ -313,6 +340,13 @@ def main(args):
                     trainable_keys = [k for k, p in model.module.named_parameters() if p.requires_grad]
                     model_state = {k: v for k, v in model.module.state_dict().items() if k in trainable_keys}
                     
+                    # Verify x2_cls_tokens is included in checkpoint
+                    cls_token_in_checkpoint = 'x2_cls_tokens' in trainable_keys
+                    if cls_token_in_checkpoint:
+                        logger.info(f"✓ x2_cls_tokens included in checkpoint (shape: {model_state['x2_cls_tokens'].shape})")
+                    else:
+                        logger.warning("⚠️  x2_cls_tokens NOT found in trainable keys - this should not happen!")
+                    
                     checkpoint = {
                         "model": model_state,
                         "ema": ema.state_dict(),
@@ -340,13 +374,17 @@ def main(args):
                     trainable_keys = [k for k, p in model.module.named_parameters() if p.requires_grad]
                     model_state = {k: v for k, v in model.module.state_dict().items() if k in trainable_keys}
                     
+                    # Verify x2_cls_tokens is included in checkpoint
+                    if 'x2_cls_tokens' in trainable_keys:
+                        logger.info(f"✓ x2_cls_tokens included in periodic checkpoint")
+                    
                     checkpoint = {
                         "model": model_state, 
                         # We save full EMA for now to be safe, or we could also just save partial EMA if needed
                         # But EMA usually keeps track of everything. To be safe for inference, let's keep full EMA or just trainable parts.
                         # For simplicity in this specialized script, let's stick to full EMA so inference scripts don't break,
                         # UNLESS the user explicitly wants lightweight.
-                        # Given the user asked for LoRA-like "efficient" storage, best to save only what changed.
+                        # Given the user asked for LoRA-like "efficient" storage, best to save only what changed. 
                         # But standard inference scripts expect full state dict. 
                         # Compromise: Save full EMA (for immediate use) but partial model (for resume/space).
                         "ema": ema.state_dict(),
@@ -357,7 +395,7 @@ def main(args):
                     }
                     checkpoint_path = f"{checkpoint_dir}/{train_steps:07d}.pt"
                     torch.save(checkpoint, checkpoint_path)
-                    logger.info(f"Saved checkpoint to {checkpoint_path} (Model contains only trainable params)")
+                    logger.info(f"Saved checkpoint to {checkpoint_path} (Model contains only trainable params, including x2_cls_tokens)")
                 dist.barrier()
 
     model.eval()  # important! This disables randomized embedding dropout
