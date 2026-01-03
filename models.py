@@ -406,7 +406,9 @@ class DiT(nn.Module):
         if self.x2_vit_proj_out is not None:
             x2 = self.x2_vit_proj_out(x2)  # Project back to hidden_size
         # extract CLS tokens from x2
-        x2 = x2[:, :, 4::5]  # Extract CLS tokens: (N, T, D)
+        x2 = x2[:, 4::5, :]  # Extract CLS tokens: (N, T, D)
+        # shape of x2 and x
+        print(f"[DiT Forward] x2 shape: {x2.shape}, x shape: {x.shape}", flush=True)
         for i, block in enumerate(self.blocks):
             x = block(x, c)
             if self.x2_fuse_every and (i + 1) % self.x2_fuse_every == 0:
