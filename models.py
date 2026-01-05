@@ -418,6 +418,10 @@ class DiT(nn.Module):
             x = x + x2
         
         # print(f"[DiT Forward] ✓ Skip org connection applied across {len(self.blocks)} blocks", flush=True)
+        # print norms and min/max of x and x2
+        print(f"[DiT Forward] x norm: {torch.norm(x)}, x2 norm: {torch.norm(x2)}", flush=True)
+        print(f"[DiT Forward] x min: {torch.min(x)}, x2 min: {torch.min(x2)}", flush=True)
+        print(f"[DiT Forward] x max: {torch.max(x)}, x2 max: {torch.max(x2)}", flush=True)
         
         x = self.final_layer(x, c)                # (N, T, patch_size ** 2 * out_channels)
         x = self.unpatchify(x)                   # (N, out_channels, H, W)
