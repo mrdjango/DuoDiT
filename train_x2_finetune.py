@@ -35,6 +35,11 @@ from diffusion import create_diffusion
 from diffusers.models import AutoencoderKL
 from download import find_model
 
+try:
+    from tqdm import tqdm
+except ImportError:
+    tqdm = None
+
 CHECKPOINT_FORMAT = "x2_adapter_peft_v1"
 
 
@@ -199,6 +204,47 @@ def dataloader_kwargs(args):
         kwargs["persistent_workers"] = True
         kwargs["prefetch_factor"] = args.prefetch_factor
     return kwargs
+
+
+def make_progress_bar(loader, args, rank, epoch, logger):
+    """
+    Return a rank-0 tqdm wrapper for training progress, or the raw loader.
+    """
+    if rank != 0 or not args.progress:
+        return loader, None
+    if tqdm is None:
+        if epoch == 0:
+            logger.warning("tqdm is not installed; progress bar disabled.")
+        return loader, None
+    progress = tqdm(
+        loader,
+        total=len(loader),
+        desc=f"epoch {epoch + 1}/{args.epochs}",
+        dynamic_ncols=True,
+        leave=args.progress_leave,
+    )
+    return progress, progress
+
+
+def update_progress_bar(progress, args, train_steps, epoch, loss, best_loss, opt, x, t, using_latent_cache):
+    if progress is None or train_steps % max(args.progress_update_every, 1) != 0:
+        return
+
+    postfix = {
+        "step": train_steps,
+        "loss": f"{loss.item():.4f}",
+    }
+    if args.debug_progress:
+        lr = opt.param_groups[0]["lr"] if opt.param_groups else 0.0
+        postfix.update({
+            "epoch": epoch + 1,
+            "batch": x.shape[0],
+            "lr": f"{lr:.1e}",
+            "best": f"{best_loss:.4f}" if best_loss < float("inf") else "inf",
+            "t": f"{int(t.min().item())}-{int(t.max().item())}",
+            "src": "cache" if using_latent_cache else "vae",
+        })
+    progress.set_postfix(postfix)
 
 
 def latent_cache_path(args, full_dataset, selected_indices):
@@ -472,7 +518,8 @@ def main(args):
     for epoch in range(args.epochs):
         sampler.set_epoch(epoch)
         logger.info(f"Beginning epoch {epoch}...")
-        for x, y in loader:
+        epoch_loader, progress = make_progress_bar(loader, args, rank, epoch, logger)
+        for x, y in epoch_loader:
             x = x.to(device, non_blocking=True)
             y = y.to(device, non_blocking=True)
             if using_latent_cache:
@@ -495,6 +542,7 @@ def main(args):
             running_loss += loss.item()
             log_steps += 1
             train_steps += 1
+            update_progress_bar(progress, args, train_steps, epoch, loss, best_loss, opt, x, t, using_latent_cache)
             if train_steps % args.log_every == 0:
                 # Measure training speed:
                 torch.cuda.synchronize()
@@ -557,6 +605,8 @@ def main(args):
                     torch.save(checkpoint, checkpoint_path)
                     logger.info(f"Saved checkpoint to {checkpoint_path} (Model contains only trainable params, including x2_cls_tokens)")
                 dist.barrier()
+        if progress is not None:
+            progress.close()
 
     model.eval()  # important! This disables randomized embedding dropout
     # do any sampling/FID calculation/etc. with ema (or model) in eval mode ...
@@ -592,6 +642,18 @@ if __name__ == "__main__":
     parser.add_argument("--latent-cache-batch-size", type=int, default=64)
     parser.add_argument("--compile", action="store_true", help="Enable torch.compile for the DiT model before DDP wrapping.")
     parser.add_argument("--compile-mode", type=str, default="default")
+    progress_group = parser.add_mutually_exclusive_group()
+    progress_group.add_argument("--progress", dest="progress", action="store_true",
+                                help="Show a rank-0 tqdm progress bar during training.")
+    progress_group.add_argument("--no-progress", dest="progress", action="store_false",
+                                help="Disable the tqdm training progress bar.")
+    parser.set_defaults(progress=True)
+    parser.add_argument("--debug-progress", action="store_true",
+                        help="Show detailed progress-bar fields such as lr, timestep range, and data source.")
+    parser.add_argument("--progress-update-every", type=int, default=1,
+                        help="Update tqdm postfix every N train steps.")
+    parser.add_argument("--progress-leave", action="store_true",
+                        help="Keep completed epoch progress bars visible.")
     
     # New arguments
     parser.add_argument("--classes", type=int, nargs="+", required=True, help="List of ImageNet class indices to train on (default: 0-9)")
