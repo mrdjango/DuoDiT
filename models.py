@@ -13,7 +13,8 @@ import torch
 import torch.nn as nn
 import numpy as np
 import math
-from timm.models.vision_transformer import PatchEmbed, Attention, Mlp
+import timm
+from timm.models.vision_transformer import PatchEmbed, Attention, Mlp, VisionTransformer, Block
 
 
 def modulate(x, shift, scale):
@@ -158,24 +159,53 @@ class DiT(nn.Module):
         class_dropout_prob=0.1,
         num_classes=1000,
         learn_sigma=True,
+        x2_fuse_every=0,           # >0 to fuse x2 into x every N blocks (early/throughout)
+        x2_condition_with_c=False,  # True to FiLM-condition x2 with t+y before its ViT block
+        x2_final_fuse=True,        # keep the final add of x2 after all blocks
     ):
         super().__init__()
         self.learn_sigma = learn_sigma
         self.in_channels = in_channels
         self.out_channels = in_channels * 2 if learn_sigma else in_channels
         self.patch_size = patch_size
+        self.hidden_size = hidden_size
         self.num_heads = num_heads
 
         self.x_embedder = PatchEmbed(input_size, patch_size, in_channels, hidden_size, bias=True)
+        self.x2_embedder = PatchEmbed(input_size, patch_size // 2, in_channels, hidden_size, bias=True)
         self.t_embedder = TimestepEmbedder(hidden_size)
         self.y_embedder = LabelEmbedder(num_classes, hidden_size, class_dropout_prob)
         num_patches = self.x_embedder.num_patches
         # Will use fixed sin-cos embedding:
         self.pos_embed = nn.Parameter(torch.zeros(1, num_patches, hidden_size), requires_grad=False)
+        # Learnable CLS tokens for x2 (one per group of 4 patches)
+        self.x2_cls_tokens = nn.Parameter(torch.randn(1, num_patches, hidden_size) * 0.02)
 
         self.blocks = nn.ModuleList([
             DiTBlock(hidden_size, num_heads, mlp_ratio=mlp_ratio) for _ in range(depth)
         ])
+        # ViT block for processing x2
+        # Will be initialized with target dimensions, but may be replaced with pretrained block if dimensions differ
+        self.x2_vit_block = Block(
+            dim=hidden_size,
+            num_heads=num_heads,
+            mlp_ratio=mlp_ratio,
+            qkv_bias=True
+        )
+        # Optional FiLM to condition x2 on c (t+y)
+        self.x2_condition_with_c = x2_condition_with_c
+        if self.x2_condition_with_c:
+            self.x2_film = nn.Sequential(
+                nn.SiLU(),
+                nn.Linear(hidden_size, 2 * hidden_size, bias=True)
+            )
+        else:
+            self.x2_film = None
+        # Projection layers for adapting dimensions if needed (will be created if dimensions don't match)
+        self.x2_vit_proj_in = None
+        self.x2_vit_proj_out = None
+        self.x2_fuse_every = x2_fuse_every
+        self.x2_final_fuse = x2_final_fuse
         self.final_layer = FinalLayer(hidden_size, patch_size, self.out_channels)
         self.initialize_weights()
 
@@ -214,6 +244,99 @@ class DiT(nn.Module):
         nn.init.constant_(self.final_layer.adaLN_modulation[-1].bias, 0)
         nn.init.constant_(self.final_layer.linear.weight, 0)
         nn.init.constant_(self.final_layer.linear.bias, 0)
+        
+        # Load pre-trained timm ViT weights for x2_vit_block
+        self.load_pretrained_vit_weights()
+
+    def load_pretrained_vit_weights(self, vit_model_name='vit_large_patch16_224'):
+        """
+        Load pre-trained timm ViT weights for x2_vit_block.
+        If dimensions don't match, uses projection layers to adapt.
+        """
+        try:
+            # Load pre-trained ViT model
+            print(f"[DiT] Loading pre-trained ViT model: {vit_model_name}", flush=True)
+            pretrained_vit = timm.create_model(vit_model_name, pretrained=True)
+            pretrained_vit.eval()
+            
+            # Extract the last block
+            pretrained_block = pretrained_vit.blocks[-1]
+            pretrained_dim = pretrained_vit.embed_dim
+            # Get num_heads from the attention module or infer from qkv weight shape
+            pretrained_num_heads = None
+            # Try multiple ways to get num_heads
+            if hasattr(pretrained_block.attn, 'num_heads'):
+                pretrained_num_heads = pretrained_block.attn.num_heads
+            elif hasattr(pretrained_vit, 'num_heads'):
+                pretrained_num_heads = pretrained_vit.num_heads
+            else:
+                # Infer from qkv weight shape
+                # qkv weight shape is (3 * num_heads * head_dim, embed_dim)
+                # where embed_dim = num_heads * head_dim
+                # So: qkv_out_dim = 3 * embed_dim, and head_dim = embed_dim / num_heads
+                # Therefore: qkv_out_dim = 3 * num_heads * (embed_dim / num_heads) = 3 * embed_dim
+                # This means we can't directly get num_heads from qkv_out_dim alone
+                # But we can calculate: num_heads = embed_dim / head_dim
+                # And head_dim = qkv_out_dim / (3 * num_heads) = embed_dim / num_heads
+                # So: qkv_out_dim = 3 * embed_dim (always true for standard ViT)
+                # We need to infer head_dim. Standard head_dim values: 64 (most common)
+                qkv_out_dim = pretrained_block.attn.qkv.weight.shape[0]
+                # Calculate head_dim from qkv: head_dim = qkv_out_dim / (3 * num_heads)
+                # Since we don't know num_heads, let's use common defaults
+                # Common ViT configs: embed_dim 768 -> 12 heads (head_dim=64), 1024 -> 16 heads (head_dim=64)
+                if pretrained_dim == 768:
+                    pretrained_num_heads = 12
+                elif pretrained_dim == 1024:
+                    pretrained_num_heads = 16
+                elif pretrained_dim == 1280:
+                    pretrained_num_heads = 16
+                else:
+                    # Calculate: assume head_dim = 64 (most common)
+                    pretrained_num_heads = pretrained_dim // 64
+                    if pretrained_num_heads <= 0 or pretrained_num_heads > 32:
+                        pretrained_num_heads = 16  # fallback to common value
+                print(f"[DiT] Inferred num_heads={pretrained_num_heads} from embed_dim={pretrained_dim}", flush=True)
+            
+            print(f"[DiT] Pre-trained ViT block: dim={pretrained_dim}, num_heads={pretrained_num_heads}", flush=True)
+            print(f"[DiT] Target x2_vit_block: dim={self.x2_vit_block.norm1.normalized_shape[0]}, num_heads={self.num_heads}", flush=True)
+            
+            # Check if dimensions match
+            if pretrained_dim == self.hidden_size and pretrained_num_heads == self.num_heads:
+                # Direct weight loading if dimensions match
+                print(f"[DiT] Dimensions match! Loading weights directly...", flush=True)
+                self.x2_vit_block.load_state_dict(pretrained_block.state_dict(), strict=True)
+                print(f"[DiT] ✓ Successfully loaded pre-trained ViT weights for x2_vit_block", flush=True)
+            else:
+                # Dimensions don't match - replace block with pretrained dimensions and use projection layers
+                print(f"[DiT] Dimensions don't match. Creating block with pretrained dimensions and projection layers...", flush=True)
+                
+                # Create a new block with pretrained dimensions
+                pretrained_mlp_ratio = pretrained_vit.mlp_ratio if hasattr(pretrained_vit, 'mlp_ratio') else 4.0
+                self.x2_vit_block = Block(
+                    dim=pretrained_dim,
+                    num_heads=pretrained_num_heads,
+                    mlp_ratio=pretrained_mlp_ratio,
+                    qkv_bias=True
+                )
+                
+                # Load pre-trained weights into the new block
+                self.x2_vit_block.load_state_dict(pretrained_block.state_dict(), strict=True)
+                
+                # Create projection layers
+                self.x2_vit_proj_in = nn.Linear(self.hidden_size, pretrained_dim)
+                self.x2_vit_proj_out = nn.Linear(pretrained_dim, self.hidden_size)
+                # Initialize projection layers
+                nn.init.xavier_uniform_(self.x2_vit_proj_in.weight)
+                nn.init.constant_(self.x2_vit_proj_in.bias, 0)
+                nn.init.xavier_uniform_(self.x2_vit_proj_out.weight)
+                nn.init.constant_(self.x2_vit_proj_out.bias, 0)
+                
+                print(f"[DiT] ✓ Successfully loaded pre-trained ViT weights into block with dim={pretrained_dim}", flush=True)
+                print(f"[DiT] Using projection layers to adapt dimensions: {self.hidden_size} -> {pretrained_dim} -> {self.hidden_size}", flush=True)
+                
+        except Exception as e:
+            print(f"[DiT] Warning: Could not load pre-trained ViT weights: {e}", flush=True)
+            print(f"[DiT] Using randomly initialized weights for x2_vit_block", flush=True)
 
     def patchify(self, imgs):
         """
@@ -262,32 +385,69 @@ class DiT(nn.Module):
         t: (N,) tensor of diffusion timesteps
         y: (N,) tensor of class labels
         """
-        # Log forward pass execution
-        print(f"[DiT Forward] Batch: {x.shape}, Timesteps: [{t.min().item():.0f}-{t.max().item():.0f}], Classes: {y[:min(4,len(y))].tolist()}", flush=True)
         
-        ## start my new approach                                # preserve pre-block representation
-        x2 = self.patchify(x) # (N, c, h, w, p*p)
+        # skip = self.x_embedder(x)                                 # preserve pre-block representation
+        x2 = self.x2_embedder(x)  # (N, 4T, D)
+        
+        # Insert CLS tokens after every 4 rows: (N, 4T, D) -> (N, 5T, D)
+        N, seq_len, D = x2.shape
+        T = seq_len // 4  # Number of groups
+        # Reshape to group patches in sets of 4: (N, 4T, D) -> (N, T, 4, D)
+        x2 = x2.reshape(N, T, 4, D)
+        # Expand learnable CLS tokens: (1, T, D) -> (N, T, 1, D)
+        # Use repeat instead of expand to ensure gradients flow properly to the learnable parameter
+        x2_cls_tokens_expanded = self.x2_cls_tokens.repeat(N, 1, 1).unsqueeze(2)  # (N, T, 1, D)
+        # Concatenate CLS tokens after each group of 4: (N, T, 4, D) + (N, T, 1, D) -> (N, T, 5, D)
+        x2 = torch.cat([x2, x2_cls_tokens_expanded], dim=2)  # (N, T, 5, D)
+        # Reshape back to sequence: (N, T, 5, D) -> (N, 5T, D)
+        x2 = x2.reshape(N, 5 * T, D)
+        
+        # print(f"[DiT Forward] skip: {skip.shape}", flush=True)
         x = self.x_embedder(x) + self.pos_embed  # (N, T, D), where T = H * W / patch_size ** 2
         t = self.t_embedder(t)                   # (N, D), t =
         y = self.y_embedder(y, self.training)    # (N, D)
         c = t + y                                # (N, D)
-        # apply rest of forward pass to x2 and iterate over p*p patches
-        for i in range(x2.shape[4]):
-            inner_patch = self.x_embedder(x2[:, :, :, :, i]) + self.pos_embed# (N, c, h, w, 1)
-            print(f"[DiT Forward] inner_patch: {inner_patch.shape}")
-            # sum of x2 + x2_i
-            for block in self.blocks:
-                inner_patch = block(inner_patch, c)
-            # update x 
-            print(f"[DiT Forward] inner_patch after blocks: {inner_patch.shape}")
-            print(f"[DiT Forward] x[:,i,:]: {x.shape}")
-            # calculate mean of inner_patch of dim = 1
-            inner_patch = inner_patch.mean(dim=1)
-            x[:,i,:] = x[:,i,:] + inner_patch
-
-        for block in self.blocks:
-            x = block(x, c)                      # (N, T, D)
-       
+        # Pool x2 from shape (N, 5T, D) to (N, T, D) to match x
+        # Need to transpose for avg_pool1d which expects (N, C, L) format
+        # x2 = x2.transpose(1, 2)  # (N, D, 5T)
+        # x2 = torch.avg_pool1d(x2, kernel_size=5, stride=5) # my approach
+        # x2 = -torch.max_pool1d(-x2, kernel_size=5, stride=5) # min pooling (rezghi approach)
+        # Extract CLS tokens: take every 5th row starting from index 4 (before transpose, CLS tokens were at positions 4, 9, 14, ...)
+        # After transpose and pooling, we need to extract from the original x2 before pooling
+        # So we extract from x2 before the pooling operation
+        # x2_cls = x2[:, :, 4::5]  # Extract CLS tokens: (N, D, T)
+        # x2_cls = x2_cls.transpose(1, 2)  # (N, T, D)
+        # x2 = x2.transpose(1, 2)  # (N, T, D)
+        # Inject positional info so x2 tokens carry spatial cues like x
+        # x2 = x2 + self.pos_embed # turn off for now because it increases FID
+        # Optionally condition x2 on c via FiLM before the ViT block
+        if self.x2_film is not None:
+            shift, scale = self.x2_film(c).chunk(2, dim=1)
+            x2 = modulate(x2, shift, scale)
+        # Apply ViT block to x2 to ensure same processing as x
+        # Use projection layers if dimensions don't match
+        if self.x2_vit_proj_in is not None:
+            x2 = self.x2_vit_proj_in(x2)  # Project to pre-trained ViT dimension
+        x2 = self.x2_vit_block(x2)  # (N, T, D) - processed by pre-trained ViT block
+        if self.x2_vit_proj_out is not None:
+            x2 = self.x2_vit_proj_out(x2)  # Project back to hidden_size
+        # extract CLS tokens from x2
+        x2 = x2[:, 4::5, :]  # Extract CLS tokens: (N, T, D)
+        # shape of x2 and x
+        print(f"[DiT Forward] x2 shape: {x2.shape}, x shape: {x.shape}", flush=True)
+        for i, block in enumerate(self.blocks):
+            x = block(x, c)
+            if self.x2_fuse_every and (i + 1) % self.x2_fuse_every == 0:
+                x = x + x2
+        if self.x2_final_fuse:
+            x = x + x2
+        
+        # print(f"[DiT Forward] ✓ Skip org connection applied across {len(self.blocks)} blocks", flush=True)
+        # print norms and min/max of x and x2
+        print(f"[DiT Forward] x norm: {torch.norm(x)}, x2 norm: {torch.norm(x2)}", flush=True)
+        print(f"[DiT Forward] x min: {torch.min(x)}, x2 min: {torch.min(x2)}", flush=True)
+        print(f"[DiT Forward] x max: {torch.max(x)}, x2 max: {torch.max(x2)}", flush=True)
+        
         x = self.final_layer(x, c)                # (N, T, patch_size ** 2 * out_channels)
 
         x = self.unpatchify(x)                   # (N, out_channels, H, W)

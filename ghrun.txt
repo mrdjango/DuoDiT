@@ -1,0 +1,5027 @@
+Starting rank=0, seed=0, world_size=1.
+[2025-12-19 01:53:26] Experiment directory created at ./dit_fine_resluts//000-DiT-XL-2-x2-finetune
+Creating DiT-XL/2 model...
+[DiT] Loading pre-trained ViT model: vit_large_patch16_224
+[2025-12-19 01:53:32] Loading pretrained weights from Hugging Face hub (timm/vit_large_patch16_224.augreg_in21k_ft_in1k)
+[2025-12-19 01:53:32] HTTP Request: HEAD https://huggingface.co/timm/vit_large_patch16_224.augreg_in21k_ft_in1k/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+[2025-12-19 01:53:32] [timm/vit_large_patch16_224.augreg_in21k_ft_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+[DiT] Pre-trained ViT block: dim=1024, num_heads=16
+[DiT] Target x2_vit_block: dim=1152, num_heads=16
+[DiT] Dimensions don't match. Creating block with pretrained dimensions and projection layers...
+[DiT] ✓ Successfully loaded pre-trained ViT weights into block with dim=1024
+[DiT] Using projection layers to adapt dimensions: 1152 -> 1024 -> 1152
+[2025-12-19 01:53:32] Loading base pre-trained model from DiT-XL-2-256x256.pt...
+100%|███████████████████████████████████████| 2.70G/2.70G [00:08<00:00, 317MB/s]
+[2025-12-19 01:53:42] Missing keys when loading base model (will use random init): 20 keys
+[2025-12-19 01:53:42] x2-related keys missing (expected): 20 keys
+[2025-12-19 01:53:42] ✓ Base pre-trained model loaded successfully
+[2025-12-19 01:53:42] Freezing main DiT model...
+[2025-12-19 01:53:42] Unfreezing x2 components...
+[2025-12-19 01:53:42] Unfreezing x2_vit_proj_in...
+[2025-12-19 01:53:42] Unfreezing x2_vit_proj_out...
+[2025-12-19 01:53:42] Unfreezing final_layer...
+[2025-12-19 01:53:42] Trainable Parameters: 17,656,864 / 692,749,600 (2.55%)
+Cannot initialize model with low cpu memory usage because `accelerate` was not found in the environment. Defaulting to `low_cpu_mem_usage=False`. It is strongly recommended to install `accelerate` for faster and less memory-intense model loading. You can do so with: 
+```
+pip install accelerate
+```
+.
+/home/ubuntu/.local/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py:202: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+[2025-12-19 01:53:43] HTTP Request: HEAD https://huggingface.co/stabilityai/sd-vae-ft-ema/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+[2025-12-19 01:53:43] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/stabilityai/sd-vae-ft-ema/f04b2c4b98319346dad8c65879f680b1997b204a/config.json "HTTP/1.1 200 OK"
+[2025-12-19 01:53:43] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/stabilityai/sd-vae-ft-ema/f04b2c4b98319346dad8c65879f680b1997b204a/config.json "HTTP/1.1 200 OK"
+config.json: 100%|█████████████████████████████| 547/547 [00:00<00:00, 4.85MB/s]
+[2025-12-19 01:53:43] HTTP Request: HEAD https://huggingface.co/stabilityai/sd-vae-ft-ema/resolve/f04b2c4b98319346dad8c65879f680b1997b204a/diffusion_pytorch_model.safetensors.index.json "HTTP/1.1 404 Not Found"
+[2025-12-19 01:53:43] HTTP Request: HEAD https://huggingface.co/stabilityai/sd-vae-ft-ema/resolve/f04b2c4b98319346dad8c65879f680b1997b204a/diffusion_pytorch_model.safetensors "HTTP/1.1 302 Found"
+[2025-12-19 01:53:43] HTTP Request: GET https://huggingface.co/api/models/stabilityai/sd-vae-ft-ema/xet-read-token/f04b2c4b98319346dad8c65879f680b1997b204a "HTTP/1.1 200 OK"
+diffusion_pytorch_model.safetensors: 100%|████| 335M/335M [00:01<00:00, 181MB/s]
+[2025-12-19 01:53:45] Filtering dataset for classes: [972, 973, 974, 975, 976, 387, 386, 388, 389, 385]
+[2025-12-19 01:53:45] Filtered Dataset contains 500 images (from 50000 total)
+[2025-12-19 01:53:45] Training for 1400 epochs...
+[2025-12-19 01:53:45] Beginning epoch 0...
+Beginning epoch 0...
+Loss: 0.14583633840084076
+Loss: 0.10822071880102158
+Loss: 0.09752950817346573
+Loss: 0.14847196638584137
+Loss: 0.13533881306648254
+[2025-12-19 01:53:47] (step=0000005) Train Loss: 0.1271, Train Steps/Sec: 2.23
+✓ Step 0000005 | Loss: 0.1271 | Steps/Sec: 2.23
+[2025-12-19 01:53:49] Saved BEST checkpoint to ./dit_fine_resluts//000-DiT-XL-2-x2-finetune/checkpoints/epoch-0-loss-0.1271.pt (Loss: 0.1271)
+🏆 New best checkpoint saved! Loss: 0.1271
+Loss: 0.12772440910339355
+Loss: 0.1454893797636032
+Loss: 0.14919281005859375
+Loss: 0.1779632717370987
+Loss: 0.13587790727615356
+[2025-12-19 01:53:50] (step=0000010) Train Loss: 0.1472, Train Steps/Sec: 4.94
+✓ Step 0000010 | Loss: 0.1472 | Steps/Sec: 4.94
+[2025-12-19 01:53:50] Beginning epoch 1...
+Beginning epoch 1...
+Loss: 0.12303363531827927
+Loss: 0.1115318089723587
+Loss: 0.15106931328773499
+Loss: 0.13914717733860016
+Loss: 0.15561655163764954
+[2025-12-19 01:53:51] (step=0000015) Train Loss: 0.1361, Train Steps/Sec: 3.83
+✓ Step 0000015 | Loss: 0.1361 | Steps/Sec: 3.83
+Loss: 0.11809486150741577
+Loss: 0.1394927203655243
+Loss: 0.1400250941514969
+Loss: 0.1752597540616989
+Loss: 0.11488597840070724
+[2025-12-19 01:53:52] (step=0000020) Train Loss: 0.1376, Train Steps/Sec: 4.95
+✓ Step 0000020 | Loss: 0.1376 | Steps/Sec: 4.95
+[2025-12-19 01:53:52] Beginning epoch 2...
+Beginning epoch 2...
+Loss: 0.1750973016023636
+Loss: 0.11311332136392593
+Loss: 0.16550856828689575
+Loss: 0.10932663083076477
+Loss: 0.1871366649866104
+[2025-12-19 01:53:53] (step=0000025) Train Loss: 0.1500, Train Steps/Sec: 3.81
+✓ Step 0000025 | Loss: 0.1500 | Steps/Sec: 3.81
+Loss: 0.15689228475093842
+Loss: 0.0787309929728508
+Loss: 0.09072505682706833
+Loss: 0.14011220633983612
+Loss: 0.14111286401748657
+[2025-12-19 01:53:54] (step=0000030) Train Loss: 0.1215, Train Steps/Sec: 4.93
+✓ Step 0000030 | Loss: 0.1215 | Steps/Sec: 4.93
+[2025-12-19 01:53:56] Saved BEST checkpoint to ./dit_fine_resluts//000-DiT-XL-2-x2-finetune/checkpoints/epoch-2-loss-0.1215.pt (Loss: 0.1215)
+🏆 New best checkpoint saved! Loss: 0.1215
+[2025-12-19 01:53:56] Beginning epoch 3...
+Beginning epoch 3...
+Loss: 0.13169950246810913
+Loss: 0.1588037610054016
+Loss: 0.14623692631721497
+Loss: 0.17517787218093872
+Loss: 0.10469546914100647
+[2025-12-19 01:53:57] (step=0000035) Train Loss: 0.1433, Train Steps/Sec: 3.81
+✓ Step 0000035 | Loss: 0.1433 | Steps/Sec: 3.81
+Loss: 0.1789044588804245
+Loss: 0.1447778344154358
+Loss: 0.20651286840438843
+Loss: 0.17359985411167145
+Loss: 0.11495256423950195
+[2025-12-19 01:53:58] (step=0000040) Train Loss: 0.1637, Train Steps/Sec: 4.92
+✓ Step 0000040 | Loss: 0.1637 | Steps/Sec: 4.92
+[2025-12-19 01:53:58] Beginning epoch 4...
+Beginning epoch 4...
+Loss: 0.10414163023233414
+Loss: 0.13170810043811798
+Loss: 0.0964103415608406
+Loss: 0.11268150061368942
+Loss: 0.1805943250656128
+[2025-12-19 01:53:59] (step=0000045) Train Loss: 0.1251, Train Steps/Sec: 3.79
+✓ Step 0000045 | Loss: 0.1251 | Steps/Sec: 3.79
+Loss: 0.12608766555786133
+Loss: 0.12654419243335724
+Loss: 0.14418044686317444
+Loss: 0.1181902065873146
+Loss: 0.17125028371810913
+[2025-12-19 01:54:00] (step=0000050) Train Loss: 0.1373, Train Steps/Sec: 4.92
+✓ Step 0000050 | Loss: 0.1373 | Steps/Sec: 4.92
+[2025-12-19 01:54:00] Beginning epoch 5...
+Beginning epoch 5...
+Loss: 0.16017040610313416
+Loss: 0.14674076437950134
+Loss: 0.1430753618478775
+Loss: 0.14641770720481873
+Loss: 0.13185101747512817
+[2025-12-19 01:54:02] (step=0000055) Train Loss: 0.1457, Train Steps/Sec: 3.80
+✓ Step 0000055 | Loss: 0.1457 | Steps/Sec: 3.80
+Loss: 0.10593557357788086
+Loss: 0.19241034984588623
+Loss: 0.10423219203948975
+Loss: 0.1446228325366974
+Loss: 0.1672760397195816
+[2025-12-19 01:54:03] (step=0000060) Train Loss: 0.1429, Train Steps/Sec: 4.93
+✓ Step 0000060 | Loss: 0.1429 | Steps/Sec: 4.93
+[2025-12-19 01:54:03] Beginning epoch 6...
+Beginning epoch 6...
+Loss: 0.12901146709918976
+Loss: 0.15382356941699982
+Loss: 0.08462188392877579
+Loss: 0.13764715194702148
+Loss: 0.10813979059457779
+[2025-12-19 01:54:04] (step=0000065) Train Loss: 0.1226, Train Steps/Sec: 3.82
+✓ Step 0000065 | Loss: 0.1226 | Steps/Sec: 3.82
+Loss: 0.14522285759449005
+Loss: 0.17729419469833374
+Loss: 0.1674073338508606
+Loss: 0.11471293866634369
+Loss: 0.10580834001302719
+[2025-12-19 01:54:05] (step=0000070) Train Loss: 0.1421, Train Steps/Sec: 4.92
+✓ Step 0000070 | Loss: 0.1421 | Steps/Sec: 4.92
+[2025-12-19 01:54:05] Beginning epoch 7...
+Beginning epoch 7...
+Loss: 0.13113687932491302
+Loss: 0.13180269300937653
+Loss: 0.1280522346496582
+Loss: 0.08953302353620529
+Loss: 0.19101932644844055
+[2025-12-19 01:54:06] (step=0000075) Train Loss: 0.1343, Train Steps/Sec: 3.81
+✓ Step 0000075 | Loss: 0.1343 | Steps/Sec: 3.81
+Loss: 0.13006450235843658
+Loss: 0.11700509488582611
+Loss: 0.14902029931545258
+Loss: 0.1148955449461937
+Loss: 0.1208093911409378
+[2025-12-19 01:54:07] (step=0000080) Train Loss: 0.1264, Train Steps/Sec: 4.93
+✓ Step 0000080 | Loss: 0.1264 | Steps/Sec: 4.93
+[2025-12-19 01:54:07] Beginning epoch 8...
+Beginning epoch 8...
+Loss: 0.14090421795845032
+Loss: 0.11803899705410004
+Loss: 0.0980878546833992
+Loss: 0.13455571234226227
+Loss: 0.1849699765443802
+[2025-12-19 01:54:09] (step=0000085) Train Loss: 0.1353, Train Steps/Sec: 3.78
+✓ Step 0000085 | Loss: 0.1353 | Steps/Sec: 3.78
+Loss: 0.15999579429626465
+Loss: 0.16394583880901337
+Loss: 0.14015451073646545
+Loss: 0.12431254237890244
+Loss: 0.14189304411411285
+[2025-12-19 01:54:10] (step=0000090) Train Loss: 0.1461, Train Steps/Sec: 4.93
+✓ Step 0000090 | Loss: 0.1461 | Steps/Sec: 4.93
+[2025-12-19 01:54:10] Beginning epoch 9...
+Beginning epoch 9...
+Loss: 0.1740419715642929
+Loss: 0.19553497433662415
+Loss: 0.17753076553344727
+Loss: 0.13948814570903778
+Loss: 0.14275826513767242
+[2025-12-19 01:54:11] (step=0000095) Train Loss: 0.1659, Train Steps/Sec: 3.80
+✓ Step 0000095 | Loss: 0.1659 | Steps/Sec: 3.80
+Loss: 0.15732309222221375
+Loss: 0.10743322223424911
+Loss: 0.15378493070602417
+Loss: 0.1749206930398941
+Loss: 0.16503240168094635
+[2025-12-19 01:54:12] (step=0000100) Train Loss: 0.1517, Train Steps/Sec: 4.93
+✓ Step 0000100 | Loss: 0.1517 | Steps/Sec: 4.93
+[2025-12-19 01:54:12] Beginning epoch 10...
+Beginning epoch 10...
+Loss: 0.11603301763534546
+Loss: 0.14369098842144012
+Loss: 0.16252894699573517
+Loss: 0.12258363515138626
+Loss: 0.12590427696704865
+[2025-12-19 01:54:13] (step=0000105) Train Loss: 0.1341, Train Steps/Sec: 3.73
+✓ Step 0000105 | Loss: 0.1341 | Steps/Sec: 3.73
+Loss: 0.1788032352924347
+Loss: 0.12414071708917618
+Loss: 0.10847079008817673
+Loss: 0.1012745201587677
+Loss: 0.10979330539703369
+[2025-12-19 01:54:14] (step=0000110) Train Loss: 0.1245, Train Steps/Sec: 4.89
+✓ Step 0000110 | Loss: 0.1245 | Steps/Sec: 4.89
+[2025-12-19 01:54:14] Beginning epoch 11...
+Beginning epoch 11...
+Loss: 0.1207151859998703
+Loss: 0.11083263158798218
+Loss: 0.15654098987579346
+Loss: 0.15983185172080994
+Loss: 0.1291569471359253
+[2025-12-19 01:54:16] (step=0000115) Train Loss: 0.1354, Train Steps/Sec: 3.79
+✓ Step 0000115 | Loss: 0.1354 | Steps/Sec: 3.79
+Loss: 0.150557279586792
+Loss: 0.1531842052936554
+Loss: 0.13580602407455444
+Loss: 0.13067305088043213
+Loss: 0.1848030686378479
+[2025-12-19 01:54:17] (step=0000120) Train Loss: 0.1510, Train Steps/Sec: 4.91
+✓ Step 0000120 | Loss: 0.1510 | Steps/Sec: 4.91
+[2025-12-19 01:54:17] Beginning epoch 12...
+Beginning epoch 12...
+Loss: 0.2129853367805481
+Loss: 0.14378032088279724
+Loss: 0.12500713765621185
+Loss: 0.08798181265592575
+Loss: 0.1380344033241272
+[2025-12-19 01:54:18] (step=0000125) Train Loss: 0.1416, Train Steps/Sec: 3.78
+✓ Step 0000125 | Loss: 0.1416 | Steps/Sec: 3.78
+Loss: 0.12897853553295135
+Loss: 0.14201001822948456
+Loss: 0.11678687483072281
+Loss: 0.13761857151985168
+Loss: 0.19974006712436676
+[2025-12-19 01:54:19] (step=0000130) Train Loss: 0.1450, Train Steps/Sec: 4.88
+✓ Step 0000130 | Loss: 0.1450 | Steps/Sec: 4.88
+[2025-12-19 01:54:19] Beginning epoch 13...
+Beginning epoch 13...
+Loss: 0.13440850377082825
+Loss: 0.1292818933725357
+Loss: 0.11646950244903564
+Loss: 0.11039067804813385
+Loss: 0.16376972198486328
+[2025-12-19 01:54:20] (step=0000135) Train Loss: 0.1309, Train Steps/Sec: 3.77
+✓ Step 0000135 | Loss: 0.1309 | Steps/Sec: 3.77
+Loss: 0.18328669667243958
+Loss: 0.1061151847243309
+Loss: 0.18436546623706818
+Loss: 0.2012271136045456
+Loss: 0.07868225872516632
+[2025-12-19 01:54:21] (step=0000140) Train Loss: 0.1507, Train Steps/Sec: 4.91
+✓ Step 0000140 | Loss: 0.1507 | Steps/Sec: 4.91
+[2025-12-19 01:54:21] Beginning epoch 14...
+Beginning epoch 14...
+Loss: 0.09903522580862045
+Loss: 0.1632302850484848
+Loss: 0.1281934529542923
+Loss: 0.11905363947153091
+Loss: 0.13965867459774017
+[2025-12-19 01:54:23] (step=0000145) Train Loss: 0.1298, Train Steps/Sec: 3.82
+✓ Step 0000145 | Loss: 0.1298 | Steps/Sec: 3.82
+Loss: 0.2318185716867447
+Loss: 0.2339688092470169
+Loss: 0.15397441387176514
+Loss: 0.12559808790683746
+Loss: 0.17441794276237488
+[2025-12-19 01:54:24] (step=0000150) Train Loss: 0.1840, Train Steps/Sec: 4.91
+✓ Step 0000150 | Loss: 0.1840 | Steps/Sec: 4.91
+[2025-12-19 01:54:24] Beginning epoch 15...
+Beginning epoch 15...
+Loss: 0.1633913815021515
+Loss: 0.11670949310064316
+Loss: 0.08430042862892151
+Loss: 0.14742471277713776
+Loss: 0.13557977974414825
+[2025-12-19 01:54:25] (step=0000155) Train Loss: 0.1295, Train Steps/Sec: 3.78
+✓ Step 0000155 | Loss: 0.1295 | Steps/Sec: 3.78
+Loss: 0.11374508589506149
+Loss: 0.1469392031431198
+Loss: 0.1523369997739792
+Loss: 0.12122918665409088
+Loss: 0.1511351615190506
+[2025-12-19 01:54:26] (step=0000160) Train Loss: 0.1371, Train Steps/Sec: 4.90
+✓ Step 0000160 | Loss: 0.1371 | Steps/Sec: 4.90
+[2025-12-19 01:54:26] Beginning epoch 16...
+Beginning epoch 16...
+Loss: 0.16876435279846191
+Loss: 0.13540495932102203
+Loss: 0.07359182089567184
+Loss: 0.14197076857089996
+Loss: 0.12205437570810318
+[2025-12-19 01:54:27] (step=0000165) Train Loss: 0.1284, Train Steps/Sec: 3.80
+✓ Step 0000165 | Loss: 0.1284 | Steps/Sec: 3.80
+Loss: 0.1386006474494934
+Loss: 0.10755937546491623
+Loss: 0.11427191644906998
+Loss: 0.12870252132415771
+Loss: 0.1208668127655983
+[2025-12-19 01:54:28] (step=0000170) Train Loss: 0.1220, Train Steps/Sec: 4.90
+✓ Step 0000170 | Loss: 0.1220 | Steps/Sec: 4.90
+[2025-12-19 01:54:28] Beginning epoch 17...
+Beginning epoch 17...
+Loss: 0.11419066786766052
+Loss: 0.21060149371623993
+Loss: 0.12141605466604233
+Loss: 0.14592237770557404
+Loss: 0.12326819449663162
+[2025-12-19 01:54:30] (step=0000175) Train Loss: 0.1431, Train Steps/Sec: 3.78
+✓ Step 0000175 | Loss: 0.1431 | Steps/Sec: 3.78
+Loss: 0.14115095138549805
+Loss: 0.11115770041942596
+Loss: 0.15165477991104126
+Loss: 0.14014358818531036
+Loss: 0.15558871626853943
+[2025-12-19 01:54:31] (step=0000180) Train Loss: 0.1399, Train Steps/Sec: 4.87
+✓ Step 0000180 | Loss: 0.1399 | Steps/Sec: 4.87
+[2025-12-19 01:54:31] Beginning epoch 18...
+Beginning epoch 18...
+Loss: 0.13721737265586853
+Loss: 0.12260598689317703
+Loss: 0.10793039947748184
+Loss: 0.11763467639684677
+Loss: 0.1212758794426918
+[2025-12-19 01:54:32] (step=0000185) Train Loss: 0.1213, Train Steps/Sec: 3.78
+✓ Step 0000185 | Loss: 0.1213 | Steps/Sec: 3.78
+[2025-12-19 01:54:33] Saved BEST checkpoint to ./dit_fine_resluts//000-DiT-XL-2-x2-finetune/checkpoints/epoch-18-loss-0.1213.pt (Loss: 0.1213)
+🏆 New best checkpoint saved! Loss: 0.1213
+Loss: 0.19469107687473297
+Loss: 0.15485988557338715
+Loss: 0.12289173156023026
+Loss: 0.13283662497997284
+Loss: 0.10804237425327301
+[2025-12-19 01:54:35] (step=0000190) Train Loss: 0.1427, Train Steps/Sec: 4.89
+✓ Step 0000190 | Loss: 0.1427 | Steps/Sec: 4.89
+[2025-12-19 01:54:35] Beginning epoch 19...
+Beginning epoch 19...
+Loss: 0.16169080138206482
+Loss: 0.13676433265209198
+Loss: 0.108830027282238
+Loss: 0.13799229264259338
+Loss: 0.12871775031089783
+[2025-12-19 01:54:36] (step=0000195) Train Loss: 0.1348, Train Steps/Sec: 3.80
+✓ Step 0000195 | Loss: 0.1348 | Steps/Sec: 3.80
+Loss: 0.12936748564243317
+Loss: 0.13236857950687408
+Loss: 0.11153968423604965
+Loss: 0.16590560972690582
+Loss: 0.13636326789855957
+[2025-12-19 01:54:37] (step=0000200) Train Loss: 0.1351, Train Steps/Sec: 4.89
+✓ Step 0000200 | Loss: 0.1351 | Steps/Sec: 4.89
+[2025-12-19 01:54:37] Beginning epoch 20...
+Beginning epoch 20...
+Loss: 0.14958585798740387
+Loss: 0.09038107842206955
+Loss: 0.15852104127407074
+Loss: 0.13595059514045715
+Loss: 0.2797163426876068
+[2025-12-19 01:54:38] (step=0000205) Train Loss: 0.1628, Train Steps/Sec: 3.80
+✓ Step 0000205 | Loss: 0.1628 | Steps/Sec: 3.80
+Loss: 0.14127254486083984
+Loss: 0.16319908201694489
+Loss: 0.18293464183807373
+Loss: 0.1725127249956131
+Loss: 0.15769948065280914
+[2025-12-19 01:54:39] (step=0000210) Train Loss: 0.1635, Train Steps/Sec: 4.91
+✓ Step 0000210 | Loss: 0.1635 | Steps/Sec: 4.91
+[2025-12-19 01:54:39] Beginning epoch 21...
+Beginning epoch 21...
+Loss: 0.2323680967092514
+Loss: 0.16217505931854248
+Loss: 0.12138145416975021
+Loss: 0.14435145258903503
+Loss: 0.16204220056533813
+[2025-12-19 01:54:41] (step=0000215) Train Loss: 0.1645, Train Steps/Sec: 3.75
+✓ Step 0000215 | Loss: 0.1645 | Steps/Sec: 3.75
+Loss: 0.1540968418121338
+Loss: 0.16613057255744934
+Loss: 0.11557154357433319
+Loss: 0.16649268567562103
+Loss: 0.12743477523326874
+[2025-12-19 01:54:42] (step=0000220) Train Loss: 0.1459, Train Steps/Sec: 4.89
+✓ Step 0000220 | Loss: 0.1459 | Steps/Sec: 4.89
+[2025-12-19 01:54:42] Beginning epoch 22...
+Beginning epoch 22...
+Loss: 0.11860056966543198
+Loss: 0.14215289056301117
+Loss: 0.1271364986896515
+Loss: 0.09118769317865372
+Loss: 0.10704834014177322
+[2025-12-19 01:54:43] (step=0000225) Train Loss: 0.1172, Train Steps/Sec: 3.81
+✓ Step 0000225 | Loss: 0.1172 | Steps/Sec: 3.81
+[2025-12-19 01:54:44] Saved BEST checkpoint to ./dit_fine_resluts//000-DiT-XL-2-x2-finetune/checkpoints/epoch-22-loss-0.1172.pt (Loss: 0.1172)
+🏆 New best checkpoint saved! Loss: 0.1172
+Loss: 0.2871532142162323
+Loss: 0.16152894496917725
+Loss: 0.13135665655136108
+Loss: 0.12071231752634048
+Loss: 0.12314903736114502
+[2025-12-19 01:54:45] (step=0000230) Train Loss: 0.1648, Train Steps/Sec: 4.89
+✓ Step 0000230 | Loss: 0.1648 | Steps/Sec: 4.89
+[2025-12-19 01:54:45] Beginning epoch 23...
+Beginning epoch 23...
+Loss: 0.08938044309616089
+Loss: 0.16045497357845306
+Loss: 0.14982952177524567
+Loss: 0.12940147519111633
+Loss: 0.14012263715267181
+[2025-12-19 01:54:47] (step=0000235) Train Loss: 0.1338, Train Steps/Sec: 3.80
+✓ Step 0000235 | Loss: 0.1338 | Steps/Sec: 3.80
+Loss: 0.10674062371253967
+Loss: 0.15500947833061218
+Loss: 0.23363906145095825
+Loss: 0.1493363380432129
+Loss: 0.11457792669534683
+[2025-12-19 01:54:48] (step=0000240) Train Loss: 0.1519, Train Steps/Sec: 4.90
+✓ Step 0000240 | Loss: 0.1519 | Steps/Sec: 4.90
+[2025-12-19 01:54:48] Beginning epoch 24...
+Beginning epoch 24...
+Loss: 0.10905063152313232
+Loss: 0.13574352860450745
+Loss: 0.14257463812828064
+Loss: 0.18431925773620605
+Loss: 0.12502959370613098
+[2025-12-19 01:54:49] (step=0000245) Train Loss: 0.1393, Train Steps/Sec: 3.81
+✓ Step 0000245 | Loss: 0.1393 | Steps/Sec: 3.81
+Loss: 0.13424614071846008
+Loss: 0.14797905087471008
+Loss: 0.14222945272922516
+Loss: 0.12961970269680023
+Loss: 0.19115199148654938
+[2025-12-19 01:54:50] (step=0000250) Train Loss: 0.1490, Train Steps/Sec: 4.90
+✓ Step 0000250 | Loss: 0.1490 | Steps/Sec: 4.90
+[2025-12-19 01:54:50] Beginning epoch 25...
+Beginning epoch 25...
+Loss: 0.1965363621711731
+Loss: 0.14832070469856262
+Loss: 0.11104918271303177
+Loss: 0.12144643813371658
+Loss: 0.11490988731384277
+[2025-12-19 01:54:51] (step=0000255) Train Loss: 0.1385, Train Steps/Sec: 3.78
+✓ Step 0000255 | Loss: 0.1385 | Steps/Sec: 3.78
+Loss: 0.2047320306301117
+Loss: 0.13832606375217438
+Loss: 0.1375877559185028
+Loss: 0.11831580102443695
+Loss: 0.1504254788160324
+[2025-12-19 01:54:52] (step=0000260) Train Loss: 0.1499, Train Steps/Sec: 4.91
+✓ Step 0000260 | Loss: 0.1499 | Steps/Sec: 4.91
+[2025-12-19 01:54:52] Beginning epoch 26...
+Beginning epoch 26...
+Loss: 0.11020788550376892
+Loss: 0.1272633969783783
+Loss: 0.12297216057777405
+Loss: 0.13458362221717834
+Loss: 0.1113068237900734
+[2025-12-19 01:54:54] (step=0000265) Train Loss: 0.1213, Train Steps/Sec: 3.83
+✓ Step 0000265 | Loss: 0.1213 | Steps/Sec: 3.83
+Loss: 0.14807701110839844
+Loss: 0.2196817398071289
+Loss: 0.18807590007781982
+Loss: 0.18627652525901794
+Loss: 0.15067683160305023
+[2025-12-19 01:54:55] (step=0000270) Train Loss: 0.1786, Train Steps/Sec: 4.90
+✓ Step 0000270 | Loss: 0.1786 | Steps/Sec: 4.90
+[2025-12-19 01:54:55] Beginning epoch 27...
+Beginning epoch 27...
+Loss: 0.11067155748605728
+Loss: 0.1242298111319542
+Loss: 0.10522928833961487
+Loss: 0.20892280340194702
+Loss: 0.14501500129699707
+[2025-12-19 01:54:56] (step=0000275) Train Loss: 0.1388, Train Steps/Sec: 3.78
+✓ Step 0000275 | Loss: 0.1388 | Steps/Sec: 3.78
+Loss: 0.1189303770661354
+Loss: 0.12366489320993423
+Loss: 0.13685785233974457
+Loss: 0.10702550411224365
+Loss: 0.13489824533462524
+[2025-12-19 01:54:57] (step=0000280) Train Loss: 0.1243, Train Steps/Sec: 4.91
+✓ Step 0000280 | Loss: 0.1243 | Steps/Sec: 4.91
+[2025-12-19 01:54:57] Beginning epoch 28...
+Beginning epoch 28...
+Loss: 0.1654045283794403
+Loss: 0.148885577917099
+Loss: 0.12056689709424973
+Loss: 0.11760208010673523
+Loss: 0.1291412115097046
+[2025-12-19 01:54:58] (step=0000285) Train Loss: 0.1363, Train Steps/Sec: 3.82
+✓ Step 0000285 | Loss: 0.1363 | Steps/Sec: 3.82
+Loss: 0.16611430048942566
+Loss: 0.1687396615743637
+Loss: 0.1633787304162979
+Loss: 0.14920268952846527
+Loss: 0.1601528823375702
+[2025-12-19 01:54:59] (step=0000290) Train Loss: 0.1615, Train Steps/Sec: 4.90
+✓ Step 0000290 | Loss: 0.1615 | Steps/Sec: 4.90
+[2025-12-19 01:54:59] Beginning epoch 29...
+Beginning epoch 29...
+Loss: 0.1585579663515091
+Loss: 0.14716607332229614
+Loss: 0.10725458711385727
+Loss: 0.19742590188980103
+Loss: 0.22929427027702332
+[2025-12-19 01:55:01] (step=0000295) Train Loss: 0.1679, Train Steps/Sec: 3.79
+✓ Step 0000295 | Loss: 0.1679 | Steps/Sec: 3.79
+Loss: 0.11903827637434006
+Loss: 0.12372022122144699
+Loss: 0.20930194854736328
+Loss: 0.11370988935232162
+Loss: 0.1037633866071701
+[2025-12-19 01:55:02] (step=0000300) Train Loss: 0.1339, Train Steps/Sec: 4.90
+✓ Step 0000300 | Loss: 0.1339 | Steps/Sec: 4.90
+[2025-12-19 01:55:02] Beginning epoch 30...
+Beginning epoch 30...
+Loss: 0.12301173061132431
+Loss: 0.11664421111345291
+Loss: 0.13113614916801453
+Loss: 0.15218748152256012
+Loss: 0.1843166947364807
+[2025-12-19 01:55:03] (step=0000305) Train Loss: 0.1415, Train Steps/Sec: 3.77
+✓ Step 0000305 | Loss: 0.1415 | Steps/Sec: 3.77
+Loss: 0.126683309674263
+Loss: 0.13748431205749512
+Loss: 0.24169780313968658
+Loss: 0.09824410080909729
+Loss: 0.12339688837528229
+[2025-12-19 01:55:04] (step=0000310) Train Loss: 0.1455, Train Steps/Sec: 4.89
+✓ Step 0000310 | Loss: 0.1455 | Steps/Sec: 4.89
+[2025-12-19 01:55:04] Beginning epoch 31...
+Beginning epoch 31...
+Loss: 0.0943632647395134
+Loss: 0.1058761477470398
+Loss: 0.16831542551517487
+Loss: 0.13326743245124817
+Loss: 0.16292110085487366
+[2025-12-19 01:55:05] (step=0000315) Train Loss: 0.1329, Train Steps/Sec: 3.78
+✓ Step 0000315 | Loss: 0.1329 | Steps/Sec: 3.78
+Loss: 0.14087766408920288
+Loss: 0.12380748242139816
+Loss: 0.11924146115779877
+Loss: 0.1095651388168335
+Loss: 0.17996320128440857
+[2025-12-19 01:55:06] (step=0000320) Train Loss: 0.1347, Train Steps/Sec: 4.86
+✓ Step 0000320 | Loss: 0.1347 | Steps/Sec: 4.86
+[2025-12-19 01:55:06] Beginning epoch 32...
+Beginning epoch 32...
+Loss: 0.17562498152256012
+Loss: 0.19210587441921234
+Loss: 0.14200825989246368
+Loss: 0.166070356965065
+Loss: 0.15633437037467957
+[2025-12-19 01:55:08] (step=0000325) Train Loss: 0.1664, Train Steps/Sec: 3.78
+✓ Step 0000325 | Loss: 0.1664 | Steps/Sec: 3.78
+Loss: 0.20087796449661255
+Loss: 0.1929825097322464
+Loss: 0.2304043173789978
+Loss: 0.11313814669847488
+Loss: 0.08663438260555267
+[2025-12-19 01:55:09] (step=0000330) Train Loss: 0.1648, Train Steps/Sec: 4.88
+✓ Step 0000330 | Loss: 0.1648 | Steps/Sec: 4.88
+[2025-12-19 01:55:09] Beginning epoch 33...
+Beginning epoch 33...
+Loss: 0.10585005581378937
+Loss: 0.16816850006580353
+Loss: 0.09722758084535599
+Loss: 0.12207557260990143
+Loss: 0.14140063524246216
+[2025-12-19 01:55:10] (step=0000335) Train Loss: 0.1269, Train Steps/Sec: 3.80
+✓ Step 0000335 | Loss: 0.1269 | Steps/Sec: 3.80
+Loss: 0.124642014503479
+Loss: 0.10739433020353317
+Loss: 0.13426797091960907
+Loss: 0.14333084225654602
+Loss: 0.13112300634384155
+[2025-12-19 01:55:11] (step=0000340) Train Loss: 0.1282, Train Steps/Sec: 4.89
+✓ Step 0000340 | Loss: 0.1282 | Steps/Sec: 4.89
+[2025-12-19 01:55:11] Beginning epoch 34...
+Beginning epoch 34...
+Loss: 0.13409221172332764
+Loss: 0.14375485479831696
+Loss: 0.1468922346830368
+Loss: 0.13810749351978302
+Loss: 0.215315580368042
+[2025-12-19 01:55:12] (step=0000345) Train Loss: 0.1556, Train Steps/Sec: 3.77
+✓ Step 0000345 | Loss: 0.1556 | Steps/Sec: 3.77
+Loss: 0.1245480328798294
+Loss: 0.09576515853404999
+Loss: 0.1124921590089798
+Loss: 0.14644308388233185
+Loss: 0.21242907643318176
+[2025-12-19 01:55:13] (step=0000350) Train Loss: 0.1383, Train Steps/Sec: 4.89
+✓ Step 0000350 | Loss: 0.1383 | Steps/Sec: 4.89
+[2025-12-19 01:55:13] Beginning epoch 35...
+Beginning epoch 35...
+Loss: 0.1601678878068924
+Loss: 0.10533826798200607
+Loss: 0.14542244374752045
+Loss: 0.1372005045413971
+Loss: 0.1780688464641571
+[2025-12-19 01:55:15] (step=0000355) Train Loss: 0.1452, Train Steps/Sec: 3.81
+✓ Step 0000355 | Loss: 0.1452 | Steps/Sec: 3.81
+Loss: 0.11768638342618942
+Loss: 0.11544007062911987
+Loss: 0.10562549531459808
+Loss: 0.15883956849575043
+Loss: 0.156857430934906
+[2025-12-19 01:55:16] (step=0000360) Train Loss: 0.1309, Train Steps/Sec: 4.89
+✓ Step 0000360 | Loss: 0.1309 | Steps/Sec: 4.89
+[2025-12-19 01:55:16] Beginning epoch 36...
+Beginning epoch 36...
+Loss: 0.18042071163654327
+Loss: 0.16498854756355286
+Loss: 0.10517057031393051
+Loss: 0.16800753772258759
+Loss: 0.18455389142036438
+[2025-12-19 01:55:17] (step=0000365) Train Loss: 0.1606, Train Steps/Sec: 3.79
+✓ Step 0000365 | Loss: 0.1606 | Steps/Sec: 3.79
+Loss: 0.11904929578304291
+Loss: 0.13307224214076996
+Loss: 0.09621113538742065
+Loss: 0.10499143600463867
+Loss: 0.19021491706371307
+[2025-12-19 01:55:18] (step=0000370) Train Loss: 0.1287, Train Steps/Sec: 4.86
+✓ Step 0000370 | Loss: 0.1287 | Steps/Sec: 4.86
+[2025-12-19 01:55:18] Beginning epoch 37...
+Beginning epoch 37...
+Loss: 0.21875053644180298
+Loss: 0.18296363949775696
+Loss: 0.13451741635799408
+Loss: 0.17870929837226868
+Loss: 0.16477423906326294
+[2025-12-19 01:55:19] (step=0000375) Train Loss: 0.1759, Train Steps/Sec: 3.82
+✓ Step 0000375 | Loss: 0.1759 | Steps/Sec: 3.82
+Loss: 0.11556432396173477
+Loss: 0.12001828104257584
+Loss: 0.1316361427307129
+Loss: 0.1376289278268814
+Loss: 0.16615527868270874
+[2025-12-19 01:55:20] (step=0000380) Train Loss: 0.1342, Train Steps/Sec: 4.87
+✓ Step 0000380 | Loss: 0.1342 | Steps/Sec: 4.87
+[2025-12-19 01:55:20] Beginning epoch 38...
+Beginning epoch 38...
+Loss: 0.11008038371801376
+Loss: 0.20521961152553558
+Loss: 0.14373673498630524
+Loss: 0.14257845282554626
+Loss: 0.10960134863853455
+[2025-12-19 01:55:22] (step=0000385) Train Loss: 0.1422, Train Steps/Sec: 3.80
+✓ Step 0000385 | Loss: 0.1422 | Steps/Sec: 3.80
+Loss: 0.13424983620643616
+Loss: 0.18455342948436737
+Loss: 0.15242642164230347
+Loss: 0.12396775186061859
+Loss: 0.13320526480674744
+[2025-12-19 01:55:23] (step=0000390) Train Loss: 0.1457, Train Steps/Sec: 4.89
+✓ Step 0000390 | Loss: 0.1457 | Steps/Sec: 4.89
+[2025-12-19 01:55:23] Beginning epoch 39...
+Beginning epoch 39...
+Loss: 0.13925398886203766
+Loss: 0.1777711808681488
+Loss: 0.1657298058271408
+Loss: 0.15708984434604645
+Loss: 0.12535688281059265
+[2025-12-19 01:55:24] (step=0000395) Train Loss: 0.1530, Train Steps/Sec: 3.82
+✓ Step 0000395 | Loss: 0.1530 | Steps/Sec: 3.82
+Loss: 0.14424385130405426
+Loss: 0.16817668080329895
+Loss: 0.10874612629413605
+Loss: 0.17000477015972137
+Loss: 0.17007052898406982
+[2025-12-19 01:55:25] (step=0000400) Train Loss: 0.1522, Train Steps/Sec: 4.88
+✓ Step 0000400 | Loss: 0.1522 | Steps/Sec: 4.88
+[2025-12-19 01:55:25] Beginning epoch 40...
+Beginning epoch 40...
+Loss: 0.1468687206506729
+Loss: 0.10978638380765915
+Loss: 0.09785114228725433
+Loss: 0.2141224592924118
+Loss: 0.18250834941864014
+[2025-12-19 01:55:26] (step=0000405) Train Loss: 0.1502, Train Steps/Sec: 3.76
+✓ Step 0000405 | Loss: 0.1502 | Steps/Sec: 3.76
+Loss: 0.06919067353010178
+Loss: 0.11342141777276993
+Loss: 0.11760419607162476
+Loss: 0.15059539675712585
+Loss: 0.11312165856361389
+[2025-12-19 01:55:27] (step=0000410) Train Loss: 0.1128, Train Steps/Sec: 4.89
+✓ Step 0000410 | Loss: 0.1128 | Steps/Sec: 4.89
+[2025-12-19 01:55:29] Saved BEST checkpoint to ./dit_fine_resluts//000-DiT-XL-2-x2-finetune/checkpoints/epoch-40-loss-0.1128.pt (Loss: 0.1128)
+🏆 New best checkpoint saved! Loss: 0.1128
+[2025-12-19 01:55:29] Beginning epoch 41...
+Beginning epoch 41...
+Loss: 0.16369947791099548
+Loss: 0.1245623454451561
+Loss: 0.13341562449932098
+Loss: 0.10908764600753784
+Loss: 0.17004960775375366
+[2025-12-19 01:55:30] (step=0000415) Train Loss: 0.1402, Train Steps/Sec: 3.78
+✓ Step 0000415 | Loss: 0.1402 | Steps/Sec: 3.78
+Loss: 0.11929236352443695
+Loss: 0.15985876321792603
+Loss: 0.12289568036794662
+Loss: 0.15912024676799774
+Loss: 0.09029144048690796
+[2025-12-19 01:55:31] (step=0000420) Train Loss: 0.1303, Train Steps/Sec: 4.88
+✓ Step 0000420 | Loss: 0.1303 | Steps/Sec: 4.88
+[2025-12-19 01:55:31] Beginning epoch 42...
+Beginning epoch 42...
+Loss: 0.11858552694320679
+Loss: 0.1724611222743988
+Loss: 0.16579334437847137
+Loss: 0.1156129464507103
+Loss: 0.14447160065174103
+[2025-12-19 01:55:32] (step=0000425) Train Loss: 0.1434, Train Steps/Sec: 3.78
+✓ Step 0000425 | Loss: 0.1434 | Steps/Sec: 3.78
+Loss: 0.15167374908924103
+Loss: 0.09711799770593643
+Loss: 0.10578793287277222
+Loss: 0.1289708912372589
+Loss: 0.1989727020263672
+[2025-12-19 01:55:33] (step=0000430) Train Loss: 0.1365, Train Steps/Sec: 4.89
+✓ Step 0000430 | Loss: 0.1365 | Steps/Sec: 4.89
+[2025-12-19 01:55:34] Beginning epoch 43...
+Beginning epoch 43...
+Loss: 0.15445153415203094
+Loss: 0.1540358066558838
+Loss: 0.13155235350131989
+Loss: 0.12093228846788406
+Loss: 0.13847795128822327
+[2025-12-19 01:55:35] (step=0000435) Train Loss: 0.1399, Train Steps/Sec: 3.79
+✓ Step 0000435 | Loss: 0.1399 | Steps/Sec: 3.79
+Loss: 0.16184958815574646
+Loss: 0.13478095829486847
+Loss: 0.13376806676387787
+Loss: 0.09214912354946136
+Loss: 0.17034032940864563
+[2025-12-19 01:55:36] (step=0000440) Train Loss: 0.1386, Train Steps/Sec: 4.87
+✓ Step 0000440 | Loss: 0.1386 | Steps/Sec: 4.87
+[2025-12-19 01:55:36] Beginning epoch 44...
+Beginning epoch 44...
+Loss: 0.17702731490135193
+Loss: 0.19130945205688477
+Loss: 0.20894576609134674
+Loss: 0.12312623858451843
+Loss: 0.1479826271533966
+[2025-12-19 01:55:37] (step=0000445) Train Loss: 0.1697, Train Steps/Sec: 3.76
+✓ Step 0000445 | Loss: 0.1697 | Steps/Sec: 3.76
+Loss: 0.11969758570194244
+Loss: 0.09603255987167358
+Loss: 0.13179104030132294
+Loss: 0.11584344506263733
+Loss: 0.18763361871242523
+[2025-12-19 01:55:38] (step=0000450) Train Loss: 0.1302, Train Steps/Sec: 4.88
+✓ Step 0000450 | Loss: 0.1302 | Steps/Sec: 4.88
+[2025-12-19 01:55:38] Beginning epoch 45...
+Beginning epoch 45...
+Loss: 0.08548850566148758
+Loss: 0.17459750175476074
+Loss: 0.11770478636026382
+Loss: 0.11263503134250641
+Loss: 0.22536532580852509
+[2025-12-19 01:55:40] (step=0000455) Train Loss: 0.1432, Train Steps/Sec: 3.81
+✓ Step 0000455 | Loss: 0.1432 | Steps/Sec: 3.81
+Loss: 0.11361432075500488
+Loss: 0.11747650057077408
+Loss: 0.1318361461162567
+Loss: 0.10907060652971268
+Loss: 0.17247813940048218
+[2025-12-19 01:55:41] (step=0000460) Train Loss: 0.1289, Train Steps/Sec: 4.87
+✓ Step 0000460 | Loss: 0.1289 | Steps/Sec: 4.87
+[2025-12-19 01:55:41] Beginning epoch 46...
+Beginning epoch 46...
+Loss: 0.1419282853603363
+Loss: 0.169432133436203
+Loss: 0.2111116349697113
+Loss: 0.1324145346879959
+Loss: 0.1333419531583786
+[2025-12-19 01:55:42] (step=0000465) Train Loss: 0.1576, Train Steps/Sec: 3.76
+✓ Step 0000465 | Loss: 0.1576 | Steps/Sec: 3.76
+Loss: 0.17319798469543457
+Loss: 0.13148453831672668
+Loss: 0.2259918749332428
+Loss: 0.2368955910205841
+Loss: 0.14517103135585785
+[2025-12-19 01:55:43] (step=0000470) Train Loss: 0.1825, Train Steps/Sec: 4.88
+✓ Step 0000470 | Loss: 0.1825 | Steps/Sec: 4.88
+[2025-12-19 01:55:43] Beginning epoch 47...
+Beginning epoch 47...
+Loss: 0.13059349358081818
+Loss: 0.21923266351222992
+Loss: 0.09564235806465149
+Loss: 0.10118066519498825
+Loss: 0.13685284554958344
+[2025-12-19 01:55:44] (step=0000475) Train Loss: 0.1367, Train Steps/Sec: 3.76
+✓ Step 0000475 | Loss: 0.1367 | Steps/Sec: 3.76
+Loss: 0.14806631207466125
+Loss: 0.06252772361040115
+Loss: 0.17195621132850647
+Loss: 0.14169210195541382
+Loss: 0.1651175320148468
+[2025-12-19 01:55:45] (step=0000480) Train Loss: 0.1379, Train Steps/Sec: 4.87
+✓ Step 0000480 | Loss: 0.1379 | Steps/Sec: 4.87
+[2025-12-19 01:55:45] Beginning epoch 48...
+Beginning epoch 48...
+Loss: 0.13864728808403015
+Loss: 0.17129427194595337
+Loss: 0.1035488098859787
+Loss: 0.11899028718471527
+Loss: 0.13236314058303833
+[2025-12-19 01:55:47] (step=0000485) Train Loss: 0.1330, Train Steps/Sec: 3.76
+✓ Step 0000485 | Loss: 0.1330 | Steps/Sec: 3.76
+Loss: 0.13165031373500824
+Loss: 0.12717151641845703
+Loss: 0.11715926229953766
+Loss: 0.19202780723571777
+Loss: 0.13449810445308685
+[2025-12-19 01:55:48] (step=0000490) Train Loss: 0.1405, Train Steps/Sec: 4.88
+✓ Step 0000490 | Loss: 0.1405 | Steps/Sec: 4.88
+[2025-12-19 01:55:48] Beginning epoch 49...
+Beginning epoch 49...
+Loss: 0.10864705592393875
+Loss: 0.1919870525598526
+Loss: 0.15105979144573212
+Loss: 0.07492735981941223
+Loss: 0.1597035527229309
+[2025-12-19 01:55:49] (step=0000495) Train Loss: 0.1373, Train Steps/Sec: 3.81
+✓ Step 0000495 | Loss: 0.1373 | Steps/Sec: 3.81
+Loss: 0.13563252985477448
+Loss: 0.13175758719444275
+Loss: 0.18770179152488708
+Loss: 0.18223296105861664
+Loss: 0.15666517615318298
+[2025-12-19 01:55:50] (step=0000500) Train Loss: 0.1588, Train Steps/Sec: 4.87
+✓ Step 0000500 | Loss: 0.1588 | Steps/Sec: 4.87
+[2025-12-19 01:55:51] Saved checkpoint to ./dit_fine_resluts//000-DiT-XL-2-x2-finetune/checkpoints/0000500.pt (Model contains only trainable params)
+[2025-12-19 01:55:51] Beginning epoch 50...
+Beginning epoch 50...
+Loss: 0.197526216506958
+Loss: 0.10622330754995346
+Loss: 0.182708740234375
+Loss: 0.12012496590614319
+Loss: 0.09373092651367188
+[2025-12-19 01:55:53] (step=0000505) Train Loss: 0.1401, Train Steps/Sec: 1.83
+✓ Step 0000505 | Loss: 0.1401 | Steps/Sec: 1.83
+Loss: 0.15892229974269867
+Loss: 0.13924627006053925
+Loss: 0.1158546432852745
+Loss: 0.09207747876644135
+Loss: 0.16171851754188538
+[2025-12-19 01:55:54] (step=0000510) Train Loss: 0.1336, Train Steps/Sec: 4.86
+✓ Step 0000510 | Loss: 0.1336 | Steps/Sec: 4.86
+[2025-12-19 01:55:54] Beginning epoch 51...
+Beginning epoch 51...
+Loss: 0.09853579103946686
+Loss: 0.08324790000915527
+Loss: 0.09933385998010635
+Loss: 0.18369217216968536
+Loss: 0.14037670195102692
+[2025-12-19 01:55:55] (step=0000515) Train Loss: 0.1210, Train Steps/Sec: 3.79
+✓ Step 0000515 | Loss: 0.1210 | Steps/Sec: 3.79
+Loss: 0.1756615936756134
+Loss: 0.14865060150623322
+Loss: 0.1725444346666336
+Loss: 0.17622056603431702
+Loss: 0.10047613084316254
+[2025-12-19 01:55:56] (step=0000520) Train Loss: 0.1547, Train Steps/Sec: 4.86
+✓ Step 0000520 | Loss: 0.1547 | Steps/Sec: 4.86
+[2025-12-19 01:55:56] Beginning epoch 52...
+Beginning epoch 52...
+Loss: 0.1364935040473938
+Loss: 0.1152782067656517
+Loss: 0.12031853199005127
+Loss: 0.14697542786598206
+Loss: 0.12469667196273804
+[2025-12-19 01:55:57] (step=0000525) Train Loss: 0.1288, Train Steps/Sec: 3.82
+✓ Step 0000525 | Loss: 0.1288 | Steps/Sec: 3.82
+Loss: 0.12091463804244995
+Loss: 0.16371415555477142
+Loss: 0.16367772221565247
+Loss: 0.1772746592760086
+Loss: 0.1997775286436081
+[2025-12-19 01:55:58] (step=0000530) Train Loss: 0.1651, Train Steps/Sec: 4.87
+✓ Step 0000530 | Loss: 0.1651 | Steps/Sec: 4.87
+[2025-12-19 01:55:58] Beginning epoch 53...
+Beginning epoch 53...
+Loss: 0.09158343821763992
+Loss: 0.11705867201089859
+Loss: 0.11845443397760391
+Loss: 0.1753207892179489
+Loss: 0.14791931211948395
+[2025-12-19 01:56:00] (step=0000535) Train Loss: 0.1301, Train Steps/Sec: 3.82
+✓ Step 0000535 | Loss: 0.1301 | Steps/Sec: 3.82
+Loss: 0.13795587420463562
+Loss: 0.12426843494176865
+Loss: 0.1796007752418518
+Loss: 0.1445212960243225
+Loss: 0.11043878644704819
+[2025-12-19 01:56:01] (step=0000540) Train Loss: 0.1394, Train Steps/Sec: 4.87
+✓ Step 0000540 | Loss: 0.1394 | Steps/Sec: 4.87
+[2025-12-19 01:56:01] Beginning epoch 54...
+Beginning epoch 54...
+Loss: 0.09167876839637756
+Loss: 0.14985224604606628
+Loss: 0.11941458284854889
+Loss: 0.14119940996170044
+Loss: 0.14112567901611328
+[2025-12-19 01:56:02] (step=0000545) Train Loss: 0.1287, Train Steps/Sec: 3.82
+✓ Step 0000545 | Loss: 0.1287 | Steps/Sec: 3.82
+Loss: 0.1755485087633133
+Loss: 0.13086163997650146
+Loss: 0.13836760818958282
+Loss: 0.14212802052497864
+Loss: 0.058669671416282654
+[2025-12-19 01:56:03] (step=0000550) Train Loss: 0.1291, Train Steps/Sec: 4.86
+✓ Step 0000550 | Loss: 0.1291 | Steps/Sec: 4.86
+[2025-12-19 01:56:03] Beginning epoch 55...
+Beginning epoch 55...
+Loss: 0.16796794533729553
+Loss: 0.11469905823469162
+Loss: 0.15650451183319092
+Loss: 0.11350486427545547
+Loss: 0.10053232312202454
+[2025-12-19 01:56:04] (step=0000555) Train Loss: 0.1306, Train Steps/Sec: 3.80
+✓ Step 0000555 | Loss: 0.1306 | Steps/Sec: 3.80
+Loss: 0.16397807002067566
+Loss: 0.18115924298763275
+Loss: 0.1614023596048355
+Loss: 0.14878879487514496
+Loss: 0.13387073576450348
+[2025-12-19 01:56:05] (step=0000560) Train Loss: 0.1578, Train Steps/Sec: 4.88
+✓ Step 0000560 | Loss: 0.1578 | Steps/Sec: 4.88
+[2025-12-19 01:56:05] Beginning epoch 56...
+Beginning epoch 56...
+Loss: 0.1545032411813736
+Loss: 0.15454033017158508
+Loss: 0.09755969792604446
+Loss: 0.18097758293151855
+Loss: 0.19715039432048798
+[2025-12-19 01:56:07] (step=0000565) Train Loss: 0.1569, Train Steps/Sec: 3.78
+✓ Step 0000565 | Loss: 0.1569 | Steps/Sec: 3.78
+Loss: 0.11560747027397156
+Loss: 0.14453677833080292
+Loss: 0.1495313197374344
+Loss: 0.16010816395282745
+Loss: 0.12400252372026443
+[2025-12-19 01:56:08] (step=0000570) Train Loss: 0.1388, Train Steps/Sec: 4.87
+✓ Step 0000570 | Loss: 0.1388 | Steps/Sec: 4.87
+[2025-12-19 01:56:08] Beginning epoch 57...
+Beginning epoch 57...
+Loss: 0.12643127143383026
+Loss: 0.1890338659286499
+Loss: 0.16301555931568146
+Loss: 0.16311794519424438
+Loss: 0.10888245701789856
+[2025-12-19 01:56:09] (step=0000575) Train Loss: 0.1501, Train Steps/Sec: 3.80
+✓ Step 0000575 | Loss: 0.1501 | Steps/Sec: 3.80
+Loss: 0.15843980014324188
+Loss: 0.10506080090999603
+Loss: 0.1385444551706314
+Loss: 0.1026446521282196
+Loss: 0.12880001962184906
+[2025-12-19 01:56:10] (step=0000580) Train Loss: 0.1267, Train Steps/Sec: 4.86
+✓ Step 0000580 | Loss: 0.1267 | Steps/Sec: 4.86
+[2025-12-19 01:56:10] Beginning epoch 58...
+Beginning epoch 58...
+Loss: 0.21555092930793762
+Loss: 0.15657822787761688
+Loss: 0.12435559928417206
+Loss: 0.19009478390216827
+Loss: 0.1671774685382843
+[2025-12-19 01:56:11] (step=0000585) Train Loss: 0.1708, Train Steps/Sec: 3.80
+✓ Step 0000585 | Loss: 0.1708 | Steps/Sec: 3.80
+Loss: 0.14109259843826294
+Loss: 0.12785771489143372
+Loss: 0.1610211580991745
+Loss: 0.13915766775608063
+Loss: 0.12075800448656082
+[2025-12-19 01:56:12] (step=0000590) Train Loss: 0.1380, Train Steps/Sec: 4.86
+✓ Step 0000590 | Loss: 0.1380 | Steps/Sec: 4.86
+[2025-12-19 01:56:12] Beginning epoch 59...
+Beginning epoch 59...
+Loss: 0.16053786873817444
+Loss: 0.1038724035024643
+Loss: 0.22534595429897308
+Loss: 0.10465431213378906
+Loss: 0.12460371851921082
+[2025-12-19 01:56:14] (step=0000595) Train Loss: 0.1438, Train Steps/Sec: 3.77
+✓ Step 0000595 | Loss: 0.1438 | Steps/Sec: 3.77
+Loss: 0.14653624594211578
+Loss: 0.18678633868694305
+Loss: 0.17310790717601776
+Loss: 0.11283504217863083
+Loss: 0.09137233346700668
+[2025-12-19 01:56:15] (step=0000600) Train Loss: 0.1421, Train Steps/Sec: 4.87
+✓ Step 0000600 | Loss: 0.1421 | Steps/Sec: 4.87
+[2025-12-19 01:56:15] Beginning epoch 60...
+Beginning epoch 60...
+Loss: 0.16836680471897125
+Loss: 0.131058007478714
+Loss: 0.1188453808426857
+Loss: 0.1166088804602623
+Loss: 0.15635161101818085
+[2025-12-19 01:56:16] (step=0000605) Train Loss: 0.1382, Train Steps/Sec: 3.79
+✓ Step 0000605 | Loss: 0.1382 | Steps/Sec: 3.79
+Loss: 0.12336377054452896
+Loss: 0.11606177687644958
+Loss: 0.14121805131435394
+Loss: 0.1569395214319229
+Loss: 0.19552329182624817
+[2025-12-19 01:56:17] (step=0000610) Train Loss: 0.1466, Train Steps/Sec: 4.86
+✓ Step 0000610 | Loss: 0.1466 | Steps/Sec: 4.86
+[2025-12-19 01:56:17] Beginning epoch 61...
+Beginning epoch 61...
+Loss: 0.16604988276958466
+Loss: 0.1052250862121582
+Loss: 0.14312651753425598
+Loss: 0.20755773782730103
+Loss: 0.14054350554943085
+[2025-12-19 01:56:18] (step=0000615) Train Loss: 0.1525, Train Steps/Sec: 3.75
+✓ Step 0000615 | Loss: 0.1525 | Steps/Sec: 3.75
+Loss: 0.10584315657615662
+Loss: 0.1026647537946701
+Loss: 0.19518110156059265
+Loss: 0.14022281765937805
+Loss: 0.14956848323345184
+[2025-12-19 01:56:20] (step=0000620) Train Loss: 0.1387, Train Steps/Sec: 4.86
+✓ Step 0000620 | Loss: 0.1387 | Steps/Sec: 4.86
+[2025-12-19 01:56:20] Beginning epoch 62...
+Beginning epoch 62...
+Loss: 0.11268060654401779
+Loss: 0.11001250147819519
+Loss: 0.11733434349298477
+Loss: 0.21274495124816895
+Loss: 0.16772381961345673
+[2025-12-19 01:56:21] (step=0000625) Train Loss: 0.1441, Train Steps/Sec: 3.78
+✓ Step 0000625 | Loss: 0.1441 | Steps/Sec: 3.78
+Loss: 0.17580607533454895
+Loss: 0.10687444359064102
+Loss: 0.13351428508758545
+Loss: 0.16426189243793488
+Loss: 0.1357327550649643
+[2025-12-19 01:56:22] (step=0000630) Train Loss: 0.1432, Train Steps/Sec: 4.86
+✓ Step 0000630 | Loss: 0.1432 | Steps/Sec: 4.86
+[2025-12-19 01:56:22] Beginning epoch 63...
+Beginning epoch 63...
+Loss: 0.09039679169654846
+Loss: 0.14734992384910583
+Loss: 0.16157151758670807
+Loss: 0.11961562931537628
+Loss: 0.13888509571552277
+[2025-12-19 01:56:23] (step=0000635) Train Loss: 0.1316, Train Steps/Sec: 3.80
+✓ Step 0000635 | Loss: 0.1316 | Steps/Sec: 3.80
+Loss: 0.17606627941131592
+Loss: 0.17358286678791046
+Loss: 0.11455370485782623
+Loss: 0.17224961519241333
+Loss: 0.13120640814304352
+[2025-12-19 01:56:24] (step=0000640) Train Loss: 0.1535, Train Steps/Sec: 4.86
+✓ Step 0000640 | Loss: 0.1535 | Steps/Sec: 4.86
+[2025-12-19 01:56:24] Beginning epoch 64...
+Beginning epoch 64...
+Loss: 0.1265571415424347
+Loss: 0.16017167270183563
+Loss: 0.18558531999588013
+Loss: 0.12428098171949387
+Loss: 0.1440552920103073
+[2025-12-19 01:56:26] (step=0000645) Train Loss: 0.1481, Train Steps/Sec: 3.76
+✓ Step 0000645 | Loss: 0.1481 | Steps/Sec: 3.76
+Loss: 0.1586800366640091
+Loss: 0.13838492333889008
+Loss: 0.10779391974210739
+Loss: 0.14718098938465118
+Loss: 0.1663038432598114
+[2025-12-19 01:56:27] (step=0000650) Train Loss: 0.1437, Train Steps/Sec: 4.86
+✓ Step 0000650 | Loss: 0.1437 | Steps/Sec: 4.86
+[2025-12-19 01:56:27] Beginning epoch 65...
+Beginning epoch 65...
+Loss: 0.122859425842762
+Loss: 0.16406244039535522
+Loss: 0.1693417876958847
+Loss: 0.11178078502416611
+Loss: 0.1302727907896042
+[2025-12-19 01:56:28] (step=0000655) Train Loss: 0.1397, Train Steps/Sec: 3.78
+✓ Step 0000655 | Loss: 0.1397 | Steps/Sec: 3.78
+Loss: 0.1277066320180893
+Loss: 0.14266176521778107
+Loss: 0.11191882938146591
+Loss: 0.14487548172473907
+Loss: 0.1606179028749466
+[2025-12-19 01:56:29] (step=0000660) Train Loss: 0.1376, Train Steps/Sec: 4.86
+✓ Step 0000660 | Loss: 0.1376 | Steps/Sec: 4.86
+[2025-12-19 01:56:29] Beginning epoch 66...
+Beginning epoch 66...
+Loss: 0.20308756828308105
+Loss: 0.09270291775465012
+Loss: 0.14503954350948334
+Loss: 0.15546907484531403
+Loss: 0.15673241019248962
+[2025-12-19 01:56:30] (step=0000665) Train Loss: 0.1506, Train Steps/Sec: 3.79
+✓ Step 0000665 | Loss: 0.1506 | Steps/Sec: 3.79
+Loss: 0.11862921714782715
+Loss: 0.13371562957763672
+Loss: 0.19757601618766785
+Loss: 0.07751020044088364
+Loss: 0.18199367821216583
+[2025-12-19 01:56:31] (step=0000670) Train Loss: 0.1419, Train Steps/Sec: 4.86
+✓ Step 0000670 | Loss: 0.1419 | Steps/Sec: 4.86
+[2025-12-19 01:56:31] Beginning epoch 67...
+Beginning epoch 67...
+Loss: 0.177210733294487
+Loss: 0.21018846333026886
+Loss: 0.12942346930503845
+Loss: 0.12052524089813232
+Loss: 0.12451783567667007
+[2025-12-19 01:56:33] (step=0000675) Train Loss: 0.1524, Train Steps/Sec: 3.79
+✓ Step 0000675 | Loss: 0.1524 | Steps/Sec: 3.79
+Loss: 0.11628778278827667
+Loss: 0.1732027381658554
+Loss: 0.1182229295372963
+Loss: 0.13106967508792877
+Loss: 0.10914329439401627
+[2025-12-19 01:56:34] (step=0000680) Train Loss: 0.1296, Train Steps/Sec: 4.87
+✓ Step 0000680 | Loss: 0.1296 | Steps/Sec: 4.87
+[2025-12-19 01:56:34] Beginning epoch 68...
+Beginning epoch 68...
+Loss: 0.1676185429096222
+Loss: 0.1073027029633522
+Loss: 0.17888790369033813
+Loss: 0.17522978782653809
+Loss: 0.14181916415691376
+[2025-12-19 01:56:35] (step=0000685) Train Loss: 0.1542, Train Steps/Sec: 3.77
+✓ Step 0000685 | Loss: 0.1542 | Steps/Sec: 3.77
+Loss: 0.13337531685829163
+Loss: 0.1088085025548935
+Loss: 0.11093345284461975
+Loss: 0.11455769091844559
+Loss: 0.13479258120059967
+[2025-12-19 01:56:36] (step=0000690) Train Loss: 0.1205, Train Steps/Sec: 4.87
+✓ Step 0000690 | Loss: 0.1205 | Steps/Sec: 4.87
+[2025-12-19 01:56:36] Beginning epoch 69...
+Beginning epoch 69...
+Loss: 0.08921216428279877
+Loss: 0.18682605028152466
+Loss: 0.17768943309783936
+Loss: 0.17386627197265625
+Loss: 0.12885604798793793
+[2025-12-19 01:56:37] (step=0000695) Train Loss: 0.1513, Train Steps/Sec: 3.80
+✓ Step 0000695 | Loss: 0.1513 | Steps/Sec: 3.80
+Loss: 0.10204250365495682
+Loss: 0.13365916907787323
+Loss: 0.187458798289299
+Loss: 0.14165176451206207
+Loss: 0.13572999835014343
+[2025-12-19 01:56:38] (step=0000700) Train Loss: 0.1401, Train Steps/Sec: 4.86
+✓ Step 0000700 | Loss: 0.1401 | Steps/Sec: 4.86
+[2025-12-19 01:56:38] Beginning epoch 70...
+Beginning epoch 70...
+Loss: 0.12997344136238098
+Loss: 0.19728437066078186
+Loss: 0.12129293382167816
+Loss: 0.13700833916664124
+Loss: 0.14441005885601044
+[2025-12-19 01:56:40] (step=0000705) Train Loss: 0.1460, Train Steps/Sec: 3.79
+✓ Step 0000705 | Loss: 0.1460 | Steps/Sec: 3.79
+Loss: 0.13335390388965607
+Loss: 0.09637495875358582
+Loss: 0.09882628917694092
+Loss: 0.17147018015384674
+Loss: 0.11202587187290192
+[2025-12-19 01:56:41] (step=0000710) Train Loss: 0.1224, Train Steps/Sec: 4.86
+✓ Step 0000710 | Loss: 0.1224 | Steps/Sec: 4.86
+[2025-12-19 01:56:41] Beginning epoch 71...
+Beginning epoch 71...
+Loss: 0.15193793177604675
+Loss: 0.11880826950073242
+Loss: 0.1417086273431778
+Loss: 0.24264562129974365
+Loss: 0.1319316029548645
+[2025-12-19 01:56:42] (step=0000715) Train Loss: 0.1574, Train Steps/Sec: 3.79
+✓ Step 0000715 | Loss: 0.1574 | Steps/Sec: 3.79
+Loss: 0.1927589625120163
+Loss: 0.1373824030160904
+Loss: 0.12165345251560211
+Loss: 0.1366834193468094
+Loss: 0.09589846432209015
+[2025-12-19 01:56:43] (step=0000720) Train Loss: 0.1369, Train Steps/Sec: 4.86
+✓ Step 0000720 | Loss: 0.1369 | Steps/Sec: 4.86
+[2025-12-19 01:56:43] Beginning epoch 72...
+Beginning epoch 72...
+Loss: 0.15270347893238068
+Loss: 0.0872475802898407
+Loss: 0.11071845889091492
+Loss: 0.12005183100700378
+Loss: 0.11080524325370789
+[2025-12-19 01:56:44] (step=0000725) Train Loss: 0.1163, Train Steps/Sec: 3.81
+✓ Step 0000725 | Loss: 0.1163 | Steps/Sec: 3.81
+Loss: 0.12198928743600845
+Loss: 0.14423513412475586
+Loss: 0.1087559312582016
+Loss: 0.08622036129236221
+Loss: 0.1460394412279129
+[2025-12-19 01:56:45] (step=0000730) Train Loss: 0.1214, Train Steps/Sec: 4.85
+✓ Step 0000730 | Loss: 0.1214 | Steps/Sec: 4.85
+[2025-12-19 01:56:45] Beginning epoch 73...
+Beginning epoch 73...
+Loss: 0.12944796681404114
+Loss: 0.1360706090927124
+Loss: 0.16801460087299347
+Loss: 0.12453135848045349
+Loss: 0.19482356309890747
+[2025-12-19 01:56:47] (step=0000735) Train Loss: 0.1506, Train Steps/Sec: 3.78
+✓ Step 0000735 | Loss: 0.1506 | Steps/Sec: 3.78
+Loss: 0.13803233206272125
+Loss: 0.16801904141902924
+Loss: 0.08285093307495117
+Loss: 0.20046380162239075
+Loss: 0.18310584127902985
+[2025-12-19 01:56:48] (step=0000740) Train Loss: 0.1545, Train Steps/Sec: 4.86
+✓ Step 0000740 | Loss: 0.1545 | Steps/Sec: 4.86
+[2025-12-19 01:56:48] Beginning epoch 74...
+Beginning epoch 74...
+Loss: 0.14543026685714722
+Loss: 0.13738352060317993
+Loss: 0.15550599992275238
+Loss: 0.12985803186893463
+Loss: 0.13580887019634247
+[2025-12-19 01:56:49] (step=0000745) Train Loss: 0.1408, Train Steps/Sec: 3.76
+✓ Step 0000745 | Loss: 0.1408 | Steps/Sec: 3.76
+Loss: 0.14730748534202576
+Loss: 0.12972885370254517
+Loss: 0.17857350409030914
+Loss: 0.08011723309755325
+Loss: 0.1268816441297531
+[2025-12-19 01:56:50] (step=0000750) Train Loss: 0.1325, Train Steps/Sec: 4.85
+✓ Step 0000750 | Loss: 0.1325 | Steps/Sec: 4.85
+[2025-12-19 01:56:50] Beginning epoch 75...
+Beginning epoch 75...
+Loss: 0.16775520145893097
+Loss: 0.16172248125076294
+Loss: 0.15482589602470398
+Loss: 0.1473422646522522
+Loss: 0.11849454790353775
+[2025-12-19 01:56:51] (step=0000755) Train Loss: 0.1500, Train Steps/Sec: 3.77
+✓ Step 0000755 | Loss: 0.1500 | Steps/Sec: 3.77
+Loss: 0.09637956321239471
+Loss: 0.12579450011253357
+Loss: 0.09984411299228668
+Loss: 0.19058814644813538
+Loss: 0.15920938551425934
+[2025-12-19 01:56:52] (step=0000760) Train Loss: 0.1344, Train Steps/Sec: 4.86
+✓ Step 0000760 | Loss: 0.1344 | Steps/Sec: 4.86
+[2025-12-19 01:56:52] Beginning epoch 76...
+Beginning epoch 76...
+Loss: 0.18282653391361237
+Loss: 0.1410532146692276
+Loss: 0.09474202990531921
+Loss: 0.11839878559112549
+Loss: 0.10770002007484436
+[2025-12-19 01:56:54] (step=0000765) Train Loss: 0.1289, Train Steps/Sec: 3.77
+✓ Step 0000765 | Loss: 0.1289 | Steps/Sec: 3.77
+Loss: 0.16694633662700653
+Loss: 0.1320306807756424
+Loss: 0.15073509514331818
+Loss: 0.14463983476161957
+Loss: 0.12830543518066406
+[2025-12-19 01:56:55] (step=0000770) Train Loss: 0.1445, Train Steps/Sec: 4.86
+✓ Step 0000770 | Loss: 0.1445 | Steps/Sec: 4.86
+[2025-12-19 01:56:55] Beginning epoch 77...
+Beginning epoch 77...
+Loss: 0.1485937088727951
+Loss: 0.08341213315725327
+Loss: 0.11489278823137283
+Loss: 0.13785795867443085
+Loss: 0.10806571692228317
+[2025-12-19 01:56:56] (step=0000775) Train Loss: 0.1186, Train Steps/Sec: 3.78
+✓ Step 0000775 | Loss: 0.1186 | Steps/Sec: 3.78
+Loss: 0.12751203775405884
+Loss: 0.1080830842256546
+Loss: 0.18163742125034332
+Loss: 0.17558230459690094
+Loss: 0.1794327348470688
+[2025-12-19 01:56:57] (step=0000780) Train Loss: 0.1544, Train Steps/Sec: 4.85
+✓ Step 0000780 | Loss: 0.1544 | Steps/Sec: 4.85
+[2025-12-19 01:56:57] Beginning epoch 78...
+Beginning epoch 78...
+Loss: 0.19338491559028625
+Loss: 0.13976037502288818
+Loss: 0.228801891207695
+Loss: 0.1808662712574005
+Loss: 0.1121562197804451
+[2025-12-19 01:56:58] (step=0000785) Train Loss: 0.1710, Train Steps/Sec: 3.78
+✓ Step 0000785 | Loss: 0.1710 | Steps/Sec: 3.78
+Loss: 0.1309637725353241
+Loss: 0.2265094369649887
+Loss: 0.19210080802440643
+Loss: 0.14989814162254333
+Loss: 0.15326771140098572
+[2025-12-19 01:57:00] (step=0000790) Train Loss: 0.1705, Train Steps/Sec: 4.86
+✓ Step 0000790 | Loss: 0.1705 | Steps/Sec: 4.86
+[2025-12-19 01:57:00] Beginning epoch 79...
+Beginning epoch 79...
+Loss: 0.11972618848085403
+Loss: 0.09443178027868271
+Loss: 0.1721952259540558
+Loss: 0.10054534673690796
+Loss: 0.1421031951904297
+[2025-12-19 01:57:01] (step=0000795) Train Loss: 0.1258, Train Steps/Sec: 3.80
+✓ Step 0000795 | Loss: 0.1258 | Steps/Sec: 3.80
+Loss: 0.1203276738524437
+Loss: 0.16594623029232025
+Loss: 0.11916761100292206
+Loss: 0.09526615589857101
+Loss: 0.19543616473674774
+[2025-12-19 01:57:02] (step=0000800) Train Loss: 0.1392, Train Steps/Sec: 4.84
+✓ Step 0000800 | Loss: 0.1392 | Steps/Sec: 4.84
+[2025-12-19 01:57:02] Beginning epoch 80...
+Beginning epoch 80...
+Loss: 0.12033239752054214
+Loss: 0.1319170594215393
+Loss: 0.13448566198349
+Loss: 0.11005948483943939
+Loss: 0.20420701801776886
+[2025-12-19 01:57:03] (step=0000805) Train Loss: 0.1402, Train Steps/Sec: 3.79
+✓ Step 0000805 | Loss: 0.1402 | Steps/Sec: 3.79
+Loss: 0.11268691718578339
+Loss: 0.11381179839372635
+Loss: 0.1383177489042282
+Loss: 0.19090719521045685
+Loss: 0.09524495899677277
+[2025-12-19 01:57:04] (step=0000810) Train Loss: 0.1302, Train Steps/Sec: 4.86
+✓ Step 0000810 | Loss: 0.1302 | Steps/Sec: 4.86
+[2025-12-19 01:57:04] Beginning epoch 81...
+Beginning epoch 81...
+Loss: 0.20768214762210846
+Loss: 0.1436154544353485
+Loss: 0.11618062853813171
+Loss: 0.1146477609872818
+Loss: 0.11996277421712875
+[2025-12-19 01:57:06] (step=0000815) Train Loss: 0.1404, Train Steps/Sec: 3.74
+✓ Step 0000815 | Loss: 0.1404 | Steps/Sec: 3.74
+Loss: 0.1891595870256424
+Loss: 0.16190624237060547
+Loss: 0.1409313976764679
+Loss: 0.11825776100158691
+Loss: 0.09722980111837387
+[2025-12-19 01:57:07] (step=0000820) Train Loss: 0.1415, Train Steps/Sec: 4.85
+✓ Step 0000820 | Loss: 0.1415 | Steps/Sec: 4.85
+[2025-12-19 01:57:07] Beginning epoch 82...
+Beginning epoch 82...
+Loss: 0.08679209649562836
+Loss: 0.10540466010570526
+Loss: 0.16462025046348572
+Loss: 0.21457171440124512
+Loss: 0.1573481559753418
+[2025-12-19 01:57:08] (step=0000825) Train Loss: 0.1457, Train Steps/Sec: 3.78
+✓ Step 0000825 | Loss: 0.1457 | Steps/Sec: 3.78
+Loss: 0.1419813483953476
+Loss: 0.13802604377269745
+Loss: 0.14080436527729034
+Loss: 0.1466110348701477
+Loss: 0.12727688252925873
+[2025-12-19 01:57:09] (step=0000830) Train Loss: 0.1389, Train Steps/Sec: 4.86
+✓ Step 0000830 | Loss: 0.1389 | Steps/Sec: 4.86
+[2025-12-19 01:57:09] Beginning epoch 83...
+Beginning epoch 83...
+Loss: 0.15265612304210663
+Loss: 0.14004458487033844
+Loss: 0.2161768525838852
+Loss: 0.14327506721019745
+Loss: 0.19159787893295288
+[2025-12-19 01:57:10] (step=0000835) Train Loss: 0.1688, Train Steps/Sec: 3.75
+✓ Step 0000835 | Loss: 0.1688 | Steps/Sec: 3.75
+Loss: 0.11110401153564453
+Loss: 0.09266892075538635
+Loss: 0.11604711413383484
+Loss: 0.10231108218431473
+Loss: 0.10133028030395508
+[2025-12-19 01:57:11] (step=0000840) Train Loss: 0.1047, Train Steps/Sec: 4.86
+✓ Step 0000840 | Loss: 0.1047 | Steps/Sec: 4.86
+[2025-12-19 01:57:13] Saved BEST checkpoint to ./dit_fine_resluts//000-DiT-XL-2-x2-finetune/checkpoints/epoch-83-loss-0.1047.pt (Loss: 0.1047)
+🏆 New best checkpoint saved! Loss: 0.1047
+[2025-12-19 01:57:13] Beginning epoch 84...
+Beginning epoch 84...
+Loss: 0.14266423881053925
+Loss: 0.1053171157836914
+Loss: 0.16348092257976532
+Loss: 0.09062638878822327
+Loss: 0.18733787536621094
+[2025-12-19 01:57:14] (step=0000845) Train Loss: 0.1379, Train Steps/Sec: 3.80
+✓ Step 0000845 | Loss: 0.1379 | Steps/Sec: 3.80
+Loss: 0.1703110784292221
+Loss: 0.1607508361339569
+Loss: 0.18439051508903503
+Loss: 0.13258317112922668
+Loss: 0.19726835191249847
+[2025-12-19 01:57:15] (step=0000850) Train Loss: 0.1691, Train Steps/Sec: 4.83
+✓ Step 0000850 | Loss: 0.1691 | Steps/Sec: 4.83
+[2025-12-19 01:57:15] Beginning epoch 85...
+Beginning epoch 85...
+Loss: 0.17319375276565552
+Loss: 0.07586183398962021
+Loss: 0.10419468581676483
+Loss: 0.2357640564441681
+Loss: 0.16148027777671814
+[2025-12-19 01:57:16] (step=0000855) Train Loss: 0.1501, Train Steps/Sec: 3.79
+✓ Step 0000855 | Loss: 0.1501 | Steps/Sec: 3.79
+Loss: 0.1364324986934662
+Loss: 0.08805487304925919
+Loss: 0.18636676669120789
+Loss: 0.09383444488048553
+Loss: 0.15885652601718903
+[2025-12-19 01:57:17] (step=0000860) Train Loss: 0.1327, Train Steps/Sec: 4.86
+✓ Step 0000860 | Loss: 0.1327 | Steps/Sec: 4.86
+[2025-12-19 01:57:17] Beginning epoch 86...
+Beginning epoch 86...
+Loss: 0.1513659805059433
+Loss: 0.11916296929121017
+Loss: 0.22184374928474426
+Loss: 0.12690910696983337
+Loss: 0.21559873223304749
+[2025-12-19 01:57:19] (step=0000865) Train Loss: 0.1670, Train Steps/Sec: 3.77
+✓ Step 0000865 | Loss: 0.1670 | Steps/Sec: 3.77
+Loss: 0.1416199654340744
+Loss: 0.14234887063503265
+Loss: 0.14697685837745667
+Loss: 0.17089033126831055
+Loss: 0.13292421400547028
+[2025-12-19 01:57:20] (step=0000870) Train Loss: 0.1470, Train Steps/Sec: 4.84
+✓ Step 0000870 | Loss: 0.1470 | Steps/Sec: 4.84
+[2025-12-19 01:57:20] Beginning epoch 87...
+Beginning epoch 87...
+Loss: 0.12316404283046722
+Loss: 0.12566927075386047
+Loss: 0.14737568795681
+Loss: 0.10991942137479782
+Loss: 0.20014746487140656
+[2025-12-19 01:57:21] (step=0000875) Train Loss: 0.1413, Train Steps/Sec: 3.78
+✓ Step 0000875 | Loss: 0.1413 | Steps/Sec: 3.78
+Loss: 0.12674473226070404
+Loss: 0.08460240811109543
+Loss: 0.10415534675121307
+Loss: 0.11824961751699448
+Loss: 0.1662445366382599
+[2025-12-19 01:57:22] (step=0000880) Train Loss: 0.1200, Train Steps/Sec: 4.86
+✓ Step 0000880 | Loss: 0.1200 | Steps/Sec: 4.86
+[2025-12-19 01:57:22] Beginning epoch 88...
+Beginning epoch 88...
+Loss: 0.14930765330791473
+Loss: 0.11038777977228165
+Loss: 0.19259196519851685
+Loss: 0.15508098900318146
+Loss: 0.09529557824134827
+[2025-12-19 01:57:23] (step=0000885) Train Loss: 0.1405, Train Steps/Sec: 3.76
+✓ Step 0000885 | Loss: 0.1405 | Steps/Sec: 3.76
+Loss: 0.1421569585800171
+Loss: 0.1584153175354004
+Loss: 0.13957439363002777
+Loss: 0.12023122608661652
+Loss: 0.11844869703054428
+[2025-12-19 01:57:24] (step=0000890) Train Loss: 0.1358, Train Steps/Sec: 4.85
+✓ Step 0000890 | Loss: 0.1358 | Steps/Sec: 4.85
+[2025-12-19 01:57:24] Beginning epoch 89...
+Beginning epoch 89...
+Loss: 0.17860686779022217
+Loss: 0.1402076929807663
+Loss: 0.14923882484436035
+Loss: 0.14388097822666168
+Loss: 0.1474759429693222
+[2025-12-19 01:57:26] (step=0000895) Train Loss: 0.1519, Train Steps/Sec: 3.75
+✓ Step 0000895 | Loss: 0.1519 | Steps/Sec: 3.75
+Loss: 0.18801672756671906
+Loss: 0.1343095600605011
+Loss: 0.13951750099658966
+Loss: 0.11228033155202866
+Loss: 0.16720011830329895
+[2025-12-19 01:57:27] (step=0000900) Train Loss: 0.1483, Train Steps/Sec: 4.85
+✓ Step 0000900 | Loss: 0.1483 | Steps/Sec: 4.85
+[2025-12-19 01:57:27] Beginning epoch 90...
+Beginning epoch 90...
+Loss: 0.1828048974275589
+Loss: 0.1309039145708084
+Loss: 0.07928700745105743
+Loss: 0.19125719368457794
+Loss: 0.16830478608608246
+[2025-12-19 01:57:28] (step=0000905) Train Loss: 0.1505, Train Steps/Sec: 3.76
+✓ Step 0000905 | Loss: 0.1505 | Steps/Sec: 3.76
+Loss: 0.1317356675863266
+Loss: 0.14462772011756897
+Loss: 0.09439345449209213
+Loss: 0.18822699785232544
+Loss: 0.12094104290008545
+[2025-12-19 01:57:29] (step=0000910) Train Loss: 0.1360, Train Steps/Sec: 4.84
+✓ Step 0000910 | Loss: 0.1360 | Steps/Sec: 4.84
+[2025-12-19 01:57:29] Beginning epoch 91...
+Beginning epoch 91...
+Loss: 0.10182416439056396
+Loss: 0.19156837463378906
+Loss: 0.14484953880310059
+Loss: 0.17118394374847412
+Loss: 0.11568904668092728
+[2025-12-19 01:57:31] (step=0000915) Train Loss: 0.1450, Train Steps/Sec: 3.76
+✓ Step 0000915 | Loss: 0.1450 | Steps/Sec: 3.76
+Loss: 0.1321256011724472
+Loss: 0.16900688409805298
+Loss: 0.10344542562961578
+Loss: 0.16367098689079285
+Loss: 0.15535716712474823
+[2025-12-19 01:57:32] (step=0000920) Train Loss: 0.1447, Train Steps/Sec: 4.85
+✓ Step 0000920 | Loss: 0.1447 | Steps/Sec: 4.85
+[2025-12-19 01:57:32] Beginning epoch 92...
+Beginning epoch 92...
+Loss: 0.1382337510585785
+Loss: 0.10207793861627579
+Loss: 0.15289954841136932
+Loss: 0.14869466423988342
+Loss: 0.24377849698066711
+[2025-12-19 01:57:33] (step=0000925) Train Loss: 0.1571, Train Steps/Sec: 3.77
+✓ Step 0000925 | Loss: 0.1571 | Steps/Sec: 3.77
+Loss: 0.16651782393455505
+Loss: 0.13208040595054626
+Loss: 0.16572321951389313
+Loss: 0.13054756820201874
+Loss: 0.18003122508525848
+[2025-12-19 01:57:34] (step=0000930) Train Loss: 0.1550, Train Steps/Sec: 4.86
+✓ Step 0000930 | Loss: 0.1550 | Steps/Sec: 4.86
+[2025-12-19 01:57:34] Beginning epoch 93...
+Beginning epoch 93...
+Loss: 0.15707042813301086
+Loss: 0.14266742765903473
+Loss: 0.1264389157295227
+Loss: 0.11096151918172836
+Loss: 0.17514941096305847
+[2025-12-19 01:57:35] (step=0000935) Train Loss: 0.1425, Train Steps/Sec: 3.73
+✓ Step 0000935 | Loss: 0.1425 | Steps/Sec: 3.73
+Loss: 0.14138095080852509
+Loss: 0.17529387772083282
+Loss: 0.12101787328720093
+Loss: 0.06505928933620453
+Loss: 0.10627839714288712
+[2025-12-19 01:57:36] (step=0000940) Train Loss: 0.1218, Train Steps/Sec: 4.85
+✓ Step 0000940 | Loss: 0.1218 | Steps/Sec: 4.85
+[2025-12-19 01:57:36] Beginning epoch 94...
+Beginning epoch 94...
+Loss: 0.11993848532438278
+Loss: 0.13180093467235565
+Loss: 0.14698457717895508
+Loss: 0.13406920433044434
+Loss: 0.14162829518318176
+[2025-12-19 01:57:38] (step=0000945) Train Loss: 0.1349, Train Steps/Sec: 3.77
+✓ Step 0000945 | Loss: 0.1349 | Steps/Sec: 3.77
+Loss: 0.10251596570014954
+Loss: 0.1922510713338852
+Loss: 0.07915201038122177
+Loss: 0.12841664254665375
+Loss: 0.14778877794742584
+[2025-12-19 01:57:39] (step=0000950) Train Loss: 0.1300, Train Steps/Sec: 4.85
+✓ Step 0000950 | Loss: 0.1300 | Steps/Sec: 4.85
+[2025-12-19 01:57:39] Beginning epoch 95...
+Beginning epoch 95...
+Loss: 0.17625093460083008
+Loss: 0.12275466322898865
+Loss: 0.1423259973526001
+Loss: 0.17219451069831848
+Loss: 0.12530101835727692
+[2025-12-19 01:57:40] (step=0000955) Train Loss: 0.1478, Train Steps/Sec: 3.77
+✓ Step 0000955 | Loss: 0.1478 | Steps/Sec: 3.77
+Loss: 0.11560508608818054
+Loss: 0.1303195357322693
+Loss: 0.10851438343524933
+Loss: 0.1753305047750473
+Loss: 0.12251592427492142
+[2025-12-19 01:57:41] (step=0000960) Train Loss: 0.1305, Train Steps/Sec: 4.86
+✓ Step 0000960 | Loss: 0.1305 | Steps/Sec: 4.86
+[2025-12-19 01:57:41] Beginning epoch 96...
+Beginning epoch 96...
+Loss: 0.11654037982225418
+Loss: 0.13248299062252045
+Loss: 0.14242403209209442
+Loss: 0.14398400485515594
+Loss: 0.18896779417991638
+[2025-12-19 01:57:42] (step=0000965) Train Loss: 0.1449, Train Steps/Sec: 3.72
+✓ Step 0000965 | Loss: 0.1449 | Steps/Sec: 3.72
+Loss: 0.16281211376190186
+Loss: 0.13848455250263214
+Loss: 0.17474085092544556
+Loss: 0.10773959755897522
+Loss: 0.1293676495552063
+[2025-12-19 01:57:43] (step=0000970) Train Loss: 0.1426, Train Steps/Sec: 4.86
+✓ Step 0000970 | Loss: 0.1426 | Steps/Sec: 4.86
+[2025-12-19 01:57:43] Beginning epoch 97...
+Beginning epoch 97...
+Loss: 0.1022305116057396
+Loss: 0.11959754675626755
+Loss: 0.13932712376117706
+Loss: 0.14857706427574158
+Loss: 0.11665092408657074
+[2025-12-19 01:57:45] (step=0000975) Train Loss: 0.1253, Train Steps/Sec: 3.78
+✓ Step 0000975 | Loss: 0.1253 | Steps/Sec: 3.78
+Loss: 0.12498504668474197
+Loss: 0.1666550189256668
+Loss: 0.11827892065048218
+Loss: 0.20830966532230377
+Loss: 0.14894625544548035
+[2025-12-19 01:57:46] (step=0000980) Train Loss: 0.1534, Train Steps/Sec: 4.84
+✓ Step 0000980 | Loss: 0.1534 | Steps/Sec: 4.84
+[2025-12-19 01:57:46] Beginning epoch 98...
+Beginning epoch 98...
+Loss: 0.12445764243602753
+Loss: 0.13273510336875916
+Loss: 0.16178227961063385
+Loss: 0.11178630590438843
+Loss: 0.1590748131275177
+[2025-12-19 01:57:47] (step=0000985) Train Loss: 0.1380, Train Steps/Sec: 3.76
+✓ Step 0000985 | Loss: 0.1380 | Steps/Sec: 3.76
+Loss: 0.1371835172176361
+Loss: 0.09705979377031326
+Loss: 0.1370295137166977
+Loss: 0.1664893478155136
+Loss: 0.14030224084854126
+[2025-12-19 01:57:48] (step=0000990) Train Loss: 0.1356, Train Steps/Sec: 4.85
+✓ Step 0000990 | Loss: 0.1356 | Steps/Sec: 4.85
+[2025-12-19 01:57:48] Beginning epoch 99...
+Beginning epoch 99...
+Loss: 0.13971032202243805
+Loss: 0.15942302346229553
+Loss: 0.11822709441184998
+Loss: 0.1348700374364853
+Loss: 0.13832825422286987
+[2025-12-19 01:57:49] (step=0000995) Train Loss: 0.1381, Train Steps/Sec: 3.77
+✓ Step 0000995 | Loss: 0.1381 | Steps/Sec: 3.77
+Loss: 0.09896638989448547
+Loss: 0.1558476984500885
+Loss: 0.15709973871707916
+Loss: 0.1347689926624298
+Loss: 0.05956855043768883
+[2025-12-19 01:57:50] (step=0001000) Train Loss: 0.1213, Train Steps/Sec: 4.84
+✓ Step 0001000 | Loss: 0.1213 | Steps/Sec: 4.84
+[2025-12-19 01:57:52] Saved checkpoint to ./dit_fine_resluts//000-DiT-XL-2-x2-finetune/checkpoints/0001000.pt (Model contains only trainable params)
+[2025-12-19 01:57:52] Beginning epoch 100...
+Beginning epoch 100...
+Loss: 0.11011110246181488
+Loss: 0.11982204020023346
+Loss: 0.16963978111743927
+Loss: 0.1839296519756317
+Loss: 0.1589791178703308
+[2025-12-19 01:57:53] (step=0001005) Train Loss: 0.1485, Train Steps/Sec: 1.83
+✓ Step 0001005 | Loss: 0.1485 | Steps/Sec: 1.83
+Loss: 0.11563067138195038
+Loss: 0.17855708301067352
+Loss: 0.16646404564380646
+Loss: 0.148206889629364
+Loss: 0.11848355829715729
+[2025-12-19 01:57:54] (step=0001010) Train Loss: 0.1455, Train Steps/Sec: 4.85
+✓ Step 0001010 | Loss: 0.1455 | Steps/Sec: 4.85
+[2025-12-19 01:57:54] Beginning epoch 101...
+Beginning epoch 101...
+Loss: 0.1276632696390152
+Loss: 0.14683261513710022
+Loss: 0.22654910385608673
+Loss: 0.13756826519966125
+Loss: 0.15945753455162048
+[2025-12-19 01:57:56] (step=0001015) Train Loss: 0.1596, Train Steps/Sec: 3.78
+✓ Step 0001015 | Loss: 0.1596 | Steps/Sec: 3.78
+Loss: 0.1602414846420288
+Loss: 0.19784334301948547
+Loss: 0.178984597325325
+Loss: 0.12994800508022308
+Loss: 0.15939776599407196
+[2025-12-19 01:57:57] (step=0001020) Train Loss: 0.1653, Train Steps/Sec: 4.86
+✓ Step 0001020 | Loss: 0.1653 | Steps/Sec: 4.86
+[2025-12-19 01:57:57] Beginning epoch 102...
+Beginning epoch 102...
+Loss: 0.14280454814434052
+Loss: 0.09972148388624191
+Loss: 0.09278085827827454
+Loss: 0.19063223898410797
+Loss: 0.21131113171577454
+[2025-12-19 01:57:58] (step=0001025) Train Loss: 0.1475, Train Steps/Sec: 3.75
+✓ Step 0001025 | Loss: 0.1475 | Steps/Sec: 3.75
+Loss: 0.14855295419692993
+Loss: 0.15010416507720947
+Loss: 0.12009551376104355
+Loss: 0.15026073157787323
+Loss: 0.12874537706375122
+[2025-12-19 01:57:59] (step=0001030) Train Loss: 0.1396, Train Steps/Sec: 4.85
+✓ Step 0001030 | Loss: 0.1396 | Steps/Sec: 4.85
+[2025-12-19 01:57:59] Beginning epoch 103...
+Beginning epoch 103...
+Loss: 0.11127946525812149
+Loss: 0.13906894624233246
+Loss: 0.18792220950126648
+Loss: 0.09922270476818085
+Loss: 0.15959049761295319
+[2025-12-19 01:58:00] (step=0001035) Train Loss: 0.1394, Train Steps/Sec: 3.75
+✓ Step 0001035 | Loss: 0.1394 | Steps/Sec: 3.75
+Loss: 0.2295922040939331
+Loss: 0.1542205959558487
+Loss: 0.19692029058933258
+Loss: 0.058457326143980026
+Loss: 0.16079124808311462
+[2025-12-19 01:58:01] (step=0001040) Train Loss: 0.1600, Train Steps/Sec: 4.86
+✓ Step 0001040 | Loss: 0.1600 | Steps/Sec: 4.86
+[2025-12-19 01:58:01] Beginning epoch 104...
+Beginning epoch 104...
+Loss: 0.11610227078199387
+Loss: 0.13316017389297485
+Loss: 0.09964881837368011
+Loss: 0.14525046944618225
+Loss: 0.08749394863843918
+[2025-12-19 01:58:03] (step=0001045) Train Loss: 0.1163, Train Steps/Sec: 3.77
+✓ Step 0001045 | Loss: 0.1163 | Steps/Sec: 3.77
+Loss: 0.16232681274414062
+Loss: 0.0979863777756691
+Loss: 0.17641347646713257
+Loss: 0.1402914673089981
+Loss: 0.16348248720169067
+[2025-12-19 01:58:04] (step=0001050) Train Loss: 0.1481, Train Steps/Sec: 4.85
+✓ Step 0001050 | Loss: 0.1481 | Steps/Sec: 4.85
+[2025-12-19 01:58:04] Beginning epoch 105...
+Beginning epoch 105...
+Loss: 0.11809110641479492
+Loss: 0.1759214699268341
+Loss: 0.1363067626953125
+Loss: 0.11250312626361847
+Loss: 0.13981252908706665
+[2025-12-19 01:58:05] (step=0001055) Train Loss: 0.1365, Train Steps/Sec: 3.77
+✓ Step 0001055 | Loss: 0.1365 | Steps/Sec: 3.77
+Loss: 0.12521903216838837
+Loss: 0.09299217164516449
+Loss: 0.10873162746429443
+Loss: 0.08351710438728333
+Loss: 0.1305636167526245
+[2025-12-19 01:58:06] (step=0001060) Train Loss: 0.1082, Train Steps/Sec: 4.85
+✓ Step 0001060 | Loss: 0.1082 | Steps/Sec: 4.85
+[2025-12-19 01:58:06] Beginning epoch 106...
+Beginning epoch 106...
+Loss: 0.08660078048706055
+Loss: 0.1165737733244896
+Loss: 0.14039471745491028
+Loss: 0.1103915125131607
+Loss: 0.1280503123998642
+[2025-12-19 01:58:07] (step=0001065) Train Loss: 0.1164, Train Steps/Sec: 3.77
+✓ Step 0001065 | Loss: 0.1164 | Steps/Sec: 3.77
+Loss: 0.12226858735084534
+Loss: 0.14932319521903992
+Loss: 0.09621930867433548
+Loss: 0.14692458510398865
+Loss: 0.15072618424892426
+[2025-12-19 01:58:08] (step=0001070) Train Loss: 0.1331, Train Steps/Sec: 4.86
+✓ Step 0001070 | Loss: 0.1331 | Steps/Sec: 4.86
+[2025-12-19 01:58:08] Beginning epoch 107...
+Beginning epoch 107...
+Loss: 0.12107625603675842
+Loss: 0.11118927597999573
+Loss: 0.16695131361484528
+Loss: 0.1190924420952797
+Loss: 0.17509032785892487
+[2025-12-19 01:58:10] (step=0001075) Train Loss: 0.1387, Train Steps/Sec: 3.77
+✓ Step 0001075 | Loss: 0.1387 | Steps/Sec: 3.77
+Loss: 0.17918525636196136
+Loss: 0.19633848965168
+Loss: 0.13990330696105957
+Loss: 0.14086900651454926
+Loss: 0.1480012983083725
+[2025-12-19 01:58:11] (step=0001080) Train Loss: 0.1609, Train Steps/Sec: 4.85
+✓ Step 0001080 | Loss: 0.1609 | Steps/Sec: 4.85
+[2025-12-19 01:58:11] Beginning epoch 108...
+Beginning epoch 108...
+Loss: 0.14291831851005554
+Loss: 0.1411026269197464
+Loss: 0.13623641431331635
+Loss: 0.15834181010723114
+Loss: 0.06868243962526321
+[2025-12-19 01:58:12] (step=0001085) Train Loss: 0.1295, Train Steps/Sec: 3.69
+✓ Step 0001085 | Loss: 0.1295 | Steps/Sec: 3.69
+Loss: 0.19860026240348816
+Loss: 0.1188647598028183
+Loss: 0.09397754818201065
+Loss: 0.148647278547287
+Loss: 0.12524999678134918
+[2025-12-19 01:58:13] (step=0001090) Train Loss: 0.1371, Train Steps/Sec: 4.84
+✓ Step 0001090 | Loss: 0.1371 | Steps/Sec: 4.84
+[2025-12-19 01:58:13] Beginning epoch 109...
+Beginning epoch 109...
+Loss: 0.1345101296901703
+Loss: 0.09147338569164276
+Loss: 0.1183723583817482
+Loss: 0.13973380625247955
+Loss: 0.22044798731803894
+[2025-12-19 01:58:14] (step=0001095) Train Loss: 0.1409, Train Steps/Sec: 3.75
+✓ Step 0001095 | Loss: 0.1409 | Steps/Sec: 3.75
+Loss: 0.17311939597129822
+Loss: 0.1664324849843979
+Loss: 0.10965335369110107
+Loss: 0.08557998389005661
+Loss: 0.1537071317434311
+[2025-12-19 01:58:16] (step=0001100) Train Loss: 0.1377, Train Steps/Sec: 4.85
+✓ Step 0001100 | Loss: 0.1377 | Steps/Sec: 4.85
+[2025-12-19 01:58:16] Beginning epoch 110...
+Beginning epoch 110...
+Loss: 0.08993974328041077
+Loss: 0.15009871125221252
+Loss: 0.1143772304058075
+Loss: 0.13717614114284515
+Loss: 0.11859220266342163
+[2025-12-19 01:58:17] (step=0001105) Train Loss: 0.1220, Train Steps/Sec: 3.73
+✓ Step 0001105 | Loss: 0.1220 | Steps/Sec: 3.73
+Loss: 0.12422435730695724
+Loss: 0.11523523926734924
+Loss: 0.1206788718700409
+Loss: 0.20160073041915894
+Loss: 0.15614725649356842
+[2025-12-19 01:58:18] (step=0001110) Train Loss: 0.1436, Train Steps/Sec: 4.83
+✓ Step 0001110 | Loss: 0.1436 | Steps/Sec: 4.83
+[2025-12-19 01:58:18] Beginning epoch 111...
+Beginning epoch 111...
+Loss: 0.1203894391655922
+Loss: 0.1522400826215744
+Loss: 0.16193576157093048
+Loss: 0.17782455682754517
+Loss: 0.17030227184295654
+[2025-12-19 01:58:19] (step=0001115) Train Loss: 0.1565, Train Steps/Sec: 3.79
+✓ Step 0001115 | Loss: 0.1565 | Steps/Sec: 3.79
+Loss: 0.14261183142662048
+Loss: 0.1269853562116623
+Loss: 0.12161277234554291
+Loss: 0.09916491061449051
+Loss: 0.1259644329547882
+[2025-12-19 01:58:20] (step=0001120) Train Loss: 0.1233, Train Steps/Sec: 4.85
+✓ Step 0001120 | Loss: 0.1233 | Steps/Sec: 4.85
+[2025-12-19 01:58:20] Beginning epoch 112...
+Beginning epoch 112...
+Loss: 0.1087990328669548
+Loss: 0.13981230556964874
+Loss: 0.14272786676883698
+Loss: 0.14864757657051086
+Loss: 0.1296854019165039
+[2025-12-19 01:58:22] (step=0001125) Train Loss: 0.1339, Train Steps/Sec: 3.75
+✓ Step 0001125 | Loss: 0.1339 | Steps/Sec: 3.75
+Loss: 0.12234243005514145
+Loss: 0.12138848006725311
+Loss: 0.2939912974834442
+Loss: 0.14883093535900116
+Loss: 0.11968604475259781
+[2025-12-19 01:58:23] (step=0001130) Train Loss: 0.1612, Train Steps/Sec: 4.84
+✓ Step 0001130 | Loss: 0.1612 | Steps/Sec: 4.84
+[2025-12-19 01:58:23] Beginning epoch 113...
+Beginning epoch 113...
+Loss: 0.1532791703939438
+Loss: 0.1693393737077713
+Loss: 0.19994309544563293
+Loss: 0.13949067890644073
+Loss: 0.16046592593193054
+[2025-12-19 01:58:24] (step=0001135) Train Loss: 0.1645, Train Steps/Sec: 3.78
+✓ Step 0001135 | Loss: 0.1645 | Steps/Sec: 3.78
+Loss: 0.23765704035758972
+Loss: 0.1961071789264679
+Loss: 0.1315927803516388
+Loss: 0.08837505429983139
+Loss: 0.10168996453285217
+[2025-12-19 01:58:25] (step=0001140) Train Loss: 0.1511, Train Steps/Sec: 4.85
+✓ Step 0001140 | Loss: 0.1511 | Steps/Sec: 4.85
+[2025-12-19 01:58:25] Beginning epoch 114...
+Beginning epoch 114...
+Loss: 0.21539905667304993
+Loss: 0.17964297533035278
+Loss: 0.2669161856174469
+Loss: 0.12999147176742554
+Loss: 0.11977189779281616
+[2025-12-19 01:58:26] (step=0001145) Train Loss: 0.1823, Train Steps/Sec: 3.76
+✓ Step 0001145 | Loss: 0.1823 | Steps/Sec: 3.76
+Loss: 0.10816894471645355
+Loss: 0.13079501688480377
+Loss: 0.13223643600940704
+Loss: 0.10529355704784393
+Loss: 0.1812971830368042
+[2025-12-19 01:58:27] (step=0001150) Train Loss: 0.1316, Train Steps/Sec: 4.84
+✓ Step 0001150 | Loss: 0.1316 | Steps/Sec: 4.84
+[2025-12-19 01:58:27] Beginning epoch 115...
+Beginning epoch 115...
+Loss: 0.10974609851837158
+Loss: 0.18332961201667786
+Loss: 0.14498071372509003
+Loss: 0.17616191506385803
+Loss: 0.20724372565746307
+[2025-12-19 01:58:29] (step=0001155) Train Loss: 0.1643, Train Steps/Sec: 3.74
+✓ Step 0001155 | Loss: 0.1643 | Steps/Sec: 3.74
+Loss: 0.1472310870885849
+Loss: 0.10450933128595352
+Loss: 0.13337938487529755
+Loss: 0.16538764536380768
+Loss: 0.15904761850833893
+[2025-12-19 01:58:30] (step=0001160) Train Loss: 0.1419, Train Steps/Sec: 4.85
+✓ Step 0001160 | Loss: 0.1419 | Steps/Sec: 4.85
+[2025-12-19 01:58:30] Beginning epoch 116...
+Beginning epoch 116...
+Loss: 0.11209247261285782
+Loss: 0.12404336035251617
+Loss: 0.1408163458108902
+Loss: 0.09423975646495819
+Loss: 0.0808715894818306
+[2025-12-19 01:58:31] (step=0001165) Train Loss: 0.1104, Train Steps/Sec: 3.74
+✓ Step 0001165 | Loss: 0.1104 | Steps/Sec: 3.74
+Loss: 0.10585469752550125
+Loss: 0.17491737008094788
+Loss: 0.09490855038166046
+Loss: 0.13876132667064667
+Loss: 0.20933322608470917
+[2025-12-19 01:58:32] (step=0001170) Train Loss: 0.1448, Train Steps/Sec: 4.84
+✓ Step 0001170 | Loss: 0.1448 | Steps/Sec: 4.84
+[2025-12-19 01:58:32] Beginning epoch 117...
+Beginning epoch 117...
+Loss: 0.0823092833161354
+Loss: 0.1928441822528839
+Loss: 0.19859422743320465
+Loss: 0.11461228877305984
+Loss: 0.18810302019119263
+[2025-12-19 01:58:33] (step=0001175) Train Loss: 0.1553, Train Steps/Sec: 3.80
+✓ Step 0001175 | Loss: 0.1553 | Steps/Sec: 3.80
+Loss: 0.21627768874168396
+Loss: 0.12957607209682465
+Loss: 0.1180671751499176
+Loss: 0.14878436923027039
+Loss: 0.15848632156848907
+[2025-12-19 01:58:34] (step=0001180) Train Loss: 0.1542, Train Steps/Sec: 4.86
+✓ Step 0001180 | Loss: 0.1542 | Steps/Sec: 4.86
+[2025-12-19 01:58:34] Beginning epoch 118...
+Beginning epoch 118...
+Loss: 0.1712050437927246
+Loss: 0.12750723958015442
+Loss: 0.1774013787508011
+Loss: 0.10295572131872177
+Loss: 0.13770639896392822
+[2025-12-19 01:58:36] (step=0001185) Train Loss: 0.1434, Train Steps/Sec: 3.78
+✓ Step 0001185 | Loss: 0.1434 | Steps/Sec: 3.78
+Loss: 0.10646326094865799
+Loss: 0.11827147006988525
+Loss: 0.14699311554431915
+Loss: 0.09782472252845764
+Loss: 0.13104744255542755
+[2025-12-19 01:58:37] (step=0001190) Train Loss: 0.1201, Train Steps/Sec: 4.84
+✓ Step 0001190 | Loss: 0.1201 | Steps/Sec: 4.84
+[2025-12-19 01:58:37] Beginning epoch 119...
+Beginning epoch 119...
+Loss: 0.1504157930612564
+Loss: 0.20503856241703033
+Loss: 0.14132480323314667
+Loss: 0.08541952073574066
+Loss: 0.14043530821800232
+[2025-12-19 01:58:38] (step=0001195) Train Loss: 0.1445, Train Steps/Sec: 3.70
+✓ Step 0001195 | Loss: 0.1445 | Steps/Sec: 3.70
+Loss: 0.14653083682060242
+Loss: 0.1424572616815567
+Loss: 0.0946059599518776
+Loss: 0.13767990469932556
+Loss: 0.15401282906532288
+[2025-12-19 01:58:39] (step=0001200) Train Loss: 0.1351, Train Steps/Sec: 4.84
+✓ Step 0001200 | Loss: 0.1351 | Steps/Sec: 4.84
+[2025-12-19 01:58:39] Beginning epoch 120...
+Beginning epoch 120...
+Loss: 0.14733576774597168
+Loss: 0.14218609035015106
+Loss: 0.11325043439865112
+Loss: 0.1250019073486328
+Loss: 0.1672412008047104
+[2025-12-19 01:58:40] (step=0001205) Train Loss: 0.1390, Train Steps/Sec: 3.76
+✓ Step 0001205 | Loss: 0.1390 | Steps/Sec: 3.76
+Loss: 0.18316131830215454
+Loss: 0.16592495143413544
+Loss: 0.12233272939920425
+Loss: 0.18026123940944672
+Loss: 0.14139579236507416
+[2025-12-19 01:58:42] (step=0001210) Train Loss: 0.1586, Train Steps/Sec: 4.85
+✓ Step 0001210 | Loss: 0.1586 | Steps/Sec: 4.85
+[2025-12-19 01:58:42] Beginning epoch 121...
+Beginning epoch 121...
+Loss: 0.15063585340976715
+Loss: 0.10400281846523285
+Loss: 0.11528301239013672
+Loss: 0.13288523256778717
+Loss: 0.12813901901245117
+[2025-12-19 01:58:43] (step=0001215) Train Loss: 0.1262, Train Steps/Sec: 3.77
+✓ Step 0001215 | Loss: 0.1262 | Steps/Sec: 3.77
+Loss: 0.15910747647285461
+Loss: 0.13652357459068298
+Loss: 0.1092037633061409
+Loss: 0.12258893996477127
+Loss: 0.09222491830587387
+[2025-12-19 01:58:44] (step=0001220) Train Loss: 0.1239, Train Steps/Sec: 4.84
+✓ Step 0001220 | Loss: 0.1239 | Steps/Sec: 4.84
+[2025-12-19 01:58:44] Beginning epoch 122...
+Beginning epoch 122...
+Loss: 0.13465666770935059
+Loss: 0.19182735681533813
+Loss: 0.13536551594734192
+Loss: 0.12810033559799194
+Loss: 0.1859489232301712
+[2025-12-19 01:58:45] (step=0001225) Train Loss: 0.1552, Train Steps/Sec: 3.78
+✓ Step 0001225 | Loss: 0.1552 | Steps/Sec: 3.78
+Loss: 0.11788429319858551
+Loss: 0.1297316551208496
+Loss: 0.14986693859100342
+Loss: 0.2010612040758133
+Loss: 0.11081978678703308
+[2025-12-19 01:58:46] (step=0001230) Train Loss: 0.1419, Train Steps/Sec: 4.86
+✓ Step 0001230 | Loss: 0.1419 | Steps/Sec: 4.86
+[2025-12-19 01:58:46] Beginning epoch 123...
+Beginning epoch 123...
+Loss: 0.1999311000108719
+Loss: 0.13110874593257904
+Loss: 0.18850432336330414
+Loss: 0.1708986610174179
+Loss: 0.1852063536643982
+[2025-12-19 01:58:48] (step=0001235) Train Loss: 0.1751, Train Steps/Sec: 3.76
+✓ Step 0001235 | Loss: 0.1751 | Steps/Sec: 3.76
+Loss: 0.2017616629600525
+Loss: 0.19069509208202362
+Loss: 0.15387241542339325
+Loss: 0.16154241561889648
+Loss: 0.1255253702402115
+[2025-12-19 01:58:49] (step=0001240) Train Loss: 0.1667, Train Steps/Sec: 4.85
+✓ Step 0001240 | Loss: 0.1667 | Steps/Sec: 4.85
+[2025-12-19 01:58:49] Beginning epoch 124...
+Beginning epoch 124...
+Loss: 0.14650453627109528
+Loss: 0.1249408945441246
+Loss: 0.11588279157876968
+Loss: 0.12399915605783463
+Loss: 0.21936877071857452
+[2025-12-19 01:58:50] (step=0001245) Train Loss: 0.1461, Train Steps/Sec: 3.75
+✓ Step 0001245 | Loss: 0.1461 | Steps/Sec: 3.75
+Loss: 0.1841508001089096
+Loss: 0.1507115364074707
+Loss: 0.08455047756433487
+Loss: 0.1414680927991867
+Loss: 0.21007296442985535
+[2025-12-19 01:58:51] (step=0001250) Train Loss: 0.1542, Train Steps/Sec: 4.85
+✓ Step 0001250 | Loss: 0.1542 | Steps/Sec: 4.85
+[2025-12-19 01:58:51] Beginning epoch 125...
+Beginning epoch 125...
+Loss: 0.11832045018672943
+Loss: 0.14755183458328247
+Loss: 0.21489231288433075
+Loss: 0.1854492574930191
+Loss: 0.17112687230110168
+[2025-12-19 01:58:52] (step=0001255) Train Loss: 0.1675, Train Steps/Sec: 3.75
+✓ Step 0001255 | Loss: 0.1675 | Steps/Sec: 3.75
+Loss: 0.20527751743793488
+Loss: 0.15084902942180634
+Loss: 0.11444476991891861
+Loss: 0.14281027019023895
+Loss: 0.17318622767925262
+[2025-12-19 01:58:53] (step=0001260) Train Loss: 0.1573, Train Steps/Sec: 4.85
+✓ Step 0001260 | Loss: 0.1573 | Steps/Sec: 4.85
+[2025-12-19 01:58:53] Beginning epoch 126...
+Beginning epoch 126...
+Loss: 0.1836891770362854
+Loss: 0.11376705020666122
+Loss: 0.09407330304384232
+Loss: 0.12812770903110504
+Loss: 0.17727723717689514
+[2025-12-19 01:58:55] (step=0001265) Train Loss: 0.1394, Train Steps/Sec: 3.75
+✓ Step 0001265 | Loss: 0.1394 | Steps/Sec: 3.75
+Loss: 0.23254649341106415
+Loss: 0.12294109910726547
+Loss: 0.11832538992166519
+Loss: 0.13801154494285583
+Loss: 0.1307632178068161
+[2025-12-19 01:58:56] (step=0001270) Train Loss: 0.1485, Train Steps/Sec: 4.85
+✓ Step 0001270 | Loss: 0.1485 | Steps/Sec: 4.85
+[2025-12-19 01:58:56] Beginning epoch 127...
+Beginning epoch 127...
+Loss: 0.13745933771133423
+Loss: 0.15552116930484772
+Loss: 0.12762627005577087
+Loss: 0.1761309951543808
+Loss: 0.11640375107526779
+[2025-12-19 01:58:57] (step=0001275) Train Loss: 0.1426, Train Steps/Sec: 3.75
+✓ Step 0001275 | Loss: 0.1426 | Steps/Sec: 3.75
+Loss: 0.14497114717960358
+Loss: 0.1753815859556198
+Loss: 0.1678277552127838
+Loss: 0.16545544564723969
+Loss: 0.15076661109924316
+[2025-12-19 01:58:58] (step=0001280) Train Loss: 0.1609, Train Steps/Sec: 4.84
+✓ Step 0001280 | Loss: 0.1609 | Steps/Sec: 4.84
+[2025-12-19 01:58:58] Beginning epoch 128...
+Beginning epoch 128...
+Loss: 0.14292562007904053
+Loss: 0.1351039856672287
+Loss: 0.12108886241912842
+Loss: 0.11235325783491135
+Loss: 0.11084026098251343
+[2025-12-19 01:58:59] (step=0001285) Train Loss: 0.1245, Train Steps/Sec: 3.75
+✓ Step 0001285 | Loss: 0.1245 | Steps/Sec: 3.75
+Loss: 0.1169942319393158
+Loss: 0.12807753682136536
+Loss: 0.14662419259548187
+Loss: 0.1479395180940628
+Loss: 0.15859165787696838
+[2025-12-19 01:59:00] (step=0001290) Train Loss: 0.1396, Train Steps/Sec: 4.85
+✓ Step 0001290 | Loss: 0.1396 | Steps/Sec: 4.85
+[2025-12-19 01:59:00] Beginning epoch 129...
+Beginning epoch 129...
+Loss: 0.12558065354824066
+Loss: 0.2054966539144516
+Loss: 0.11397107690572739
+Loss: 0.1263960748910904
+Loss: 0.16089534759521484
+[2025-12-19 01:59:02] (step=0001295) Train Loss: 0.1465, Train Steps/Sec: 3.81
+✓ Step 0001295 | Loss: 0.1465 | Steps/Sec: 3.81
+Loss: 0.14532655477523804
+Loss: 0.16084758937358856
+Loss: 0.1039147898554802
+Loss: 0.14815470576286316
+Loss: 0.13169459998607635
+[2025-12-19 01:59:03] (step=0001300) Train Loss: 0.1380, Train Steps/Sec: 4.85
+✓ Step 0001300 | Loss: 0.1380 | Steps/Sec: 4.85
+[2025-12-19 01:59:03] Beginning epoch 130...
+Beginning epoch 130...
+Loss: 0.19636113941669464
+Loss: 0.08766239136457443
+Loss: 0.1746169775724411
+Loss: 0.13976304233074188
+Loss: 0.07595618814229965
+[2025-12-19 01:59:04] (step=0001305) Train Loss: 0.1349, Train Steps/Sec: 3.76
+✓ Step 0001305 | Loss: 0.1349 | Steps/Sec: 3.76
+Loss: 0.12157601118087769
+Loss: 0.11636296659708023
+Loss: 0.10915903747081757
+Loss: 0.15932916104793549
+Loss: 0.22171823680400848
+[2025-12-19 01:59:05] (step=0001310) Train Loss: 0.1456, Train Steps/Sec: 4.85
+✓ Step 0001310 | Loss: 0.1456 | Steps/Sec: 4.85
+[2025-12-19 01:59:05] Beginning epoch 131...
+Beginning epoch 131...
+Loss: 0.23746447265148163
+Loss: 0.1549942046403885
+Loss: 0.10325988382101059
+Loss: 0.12744151055812836
+Loss: 0.1287825107574463
+[2025-12-19 01:59:06] (step=0001315) Train Loss: 0.1504, Train Steps/Sec: 3.78
+✓ Step 0001315 | Loss: 0.1504 | Steps/Sec: 3.78
+Loss: 0.16346359252929688
+Loss: 0.13407427072525024
+Loss: 0.15192367136478424
+Loss: 0.11498946696519852
+Loss: 0.15347562730312347
+[2025-12-19 01:59:07] (step=0001320) Train Loss: 0.1436, Train Steps/Sec: 4.85
+✓ Step 0001320 | Loss: 0.1436 | Steps/Sec: 4.85
+[2025-12-19 01:59:07] Beginning epoch 132...
+Beginning epoch 132...
+Loss: 0.1304657906293869
+Loss: 0.13505253195762634
+Loss: 0.1274857074022293
+Loss: 0.17367932200431824
+Loss: 0.09709815680980682
+[2025-12-19 01:59:09] (step=0001325) Train Loss: 0.1328, Train Steps/Sec: 3.78
+✓ Step 0001325 | Loss: 0.1328 | Steps/Sec: 3.78
+Loss: 0.11125494539737701
+Loss: 0.1075657457113266
+Loss: 0.22938621044158936
+Loss: 0.07770986109972
+Loss: 0.08986299484968185
+[2025-12-19 01:59:10] (step=0001330) Train Loss: 0.1232, Train Steps/Sec: 4.85
+✓ Step 0001330 | Loss: 0.1232 | Steps/Sec: 4.85
+[2025-12-19 01:59:10] Beginning epoch 133...
+Beginning epoch 133...
+Loss: 0.11649318784475327
+Loss: 0.12995688617229462
+Loss: 0.14544320106506348
+Loss: 0.1984369456768036
+Loss: 0.09810447692871094
+[2025-12-19 01:59:11] (step=0001335) Train Loss: 0.1377, Train Steps/Sec: 3.76
+✓ Step 0001335 | Loss: 0.1377 | Steps/Sec: 3.76
+Loss: 0.09278231114149094
+Loss: 0.09495536237955093
+Loss: 0.14577840268611908
+Loss: 0.13655565679073334
+Loss: 0.17785169184207916
+[2025-12-19 01:59:12] (step=0001340) Train Loss: 0.1296, Train Steps/Sec: 4.85
+✓ Step 0001340 | Loss: 0.1296 | Steps/Sec: 4.85
+[2025-12-19 01:59:12] Beginning epoch 134...
+Beginning epoch 134...
+Loss: 0.14820465445518494
+Loss: 0.15126077830791473
+Loss: 0.1745070219039917
+Loss: 0.1438124179840088
+Loss: 0.1673303246498108
+[2025-12-19 01:59:14] (step=0001345) Train Loss: 0.1570, Train Steps/Sec: 3.76
+✓ Step 0001345 | Loss: 0.1570 | Steps/Sec: 3.76
+Loss: 0.148053377866745
+Loss: 0.148548886179924
+Loss: 0.10289999097585678
+Loss: 0.09924744069576263
+Loss: 0.11496838927268982
+[2025-12-19 01:59:15] (step=0001350) Train Loss: 0.1227, Train Steps/Sec: 4.85
+✓ Step 0001350 | Loss: 0.1227 | Steps/Sec: 4.85
+[2025-12-19 01:59:15] Beginning epoch 135...
+Beginning epoch 135...
+Loss: 0.16056941449642181
+Loss: 0.19611559808254242
+Loss: 0.18285506963729858
+Loss: 0.1055288091301918
+Loss: 0.1425858587026596
+[2025-12-19 01:59:16] (step=0001355) Train Loss: 0.1575, Train Steps/Sec: 3.76
+✓ Step 0001355 | Loss: 0.1575 | Steps/Sec: 3.76
+Loss: 0.1086295023560524
+Loss: 0.14706572890281677
+Loss: 0.17268186807632446
+Loss: 0.11371160298585892
+Loss: 0.19769637286663055
+[2025-12-19 01:59:17] (step=0001360) Train Loss: 0.1480, Train Steps/Sec: 4.85
+✓ Step 0001360 | Loss: 0.1480 | Steps/Sec: 4.85
+[2025-12-19 01:59:17] Beginning epoch 136...
+Beginning epoch 136...
+Loss: 0.18283577263355255
+Loss: 0.15747211873531342
+Loss: 0.15185090899467468
+Loss: 0.1614343225955963
+Loss: 0.15430189669132233
+[2025-12-19 01:59:18] (step=0001365) Train Loss: 0.1616, Train Steps/Sec: 3.76
+✓ Step 0001365 | Loss: 0.1616 | Steps/Sec: 3.76
+Loss: 0.15720057487487793
+Loss: 0.17621375620365143
+Loss: 0.15976063907146454
+Loss: 0.07328513264656067
+Loss: 0.151143416762352
+[2025-12-19 01:59:19] (step=0001370) Train Loss: 0.1435, Train Steps/Sec: 4.85
+✓ Step 0001370 | Loss: 0.1435 | Steps/Sec: 4.85
+[2025-12-19 01:59:19] Beginning epoch 137...
+Beginning epoch 137...
+Loss: 0.12511573731899261
+Loss: 0.08733025938272476
+Loss: 0.1327838897705078
+Loss: 0.16375386714935303
+Loss: 0.1681210696697235
+[2025-12-19 01:59:21] (step=0001375) Train Loss: 0.1354, Train Steps/Sec: 3.75
+✓ Step 0001375 | Loss: 0.1354 | Steps/Sec: 3.75
+Loss: 0.15326258540153503
+Loss: 0.14298823475837708
+Loss: 0.18584495782852173
+Loss: 0.17650365829467773
+Loss: 0.15662424266338348
+[2025-12-19 01:59:22] (step=0001380) Train Loss: 0.1630, Train Steps/Sec: 4.85
+✓ Step 0001380 | Loss: 0.1630 | Steps/Sec: 4.85
+[2025-12-19 01:59:22] Beginning epoch 138...
+Beginning epoch 138...
+Loss: 0.17144665122032166
+Loss: 0.10342904925346375
+Loss: 0.118951715528965
+Loss: 0.128019317984581
+Loss: 0.1321287900209427
+[2025-12-19 01:59:23] (step=0001385) Train Loss: 0.1308, Train Steps/Sec: 3.73
+✓ Step 0001385 | Loss: 0.1308 | Steps/Sec: 3.73
+Loss: 0.11602339148521423
+Loss: 0.11255493015050888
+Loss: 0.12208171933889389
+Loss: 0.07690996676683426
+Loss: 0.13177292048931122
+[2025-12-19 01:59:24] (step=0001390) Train Loss: 0.1119, Train Steps/Sec: 4.85
+✓ Step 0001390 | Loss: 0.1119 | Steps/Sec: 4.85
+[2025-12-19 01:59:24] Beginning epoch 139...
+Beginning epoch 139...
+Loss: 0.16119761765003204
+Loss: 0.123237244784832
+Loss: 0.047889452427625656
+Loss: 0.19568926095962524
+Loss: 0.14776040613651276
+[2025-12-19 01:59:25] (step=0001395) Train Loss: 0.1352, Train Steps/Sec: 3.76
+✓ Step 0001395 | Loss: 0.1352 | Steps/Sec: 3.76
+Loss: 0.1728084534406662
+Loss: 0.08040948957204819
+Loss: 0.16490134596824646
+Loss: 0.12309535592794418
+Loss: 0.16156257688999176
+[2025-12-19 01:59:26] (step=0001400) Train Loss: 0.1406, Train Steps/Sec: 4.85
+✓ Step 0001400 | Loss: 0.1406 | Steps/Sec: 4.85
+[2025-12-19 01:59:26] Beginning epoch 140...
+Beginning epoch 140...
+Loss: 0.07145921140909195
+Loss: 0.14614389836788177
+Loss: 0.12692856788635254
+Loss: 0.14907331764698029
+Loss: 0.15984484553337097
+[2025-12-19 01:59:28] (step=0001405) Train Loss: 0.1307, Train Steps/Sec: 3.75
+✓ Step 0001405 | Loss: 0.1307 | Steps/Sec: 3.75
+Loss: 0.15507641434669495
+Loss: 0.20367489755153656
+Loss: 0.11035864800214767
+Loss: 0.12150649726390839
+Loss: 0.26336875557899475
+[2025-12-19 01:59:29] (step=0001410) Train Loss: 0.1708, Train Steps/Sec: 4.84
+✓ Step 0001410 | Loss: 0.1708 | Steps/Sec: 4.84
+[2025-12-19 01:59:29] Beginning epoch 141...
+Beginning epoch 141...
+Loss: 0.1890590488910675
+Loss: 0.20032919943332672
+Loss: 0.22741477191448212
+Loss: 0.10488162934780121
+Loss: 0.1644621193408966
+[2025-12-19 01:59:30] (step=0001415) Train Loss: 0.1772, Train Steps/Sec: 3.75
+✓ Step 0001415 | Loss: 0.1772 | Steps/Sec: 3.75
+Loss: 0.1613040566444397
+Loss: 0.12338268756866455
+Loss: 0.11912567168474197
+Loss: 0.154716357588768
+Loss: 0.10482754558324814
+[2025-12-19 01:59:31] (step=0001420) Train Loss: 0.1327, Train Steps/Sec: 4.84
+✓ Step 0001420 | Loss: 0.1327 | Steps/Sec: 4.84
+[2025-12-19 01:59:31] Beginning epoch 142...
+Beginning epoch 142...
+Loss: 0.1372038573026657
+Loss: 0.18349403142929077
+Loss: 0.08346537500619888
+Loss: 0.11385542899370193
+Loss: 0.1013757511973381
+[2025-12-19 01:59:32] (step=0001425) Train Loss: 0.1239, Train Steps/Sec: 3.77
+✓ Step 0001425 | Loss: 0.1239 | Steps/Sec: 3.77
+Loss: 0.11570294946432114
+Loss: 0.13767211139202118
+Loss: 0.14006291329860687
+Loss: 0.2127004712820053
+Loss: 0.15218207240104675
+[2025-12-19 01:59:33] (step=0001430) Train Loss: 0.1517, Train Steps/Sec: 4.84
+✓ Step 0001430 | Loss: 0.1517 | Steps/Sec: 4.84
+[2025-12-19 01:59:34] Beginning epoch 143...
+Beginning epoch 143...
+Loss: 0.12450259923934937
+Loss: 0.1345737725496292
+Loss: 0.18274559080600739
+Loss: 0.14449210464954376
+Loss: 0.19098494946956635
+[2025-12-19 01:59:35] (step=0001435) Train Loss: 0.1555, Train Steps/Sec: 3.78
+✓ Step 0001435 | Loss: 0.1555 | Steps/Sec: 3.78
+Loss: 0.1447766125202179
+Loss: 0.18785922229290009
+Loss: 0.16079990565776825
+Loss: 0.13991057872772217
+Loss: 0.0953812450170517
+[2025-12-19 01:59:36] (step=0001440) Train Loss: 0.1457, Train Steps/Sec: 4.83
+✓ Step 0001440 | Loss: 0.1457 | Steps/Sec: 4.83
+[2025-12-19 01:59:36] Beginning epoch 144...
+Beginning epoch 144...
+Loss: 0.2125174105167389
+Loss: 0.1292954534292221
+Loss: 0.15267503261566162
+Loss: 0.17801238596439362
+Loss: 0.1631697416305542
+[2025-12-19 01:59:37] (step=0001445) Train Loss: 0.1671, Train Steps/Sec: 3.74
+✓ Step 0001445 | Loss: 0.1671 | Steps/Sec: 3.74
+Loss: 0.1373605877161026
+Loss: 0.14238321781158447
+Loss: 0.08056528121232986
+Loss: 0.16200637817382812
+Loss: 0.14474521577358246
+[2025-12-19 01:59:38] (step=0001450) Train Loss: 0.1334, Train Steps/Sec: 4.83
+✓ Step 0001450 | Loss: 0.1334 | Steps/Sec: 4.83
+[2025-12-19 01:59:38] Beginning epoch 145...
+Beginning epoch 145...
+Loss: 0.12277000397443771
+Loss: 0.12660232186317444
+Loss: 0.14144764840602875
+Loss: 0.10819774121046066
+Loss: 0.11542259156703949
+[2025-12-19 01:59:40] (step=0001455) Train Loss: 0.1229, Train Steps/Sec: 3.73
+✓ Step 0001455 | Loss: 0.1229 | Steps/Sec: 3.73
+Loss: 0.11732440441846848
+Loss: 0.15684279799461365
+Loss: 0.09702938050031662
+Loss: 0.15455614030361176
+Loss: 0.11572951823472977
+[2025-12-19 01:59:41] (step=0001460) Train Loss: 0.1283, Train Steps/Sec: 4.84
+✓ Step 0001460 | Loss: 0.1283 | Steps/Sec: 4.84
+[2025-12-19 01:59:41] Beginning epoch 146...
+Beginning epoch 146...
+Loss: 0.1256720870733261
+Loss: 0.13375625014305115
+Loss: 0.14814315736293793
+Loss: 0.13829389214515686
+Loss: 0.11048875749111176
+[2025-12-19 01:59:42] (step=0001465) Train Loss: 0.1313, Train Steps/Sec: 3.76
+✓ Step 0001465 | Loss: 0.1313 | Steps/Sec: 3.76
+Loss: 0.08911256492137909
+Loss: 0.1350778490304947
+Loss: 0.08629148453474045
+Loss: 0.12498310953378677
+Loss: 0.15215839445590973
+[2025-12-19 01:59:43] (step=0001470) Train Loss: 0.1175, Train Steps/Sec: 4.84
+✓ Step 0001470 | Loss: 0.1175 | Steps/Sec: 4.84
+[2025-12-19 01:59:43] Beginning epoch 147...
+Beginning epoch 147...
+Loss: 0.19298623502254486
+Loss: 0.1474228948354721
+Loss: 0.13109178841114044
+Loss: 0.11140521615743637
+Loss: 0.14162492752075195
+[2025-12-19 01:59:44] (step=0001475) Train Loss: 0.1449, Train Steps/Sec: 3.77
+✓ Step 0001475 | Loss: 0.1449 | Steps/Sec: 3.77
+Loss: 0.18163619935512543
+Loss: 0.17705272138118744
+Loss: 0.20029477775096893
+Loss: 0.17762544751167297
+Loss: 0.07651318609714508
+[2025-12-19 01:59:45] (step=0001480) Train Loss: 0.1626, Train Steps/Sec: 4.85
+✓ Step 0001480 | Loss: 0.1626 | Steps/Sec: 4.85
+[2025-12-19 01:59:45] Beginning epoch 148...
+Beginning epoch 148...
+Loss: 0.09486836940050125
+Loss: 0.19837741553783417
+Loss: 0.12091494351625443
+Loss: 0.1591765135526657
+Loss: 0.1319119781255722
+[2025-12-19 01:59:47] (step=0001485) Train Loss: 0.1410, Train Steps/Sec: 3.73
+✓ Step 0001485 | Loss: 0.1410 | Steps/Sec: 3.73
+Loss: 0.1455214023590088
+Loss: 0.14861555397510529
+Loss: 0.16130292415618896
+Loss: 0.16600610315799713
+Loss: 0.1526317596435547
+[2025-12-19 01:59:48] (step=0001490) Train Loss: 0.1548, Train Steps/Sec: 4.84
+✓ Step 0001490 | Loss: 0.1548 | Steps/Sec: 4.84
+[2025-12-19 01:59:48] Beginning epoch 149...
+Beginning epoch 149...
+Loss: 0.1219019740819931
+Loss: 0.12867021560668945
+Loss: 0.1043693870306015
+Loss: 0.17032738029956818
+Loss: 0.11462078988552094
+[2025-12-19 01:59:49] (step=0001495) Train Loss: 0.1280, Train Steps/Sec: 3.78
+✓ Step 0001495 | Loss: 0.1280 | Steps/Sec: 3.78
+Loss: 0.16655373573303223
+Loss: 0.17128394544124603
+Loss: 0.12945996224880219
+Loss: 0.10846980661153793
+Loss: 0.13216041028499603
+[2025-12-19 01:59:50] (step=0001500) Train Loss: 0.1416, Train Steps/Sec: 4.83
+✓ Step 0001500 | Loss: 0.1416 | Steps/Sec: 4.83
+[2025-12-19 01:59:51] Saved checkpoint to ./dit_fine_resluts//000-DiT-XL-2-x2-finetune/checkpoints/0001500.pt (Model contains only trainable params)
+[2025-12-19 01:59:51] Beginning epoch 150...
+Beginning epoch 150...
+Loss: 0.12460748106241226
+Loss: 0.12589246034622192
+Loss: 0.1447768211364746
+Loss: 0.17190022766590118
+Loss: 0.19922657310962677
+[2025-12-19 01:59:53] (step=0001505) Train Loss: 0.1533, Train Steps/Sec: 1.83
+✓ Step 0001505 | Loss: 0.1533 | Steps/Sec: 1.83
+Loss: 0.09858020395040512
+Loss: 0.07748420536518097
+Loss: 0.15395942330360413
+Loss: 0.19201186299324036
+Loss: 0.09387650340795517
+[2025-12-19 01:59:54] (step=0001510) Train Loss: 0.1232, Train Steps/Sec: 4.84
+✓ Step 0001510 | Loss: 0.1232 | Steps/Sec: 4.84
+[2025-12-19 01:59:54] Beginning epoch 151...
+Beginning epoch 151...
+Loss: 0.14497576653957367
+Loss: 0.1452973186969757
+Loss: 0.05583933740854263
+Loss: 0.16159547865390778
+Loss: 0.15574732422828674
+[2025-12-19 01:59:55] (step=0001515) Train Loss: 0.1327, Train Steps/Sec: 3.74
+✓ Step 0001515 | Loss: 0.1327 | Steps/Sec: 3.74
+Loss: 0.18110381066799164
+Loss: 0.219816654920578
+Loss: 0.16217327117919922
+Loss: 0.12404396384954453
+Loss: 0.13263823091983795
+[2025-12-19 01:59:56] (step=0001520) Train Loss: 0.1640, Train Steps/Sec: 4.83
+✓ Step 0001520 | Loss: 0.1640 | Steps/Sec: 4.83
+[2025-12-19 01:59:56] Beginning epoch 152...
+Beginning epoch 152...
+Loss: 0.23387733101844788
+Loss: 0.08946493268013
+Loss: 0.10598044842481613
+Loss: 0.10267002880573273
+Loss: 0.16079367697238922
+[2025-12-19 01:59:58] (step=0001525) Train Loss: 0.1386, Train Steps/Sec: 3.75
+✓ Step 0001525 | Loss: 0.1386 | Steps/Sec: 3.75
+Loss: 0.15482772886753082
+Loss: 0.1549328714609146
+Loss: 0.15036369860172272
+Loss: 0.28769955039024353
+Loss: 0.1210559532046318
+[2025-12-19 01:59:59] (step=0001530) Train Loss: 0.1738, Train Steps/Sec: 4.83
+✓ Step 0001530 | Loss: 0.1738 | Steps/Sec: 4.83
+[2025-12-19 01:59:59] Beginning epoch 153...
+Beginning epoch 153...
+Loss: 0.1390390247106552
+Loss: 0.1280723512172699
+Loss: 0.22150756418704987
+Loss: 0.09655021131038666
+Loss: 0.14731666445732117
+[2025-12-19 02:00:00] (step=0001535) Train Loss: 0.1465, Train Steps/Sec: 3.79
+✓ Step 0001535 | Loss: 0.1465 | Steps/Sec: 3.79
+Loss: 0.20353400707244873
+Loss: 0.17890086770057678
+Loss: 0.14944927394390106
+Loss: 0.14709539711475372
+Loss: 0.11503621935844421
+[2025-12-19 02:00:01] (step=0001540) Train Loss: 0.1588, Train Steps/Sec: 4.84
+✓ Step 0001540 | Loss: 0.1588 | Steps/Sec: 4.84
+[2025-12-19 02:00:01] Beginning epoch 154...
+Beginning epoch 154...
+Loss: 0.10831283032894135
+Loss: 0.11694592982530594
+Loss: 0.1188158169388771
+Loss: 0.0983990728855133
+Loss: 0.13048799335956573
+[2025-12-19 02:00:02] (step=0001545) Train Loss: 0.1146, Train Steps/Sec: 3.75
+✓ Step 0001545 | Loss: 0.1146 | Steps/Sec: 3.75
+Loss: 0.10469280183315277
+Loss: 0.16244134306907654
+Loss: 0.11193951964378357
+Loss: 0.13824176788330078
+Loss: 0.14069373905658722
+[2025-12-19 02:00:03] (step=0001550) Train Loss: 0.1316, Train Steps/Sec: 4.85
+✓ Step 0001550 | Loss: 0.1316 | Steps/Sec: 4.85
+[2025-12-19 02:00:03] Beginning epoch 155...
+Beginning epoch 155...
+Loss: 0.10440030694007874
+Loss: 0.16166400909423828
+Loss: 0.21496179699897766
+Loss: 0.14285826683044434
+Loss: 0.1469193994998932
+[2025-12-19 02:00:05] (step=0001555) Train Loss: 0.1542, Train Steps/Sec: 3.74
+✓ Step 0001555 | Loss: 0.1542 | Steps/Sec: 3.74
+Loss: 0.1338101029396057
+Loss: 0.15290974080562592
+Loss: 0.06808499246835709
+Loss: 0.11829234659671783
+Loss: 0.16634589433670044
+[2025-12-19 02:00:06] (step=0001560) Train Loss: 0.1279, Train Steps/Sec: 4.83
+✓ Step 0001560 | Loss: 0.1279 | Steps/Sec: 4.83
+[2025-12-19 02:00:06] Beginning epoch 156...
+Beginning epoch 156...
+Loss: 0.0951458066701889
+Loss: 0.19121067225933075
+Loss: 0.14876264333724976
+Loss: 0.13825324177742004
+Loss: 0.14743658900260925
+[2025-12-19 02:00:07] (step=0001565) Train Loss: 0.1442, Train Steps/Sec: 3.73
+✓ Step 0001565 | Loss: 0.1442 | Steps/Sec: 3.73
+Loss: 0.1553143858909607
+Loss: 0.11077649891376495
+Loss: 0.13161097466945648
+Loss: 0.1698940247297287
+Loss: 0.12018675357103348
+[2025-12-19 02:00:08] (step=0001570) Train Loss: 0.1376, Train Steps/Sec: 4.83
+✓ Step 0001570 | Loss: 0.1376 | Steps/Sec: 4.83
+[2025-12-19 02:00:08] Beginning epoch 157...
+Beginning epoch 157...
+Loss: 0.09503291547298431
+Loss: 0.10943682491779327
+Loss: 0.17457988858222961
+Loss: 0.1553412526845932
+Loss: 0.12808918952941895
+[2025-12-19 02:00:09] (step=0001575) Train Loss: 0.1325, Train Steps/Sec: 3.76
+✓ Step 0001575 | Loss: 0.1325 | Steps/Sec: 3.76
+Loss: 0.1483331322669983
+Loss: 0.11118265241384506
+Loss: 0.21233928203582764
+Loss: 0.13982415199279785
+Loss: 0.10137500613927841
+[2025-12-19 02:00:10] (step=0001580) Train Loss: 0.1426, Train Steps/Sec: 4.83
+✓ Step 0001580 | Loss: 0.1426 | Steps/Sec: 4.83
+[2025-12-19 02:00:10] Beginning epoch 158...
+Beginning epoch 158...
+Loss: 0.12590695917606354
+Loss: 0.16677112877368927
+Loss: 0.1996200829744339
+Loss: 0.126249760389328
+Loss: 0.1712559312582016
+[2025-12-19 02:00:12] (step=0001585) Train Loss: 0.1580, Train Steps/Sec: 3.74
+✓ Step 0001585 | Loss: 0.1580 | Steps/Sec: 3.74
+Loss: 0.2420644760131836
+Loss: 0.13024163246154785
+Loss: 0.14736270904541016
+Loss: 0.17436572909355164
+Loss: 0.18842776119709015
+[2025-12-19 02:00:13] (step=0001590) Train Loss: 0.1765, Train Steps/Sec: 4.84
+✓ Step 0001590 | Loss: 0.1765 | Steps/Sec: 4.84
+[2025-12-19 02:00:13] Beginning epoch 159...
+Beginning epoch 159...
+Loss: 0.2173171192407608
+Loss: 0.17912761867046356
+Loss: 0.11763303726911545
+Loss: 0.13429467380046844
+Loss: 0.12950797379016876
+[2025-12-19 02:00:14] (step=0001595) Train Loss: 0.1556, Train Steps/Sec: 3.76
+✓ Step 0001595 | Loss: 0.1556 | Steps/Sec: 3.76
+Loss: 0.14406172931194305
+Loss: 0.14049756526947021
+Loss: 0.18075813353061676
+Loss: 0.1757068634033203
+Loss: 0.20200663805007935
+[2025-12-19 02:00:15] (step=0001600) Train Loss: 0.1686, Train Steps/Sec: 4.84
+✓ Step 0001600 | Loss: 0.1686 | Steps/Sec: 4.84
+[2025-12-19 02:00:15] Beginning epoch 160...
+Beginning epoch 160...
+Loss: 0.12161808460950851
+Loss: 0.18167953193187714
+Loss: 0.10530056059360504
+Loss: 0.13859935104846954
+Loss: 0.15699243545532227
+[2025-12-19 02:00:16] (step=0001605) Train Loss: 0.1408, Train Steps/Sec: 3.73
+✓ Step 0001605 | Loss: 0.1408 | Steps/Sec: 3.73
+Loss: 0.12143226712942123
+Loss: 0.1447112262248993
+Loss: 0.13983197510242462
+Loss: 0.150143101811409
+Loss: 0.1837620884180069
+[2025-12-19 02:00:18] (step=0001610) Train Loss: 0.1480, Train Steps/Sec: 4.83
+✓ Step 0001610 | Loss: 0.1480 | Steps/Sec: 4.83
+[2025-12-19 02:00:18] Beginning epoch 161...
+Beginning epoch 161...
+Loss: 0.15258601307868958
+Loss: 0.09397401660680771
+Loss: 0.14182382822036743
+Loss: 0.11390584707260132
+Loss: 0.16263218224048615
+[2025-12-19 02:00:19] (step=0001615) Train Loss: 0.1330, Train Steps/Sec: 3.75
+✓ Step 0001615 | Loss: 0.1330 | Steps/Sec: 3.75
+Loss: 0.1808597892522812
+Loss: 0.08858250081539154
+Loss: 0.11250284314155579
+Loss: 0.11739751696586609
+Loss: 0.15573231875896454
+[2025-12-19 02:00:20] (step=0001620) Train Loss: 0.1310, Train Steps/Sec: 4.84
+✓ Step 0001620 | Loss: 0.1310 | Steps/Sec: 4.84
+[2025-12-19 02:00:20] Beginning epoch 162...
+Beginning epoch 162...
+Loss: 0.10135562717914581
+Loss: 0.1609169989824295
+Loss: 0.11384082585573196
+Loss: 0.10613051056861877
+Loss: 0.13072428107261658
+[2025-12-19 02:00:21] (step=0001625) Train Loss: 0.1226, Train Steps/Sec: 3.76
+✓ Step 0001625 | Loss: 0.1226 | Steps/Sec: 3.76
+Loss: 0.1628045290708542
+Loss: 0.11761458963155746
+Loss: 0.14202219247817993
+Loss: 0.21238215267658234
+Loss: 0.1834564357995987
+[2025-12-19 02:00:22] (step=0001630) Train Loss: 0.1637, Train Steps/Sec: 4.83
+✓ Step 0001630 | Loss: 0.1637 | Steps/Sec: 4.83
+[2025-12-19 02:00:22] Beginning epoch 163...
+Beginning epoch 163...
+Loss: 0.22519554197788239
+Loss: 0.1191580668091774
+Loss: 0.22990618646144867
+Loss: 0.1338547170162201
+Loss: 0.14536386728286743
+[2025-12-19 02:00:24] (step=0001635) Train Loss: 0.1707, Train Steps/Sec: 3.75
+✓ Step 0001635 | Loss: 0.1707 | Steps/Sec: 3.75
+Loss: 0.15508708357810974
+Loss: 0.12366325408220291
+Loss: 0.17203807830810547
+Loss: 0.1697123497724533
+Loss: 0.12443596869707108
+[2025-12-19 02:00:25] (step=0001640) Train Loss: 0.1490, Train Steps/Sec: 4.85
+✓ Step 0001640 | Loss: 0.1490 | Steps/Sec: 4.85
+[2025-12-19 02:00:25] Beginning epoch 164...
+Beginning epoch 164...
+Loss: 0.20255912840366364
+Loss: 0.155325248837471
+Loss: 0.16635185480117798
+Loss: 0.1773153394460678
+Loss: 0.1848762035369873
+[2025-12-19 02:00:26] (step=0001645) Train Loss: 0.1773, Train Steps/Sec: 3.80
+✓ Step 0001645 | Loss: 0.1773 | Steps/Sec: 3.80
+Loss: 0.08603470772504807
+Loss: 0.09234266728162766
+Loss: 0.12777665257453918
+Loss: 0.09731820225715637
+Loss: 0.13442493975162506
+[2025-12-19 02:00:27] (step=0001650) Train Loss: 0.1076, Train Steps/Sec: 4.84
+✓ Step 0001650 | Loss: 0.1076 | Steps/Sec: 4.84
+[2025-12-19 02:00:27] Beginning epoch 165...
+Beginning epoch 165...
+Loss: 0.09990928322076797
+Loss: 0.09557551145553589
+Loss: 0.13910731673240662
+Loss: 0.17852552235126495
+Loss: 0.14733563363552094
+[2025-12-19 02:00:28] (step=0001655) Train Loss: 0.1321, Train Steps/Sec: 3.75
+✓ Step 0001655 | Loss: 0.1321 | Steps/Sec: 3.75
+Loss: 0.151951864361763
+Loss: 0.22483104467391968
+Loss: 0.10026247054338455
+Loss: 0.15908613801002502
+Loss: 0.0989561602473259
+[2025-12-19 02:00:29] (step=0001660) Train Loss: 0.1470, Train Steps/Sec: 4.85
+✓ Step 0001660 | Loss: 0.1470 | Steps/Sec: 4.85
+[2025-12-19 02:00:29] Beginning epoch 166...
+Beginning epoch 166...
+Loss: 0.13010919094085693
+Loss: 0.09111731499433517
+Loss: 0.1519581526517868
+Loss: 0.1258588433265686
+Loss: 0.1258569061756134
+[2025-12-19 02:00:31] (step=0001665) Train Loss: 0.1250, Train Steps/Sec: 3.74
+✓ Step 0001665 | Loss: 0.1250 | Steps/Sec: 3.74
+Loss: 0.14325137436389923
+Loss: 0.13654179871082306
+Loss: 0.1459922194480896
+Loss: 0.12612710893154144
+Loss: 0.15981973707675934
+[2025-12-19 02:00:32] (step=0001670) Train Loss: 0.1423, Train Steps/Sec: 4.84
+✓ Step 0001670 | Loss: 0.1423 | Steps/Sec: 4.84
+[2025-12-19 02:00:32] Beginning epoch 167...
+Beginning epoch 167...
+Loss: 0.09503501653671265
+Loss: 0.10424086451530457
+Loss: 0.1701803207397461
+Loss: 0.14759297668933868
+Loss: 0.1383436769247055
+[2025-12-19 02:00:33] (step=0001675) Train Loss: 0.1311, Train Steps/Sec: 3.75
+✓ Step 0001675 | Loss: 0.1311 | Steps/Sec: 3.75
+Loss: 0.13824692368507385
+Loss: 0.1432846039533615
+Loss: 0.10924635827541351
+Loss: 0.15296052396297455
+Loss: 0.09379766136407852
+[2025-12-19 02:00:34] (step=0001680) Train Loss: 0.1275, Train Steps/Sec: 4.84
+✓ Step 0001680 | Loss: 0.1275 | Steps/Sec: 4.84
+[2025-12-19 02:00:34] Beginning epoch 168...
+Beginning epoch 168...
+Loss: 0.10526090115308762
+Loss: 0.15981660783290863
+Loss: 0.13036344945430756
+Loss: 0.14838102459907532
+Loss: 0.16708125174045563
+[2025-12-19 02:00:35] (step=0001685) Train Loss: 0.1422, Train Steps/Sec: 3.76
+✓ Step 0001685 | Loss: 0.1422 | Steps/Sec: 3.76
+Loss: 0.11325064301490784
+Loss: 0.16163402795791626
+Loss: 0.1452849805355072
+Loss: 0.11689864844083786
+Loss: 0.07920245826244354
+[2025-12-19 02:00:36] (step=0001690) Train Loss: 0.1233, Train Steps/Sec: 4.84
+✓ Step 0001690 | Loss: 0.1233 | Steps/Sec: 4.84
+[2025-12-19 02:00:36] Beginning epoch 169...
+Beginning epoch 169...
+Loss: 0.19864368438720703
+Loss: 0.1984732747077942
+Loss: 0.18203075230121613
+Loss: 0.1393030285835266
+Loss: 0.10687153786420822
+[2025-12-19 02:00:38] (step=0001695) Train Loss: 0.1651, Train Steps/Sec: 3.77
+✓ Step 0001695 | Loss: 0.1651 | Steps/Sec: 3.77
+Loss: 0.13077299296855927
+Loss: 0.12477736920118332
+Loss: 0.16515140235424042
+Loss: 0.11788085848093033
+Loss: 0.19653725624084473
+[2025-12-19 02:00:39] (step=0001700) Train Loss: 0.1470, Train Steps/Sec: 4.86
+✓ Step 0001700 | Loss: 0.1470 | Steps/Sec: 4.86
+[2025-12-19 02:00:39] Beginning epoch 170...
+Beginning epoch 170...
+Loss: 0.118532694876194
+Loss: 0.13891318440437317
+Loss: 0.12054271250963211
+Loss: 0.0901377946138382
+Loss: 0.13335561752319336
+[2025-12-19 02:00:40] (step=0001705) Train Loss: 0.1203, Train Steps/Sec: 3.78
+✓ Step 0001705 | Loss: 0.1203 | Steps/Sec: 3.78
+Loss: 0.15378108620643616
+Loss: 0.13806118071079254
+Loss: 0.17974412441253662
+Loss: 0.16121239960193634
+Loss: 0.19486652314662933
+[2025-12-19 02:00:41] (step=0001710) Train Loss: 0.1655, Train Steps/Sec: 4.85
+✓ Step 0001710 | Loss: 0.1655 | Steps/Sec: 4.85
+[2025-12-19 02:00:41] Beginning epoch 171...
+Beginning epoch 171...
+Loss: 0.07595791667699814
+Loss: 0.12138935178518295
+Loss: 0.11367940902709961
+Loss: 0.14244773983955383
+Loss: 0.16401460766792297
+[2025-12-19 02:00:43] (step=0001715) Train Loss: 0.1235, Train Steps/Sec: 3.73
+✓ Step 0001715 | Loss: 0.1235 | Steps/Sec: 3.73
+Loss: 0.18158109486103058
+Loss: 0.11496023088693619
+Loss: 0.15884730219841003
+Loss: 0.1598556935787201
+Loss: 0.13297046720981598
+[2025-12-19 02:00:44] (step=0001720) Train Loss: 0.1496, Train Steps/Sec: 4.85
+✓ Step 0001720 | Loss: 0.1496 | Steps/Sec: 4.85
+[2025-12-19 02:00:44] Beginning epoch 172...
+Beginning epoch 172...
+Loss: 0.16538390517234802
+Loss: 0.2064538598060608
+Loss: 0.22605636715888977
+Loss: 0.08927328884601593
+Loss: 0.12174154072999954
+[2025-12-19 02:00:45] (step=0001725) Train Loss: 0.1618, Train Steps/Sec: 3.77
+✓ Step 0001725 | Loss: 0.1618 | Steps/Sec: 3.77
+Loss: 0.1380905956029892
+Loss: 0.1796966940164566
+Loss: 0.14673426747322083
+Loss: 0.15349960327148438
+Loss: 0.1223367378115654
+[2025-12-19 02:00:46] (step=0001730) Train Loss: 0.1481, Train Steps/Sec: 4.85
+✓ Step 0001730 | Loss: 0.1481 | Steps/Sec: 4.85
+[2025-12-19 02:00:46] Beginning epoch 173...
+Beginning epoch 173...
+Loss: 0.17073175311088562
+Loss: 0.10819821804761887
+Loss: 0.1281159371137619
+Loss: 0.13485048711299896
+Loss: 0.12612144649028778
+[2025-12-19 02:00:47] (step=0001735) Train Loss: 0.1336, Train Steps/Sec: 3.78
+✓ Step 0001735 | Loss: 0.1336 | Steps/Sec: 3.78
+Loss: 0.15558533370494843
+Loss: 0.1787324845790863
+Loss: 0.12915582954883575
+Loss: 0.17089183628559113
+Loss: 0.18730616569519043
+[2025-12-19 02:00:48] (step=0001740) Train Loss: 0.1643, Train Steps/Sec: 4.85
+✓ Step 0001740 | Loss: 0.1643 | Steps/Sec: 4.85
+[2025-12-19 02:00:48] Beginning epoch 174...
+Beginning epoch 174...
+Loss: 0.21797211468219757
+Loss: 0.13126100599765778
+Loss: 0.1827615648508072
+Loss: 0.11680083721876144
+Loss: 0.2000284194946289
+[2025-12-19 02:00:50] (step=0001745) Train Loss: 0.1698, Train Steps/Sec: 3.76
+✓ Step 0001745 | Loss: 0.1698 | Steps/Sec: 3.76
+Loss: 0.11279550194740295
+Loss: 0.14955174922943115
+Loss: 0.252836138010025
+Loss: 0.11910438537597656
+Loss: 0.13714450597763062
+[2025-12-19 02:00:51] (step=0001750) Train Loss: 0.1543, Train Steps/Sec: 4.86
+✓ Step 0001750 | Loss: 0.1543 | Steps/Sec: 4.86
+[2025-12-19 02:00:51] Beginning epoch 175...
+Beginning epoch 175...
+Loss: 0.1842932105064392
+Loss: 0.12280870229005814
+Loss: 0.11137033253908157
+Loss: 0.16098934412002563
+Loss: 0.10906103253364563
+[2025-12-19 02:00:52] (step=0001755) Train Loss: 0.1377, Train Steps/Sec: 3.80
+✓ Step 0001755 | Loss: 0.1377 | Steps/Sec: 3.80
+Loss: 0.1078045442700386
+Loss: 0.11741039156913757
+Loss: 0.15442802011966705
+Loss: 0.154596209526062
+Loss: 0.14275787770748138
+[2025-12-19 02:00:53] (step=0001760) Train Loss: 0.1354, Train Steps/Sec: 4.85
+✓ Step 0001760 | Loss: 0.1354 | Steps/Sec: 4.85
+[2025-12-19 02:00:53] Beginning epoch 176...
+Beginning epoch 176...
+Loss: 0.13514281809329987
+Loss: 0.14297977089881897
+Loss: 0.16470083594322205
+Loss: 0.17150098085403442
+Loss: 0.10522710531949997
+[2025-12-19 02:00:54] (step=0001765) Train Loss: 0.1439, Train Steps/Sec: 3.79
+✓ Step 0001765 | Loss: 0.1439 | Steps/Sec: 3.79
+Loss: 0.15559829771518707
+Loss: 0.12505902349948883
+Loss: 0.19502662122249603
+Loss: 0.16922762989997864
+Loss: 0.13864301145076752
+[2025-12-19 02:00:55] (step=0001770) Train Loss: 0.1567, Train Steps/Sec: 4.85
+✓ Step 0001770 | Loss: 0.1567 | Steps/Sec: 4.85
+[2025-12-19 02:00:55] Beginning epoch 177...
+Beginning epoch 177...
+Loss: 0.17525704205036163
+Loss: 0.1795811951160431
+Loss: 0.1787714660167694
+Loss: 0.16468451917171478
+Loss: 0.14837557077407837
+[2025-12-19 02:00:57] (step=0001775) Train Loss: 0.1693, Train Steps/Sec: 3.78
+✓ Step 0001775 | Loss: 0.1693 | Steps/Sec: 3.78
+Loss: 0.11838068813085556
+Loss: 0.14625903964042664
+Loss: 0.16583281755447388
+Loss: 0.11828569322824478
+Loss: 0.10828149318695068
+[2025-12-19 02:00:58] (step=0001780) Train Loss: 0.1314, Train Steps/Sec: 4.84
+✓ Step 0001780 | Loss: 0.1314 | Steps/Sec: 4.84
+[2025-12-19 02:00:58] Beginning epoch 178...
+Beginning epoch 178...
+Loss: 0.10659860074520111
+Loss: 0.16571563482284546
+Loss: 0.14981679618358612
+Loss: 0.202570378780365
+Loss: 0.1307884305715561
+[2025-12-19 02:00:59] (step=0001785) Train Loss: 0.1511, Train Steps/Sec: 3.77
+✓ Step 0001785 | Loss: 0.1511 | Steps/Sec: 3.77
+Loss: 0.13733802735805511
+Loss: 0.14886446297168732
+Loss: 0.1481248438358307
+Loss: 0.13368339836597443
+Loss: 0.10219979286193848
+[2025-12-19 02:01:00] (step=0001790) Train Loss: 0.1340, Train Steps/Sec: 4.85
+✓ Step 0001790 | Loss: 0.1340 | Steps/Sec: 4.85
+[2025-12-19 02:01:00] Beginning epoch 179...
+Beginning epoch 179...
+Loss: 0.10758903622627258
+Loss: 0.16553524136543274
+Loss: 0.1259436160326004
+Loss: 0.17772667109966278
+Loss: 0.12119083106517792
+[2025-12-19 02:01:01] (step=0001795) Train Loss: 0.1396, Train Steps/Sec: 3.79
+✓ Step 0001795 | Loss: 0.1396 | Steps/Sec: 3.79
+Loss: 0.1545467972755432
+Loss: 0.13277053833007812
+Loss: 0.2261921465396881
+Loss: 0.1446247696876526
+Loss: 0.14804469048976898
+[2025-12-19 02:01:02] (step=0001800) Train Loss: 0.1612, Train Steps/Sec: 4.85
+✓ Step 0001800 | Loss: 0.1612 | Steps/Sec: 4.85
+[2025-12-19 02:01:02] Beginning epoch 180...
+Beginning epoch 180...
+Loss: 0.09363669902086258
+Loss: 0.15129800140857697
+Loss: 0.16253867745399475
+Loss: 0.14340513944625854
+Loss: 0.12973640859127045
+[2025-12-19 02:01:04] (step=0001805) Train Loss: 0.1361, Train Steps/Sec: 3.76
+✓ Step 0001805 | Loss: 0.1361 | Steps/Sec: 3.76
+Loss: 0.13326896727085114
+Loss: 0.16239270567893982
+Loss: 0.11210954189300537
+Loss: 0.16435359418392181
+Loss: 0.12470027804374695
+[2025-12-19 02:01:05] (step=0001810) Train Loss: 0.1394, Train Steps/Sec: 4.85
+✓ Step 0001810 | Loss: 0.1394 | Steps/Sec: 4.85
+[2025-12-19 02:01:05] Beginning epoch 181...
+Beginning epoch 181...
+Loss: 0.2106483429670334
+Loss: 0.16076716780662537
+Loss: 0.16687919199466705
+Loss: 0.16166530549526215
+Loss: 0.12940123677253723
+[2025-12-19 02:01:06] (step=0001815) Train Loss: 0.1659, Train Steps/Sec: 3.75
+✓ Step 0001815 | Loss: 0.1659 | Steps/Sec: 3.75
+Loss: 0.14402933418750763
+Loss: 0.08570241928100586
+Loss: 0.1395263522863388
+Loss: 0.25924646854400635
+Loss: 0.12487535923719406
+[2025-12-19 02:01:07] (step=0001820) Train Loss: 0.1507, Train Steps/Sec: 4.86
+✓ Step 0001820 | Loss: 0.1507 | Steps/Sec: 4.86
+[2025-12-19 02:01:07] Beginning epoch 182...
+Beginning epoch 182...
+Loss: 0.13310816884040833
+Loss: 0.13654807209968567
+Loss: 0.14596804976463318
+Loss: 0.134451761841774
+Loss: 0.13528718054294586
+[2025-12-19 02:01:08] (step=0001825) Train Loss: 0.1371, Train Steps/Sec: 3.75
+✓ Step 0001825 | Loss: 0.1371 | Steps/Sec: 3.75
+Loss: 0.14089106023311615
+Loss: 0.1549716293811798
+Loss: 0.18183527886867523
+Loss: 0.12004407495260239
+Loss: 0.145919069647789
+[2025-12-19 02:01:09] (step=0001830) Train Loss: 0.1487, Train Steps/Sec: 4.85
+✓ Step 0001830 | Loss: 0.1487 | Steps/Sec: 4.85
+[2025-12-19 02:01:09] Beginning epoch 183...
+Beginning epoch 183...
+Loss: 0.11348772048950195
+Loss: 0.1257242113351822
+Loss: 0.1567832976579666
+Loss: 0.09797726571559906
+Loss: 0.15106262266635895
+[2025-12-19 02:01:11] (step=0001835) Train Loss: 0.1290, Train Steps/Sec: 3.76
+✓ Step 0001835 | Loss: 0.1290 | Steps/Sec: 3.76
+Loss: 0.14197827875614166
+Loss: 0.11799778044223785
+Loss: 0.1514991819858551
+Loss: 0.09039474278688431
+Loss: 0.16002453863620758
+[2025-12-19 02:01:12] (step=0001840) Train Loss: 0.1324, Train Steps/Sec: 4.86
+✓ Step 0001840 | Loss: 0.1324 | Steps/Sec: 4.86
+[2025-12-19 02:01:12] Beginning epoch 184...
+Beginning epoch 184...
+Loss: 0.19712801277637482
+Loss: 0.09357596188783646
+Loss: 0.1187504380941391
+Loss: 0.176882803440094
+Loss: 0.12304899096488953
+[2025-12-19 02:01:13] (step=0001845) Train Loss: 0.1419, Train Steps/Sec: 3.78
+✓ Step 0001845 | Loss: 0.1419 | Steps/Sec: 3.78
+Loss: 0.15476389229297638
+Loss: 0.15099786221981049
+Loss: 0.14926953613758087
+Loss: 0.16418689489364624
+Loss: 0.12734581530094147
+[2025-12-19 02:01:14] (step=0001850) Train Loss: 0.1493, Train Steps/Sec: 4.86
+✓ Step 0001850 | Loss: 0.1493 | Steps/Sec: 4.86
+[2025-12-19 02:01:14] Beginning epoch 185...
+Beginning epoch 185...
+Loss: 0.16104058921337128
+Loss: 0.07181687653064728
+Loss: 0.11674317717552185
+Loss: 0.1410665065050125
+Loss: 0.1373378187417984
+[2025-12-19 02:01:16] (step=0001855) Train Loss: 0.1256, Train Steps/Sec: 3.75
+✓ Step 0001855 | Loss: 0.1256 | Steps/Sec: 3.75
+Loss: 0.17810869216918945
+Loss: 0.14000733196735382
+Loss: 0.16599157452583313
+Loss: 0.14053836464881897
+Loss: 0.18500381708145142
+[2025-12-19 02:01:17] (step=0001860) Train Loss: 0.1619, Train Steps/Sec: 4.85
+✓ Step 0001860 | Loss: 0.1619 | Steps/Sec: 4.85
+[2025-12-19 02:01:17] Beginning epoch 186...
+Beginning epoch 186...
+Loss: 0.13326770067214966
+Loss: 0.10554882138967514
+Loss: 0.13728278875350952
+Loss: 0.17735593020915985
+Loss: 0.19300374388694763
+[2025-12-19 02:01:18] (step=0001865) Train Loss: 0.1493, Train Steps/Sec: 3.76
+✓ Step 0001865 | Loss: 0.1493 | Steps/Sec: 3.76
+Loss: 0.18763121962547302
+Loss: 0.14957717061042786
+Loss: 0.1720268279314041
+Loss: 0.17235763370990753
+Loss: 0.117044597864151
+[2025-12-19 02:01:19] (step=0001870) Train Loss: 0.1597, Train Steps/Sec: 4.86
+✓ Step 0001870 | Loss: 0.1597 | Steps/Sec: 4.86
+[2025-12-19 02:01:19] Beginning epoch 187...
+Beginning epoch 187...
+Loss: 0.23006495833396912
+Loss: 0.10977457463741302
+Loss: 0.10456381738185883
+Loss: 0.12911348044872284
+Loss: 0.20353014767169952
+[2025-12-19 02:01:20] (step=0001875) Train Loss: 0.1554, Train Steps/Sec: 3.75
+✓ Step 0001875 | Loss: 0.1554 | Steps/Sec: 3.75
+Loss: 0.10265108197927475
+Loss: 0.16621705889701843
+Loss: 0.10530761629343033
+Loss: 0.16640029847621918
+Loss: 0.12282788753509521
+[2025-12-19 02:01:21] (step=0001880) Train Loss: 0.1327, Train Steps/Sec: 4.86
+✓ Step 0001880 | Loss: 0.1327 | Steps/Sec: 4.86
+[2025-12-19 02:01:21] Beginning epoch 188...
+Beginning epoch 188...
+Loss: 0.14959892630577087
+Loss: 0.10459540784358978
+Loss: 0.11277703940868378
+Loss: 0.12581367790699005
+Loss: 0.2213701456785202
+[2025-12-19 02:01:23] (step=0001885) Train Loss: 0.1428, Train Steps/Sec: 3.78
+✓ Step 0001885 | Loss: 0.1428 | Steps/Sec: 3.78
+Loss: 0.1198633536696434
+Loss: 0.1246834546327591
+Loss: 0.08499227464199066
+Loss: 0.10696534812450409
+Loss: 0.18465512990951538
+[2025-12-19 02:01:24] (step=0001890) Train Loss: 0.1242, Train Steps/Sec: 4.87
+✓ Step 0001890 | Loss: 0.1242 | Steps/Sec: 4.87
+[2025-12-19 02:01:24] Beginning epoch 189...
+Beginning epoch 189...
+Loss: 0.14785893261432648
+Loss: 0.0862492248415947
+Loss: 0.10351142287254333
+Loss: 0.1265416294336319
+Loss: 0.1607249677181244
+[2025-12-19 02:01:25] (step=0001895) Train Loss: 0.1250, Train Steps/Sec: 3.81
+✓ Step 0001895 | Loss: 0.1250 | Steps/Sec: 3.81
+Loss: 0.17721667885780334
+Loss: 0.11489303410053253
+Loss: 0.1704695075750351
+Loss: 0.10859092324972153
+Loss: 0.1496693640947342
+[2025-12-19 02:01:26] (step=0001900) Train Loss: 0.1442, Train Steps/Sec: 4.87
+✓ Step 0001900 | Loss: 0.1442 | Steps/Sec: 4.87
+[2025-12-19 02:01:26] Beginning epoch 190...
+Beginning epoch 190...
+Loss: 0.171335831284523
+Loss: 0.10052081942558289
+Loss: 0.16480299830436707
+Loss: 0.13018682599067688
+Loss: 0.14282426238059998
+[2025-12-19 02:01:27] (step=0001905) Train Loss: 0.1419, Train Steps/Sec: 3.73
+✓ Step 0001905 | Loss: 0.1419 | Steps/Sec: 3.73
+Loss: 0.1301339715719223
+Loss: 0.11184149235486984
+Loss: 0.07973383367061615
+Loss: 0.16544051468372345
+Loss: 0.16455420851707458
+[2025-12-19 02:01:28] (step=0001910) Train Loss: 0.1303, Train Steps/Sec: 4.86
+✓ Step 0001910 | Loss: 0.1303 | Steps/Sec: 4.86
+[2025-12-19 02:01:28] Beginning epoch 191...
+Beginning epoch 191...
+Loss: 0.16549772024154663
+Loss: 0.11401987075805664
+Loss: 0.16445788741111755
+Loss: 0.24006986618041992
+Loss: 0.11840356886386871
+[2025-12-19 02:01:30] (step=0001915) Train Loss: 0.1605, Train Steps/Sec: 3.78
+✓ Step 0001915 | Loss: 0.1605 | Steps/Sec: 3.78
+Loss: 0.15899883210659027
+Loss: 0.11248014122247696
+Loss: 0.12967520952224731
+Loss: 0.1618875116109848
+Loss: 0.17805974185466766
+[2025-12-19 02:01:31] (step=0001920) Train Loss: 0.1482, Train Steps/Sec: 4.86
+✓ Step 0001920 | Loss: 0.1482 | Steps/Sec: 4.86
+[2025-12-19 02:01:31] Beginning epoch 192...
+Beginning epoch 192...
+Loss: 0.14631858468055725
+Loss: 0.16681230068206787
+Loss: 0.13168789446353912
+Loss: 0.1420852690935135
+Loss: 0.1298462599515915
+[2025-12-19 02:01:32] (step=0001925) Train Loss: 0.1434, Train Steps/Sec: 3.74
+✓ Step 0001925 | Loss: 0.1434 | Steps/Sec: 3.74
+Loss: 0.11784865707159042
+Loss: 0.09973809868097305
+Loss: 0.09456086903810501
+Loss: 0.14316478371620178
+Loss: 0.140792116522789
+[2025-12-19 02:01:33] (step=0001930) Train Loss: 0.1192, Train Steps/Sec: 4.86
+✓ Step 0001930 | Loss: 0.1192 | Steps/Sec: 4.86
+[2025-12-19 02:01:33] Beginning epoch 193...
+Beginning epoch 193...
+Loss: 0.1565483957529068
+Loss: 0.1386898159980774
+Loss: 0.14524583518505096
+Loss: 0.21661891043186188
+Loss: 0.18272696435451508
+[2025-12-19 02:01:34] (step=0001935) Train Loss: 0.1680, Train Steps/Sec: 3.77
+✓ Step 0001935 | Loss: 0.1680 | Steps/Sec: 3.77
+Loss: 0.20298878848552704
+Loss: 0.1714315414428711
+Loss: 0.14143778383731842
+Loss: 0.22421616315841675
+Loss: 0.11304570734500885
+[2025-12-19 02:01:35] (step=0001940) Train Loss: 0.1706, Train Steps/Sec: 4.87
+✓ Step 0001940 | Loss: 0.1706 | Steps/Sec: 4.87
+[2025-12-19 02:01:35] Beginning epoch 194...
+Beginning epoch 194...
+Loss: 0.1681486815214157
+Loss: 0.15890845656394958
+Loss: 0.15450581908226013
+Loss: 0.17899423837661743
+Loss: 0.15394923090934753
+[2025-12-19 02:01:37] (step=0001945) Train Loss: 0.1629, Train Steps/Sec: 3.77
+✓ Step 0001945 | Loss: 0.1629 | Steps/Sec: 3.77
+Loss: 0.09278867393732071
+Loss: 0.16430583596229553
+Loss: 0.09087216854095459
+Loss: 0.08836326748132706
+Loss: 0.18477603793144226
+[2025-12-19 02:01:38] (step=0001950) Train Loss: 0.1242, Train Steps/Sec: 4.87
+✓ Step 0001950 | Loss: 0.1242 | Steps/Sec: 4.87
+[2025-12-19 02:01:38] Beginning epoch 195...
+Beginning epoch 195...
+Loss: 0.11661653965711594
+Loss: 0.11987260729074478
+Loss: 0.10349594801664352
+Loss: 0.10057395696640015
+Loss: 0.08701462298631668
+[2025-12-19 02:01:39] (step=0001955) Train Loss: 0.1055, Train Steps/Sec: 3.78
+✓ Step 0001955 | Loss: 0.1055 | Steps/Sec: 3.78
+Loss: 0.11523386090993881
+Loss: 0.10744845867156982
+Loss: 0.14511893689632416
+Loss: 0.12991271913051605
+Loss: 0.11720144003629684
+[2025-12-19 02:01:40] (step=0001960) Train Loss: 0.1230, Train Steps/Sec: 4.87
+✓ Step 0001960 | Loss: 0.1230 | Steps/Sec: 4.87
+[2025-12-19 02:01:40] Beginning epoch 196...
+Beginning epoch 196...
+Loss: 0.15760432183742523
+Loss: 0.1648617386817932
+Loss: 0.14234265685081482
+Loss: 0.13206255435943604
+Loss: 0.12715215981006622
+[2025-12-19 02:01:41] (step=0001965) Train Loss: 0.1448, Train Steps/Sec: 3.79
+✓ Step 0001965 | Loss: 0.1448 | Steps/Sec: 3.79
+Loss: 0.14173375070095062
+Loss: 0.16186082363128662
+Loss: 0.17025431990623474
+Loss: 0.13711488246917725
+Loss: 0.08191040903329849
+[2025-12-19 02:01:42] (step=0001970) Train Loss: 0.1386, Train Steps/Sec: 4.86
+✓ Step 0001970 | Loss: 0.1386 | Steps/Sec: 4.86
+[2025-12-19 02:01:43] Beginning epoch 197...
+Beginning epoch 197...
+Loss: 0.22501876950263977
+Loss: 0.13346828520298004
+Loss: 0.14159931242465973
+Loss: 0.12251899391412735
+Loss: 0.10019980370998383
+[2025-12-19 02:01:44] (step=0001975) Train Loss: 0.1446, Train Steps/Sec: 3.80
+✓ Step 0001975 | Loss: 0.1446 | Steps/Sec: 3.80
+Loss: 0.20023192465305328
+Loss: 0.1745871901512146
+Loss: 0.1762038916349411
+Loss: 0.1118263229727745
+Loss: 0.13248082995414734
+[2025-12-19 02:01:45] (step=0001980) Train Loss: 0.1591, Train Steps/Sec: 4.88
+✓ Step 0001980 | Loss: 0.1591 | Steps/Sec: 4.88
+[2025-12-19 02:01:45] Beginning epoch 198...
+Beginning epoch 198...
+Loss: 0.13870255649089813
+Loss: 0.1634698063135147
+Loss: 0.09260696172714233
+Loss: 0.14365693926811218
+Loss: 0.16279126703739166
+[2025-12-19 02:01:46] (step=0001985) Train Loss: 0.1402, Train Steps/Sec: 3.79
+✓ Step 0001985 | Loss: 0.1402 | Steps/Sec: 3.79
+Loss: 0.13595767319202423
+Loss: 0.11122122406959534
+Loss: 0.1795431524515152
+Loss: 0.12133439630270004
+Loss: 0.18976660072803497
+[2025-12-19 02:01:47] (step=0001990) Train Loss: 0.1476, Train Steps/Sec: 4.87
+✓ Step 0001990 | Loss: 0.1476 | Steps/Sec: 4.87
+[2025-12-19 02:01:47] Beginning epoch 199...
+Beginning epoch 199...
+Loss: 0.10549984872341156
+Loss: 0.16924211382865906
+Loss: 0.09276767820119858
+Loss: 0.1396341174840927
+Loss: 0.12603111565113068
+[2025-12-19 02:01:48] (step=0001995) Train Loss: 0.1266, Train Steps/Sec: 3.82
+✓ Step 0001995 | Loss: 0.1266 | Steps/Sec: 3.82
+Loss: 0.13088800013065338
+Loss: 0.17072398960590363
+Loss: 0.180574432015419
+Loss: 0.18444472551345825
+Loss: 0.16378916800022125
+[2025-12-19 02:01:50] (step=0002000) Train Loss: 0.1661, Train Steps/Sec: 4.88
+✓ Step 0002000 | Loss: 0.1661 | Steps/Sec: 4.88
+[2025-12-19 02:01:51] Saved checkpoint to ./dit_fine_resluts//000-DiT-XL-2-x2-finetune/checkpoints/0002000.pt (Model contains only trainable params)
+[2025-12-19 02:01:51] Beginning epoch 200...
+Beginning epoch 200...
+Loss: 0.15929195284843445
+Loss: 0.1577082723379135
+Loss: 0.11709415912628174
+Loss: 0.16243144869804382
+Loss: 0.1699385941028595
+[2025-12-19 02:01:52] (step=0002005) Train Loss: 0.1533, Train Steps/Sec: 1.83
+✓ Step 0002005 | Loss: 0.1533 | Steps/Sec: 1.83
+Loss: 0.12168130278587341
+Loss: 0.10360845178365707
+Loss: 0.1417897790670395
+Loss: 0.10094554722309113
+Loss: 0.11501187086105347
+[2025-12-19 02:01:53] (step=0002010) Train Loss: 0.1166, Train Steps/Sec: 4.87
+✓ Step 0002010 | Loss: 0.1166 | Steps/Sec: 4.87
+[2025-12-19 02:01:53] Beginning epoch 201...
+Beginning epoch 201...
+Loss: 0.1594689041376114
+Loss: 0.10087499022483826
+Loss: 0.1690235137939453
+Loss: 0.09668140113353729
+Loss: 0.14337418973445892
+[2025-12-19 02:01:55] (step=0002015) Train Loss: 0.1339, Train Steps/Sec: 3.80
+✓ Step 0002015 | Loss: 0.1339 | Steps/Sec: 3.80
+Loss: 0.1213216558098793
+Loss: 0.1580110490322113
+Loss: 0.1753457635641098
+Loss: 0.1613762229681015
+Loss: 0.1292792558670044
+[2025-12-19 02:01:56] (step=0002020) Train Loss: 0.1491, Train Steps/Sec: 4.89
+✓ Step 0002020 | Loss: 0.1491 | Steps/Sec: 4.89
+[2025-12-19 02:01:56] Beginning epoch 202...
+Beginning epoch 202...
+Loss: 0.1310923546552658
+Loss: 0.11571261286735535
+Loss: 0.15687114000320435
+Loss: 0.1446128934621811
+Loss: 0.11846015602350235
+[2025-12-19 02:01:57] (step=0002025) Train Loss: 0.1333, Train Steps/Sec: 3.74
+✓ Step 0002025 | Loss: 0.1333 | Steps/Sec: 3.74
+Loss: 0.1250666379928589
+Loss: 0.18856902420520782
+Loss: 0.18374431133270264
+Loss: 0.15845230221748352
+Loss: 0.1372428983449936
+[2025-12-19 02:01:58] (step=0002030) Train Loss: 0.1586, Train Steps/Sec: 4.87
+✓ Step 0002030 | Loss: 0.1586 | Steps/Sec: 4.87
+[2025-12-19 02:01:58] Beginning epoch 203...
+Beginning epoch 203...
+Loss: 0.13753484189510345
+Loss: 0.14416003227233887
+Loss: 0.15844887495040894
+Loss: 0.1373816430568695
+Loss: 0.17498718202114105
+[2025-12-19 02:01:59] (step=0002035) Train Loss: 0.1505, Train Steps/Sec: 3.78
+✓ Step 0002035 | Loss: 0.1505 | Steps/Sec: 3.78
+Loss: 0.1127464547753334
+Loss: 0.14203113317489624
+Loss: 0.16828478872776031
+Loss: 0.16214653849601746
+Loss: 0.18003295361995697
+[2025-12-19 02:02:00] (step=0002040) Train Loss: 0.1530, Train Steps/Sec: 4.88
+✓ Step 0002040 | Loss: 0.1530 | Steps/Sec: 4.88
+[2025-12-19 02:02:00] Beginning epoch 204...
+Beginning epoch 204...
+Loss: 0.15651929378509521
+Loss: 0.14342068135738373
+Loss: 0.08766968548297882
+Loss: 0.16301631927490234
+Loss: 0.12070214748382568
+[2025-12-19 02:02:02] (step=0002045) Train Loss: 0.1343, Train Steps/Sec: 3.79
+✓ Step 0002045 | Loss: 0.1343 | Steps/Sec: 3.79
+Loss: 0.07386407256126404
+Loss: 0.0945054441690445
+Loss: 0.1687438189983368
+Loss: 0.1647070050239563
+Loss: 0.10225337743759155
+[2025-12-19 02:02:03] (step=0002050) Train Loss: 0.1208, Train Steps/Sec: 4.87
+✓ Step 0002050 | Loss: 0.1208 | Steps/Sec: 4.87
+[2025-12-19 02:02:03] Beginning epoch 205...
+Beginning epoch 205...
+Loss: 0.1698022186756134
+Loss: 0.11743036657571793
+Loss: 0.114671990275383
+Loss: 0.13345767557621002
+Loss: 0.11194658279418945
+[2025-12-19 02:02:04] (step=0002055) Train Loss: 0.1295, Train Steps/Sec: 3.78
+✓ Step 0002055 | Loss: 0.1295 | Steps/Sec: 3.78
+Loss: 0.15418969094753265
+Loss: 0.15444974601268768
+Loss: 0.20197142660617828
+Loss: 0.16847488284111023
+Loss: 0.14532779157161713
+[2025-12-19 02:02:05] (step=0002060) Train Loss: 0.1649, Train Steps/Sec: 4.89
+✓ Step 0002060 | Loss: 0.1649 | Steps/Sec: 4.89
+[2025-12-19 02:02:05] Beginning epoch 206...
+Beginning epoch 206...
+Loss: 0.12576889991760254
+Loss: 0.09829525649547577
+Loss: 0.18397468328475952
+Loss: 0.15096695721149445
+Loss: 0.18005336821079254
+[2025-12-19 02:02:06] (step=0002065) Train Loss: 0.1478, Train Steps/Sec: 3.79
+✓ Step 0002065 | Loss: 0.1478 | Steps/Sec: 3.79
+Loss: 0.17635715007781982
+Loss: 0.12321216613054276
+Loss: 0.08938007801771164
+Loss: 0.10200846195220947
+Loss: 0.11068450659513474
+[2025-12-19 02:02:07] (step=0002070) Train Loss: 0.1203, Train Steps/Sec: 4.88
+✓ Step 0002070 | Loss: 0.1203 | Steps/Sec: 4.88
+[2025-12-19 02:02:07] Beginning epoch 207...
+Beginning epoch 207...
+Loss: 0.17274995148181915
+Loss: 0.0882498174905777
+Loss: 0.16537967324256897
+Loss: 0.15950225293636322
+Loss: 0.23825347423553467
+[2025-12-19 02:02:09] (step=0002075) Train Loss: 0.1648, Train Steps/Sec: 3.79
+✓ Step 0002075 | Loss: 0.1648 | Steps/Sec: 3.79
+Loss: 0.16092412173748016
+Loss: 0.19538450241088867
+Loss: 0.122403584420681
+Loss: 0.17019088566303253
+Loss: 0.22486083209514618
+[2025-12-19 02:02:10] (step=0002080) Train Loss: 0.1748, Train Steps/Sec: 4.88
+✓ Step 0002080 | Loss: 0.1748 | Steps/Sec: 4.88
+[2025-12-19 02:02:10] Beginning epoch 208...
+Beginning epoch 208...
+Loss: 0.14665572345256805
+Loss: 0.14075207710266113
+Loss: 0.1561197191476822
+Loss: 0.1424437165260315
+Loss: 0.1590656340122223
+[2025-12-19 02:02:11] (step=0002085) Train Loss: 0.1490, Train Steps/Sec: 3.78
+✓ Step 0002085 | Loss: 0.1490 | Steps/Sec: 3.78
+Loss: 0.12628337740898132
+Loss: 0.10588065534830093
+Loss: 0.11395511031150818
+Loss: 0.15028013288974762
+Loss: 0.16539084911346436
+[2025-12-19 02:02:12] (step=0002090) Train Loss: 0.1324, Train Steps/Sec: 4.88
+✓ Step 0002090 | Loss: 0.1324 | Steps/Sec: 4.88
+[2025-12-19 02:02:12] Beginning epoch 209...
+Beginning epoch 209...
+Loss: 0.19939164817333221
+Loss: 0.15653306245803833
+Loss: 0.1342967450618744
+Loss: 0.16333404183387756
+Loss: 0.14037840068340302
+[2025-12-19 02:02:13] (step=0002095) Train Loss: 0.1588, Train Steps/Sec: 3.74
+✓ Step 0002095 | Loss: 0.1588 | Steps/Sec: 3.74
+Loss: 0.13767109811306
+Loss: 0.18428540229797363
+Loss: 0.17563194036483765
+Loss: 0.1389126181602478
+Loss: 0.1764126569032669
+[2025-12-19 02:02:14] (step=0002100) Train Loss: 0.1626, Train Steps/Sec: 4.89
+✓ Step 0002100 | Loss: 0.1626 | Steps/Sec: 4.89
+[2025-12-19 02:02:14] Beginning epoch 210...
+Beginning epoch 210...
+Loss: 0.17994137108325958
+Loss: 0.1495642215013504
+Loss: 0.14308778941631317
+Loss: 0.19031111896038055
+Loss: 0.09667941927909851
+[2025-12-19 02:02:16] (step=0002105) Train Loss: 0.1519, Train Steps/Sec: 3.81
+✓ Step 0002105 | Loss: 0.1519 | Steps/Sec: 3.81
+Loss: 0.16947688162326813
+Loss: 0.1669541746377945
+Loss: 0.09865205734968185
+Loss: 0.1314205676317215
+Loss: 0.17460539937019348
+[2025-12-19 02:02:17] (step=0002110) Train Loss: 0.1482, Train Steps/Sec: 4.89
+✓ Step 0002110 | Loss: 0.1482 | Steps/Sec: 4.89
+[2025-12-19 02:02:17] Beginning epoch 211...
+Beginning epoch 211...
+Loss: 0.21906232833862305
+Loss: 0.08439134061336517
+Loss: 0.10856452584266663
+Loss: 0.11437471956014633
+Loss: 0.07598912715911865
+[2025-12-19 02:02:18] (step=0002115) Train Loss: 0.1205, Train Steps/Sec: 3.78
+✓ Step 0002115 | Loss: 0.1205 | Steps/Sec: 3.78
+Loss: 0.166355162858963
+Loss: 0.1578422337770462
+Loss: 0.1165931299328804
+Loss: 0.167612224817276
+Loss: 0.18201929330825806
+[2025-12-19 02:02:19] (step=0002120) Train Loss: 0.1581, Train Steps/Sec: 4.89
+✓ Step 0002120 | Loss: 0.1581 | Steps/Sec: 4.89
+[2025-12-19 02:02:19] Beginning epoch 212...
+Beginning epoch 212...
+Loss: 0.11444146931171417
+Loss: 0.13170146942138672
+Loss: 0.14244253933429718
+Loss: 0.1348329335451126
+Loss: 0.1495126485824585
+[2025-12-19 02:02:20] (step=0002125) Train Loss: 0.1346, Train Steps/Sec: 3.79
+✓ Step 0002125 | Loss: 0.1346 | Steps/Sec: 3.79
+Loss: 0.17077700793743134
+Loss: 0.11843143403530121
+Loss: 0.17446444928646088
+Loss: 0.1436537653207779
+Loss: 0.14971886575222015
+[2025-12-19 02:02:21] (step=0002130) Train Loss: 0.1514, Train Steps/Sec: 4.88
+✓ Step 0002130 | Loss: 0.1514 | Steps/Sec: 4.88
+[2025-12-19 02:02:21] Beginning epoch 213...
+Beginning epoch 213...
+Loss: 0.11581109464168549
+Loss: 0.158573180437088
+Loss: 0.12901493906974792
+Loss: 0.18309307098388672
+Loss: 0.1584852784872055
+[2025-12-19 02:02:23] (step=0002135) Train Loss: 0.1490, Train Steps/Sec: 3.77
+✓ Step 0002135 | Loss: 0.1490 | Steps/Sec: 3.77
+Loss: 0.10565125197172165
+Loss: 0.1354205161333084
+Loss: 0.1335703283548355
+Loss: 0.10591800510883331
+Loss: 0.13514135777950287
+[2025-12-19 02:02:24] (step=0002140) Train Loss: 0.1231, Train Steps/Sec: 4.89
+✓ Step 0002140 | Loss: 0.1231 | Steps/Sec: 4.89
+[2025-12-19 02:02:24] Beginning epoch 214...
+Beginning epoch 214...
+Loss: 0.1286245733499527
+Loss: 0.16801801323890686
+Loss: 0.18757860362529755
+Loss: 0.13081605732440948
+Loss: 0.13924850523471832
+[2025-12-19 02:02:25] (step=0002145) Train Loss: 0.1509, Train Steps/Sec: 3.76
+✓ Step 0002145 | Loss: 0.1509 | Steps/Sec: 3.76
+Loss: 0.17857332527637482
+Loss: 0.16955678164958954
+Loss: 0.1511918008327484
+Loss: 0.07562801986932755
+Loss: 0.08690804988145828
+[2025-12-19 02:02:26] (step=0002150) Train Loss: 0.1324, Train Steps/Sec: 4.88
+✓ Step 0002150 | Loss: 0.1324 | Steps/Sec: 4.88
+[2025-12-19 02:02:26] Beginning epoch 215...
+Beginning epoch 215...
+Loss: 0.1203903779387474
+Loss: 0.14661084115505219
+Loss: 0.1610572189092636
+Loss: 0.13755594193935394
+Loss: 0.13650617003440857
+[2025-12-19 02:02:27] (step=0002155) Train Loss: 0.1404, Train Steps/Sec: 3.77
+✓ Step 0002155 | Loss: 0.1404 | Steps/Sec: 3.77
+Loss: 0.1322142481803894
+Loss: 0.07833416014909744
+Loss: 0.19339831173419952
+Loss: 0.10753156244754791
+Loss: 0.1750611960887909
+[2025-12-19 02:02:28] (step=0002160) Train Loss: 0.1373, Train Steps/Sec: 4.89
+✓ Step 0002160 | Loss: 0.1373 | Steps/Sec: 4.89
+[2025-12-19 02:02:29] Beginning epoch 216...
+Beginning epoch 216...
+Loss: 0.15288449823856354
+Loss: 0.16529427468776703
+Loss: 0.12844401597976685
+Loss: 0.10266117006540298
+Loss: 0.11262834072113037
+[2025-12-19 02:02:30] (step=0002165) Train Loss: 0.1324, Train Steps/Sec: 3.80
+✓ Step 0002165 | Loss: 0.1324 | Steps/Sec: 3.80
+Loss: 0.18762820959091187
+Loss: 0.10717932134866714
+Loss: 0.12653997540473938
+Loss: 0.12798860669136047
+Loss: 0.2240617275238037
+[2025-12-19 02:02:31] (step=0002170) Train Loss: 0.1547, Train Steps/Sec: 4.89
+✓ Step 0002170 | Loss: 0.1547 | Steps/Sec: 4.89
+[2025-12-19 02:02:31] Beginning epoch 217...
+Beginning epoch 217...
+Loss: 0.1294732540845871
+Loss: 0.1686021238565445
+Loss: 0.18802453577518463
+Loss: 0.16398093104362488
+Loss: 0.1500304788351059
+[2025-12-19 02:02:32] (step=0002175) Train Loss: 0.1600, Train Steps/Sec: 3.79
+✓ Step 0002175 | Loss: 0.1600 | Steps/Sec: 3.79
+Loss: 0.11466813832521439
+Loss: 0.13758449256420135
+Loss: 0.1575603485107422
+Loss: 0.1956941783428192
+Loss: 0.11556187272071838
+[2025-12-19 02:02:33] (step=0002180) Train Loss: 0.1442, Train Steps/Sec: 4.89
+✓ Step 0002180 | Loss: 0.1442 | Steps/Sec: 4.89
+[2025-12-19 02:02:33] Beginning epoch 218...
+Beginning epoch 218...
+Loss: 0.13019543886184692
+Loss: 0.11633328348398209
+Loss: 0.12781454622745514
+Loss: 0.15664467215538025
+Loss: 0.0978040024638176
+[2025-12-19 02:02:34] (step=0002185) Train Loss: 0.1258, Train Steps/Sec: 3.80
+✓ Step 0002185 | Loss: 0.1258 | Steps/Sec: 3.80
+Loss: 0.1302022933959961
+Loss: 0.16953715682029724
+Loss: 0.12861599028110504
+Loss: 0.13203853368759155
+Loss: 0.18338172137737274
+[2025-12-19 02:02:36] (step=0002190) Train Loss: 0.1488, Train Steps/Sec: 4.89
+✓ Step 0002190 | Loss: 0.1488 | Steps/Sec: 4.89
+[2025-12-19 02:02:36] Beginning epoch 219...
+Beginning epoch 219...
+Loss: 0.11640824377536774
+Loss: 0.12170997262001038
+Loss: 0.190862238407135
+Loss: 0.13243654370307922
+Loss: 0.17182765901088715
+[2025-12-19 02:02:37] (step=0002195) Train Loss: 0.1466, Train Steps/Sec: 3.71
+✓ Step 0002195 | Loss: 0.1466 | Steps/Sec: 3.71
+Loss: 0.11105382442474365
+Loss: 0.13169167935848236
+Loss: 0.20208746194839478
+Loss: 0.08235885202884674
+Loss: 0.16037295758724213
+[2025-12-19 02:02:38] (step=0002200) Train Loss: 0.1375, Train Steps/Sec: 4.89
+✓ Step 0002200 | Loss: 0.1375 | Steps/Sec: 4.89
+[2025-12-19 02:02:38] Beginning epoch 220...
+Beginning epoch 220...
+Loss: 0.20187152922153473
+Loss: 0.1470561921596527
+Loss: 0.1899726390838623
+Loss: 0.09042105823755264
+Loss: 0.12920249998569489
+[2025-12-19 02:02:39] (step=0002205) Train Loss: 0.1517, Train Steps/Sec: 3.77
+✓ Step 0002205 | Loss: 0.1517 | Steps/Sec: 3.77
+Loss: 0.06908048689365387
+Loss: 0.1509225070476532
+Loss: 0.19173358380794525
+Loss: 0.191044881939888
+Loss: 0.16261202096939087
+[2025-12-19 02:02:40] (step=0002210) Train Loss: 0.1531, Train Steps/Sec: 4.89
+✓ Step 0002210 | Loss: 0.1531 | Steps/Sec: 4.89
+[2025-12-19 02:02:40] Beginning epoch 221...
+Beginning epoch 221...
+Loss: 0.11777791380882263
+Loss: 0.12713274359703064
+Loss: 0.1321098804473877
+Loss: 0.16368526220321655
+Loss: 0.2071572095155716
+[2025-12-19 02:02:42] (step=0002215) Train Loss: 0.1496, Train Steps/Sec: 3.78
+✓ Step 0002215 | Loss: 0.1496 | Steps/Sec: 3.78
+Loss: 0.1097627729177475
+Loss: 0.10662229359149933
+Loss: 0.1336277723312378
+Loss: 0.08585445582866669
+Loss: 0.13300417363643646
+[2025-12-19 02:02:43] (step=0002220) Train Loss: 0.1138, Train Steps/Sec: 4.90
+✓ Step 0002220 | Loss: 0.1138 | Steps/Sec: 4.90
+[2025-12-19 02:02:43] Beginning epoch 222...
+Beginning epoch 222...
+Loss: 0.1492261439561844
+Loss: 0.19138523936271667
+Loss: 0.14879818260669708
+Loss: 0.0756058469414711
+Loss: 0.1705358326435089
+[2025-12-19 02:02:44] (step=0002225) Train Loss: 0.1471, Train Steps/Sec: 3.81
+✓ Step 0002225 | Loss: 0.1471 | Steps/Sec: 3.81
+Loss: 0.11077909171581268
+Loss: 0.19083991646766663
+Loss: 0.12936894595623016
+Loss: 0.11684326827526093
+Loss: 0.17022250592708588
+[2025-12-19 02:02:45] (step=0002230) Train Loss: 0.1436, Train Steps/Sec: 4.89
+✓ Step 0002230 | Loss: 0.1436 | Steps/Sec: 4.89
+[2025-12-19 02:02:45] Beginning epoch 223...
+Beginning epoch 223...
+Loss: 0.11414037644863129
+Loss: 0.13291820883750916
+Loss: 0.18058040738105774
+Loss: 0.1063147485256195
+Loss: 0.1663416475057602
+[2025-12-19 02:02:46] (step=0002235) Train Loss: 0.1401, Train Steps/Sec: 3.80
+✓ Step 0002235 | Loss: 0.1401 | Steps/Sec: 3.80
+Loss: 0.1541624665260315
+Loss: 0.13548395037651062
+Loss: 0.222780242562294
+Loss: 0.1107180267572403
+Loss: 0.21409504115581512
+[2025-12-19 02:02:47] (step=0002240) Train Loss: 0.1674, Train Steps/Sec: 4.89
+✓ Step 0002240 | Loss: 0.1674 | Steps/Sec: 4.89
+[2025-12-19 02:02:47] Beginning epoch 224...
+Beginning epoch 224...
+Loss: 0.18801017105579376
+Loss: 0.09450951218605042
+Loss: 0.1372421830892563
+Loss: 0.130422905087471
+Loss: 0.1734088659286499
+[2025-12-19 02:02:49] (step=0002245) Train Loss: 0.1447, Train Steps/Sec: 3.78
+✓ Step 0002245 | Loss: 0.1447 | Steps/Sec: 3.78
+Loss: 0.13014435768127441
+Loss: 0.15725712478160858
+Loss: 0.19195154309272766
+Loss: 0.22627027332782745
+Loss: 0.14034174382686615
+[2025-12-19 02:02:50] (step=0002250) Train Loss: 0.1692, Train Steps/Sec: 4.90
+✓ Step 0002250 | Loss: 0.1692 | Steps/Sec: 4.90
+[2025-12-19 02:02:50] Beginning epoch 225...
+Beginning epoch 225...
+Loss: 0.12659324705600739
+Loss: 0.07959906756877899
+Loss: 0.09102100133895874
+Loss: 0.11102370172739029
+Loss: 0.12445463985204697
+[2025-12-19 02:02:51] (step=0002255) Train Loss: 0.1065, Train Steps/Sec: 3.77
+✓ Step 0002255 | Loss: 0.1065 | Steps/Sec: 3.77
+Loss: 0.1940726786851883
+Loss: 0.17843616008758545
+Loss: 0.17199355363845825
+Loss: 0.13335959613323212
+Loss: 0.14908742904663086
+[2025-12-19 02:02:52] (step=0002260) Train Loss: 0.1654, Train Steps/Sec: 4.89
+✓ Step 0002260 | Loss: 0.1654 | Steps/Sec: 4.89
+[2025-12-19 02:02:52] Beginning epoch 226...
+Beginning epoch 226...
+Loss: 0.1581093817949295
+Loss: 0.1711706519126892
+Loss: 0.1770218014717102
+Loss: 0.0997566357254982
+Loss: 0.1251736283302307
+[2025-12-19 02:02:53] (step=0002265) Train Loss: 0.1462, Train Steps/Sec: 3.77
+✓ Step 0002265 | Loss: 0.1462 | Steps/Sec: 3.77
+Loss: 0.18515677750110626
+Loss: 0.1354125440120697
+Loss: 0.11426037549972534
+Loss: 0.11773719638586044
+Loss: 0.13791659474372864
+[2025-12-19 02:02:54] (step=0002270) Train Loss: 0.1381, Train Steps/Sec: 4.89
+✓ Step 0002270 | Loss: 0.1381 | Steps/Sec: 4.89
+[2025-12-19 02:02:54] Beginning epoch 227...
+Beginning epoch 227...
+Loss: 0.14383015036582947
+Loss: 0.1609155684709549
+Loss: 0.1451309621334076
+Loss: 0.17155028879642487
+Loss: 0.20849747955799103
+[2025-12-19 02:02:56] (step=0002275) Train Loss: 0.1660, Train Steps/Sec: 3.79
+✓ Step 0002275 | Loss: 0.1660 | Steps/Sec: 3.79
+Loss: 0.13142654299736023
+Loss: 0.09043537825345993
+Loss: 0.11624368280172348
+Loss: 0.1536472737789154
+Loss: 0.22458139061927795
+[2025-12-19 02:02:57] (step=0002280) Train Loss: 0.1433, Train Steps/Sec: 4.88
+✓ Step 0002280 | Loss: 0.1433 | Steps/Sec: 4.88
+[2025-12-19 02:02:57] Beginning epoch 228...
+Beginning epoch 228...
+Loss: 0.1277725249528885
+Loss: 0.1930025964975357
+Loss: 0.12078483402729034
+Loss: 0.15961062908172607
+Loss: 0.20493841171264648
+[2025-12-19 02:02:58] (step=0002285) Train Loss: 0.1612, Train Steps/Sec: 3.78
+✓ Step 0002285 | Loss: 0.1612 | Steps/Sec: 3.78
+Loss: 0.1688445508480072
+Loss: 0.14990507066249847
+Loss: 0.15843474864959717
+Loss: 0.1553439199924469
+Loss: 0.13636673986911774
+[2025-12-19 02:02:59] (step=0002290) Train Loss: 0.1538, Train Steps/Sec: 4.89
+✓ Step 0002290 | Loss: 0.1538 | Steps/Sec: 4.89
+[2025-12-19 02:02:59] Beginning epoch 229...
+Beginning epoch 229...
+Loss: 0.10608932375907898
+Loss: 0.14756737649440765
+Loss: 0.09804906696081161
+Loss: 0.17565812170505524
+Loss: 0.11275129020214081
+[2025-12-19 02:03:00] (step=0002295) Train Loss: 0.1280, Train Steps/Sec: 3.80
+✓ Step 0002295 | Loss: 0.1280 | Steps/Sec: 3.80
+Loss: 0.17753508687019348
+Loss: 0.10824305564165115
+Loss: 0.1491880565881729
+Loss: 0.18308784067630768
+Loss: 0.13158859312534332
+[2025-12-19 02:03:01] (step=0002300) Train Loss: 0.1499, Train Steps/Sec: 4.89
+✓ Step 0002300 | Loss: 0.1499 | Steps/Sec: 4.89
+[2025-12-19 02:03:01] Beginning epoch 230...
+Beginning epoch 230...
+Loss: 0.13714207708835602
+Loss: 0.14944259822368622
+Loss: 0.13257379829883575
+Loss: 0.13265013694763184
+Loss: 0.1271664798259735
+[2025-12-19 02:03:03] (step=0002305) Train Loss: 0.1358, Train Steps/Sec: 3.82
+✓ Step 0002305 | Loss: 0.1358 | Steps/Sec: 3.82
+Loss: 0.11064299941062927
+Loss: 0.1339905709028244
+Loss: 0.12111755460500717
+Loss: 0.16452686488628387
+Loss: 0.1988503634929657
+[2025-12-19 02:03:04] (step=0002310) Train Loss: 0.1458, Train Steps/Sec: 4.88
+✓ Step 0002310 | Loss: 0.1458 | Steps/Sec: 4.88
+[2025-12-19 02:03:04] Beginning epoch 231...
+Beginning epoch 231...
+Loss: 0.1478058397769928
+Loss: 0.15788772702217102
+Loss: 0.18100889027118683
+Loss: 0.08662104606628418
+Loss: 0.15081462264060974
+[2025-12-19 02:03:05] (step=0002315) Train Loss: 0.1448, Train Steps/Sec: 3.75
+✓ Step 0002315 | Loss: 0.1448 | Steps/Sec: 3.75
+Loss: 0.1354784518480301
+Loss: 0.1414577066898346
+Loss: 0.1362057626247406
+Loss: 0.1522974669933319
+Loss: 0.10436395555734634
+[2025-12-19 02:03:06] (step=0002320) Train Loss: 0.1340, Train Steps/Sec: 4.89
+✓ Step 0002320 | Loss: 0.1340 | Steps/Sec: 4.89
+[2025-12-19 02:03:06] Beginning epoch 232...
+Beginning epoch 232...
+Loss: 0.1780247837305069
+Loss: 0.15128527581691742
+Loss: 0.1540483981370926
+Loss: 0.2377934455871582
+Loss: 0.1456357091665268
+[2025-12-19 02:03:07] (step=0002325) Train Loss: 0.1734, Train Steps/Sec: 3.78
+✓ Step 0002325 | Loss: 0.1734 | Steps/Sec: 3.78
+Loss: 0.1717199832201004
+Loss: 0.13882999122142792
+Loss: 0.15064939856529236
+Loss: 0.10661521553993225
+Loss: 0.12506282329559326
+[2025-12-19 02:03:08] (step=0002330) Train Loss: 0.1386, Train Steps/Sec: 4.89
+✓ Step 0002330 | Loss: 0.1386 | Steps/Sec: 4.89
+[2025-12-19 02:03:08] Beginning epoch 233...
+Beginning epoch 233...
+Loss: 0.15150754153728485
+Loss: 0.0995035469532013
+Loss: 0.10324029624462128
+Loss: 0.18853454291820526
+Loss: 0.12010002136230469
+[2025-12-19 02:03:10] (step=0002335) Train Loss: 0.1326, Train Steps/Sec: 3.78
+✓ Step 0002335 | Loss: 0.1326 | Steps/Sec: 3.78
+Loss: 0.1323777139186859
+Loss: 0.13538093864917755
+Loss: 0.12841352820396423
+Loss: 0.1351085603237152
+Loss: 0.27329790592193604
+[2025-12-19 02:03:11] (step=0002340) Train Loss: 0.1609, Train Steps/Sec: 4.89
+✓ Step 0002340 | Loss: 0.1609 | Steps/Sec: 4.89
+[2025-12-19 02:03:11] Beginning epoch 234...
+Beginning epoch 234...
+Loss: 0.11819381266832352
+Loss: 0.09377189725637436
+Loss: 0.12601201236248016
+Loss: 0.14958755671977997
+Loss: 0.13481897115707397
+[2025-12-19 02:03:12] (step=0002345) Train Loss: 0.1245, Train Steps/Sec: 3.79
+✓ Step 0002345 | Loss: 0.1245 | Steps/Sec: 3.79
+Loss: 0.14838333427906036
+Loss: 0.1131499856710434
+Loss: 0.1325480043888092
+Loss: 0.1344100683927536
+Loss: 0.12479759752750397
+[2025-12-19 02:03:13] (step=0002350) Train Loss: 0.1307, Train Steps/Sec: 4.89
+✓ Step 0002350 | Loss: 0.1307 | Steps/Sec: 4.89
+[2025-12-19 02:03:13] Beginning epoch 235...
+Beginning epoch 235...
+Loss: 0.11135552823543549
+Loss: 0.13478907942771912
+Loss: 0.12440750002861023
+Loss: 0.184732124209404
+Loss: 0.1487230807542801
+[2025-12-19 02:03:14] (step=0002355) Train Loss: 0.1408, Train Steps/Sec: 3.80
+✓ Step 0002355 | Loss: 0.1408 | Steps/Sec: 3.80
+Loss: 0.11892340332269669
+Loss: 0.11560407280921936
+Loss: 0.19256259500980377
+Loss: 0.21913187205791473
+Loss: 0.09143050760030746
+[2025-12-19 02:03:15] (step=0002360) Train Loss: 0.1475, Train Steps/Sec: 4.89
+✓ Step 0002360 | Loss: 0.1475 | Steps/Sec: 4.89
+[2025-12-19 02:03:15] Beginning epoch 236...
+Beginning epoch 236...
+Loss: 0.1426149159669876
+Loss: 0.15377524495124817
+Loss: 0.17233113944530487
+Loss: 0.10911864787340164
+Loss: 0.15969279408454895
+[2025-12-19 02:03:17] (step=0002365) Train Loss: 0.1475, Train Steps/Sec: 3.79
+✓ Step 0002365 | Loss: 0.1475 | Steps/Sec: 3.79
+Loss: 0.19678060710430145
+Loss: 0.16371481120586395
+Loss: 0.12837053835391998
+Loss: 0.10823685675859451
+Loss: 0.15387064218521118
+[2025-12-19 02:03:18] (step=0002370) Train Loss: 0.1502, Train Steps/Sec: 4.89
+✓ Step 0002370 | Loss: 0.1502 | Steps/Sec: 4.89
+[2025-12-19 02:03:18] Beginning epoch 237...
+Beginning epoch 237...
+Loss: 0.16244849562644958
+Loss: 0.15373185276985168
+Loss: 0.12375020980834961
+Loss: 0.11267859488725662
+Loss: 0.1470089703798294
+[2025-12-19 02:03:19] (step=0002375) Train Loss: 0.1399, Train Steps/Sec: 3.79
+✓ Step 0002375 | Loss: 0.1399 | Steps/Sec: 3.79
+Loss: 0.09983664005994797
+Loss: 0.08928876370191574
+Loss: 0.11397407203912735
+Loss: 0.1701848953962326
+Loss: 0.17544332146644592
+[2025-12-19 02:03:20] (step=0002380) Train Loss: 0.1297, Train Steps/Sec: 4.89
+✓ Step 0002380 | Loss: 0.1297 | Steps/Sec: 4.89
+[2025-12-19 02:03:20] Beginning epoch 238...
+Beginning epoch 238...
+Loss: 0.14215973019599915
+Loss: 0.14452031254768372
+Loss: 0.1575421839952469
+Loss: 0.1451806277036667
+Loss: 0.16131624579429626
+[2025-12-19 02:03:21] (step=0002385) Train Loss: 0.1501, Train Steps/Sec: 3.80
+✓ Step 0002385 | Loss: 0.1501 | Steps/Sec: 3.80
+Loss: 0.09966050833463669
+Loss: 0.14751788973808289
+Loss: 0.1710282862186432
+Loss: 0.11026030033826828
+Loss: 0.17238780856132507
+[2025-12-19 02:03:22] (step=0002390) Train Loss: 0.1402, Train Steps/Sec: 4.89
+✓ Step 0002390 | Loss: 0.1402 | Steps/Sec: 4.89
+[2025-12-19 02:03:22] Beginning epoch 239...
+Beginning epoch 239...
+Loss: 0.09128405153751373
+Loss: 0.1967039853334427
+Loss: 0.1433696299791336
+Loss: 0.13319669663906097
+Loss: 0.11497398465871811
+[2025-12-19 02:03:24] (step=0002395) Train Loss: 0.1359, Train Steps/Sec: 3.81
+✓ Step 0002395 | Loss: 0.1359 | Steps/Sec: 3.81
+Loss: 0.15841449797153473
+Loss: 0.2237698882818222
+Loss: 0.14031484723091125
+Loss: 0.1242687776684761
+Loss: 0.13762730360031128
+[2025-12-19 02:03:25] (step=0002400) Train Loss: 0.1569, Train Steps/Sec: 4.89
+✓ Step 0002400 | Loss: 0.1569 | Steps/Sec: 4.89
+[2025-12-19 02:03:25] Beginning epoch 240...
+Beginning epoch 240...
+Loss: 0.1800231635570526
+Loss: 0.11222369968891144
+Loss: 0.1721203625202179
+Loss: 0.12019801884889603
+Loss: 0.10712763667106628
+[2025-12-19 02:03:26] (step=0002405) Train Loss: 0.1383, Train Steps/Sec: 3.76
+✓ Step 0002405 | Loss: 0.1383 | Steps/Sec: 3.76
+Loss: 0.10245602577924728
+Loss: 0.13050977885723114
+Loss: 0.1745886504650116
+Loss: 0.13977399468421936
+Loss: 0.1399347335100174
+[2025-12-19 02:03:27] (step=0002410) Train Loss: 0.1375, Train Steps/Sec: 4.89
+✓ Step 0002410 | Loss: 0.1375 | Steps/Sec: 4.89
+[2025-12-19 02:03:27] Beginning epoch 241...
+Beginning epoch 241...
+Loss: 0.08442304283380508
+Loss: 0.08232662826776505
+Loss: 0.1444704383611679
+Loss: 0.13044296205043793
+Loss: 0.11938095092773438
+[2025-12-19 02:03:28] (step=0002415) Train Loss: 0.1122, Train Steps/Sec: 3.78
+✓ Step 0002415 | Loss: 0.1122 | Steps/Sec: 3.78
+Loss: 0.1788688451051712
+Loss: 0.17505118250846863
+Loss: 0.10322213917970657
+Loss: 0.18172171711921692
+Loss: 0.1576860100030899
+[2025-12-19 02:03:29] (step=0002420) Train Loss: 0.1593, Train Steps/Sec: 4.90
+✓ Step 0002420 | Loss: 0.1593 | Steps/Sec: 4.90
+[2025-12-19 02:03:29] Beginning epoch 242...
+Beginning epoch 242...
+Loss: 0.1920011043548584
+Loss: 0.13648651540279388
+Loss: 0.11003473401069641
+Loss: 0.14176787436008453
+Loss: 0.1418328881263733
+[2025-12-19 02:03:31] (step=0002425) Train Loss: 0.1444, Train Steps/Sec: 3.81
+✓ Step 0002425 | Loss: 0.1444 | Steps/Sec: 3.81
+Loss: 0.17936880886554718
+Loss: 0.254980206489563
+Loss: 0.23136477172374725
+Loss: 0.14966416358947754
+Loss: 0.13941816985607147
+[2025-12-19 02:03:32] (step=0002430) Train Loss: 0.1910, Train Steps/Sec: 4.89
+✓ Step 0002430 | Loss: 0.1910 | Steps/Sec: 4.89
+[2025-12-19 02:03:32] Beginning epoch 243...
+Beginning epoch 243...
+Loss: 0.062187619507312775
+Loss: 0.14001740515232086
+Loss: 0.16720867156982422
+Loss: 0.13196703791618347
+Loss: 0.1977144181728363
+[2025-12-19 02:03:33] (step=0002435) Train Loss: 0.1398, Train Steps/Sec: 3.77
+✓ Step 0002435 | Loss: 0.1398 | Steps/Sec: 3.77
+Loss: 0.14425422251224518
+Loss: 0.09087608009576797
+Loss: 0.13045430183410645
+Loss: 0.16871628165245056
+Loss: 0.08493989706039429
+[2025-12-19 02:03:34] (step=0002440) Train Loss: 0.1238, Train Steps/Sec: 4.89
+✓ Step 0002440 | Loss: 0.1238 | Steps/Sec: 4.89
+[2025-12-19 02:03:34] Beginning epoch 244...
+Beginning epoch 244...
+Loss: 0.12904143333435059
+Loss: 0.1580839604139328
+Loss: 0.22808776795864105
+Loss: 0.1399696320295334
+Loss: 0.11523063480854034
+[2025-12-19 02:03:35] (step=0002445) Train Loss: 0.1541, Train Steps/Sec: 3.81
+✓ Step 0002445 | Loss: 0.1541 | Steps/Sec: 3.81
+Loss: 0.11208470910787582
+Loss: 0.12643365561962128
+Loss: 0.14058202505111694
+Loss: 0.14008095860481262
+Loss: 0.14187011122703552
+[2025-12-19 02:03:36] (step=0002450) Train Loss: 0.1322, Train Steps/Sec: 4.89
+✓ Step 0002450 | Loss: 0.1322 | Steps/Sec: 4.89
+[2025-12-19 02:03:37] Beginning epoch 245...
+Beginning epoch 245...
+Loss: 0.11641135811805725
+Loss: 0.14069589972496033
+Loss: 0.13214384019374847
+Loss: 0.14764657616615295
+Loss: 0.1445913165807724
+[2025-12-19 02:03:38] (step=0002455) Train Loss: 0.1363, Train Steps/Sec: 3.77
+✓ Step 0002455 | Loss: 0.1363 | Steps/Sec: 3.77
+Loss: 0.0927991047501564
+Loss: 0.11904764175415039
+Loss: 0.12634553015232086
+Loss: 0.10137180238962173
+Loss: 0.14499104022979736
+[2025-12-19 02:03:39] (step=0002460) Train Loss: 0.1169, Train Steps/Sec: 4.89
+✓ Step 0002460 | Loss: 0.1169 | Steps/Sec: 4.89
+[2025-12-19 02:03:39] Beginning epoch 246...
+Beginning epoch 246...
+Loss: 0.1280919462442398
+Loss: 0.10790689289569855
+Loss: 0.1550757884979248
+Loss: 0.18646717071533203
+Loss: 0.13301539421081543
+[2025-12-19 02:03:40] (step=0002465) Train Loss: 0.1421, Train Steps/Sec: 3.78
+✓ Step 0002465 | Loss: 0.1421 | Steps/Sec: 3.78
+Loss: 0.19259013235569
+Loss: 0.1349140852689743
+Loss: 0.12735186517238617
+Loss: 0.15868256986141205
+Loss: 0.18222396075725555
+[2025-12-19 02:03:41] (step=0002470) Train Loss: 0.1592, Train Steps/Sec: 4.89
+✓ Step 0002470 | Loss: 0.1592 | Steps/Sec: 4.89
+[2025-12-19 02:03:41] Beginning epoch 247...
+Beginning epoch 247...
+Loss: 0.09612669050693512
+Loss: 0.06817620992660522
+Loss: 0.12297146767377853
+Loss: 0.12725558876991272
+Loss: 0.14915353059768677
+[2025-12-19 02:03:43] (step=0002475) Train Loss: 0.1127, Train Steps/Sec: 3.82
+✓ Step 0002475 | Loss: 0.1127 | Steps/Sec: 3.82
+Loss: 0.16673001646995544
+Loss: 0.1452559232711792
+Loss: 0.1690772920846939
+Loss: 0.1594095081090927
+Loss: 0.08002117276191711
+[2025-12-19 02:03:44] (step=0002480) Train Loss: 0.1441, Train Steps/Sec: 4.90
+✓ Step 0002480 | Loss: 0.1441 | Steps/Sec: 4.90
+[2025-12-19 02:03:44] Beginning epoch 248...
+Beginning epoch 248...
+Loss: 0.15648223459720612
+Loss: 0.13976424932479858
+Loss: 0.1226113960146904
+Loss: 0.11941328644752502
+Loss: 0.1440565139055252
+[2025-12-19 02:03:45] (step=0002485) Train Loss: 0.1365, Train Steps/Sec: 3.79
+✓ Step 0002485 | Loss: 0.1365 | Steps/Sec: 3.79
+Loss: 0.1077428013086319
+Loss: 0.14630761742591858
+Loss: 0.16628536581993103
+Loss: 0.22506602108478546
+Loss: 0.14479076862335205
+[2025-12-19 02:03:46] (step=0002490) Train Loss: 0.1580, Train Steps/Sec: 4.89
+✓ Step 0002490 | Loss: 0.1580 | Steps/Sec: 4.89
+[2025-12-19 02:03:46] Beginning epoch 249...
+Beginning epoch 249...
+Loss: 0.13732443749904633
+Loss: 0.10121217370033264
+Loss: 0.16929790377616882
+Loss: 0.14623306691646576
+Loss: 0.14623963832855225
+[2025-12-19 02:03:47] (step=0002495) Train Loss: 0.1401, Train Steps/Sec: 3.76
+✓ Step 0002495 | Loss: 0.1401 | Steps/Sec: 3.76
+Loss: 0.13349542021751404
+Loss: 0.09799882769584656
+Loss: 0.11866915225982666
+Loss: 0.1440977156162262
+Loss: 0.17262789607048035
+[2025-12-19 02:03:48] (step=0002500) Train Loss: 0.1334, Train Steps/Sec: 4.90
+✓ Step 0002500 | Loss: 0.1334 | Steps/Sec: 4.90
+[2025-12-19 02:03:50] Saved checkpoint to ./dit_fine_resluts//000-DiT-XL-2-x2-finetune/checkpoints/0002500.pt (Model contains only trainable params)
+[2025-12-19 02:03:50] Beginning epoch 250...
+Beginning epoch 250...
+Loss: 0.10575362294912338
+Loss: 0.14618481695652008
+Loss: 0.10236836969852448
+Loss: 0.17094171047210693
+Loss: 0.167550727725029
+[2025-12-19 02:03:51] (step=0002505) Train Loss: 0.1386, Train Steps/Sec: 1.86
+✓ Step 0002505 | Loss: 0.1386 | Steps/Sec: 1.86
+Loss: 0.16097614169120789
+Loss: 0.10830290615558624
+Loss: 0.16415104269981384
+Loss: 0.0765988901257515
+Loss: 0.09979943186044693
+[2025-12-19 02:03:52] (step=0002510) Train Loss: 0.1220, Train Steps/Sec: 4.89
+✓ Step 0002510 | Loss: 0.1220 | Steps/Sec: 4.89
+[2025-12-19 02:03:52] Beginning epoch 251...
+Beginning epoch 251...
+Loss: 0.12368033081293106
+Loss: 0.10838887840509415
+Loss: 0.18200820684432983
+Loss: 0.1860523819923401
+Loss: 0.13054442405700684
+[2025-12-19 02:03:53] (step=0002515) Train Loss: 0.1461, Train Steps/Sec: 3.77
+✓ Step 0002515 | Loss: 0.1461 | Steps/Sec: 3.77
+Loss: 0.1742999106645584
+Loss: 0.1533874273300171
+Loss: 0.12010316550731659
+Loss: 0.15365038812160492
+Loss: 0.13083942234516144
+[2025-12-19 02:03:54] (step=0002520) Train Loss: 0.1465, Train Steps/Sec: 4.89
+✓ Step 0002520 | Loss: 0.1465 | Steps/Sec: 4.89
+[2025-12-19 02:03:54] Beginning epoch 252...
+Beginning epoch 252...
+Loss: 0.12755611538887024
+Loss: 0.2038162350654602
+Loss: 0.23805567622184753
+Loss: 0.17213191092014313
+Loss: 0.158566415309906
+[2025-12-19 02:03:56] (step=0002525) Train Loss: 0.1800, Train Steps/Sec: 3.77
+✓ Step 0002525 | Loss: 0.1800 | Steps/Sec: 3.77
+Loss: 0.12235025316476822
+Loss: 0.19172506034374237
+Loss: 0.13976521790027618
+Loss: 0.12369416654109955
+Loss: 0.12287712097167969
+[2025-12-19 02:03:57] (step=0002530) Train Loss: 0.1401, Train Steps/Sec: 4.90
+✓ Step 0002530 | Loss: 0.1401 | Steps/Sec: 4.90
+[2025-12-19 02:03:57] Beginning epoch 253...
+Beginning epoch 253...
+Loss: 0.14720433950424194
+Loss: 0.13736993074417114
+Loss: 0.1882702261209488
+Loss: 0.1642943173646927
+Loss: 0.11470046639442444
+[2025-12-19 02:03:58] (step=0002535) Train Loss: 0.1504, Train Steps/Sec: 3.79
+✓ Step 0002535 | Loss: 0.1504 | Steps/Sec: 3.79
+Loss: 0.16660186648368835
+Loss: 0.15912634134292603
+Loss: 0.12103862315416336
+Loss: 0.12033341825008392
+Loss: 0.19466781616210938
+[2025-12-19 02:03:59] (step=0002540) Train Loss: 0.1524, Train Steps/Sec: 4.90
+✓ Step 0002540 | Loss: 0.1524 | Steps/Sec: 4.90
+[2025-12-19 02:03:59] Beginning epoch 254...
+Beginning epoch 254...
+Loss: 0.11979400366544724
+Loss: 0.1680564433336258
+Loss: 0.12252955883741379
+Loss: 0.15757106244564056
+Loss: 0.1316767930984497
+[2025-12-19 02:04:00] (step=0002545) Train Loss: 0.1399, Train Steps/Sec: 3.81
+✓ Step 0002545 | Loss: 0.1399 | Steps/Sec: 3.81
+Loss: 0.16789710521697998
+Loss: 0.1342729777097702
+Loss: 0.1652400940656662
+Loss: 0.14261560142040253
+Loss: 0.18174852430820465
+[2025-12-19 02:04:01] (step=0002550) Train Loss: 0.1584, Train Steps/Sec: 4.90
+✓ Step 0002550 | Loss: 0.1584 | Steps/Sec: 4.90
+[2025-12-19 02:04:01] Beginning epoch 255...
+Beginning epoch 255...
+Loss: 0.21021941304206848
+Loss: 0.1384425163269043
+Loss: 0.10419204831123352
+Loss: 0.16797667741775513
+Loss: 0.08011648058891296
+[2025-12-19 02:04:03] (step=0002555) Train Loss: 0.1402, Train Steps/Sec: 3.80
+✓ Step 0002555 | Loss: 0.1402 | Steps/Sec: 3.80
+Loss: 0.13164356350898743
+Loss: 0.10883285105228424
+Loss: 0.16502457857131958
+Loss: 0.15463095903396606
+Loss: 0.18081511557102203
+[2025-12-19 02:04:04] (step=0002560) Train Loss: 0.1482, Train Steps/Sec: 4.89
+✓ Step 0002560 | Loss: 0.1482 | Steps/Sec: 4.89
+[2025-12-19 02:04:04] Beginning epoch 256...
+Beginning epoch 256...
+Loss: 0.10890558362007141
+Loss: 0.18298649787902832
+Loss: 0.16209350526332855
+Loss: 0.1785479635000229
+Loss: 0.11629964411258698
+[2025-12-19 02:04:05] (step=0002565) Train Loss: 0.1498, Train Steps/Sec: 3.78
+✓ Step 0002565 | Loss: 0.1498 | Steps/Sec: 3.78
+Loss: 0.17615903913974762
+Loss: 0.11582116782665253
+Loss: 0.09752240031957626
+Loss: 0.11942259222269058
+Loss: 0.1334811896085739
+[2025-12-19 02:04:06] (step=0002570) Train Loss: 0.1285, Train Steps/Sec: 4.89
+✓ Step 0002570 | Loss: 0.1285 | Steps/Sec: 4.89
+[2025-12-19 02:04:06] Beginning epoch 257...
+Beginning epoch 257...
+Loss: 0.14206351339817047
+Loss: 0.1279737800359726
+Loss: 0.18731418251991272
+Loss: 0.10473249107599258
+Loss: 0.09170297533273697
+[2025-12-19 02:04:07] (step=0002575) Train Loss: 0.1308, Train Steps/Sec: 3.79
+✓ Step 0002575 | Loss: 0.1308 | Steps/Sec: 3.79
+Loss: 0.12539619207382202
+Loss: 0.15109272301197052
+Loss: 0.15481255948543549
+Loss: 0.14182327687740326
+Loss: 0.13727998733520508
+[2025-12-19 02:04:08] (step=0002580) Train Loss: 0.1421, Train Steps/Sec: 4.90
+✓ Step 0002580 | Loss: 0.1421 | Steps/Sec: 4.90
+[2025-12-19 02:04:08] Beginning epoch 258...
+Beginning epoch 258...
+Loss: 0.1478077620267868
+Loss: 0.1467154175043106
+Loss: 0.10398761183023453
+Loss: 0.16367186605930328
+Loss: 0.10730491578578949
+[2025-12-19 02:04:10] (step=0002585) Train Loss: 0.1339, Train Steps/Sec: 3.80
+✓ Step 0002585 | Loss: 0.1339 | Steps/Sec: 3.80
+Loss: 0.23559390008449554
+Loss: 0.09872801601886749
+Loss: 0.11646606773138046
+Loss: 0.1723928153514862
+Loss: 0.18270324170589447
+[2025-12-19 02:04:11] (step=0002590) Train Loss: 0.1612, Train Steps/Sec: 4.89
+✓ Step 0002590 | Loss: 0.1612 | Steps/Sec: 4.89
+[2025-12-19 02:04:11] Beginning epoch 259...
+Beginning epoch 259...
+Loss: 0.1888686716556549
+Loss: 0.11255297064781189
+Loss: 0.19605951011180878
+Loss: 0.11637068539857864
+Loss: 0.26189467310905457
+[2025-12-19 02:04:12] (step=0002595) Train Loss: 0.1751, Train Steps/Sec: 3.76
+✓ Step 0002595 | Loss: 0.1751 | Steps/Sec: 3.76
+Loss: 0.19147475063800812
+Loss: 0.1644652783870697
+Loss: 0.140355184674263
+Loss: 0.20929481089115143
+Loss: 0.1553700864315033
+[2025-12-19 02:04:13] (step=0002600) Train Loss: 0.1722, Train Steps/Sec: 4.90
+✓ Step 0002600 | Loss: 0.1722 | Steps/Sec: 4.90
+[2025-12-19 02:04:13] Beginning epoch 260...
+Beginning epoch 260...
+Loss: 0.13693365454673767
+Loss: 0.1370156705379486
+Loss: 0.1396183967590332
+Loss: 0.08501945436000824
+Loss: 0.12767556309700012
+[2025-12-19 02:04:14] (step=0002605) Train Loss: 0.1253, Train Steps/Sec: 3.79
+✓ Step 0002605 | Loss: 0.1253 | Steps/Sec: 3.79
+Loss: 0.1269516795873642
+Loss: 0.15516074001789093
+Loss: 0.15054656565189362
+Loss: 0.13560719788074493
+Loss: 0.10765908658504486
+[2025-12-19 02:04:15] (step=0002610) Train Loss: 0.1352, Train Steps/Sec: 4.89
+✓ Step 0002610 | Loss: 0.1352 | Steps/Sec: 4.89
+[2025-12-19 02:04:15] Beginning epoch 261...
+Beginning epoch 261...
+Loss: 0.13585634529590607
+Loss: 0.09095544368028641
+Loss: 0.11530591547489166
+Loss: 0.12461967021226883
+Loss: 0.11056388914585114
+[2025-12-19 02:04:17] (step=0002615) Train Loss: 0.1155, Train Steps/Sec: 3.81
+✓ Step 0002615 | Loss: 0.1155 | Steps/Sec: 3.81
+Loss: 0.12850193679332733
+Loss: 0.11047746241092682
+Loss: 0.12943999469280243
+Loss: 0.18864233791828156
+Loss: 0.17648328840732574
+[2025-12-19 02:04:18] (step=0002620) Train Loss: 0.1467, Train Steps/Sec: 4.89
+✓ Step 0002620 | Loss: 0.1467 | Steps/Sec: 4.89
+[2025-12-19 02:04:18] Beginning epoch 262...
+Beginning epoch 262...
+Loss: 0.20372337102890015
+Loss: 0.14110243320465088
+Loss: 0.12844868004322052
+Loss: 0.18200574815273285
+Loss: 0.1641588807106018
+[2025-12-19 02:04:19] (step=0002625) Train Loss: 0.1639, Train Steps/Sec: 3.79
+✓ Step 0002625 | Loss: 0.1639 | Steps/Sec: 3.79
+Loss: 0.12212865799665451
+Loss: 0.10722038149833679
+Loss: 0.1764853298664093
+Loss: 0.15168359875679016
+Loss: 0.1490991711616516
+[2025-12-19 02:04:20] (step=0002630) Train Loss: 0.1413, Train Steps/Sec: 4.89
+✓ Step 0002630 | Loss: 0.1413 | Steps/Sec: 4.89
+[2025-12-19 02:04:20] Beginning epoch 263...
+Beginning epoch 263...
+Loss: 0.11312353610992432
+Loss: 0.10511083155870438
+Loss: 0.11907842010259628
+Loss: 0.19137461483478546
+Loss: 0.20199614763259888
+[2025-12-19 02:04:21] (step=0002635) Train Loss: 0.1461, Train Steps/Sec: 3.80
+✓ Step 0002635 | Loss: 0.1461 | Steps/Sec: 3.80
+Loss: 0.10938474535942078
+Loss: 0.1397925466299057
+Loss: 0.17732737958431244
+Loss: 0.1317158043384552
+Loss: 0.21293757855892181
+[2025-12-19 02:04:22] (step=0002640) Train Loss: 0.1542, Train Steps/Sec: 4.89
+✓ Step 0002640 | Loss: 0.1542 | Steps/Sec: 4.89
+[2025-12-19 02:04:22] Beginning epoch 264...
+Beginning epoch 264...
+Loss: 0.11745181679725647
+Loss: 0.16005143523216248
+Loss: 0.17257475852966309
+Loss: 0.15475016832351685
+Loss: 0.17854516208171844
+[2025-12-19 02:04:24] (step=0002645) Train Loss: 0.1567, Train Steps/Sec: 3.80
+✓ Step 0002645 | Loss: 0.1567 | Steps/Sec: 3.80
+Loss: 0.11632794886827469
+Loss: 0.11510854214429855
+Loss: 0.203963503241539
+Loss: 0.14368270337581635
+Loss: 0.1359112560749054
+[2025-12-19 02:04:25] (step=0002650) Train Loss: 0.1430, Train Steps/Sec: 4.90
+✓ Step 0002650 | Loss: 0.1430 | Steps/Sec: 4.90
+[2025-12-19 02:04:25] Beginning epoch 265...
+Beginning epoch 265...
+Loss: 0.1298435926437378
+Loss: 0.08197219669818878
+Loss: 0.1325988471508026
+Loss: 0.12344640493392944
+Loss: 0.1785401552915573
+[2025-12-19 02:04:26] (step=0002655) Train Loss: 0.1293, Train Steps/Sec: 3.77
+✓ Step 0002655 | Loss: 0.1293 | Steps/Sec: 3.77
+Loss: 0.12108364701271057
+Loss: 0.1474006026983261
+Loss: 0.1638544499874115
+Loss: 0.12644748389720917
+Loss: 0.14113746583461761
+[2025-12-19 02:04:27] (step=0002660) Train Loss: 0.1400, Train Steps/Sec: 4.88
+✓ Step 0002660 | Loss: 0.1400 | Steps/Sec: 4.88
+[2025-12-19 02:04:27] Beginning epoch 266...
+Beginning epoch 266...
+Loss: 0.10166207700967789
+Loss: 0.12258987128734589
+Loss: 0.1421998143196106
+Loss: 0.12258138507604599
+Loss: 0.12459468841552734
+[2025-12-19 02:04:28] (step=0002665) Train Loss: 0.1227, Train Steps/Sec: 3.75
+✓ Step 0002665 | Loss: 0.1227 | Steps/Sec: 3.75
+Loss: 0.13490840792655945
+Loss: 0.15085352957248688
+Loss: 0.16269183158874512
+Loss: 0.16862326860427856
+Loss: 0.1799488067626953
+[2025-12-19 02:04:29] (step=0002670) Train Loss: 0.1594, Train Steps/Sec: 4.88
+✓ Step 0002670 | Loss: 0.1594 | Steps/Sec: 4.88
+[2025-12-19 02:04:29] Beginning epoch 267...
+Beginning epoch 267...
+Loss: 0.1394624412059784
+Loss: 0.13216839730739594
+Loss: 0.17453594505786896
+Loss: 0.0857994332909584
+Loss: 0.1410253793001175
+[2025-12-19 02:04:31] (step=0002675) Train Loss: 0.1346, Train Steps/Sec: 3.78
+✓ Step 0002675 | Loss: 0.1346 | Steps/Sec: 3.78
+Loss: 0.1659095287322998
+Loss: 0.09193885326385498
+Loss: 0.12343434989452362
+Loss: 0.14791880548000336
+Loss: 0.08466778695583344
+[2025-12-19 02:04:32] (step=0002680) Train Loss: 0.1228, Train Steps/Sec: 4.90
+✓ Step 0002680 | Loss: 0.1228 | Steps/Sec: 4.90
+[2025-12-19 02:04:32] Beginning epoch 268...
+Beginning epoch 268...
+Loss: 0.12413196265697479
+Loss: 0.18217021226882935
+Loss: 0.1382834017276764
+Loss: 0.08556045591831207
+Loss: 0.15118524432182312
+[2025-12-19 02:04:33] (step=0002685) Train Loss: 0.1363, Train Steps/Sec: 3.81
+✓ Step 0002685 | Loss: 0.1363 | Steps/Sec: 3.81
+Loss: 0.0902814194560051
+Loss: 0.11186179518699646
+Loss: 0.18736384809017181
+Loss: 0.08161130547523499
+Loss: 0.15952125191688538
+[2025-12-19 02:04:34] (step=0002690) Train Loss: 0.1261, Train Steps/Sec: 4.90
+✓ Step 0002690 | Loss: 0.1261 | Steps/Sec: 4.90
+[2025-12-19 02:04:34] Beginning epoch 269...
+Beginning epoch 269...
+Loss: 0.13864320516586304
+Loss: 0.17819949984550476
+Loss: 0.1644422858953476
+Loss: 0.12362281233072281
+Loss: 0.12950828671455383
+[2025-12-19 02:04:35] (step=0002695) Train Loss: 0.1469, Train Steps/Sec: 3.81
+✓ Step 0002695 | Loss: 0.1469 | Steps/Sec: 3.81
+Loss: 0.17483821511268616
+Loss: 0.1325083076953888
+Loss: 0.10200484842061996
+Loss: 0.17183037102222443
+Loss: 0.10742589831352234
+[2025-12-19 02:04:36] (step=0002700) Train Loss: 0.1377, Train Steps/Sec: 4.89
+✓ Step 0002700 | Loss: 0.1377 | Steps/Sec: 4.89
+[2025-12-19 02:04:36] Beginning epoch 270...
+Beginning epoch 270...
+Loss: 0.1828729808330536
+Loss: 0.11389476805925369
+Loss: 0.20120465755462646
+Loss: 0.1382356435060501
+Loss: 0.17623832821846008
+[2025-12-19 02:04:38] (step=0002705) Train Loss: 0.1625, Train Steps/Sec: 3.80
+✓ Step 0002705 | Loss: 0.1625 | Steps/Sec: 3.80
+Loss: 0.10509311407804489
+Loss: 0.3038526475429535
+Loss: 0.11372138559818268
+Loss: 0.15581420063972473
+Loss: 0.14363202452659607
+[2025-12-19 02:04:39] (step=0002710) Train Loss: 0.1644, Train Steps/Sec: 4.90
+✓ Step 0002710 | Loss: 0.1644 | Steps/Sec: 4.90
+[2025-12-19 02:04:39] Beginning epoch 271...
+Beginning epoch 271...
+Loss: 0.10569058358669281
+Loss: 0.09259121865034103
+Loss: 0.15988223254680634
+Loss: 0.12153167277574539
+Loss: 0.1637372523546219
+[2025-12-19 02:04:40] (step=0002715) Train Loss: 0.1287, Train Steps/Sec: 3.82
+✓ Step 0002715 | Loss: 0.1287 | Steps/Sec: 3.82
+Loss: 0.14001433551311493
+Loss: 0.20902898907661438
+Loss: 0.16892585158348083
+Loss: 0.09933275729417801
+Loss: 0.10923893004655838
+[2025-12-19 02:04:41] (step=0002720) Train Loss: 0.1453, Train Steps/Sec: 4.90
+✓ Step 0002720 | Loss: 0.1453 | Steps/Sec: 4.90
+[2025-12-19 02:04:41] Beginning epoch 272...
+Beginning epoch 272...
+Loss: 0.10073331743478775
+Loss: 0.09916531294584274
+Loss: 0.1126101091504097
+Loss: 0.18624284863471985
+Loss: 0.1108289510011673
+[2025-12-19 02:04:42] (step=0002725) Train Loss: 0.1219, Train Steps/Sec: 3.81
+✓ Step 0002725 | Loss: 0.1219 | Steps/Sec: 3.81
+Loss: 0.1750241070985794
+Loss: 0.17661170661449432
+Loss: 0.11140591651201248
+Loss: 0.11584006994962692
+Loss: 0.11185111105442047
+[2025-12-19 02:04:43] (step=0002730) Train Loss: 0.1381, Train Steps/Sec: 4.88
+✓ Step 0002730 | Loss: 0.1381 | Steps/Sec: 4.88
+[2025-12-19 02:04:43] Beginning epoch 273...
+Beginning epoch 273...
+Loss: 0.11142070591449738
+Loss: 0.12182842940092087
+Loss: 0.1018688827753067
+Loss: 0.17356730997562408
+Loss: 0.1574651300907135
+[2025-12-19 02:04:45] (step=0002735) Train Loss: 0.1332, Train Steps/Sec: 3.77
+✓ Step 0002735 | Loss: 0.1332 | Steps/Sec: 3.77
+Loss: 0.1769992858171463
+Loss: 0.17840690910816193
+Loss: 0.08687485754489899
+Loss: 0.20973676443099976
+Loss: 0.10986869782209396
+[2025-12-19 02:04:46] (step=0002740) Train Loss: 0.1524, Train Steps/Sec: 4.89
+✓ Step 0002740 | Loss: 0.1524 | Steps/Sec: 4.89
+[2025-12-19 02:04:46] Beginning epoch 274...
+Beginning epoch 274...
+Loss: 0.10843360424041748
+Loss: 0.14055800437927246
+Loss: 0.13956581056118011
+Loss: 0.1603228598833084
+Loss: 0.18965566158294678
+[2025-12-19 02:04:47] (step=0002745) Train Loss: 0.1477, Train Steps/Sec: 3.81
+✓ Step 0002745 | Loss: 0.1477 | Steps/Sec: 3.81
+Loss: 0.12903407216072083
+Loss: 0.13909116387367249
+Loss: 0.14802977442741394
+Loss: 0.1630294919013977
+Loss: 0.12629620730876923
+[2025-12-19 02:04:48] (step=0002750) Train Loss: 0.1411, Train Steps/Sec: 4.89
+✓ Step 0002750 | Loss: 0.1411 | Steps/Sec: 4.89
+[2025-12-19 02:04:48] Beginning epoch 275...
+Beginning epoch 275...
+Loss: 0.1262674480676651
+Loss: 0.10286280512809753
+Loss: 0.16590523719787598
+Loss: 0.162680983543396
+Loss: 0.15118607878684998
+[2025-12-19 02:04:49] (step=0002755) Train Loss: 0.1418, Train Steps/Sec: 3.79
+✓ Step 0002755 | Loss: 0.1418 | Steps/Sec: 3.79
+Loss: 0.10007277876138687
+Loss: 0.13650859892368317
+Loss: 0.16064029932022095
+Loss: 0.123603954911232
+Loss: 0.15359629690647125
+[2025-12-19 02:04:50] (step=0002760) Train Loss: 0.1349, Train Steps/Sec: 4.90
+✓ Step 0002760 | Loss: 0.1349 | Steps/Sec: 4.90
+[2025-12-19 02:04:51] Beginning epoch 276...
+Beginning epoch 276...
+Loss: 0.12336026132106781
+Loss: 0.06415633857250214
+Loss: 0.14718137681484222
+Loss: 0.18605934083461761
+Loss: 0.1727900207042694
+[2025-12-19 02:04:52] (step=0002765) Train Loss: 0.1387, Train Steps/Sec: 3.81
+✓ Step 0002765 | Loss: 0.1387 | Steps/Sec: 3.81
+Loss: 0.14924034476280212
+Loss: 0.13978181779384613
+Loss: 0.0990399718284607
+Loss: 0.13772141933441162
+Loss: 0.1179613247513771
+[2025-12-19 02:04:53] (step=0002770) Train Loss: 0.1287, Train Steps/Sec: 4.90
+✓ Step 0002770 | Loss: 0.1287 | Steps/Sec: 4.90
+[2025-12-19 02:04:53] Beginning epoch 277...
+Beginning epoch 277...
+Loss: 0.12557104229927063
+Loss: 0.1250932812690735
+Loss: 0.2278052717447281
+Loss: 0.13565754890441895
+Loss: 0.1575462371110916
+[2025-12-19 02:04:54] (step=0002775) Train Loss: 0.1543, Train Steps/Sec: 3.79
+✓ Step 0002775 | Loss: 0.1543 | Steps/Sec: 3.79
+Loss: 0.16105610132217407
+Loss: 0.10798060894012451
+Loss: 0.13241121172904968
+Loss: 0.10448600351810455
+Loss: 0.10937507450580597
+[2025-12-19 02:04:55] (step=0002780) Train Loss: 0.1231, Train Steps/Sec: 4.89
+✓ Step 0002780 | Loss: 0.1231 | Steps/Sec: 4.89
+[2025-12-19 02:04:55] Beginning epoch 278...
+Beginning epoch 278...
+Loss: 0.14273661375045776
+Loss: 0.19985675811767578
+Loss: 0.11024337261915207
+Loss: 0.1784014105796814
+Loss: 0.09322615712881088
+[2025-12-19 02:04:56] (step=0002785) Train Loss: 0.1449, Train Steps/Sec: 3.79
+✓ Step 0002785 | Loss: 0.1449 | Steps/Sec: 3.79
+Loss: 0.1422862708568573
+Loss: 0.13411293923854828
+Loss: 0.09479492157697678
+Loss: 0.11806996911764145
+Loss: 0.10760065913200378
+[2025-12-19 02:04:58] (step=0002790) Train Loss: 0.1194, Train Steps/Sec: 4.90
+✓ Step 0002790 | Loss: 0.1194 | Steps/Sec: 4.90
+[2025-12-19 02:04:58] Beginning epoch 279...
+Beginning epoch 279...
+Loss: 0.12009721249341965
+Loss: 0.0892525389790535
+Loss: 0.13980203866958618
+Loss: 0.12784402072429657
+Loss: 0.16731910407543182
+[2025-12-19 02:04:59] (step=0002795) Train Loss: 0.1289, Train Steps/Sec: 3.81
+✓ Step 0002795 | Loss: 0.1289 | Steps/Sec: 3.81
+Loss: 0.09815416485071182
+Loss: 0.07034315168857574
+Loss: 0.0971851721405983
+Loss: 0.16525956988334656
+Loss: 0.09103509038686752
+[2025-12-19 02:05:00] (step=0002800) Train Loss: 0.1044, Train Steps/Sec: 4.90
+✓ Step 0002800 | Loss: 0.1044 | Steps/Sec: 4.90
+[2025-12-19 02:05:01] Saved BEST checkpoint to ./dit_fine_resluts//000-DiT-XL-2-x2-finetune/checkpoints/epoch-279-loss-0.1044.pt (Loss: 0.1044)
+🏆 New best checkpoint saved! Loss: 0.1044
+[2025-12-19 02:05:01] Beginning epoch 280...
+Beginning epoch 280...
+Loss: 0.11725376546382904
+Loss: 0.1713980883359909
+Loss: 0.1749705672264099
+Loss: 0.13728272914886475
+Loss: 0.157002255320549
+[2025-12-19 02:05:03] (step=0002805) Train Loss: 0.1516, Train Steps/Sec: 3.80
+✓ Step 0002805 | Loss: 0.1516 | Steps/Sec: 3.80
+Loss: 0.2022707462310791
+Loss: 0.16283713281154633
+Loss: 0.1314680576324463
+Loss: 0.1346355825662613
+Loss: 0.14758607745170593
+[2025-12-19 02:05:04] (step=0002810) Train Loss: 0.1558, Train Steps/Sec: 4.89
+✓ Step 0002810 | Loss: 0.1558 | Steps/Sec: 4.89
+[2025-12-19 02:05:04] Beginning epoch 281...
+Beginning epoch 281...
+Loss: 0.16859526932239532
+Loss: 0.10934314131736755
+Loss: 0.1811436414718628
+Loss: 0.22015216946601868
+Loss: 0.14206205308437347
+[2025-12-19 02:05:05] (step=0002815) Train Loss: 0.1643, Train Steps/Sec: 3.77
+✓ Step 0002815 | Loss: 0.1643 | Steps/Sec: 3.77
+Loss: 0.22248543798923492
+Loss: 0.1233781948685646
+Loss: 0.12188451737165451
+Loss: 0.1625572144985199
+Loss: 0.1103818416595459
+[2025-12-19 02:05:06] (step=0002820) Train Loss: 0.1481, Train Steps/Sec: 4.89
+✓ Step 0002820 | Loss: 0.1481 | Steps/Sec: 4.89
+[2025-12-19 02:05:06] Beginning epoch 282...
+Beginning epoch 282...
+Loss: 0.11164737492799759
+Loss: 0.15520797669887543
+Loss: 0.11011485010385513
+Loss: 0.120462566614151
+Loss: 0.19445647299289703
+[2025-12-19 02:05:07] (step=0002825) Train Loss: 0.1384, Train Steps/Sec: 3.80
+✓ Step 0002825 | Loss: 0.1384 | Steps/Sec: 3.80
+Loss: 0.10161817073822021
+Loss: 0.16198357939720154
+Loss: 0.1451881229877472
+Loss: 0.11065314710140228
+Loss: 0.14820918440818787
+[2025-12-19 02:05:08] (step=0002830) Train Loss: 0.1335, Train Steps/Sec: 4.89
+✓ Step 0002830 | Loss: 0.1335 | Steps/Sec: 4.89
+[2025-12-19 02:05:08] Beginning epoch 283...
+Beginning epoch 283...
+Loss: 0.13162145018577576
+Loss: 0.13296566903591156
+Loss: 0.18568900227546692
+Loss: 0.1439562737941742
+Loss: 0.13348831236362457
+[2025-12-19 02:05:10] (step=0002835) Train Loss: 0.1455, Train Steps/Sec: 3.80
+✓ Step 0002835 | Loss: 0.1455 | Steps/Sec: 3.80
+Loss: 0.17520107328891754
+Loss: 0.0862693265080452
+Loss: 0.1472901999950409
+Loss: 0.11016618460416794
+Loss: 0.12795734405517578
+[2025-12-19 02:05:11] (step=0002840) Train Loss: 0.1294, Train Steps/Sec: 4.88
+✓ Step 0002840 | Loss: 0.1294 | Steps/Sec: 4.88
+[2025-12-19 02:05:11] Beginning epoch 284...
+Beginning epoch 284...
+Loss: 0.23034797608852386
+Loss: 0.17182452976703644
+Loss: 0.1926865577697754
+Loss: 0.10751356184482574
+Loss: 0.15025636553764343
+[2025-12-19 02:05:12] (step=0002845) Train Loss: 0.1705, Train Steps/Sec: 3.78
+✓ Step 0002845 | Loss: 0.1705 | Steps/Sec: 3.78
+Loss: 0.0679296925663948
+Loss: 0.16430571675300598
+Loss: 0.1477089673280716
+Loss: 0.07723487913608551
+Loss: 0.1424989253282547
+[2025-12-19 02:05:13] (step=0002850) Train Loss: 0.1199, Train Steps/Sec: 4.88
+✓ Step 0002850 | Loss: 0.1199 | Steps/Sec: 4.88
+[2025-12-19 02:05:13] Beginning epoch 285...
+Beginning epoch 285...
+Loss: 0.13027602434158325
+Loss: 0.11993491649627686
+Loss: 0.11920230835676193
+Loss: 0.12493505328893661
+Loss: 0.15878939628601074
+[2025-12-19 02:05:14] (step=0002855) Train Loss: 0.1306, Train Steps/Sec: 3.78
+✓ Step 0002855 | Loss: 0.1306 | Steps/Sec: 3.78
+Loss: 0.11960254609584808
+Loss: 0.11741683632135391
+Loss: 0.11749104410409927
+Loss: 0.10594337433576584
+Loss: 0.12463784962892532
+[2025-12-19 02:05:15] (step=0002860) Train Loss: 0.1170, Train Steps/Sec: 4.90
+✓ Step 0002860 | Loss: 0.1170 | Steps/Sec: 4.90
+[2025-12-19 02:05:15] Beginning epoch 286...
+Beginning epoch 286...
+Loss: 0.12958867847919464
+Loss: 0.1072906106710434
+Loss: 0.19531577825546265
+Loss: 0.14556299149990082
+Loss: 0.1309996396303177
+[2025-12-19 02:05:17] (step=0002865) Train Loss: 0.1418, Train Steps/Sec: 3.78
+✓ Step 0002865 | Loss: 0.1418 | Steps/Sec: 3.78
+Loss: 0.1613079160451889
+Loss: 0.17652183771133423
+Loss: 0.13690249621868134
+Loss: 0.1700592339038849
+Loss: 0.18338438868522644
+[2025-12-19 02:05:18] (step=0002870) Train Loss: 0.1656, Train Steps/Sec: 4.89
+✓ Step 0002870 | Loss: 0.1656 | Steps/Sec: 4.89
+[2025-12-19 02:05:18] Beginning epoch 287...
+Beginning epoch 287...
+Loss: 0.1279589980840683
+Loss: 0.16002759337425232
+Loss: 0.10244742780923843
+Loss: 0.15635232627391815
+Loss: 0.1628788709640503
+[2025-12-19 02:05:19] (step=0002875) Train Loss: 0.1419, Train Steps/Sec: 3.78
+✓ Step 0002875 | Loss: 0.1419 | Steps/Sec: 3.78
+Loss: 0.09940573573112488
+Loss: 0.15215525031089783
+Loss: 0.1564481109380722
+Loss: 0.09520715475082397
+Loss: 0.16049277782440186
+[2025-12-19 02:05:20] (step=0002880) Train Loss: 0.1327, Train Steps/Sec: 4.90
+✓ Step 0002880 | Loss: 0.1327 | Steps/Sec: 4.90
+[2025-12-19 02:05:20] Beginning epoch 288...
+Beginning epoch 288...
+Loss: 0.17709925770759583
+Loss: 0.15599212050437927
+Loss: 0.1464279294013977
+Loss: 0.14867636561393738
+Loss: 0.154397115111351
+[2025-12-19 02:05:21] (step=0002885) Train Loss: 0.1565, Train Steps/Sec: 3.81
+✓ Step 0002885 | Loss: 0.1565 | Steps/Sec: 3.81
+Loss: 0.14071975648403168
+Loss: 0.1988634467124939
+Loss: 0.12334784120321274
+Loss: 0.1882196068763733
+Loss: 0.19906039535999298
+[2025-12-19 02:05:22] (step=0002890) Train Loss: 0.1700, Train Steps/Sec: 4.90
+✓ Step 0002890 | Loss: 0.1700 | Steps/Sec: 4.90
+[2025-12-19 02:05:22] Beginning epoch 289...
+Beginning epoch 289...
+Loss: 0.08395519852638245
+Loss: 0.1610860377550125
+Loss: 0.1345730572938919
+Loss: 0.08028201758861542
+Loss: 0.1572592854499817
+[2025-12-19 02:05:24] (step=0002895) Train Loss: 0.1234, Train Steps/Sec: 3.77
+✓ Step 0002895 | Loss: 0.1234 | Steps/Sec: 3.77
+Loss: 0.12928417325019836
+Loss: 0.11354964226484299
+Loss: 0.09167683124542236
+Loss: 0.14672981202602386
+Loss: 0.1620611846446991
+[2025-12-19 02:05:25] (step=0002900) Train Loss: 0.1287, Train Steps/Sec: 4.90
+✓ Step 0002900 | Loss: 0.1287 | Steps/Sec: 4.90
+[2025-12-19 02:05:25] Beginning epoch 290...
+Beginning epoch 290...
+Loss: 0.1535625159740448
+Loss: 0.10808125883340836
+Loss: 0.18295921385288239
+Loss: 0.13227753341197968
+Loss: 0.19199641048908234
+[2025-12-19 02:05:26] (step=0002905) Train Loss: 0.1538, Train Steps/Sec: 3.75
+✓ Step 0002905 | Loss: 0.1538 | Steps/Sec: 3.75
+Loss: 0.18362899124622345
+Loss: 0.16236141324043274
+Loss: 0.2148951292037964
+Loss: 0.1928631216287613
+Loss: 0.1742168515920639
+[2025-12-19 02:05:27] (step=0002910) Train Loss: 0.1856, Train Steps/Sec: 4.90
+✓ Step 0002910 | Loss: 0.1856 | Steps/Sec: 4.90
+[2025-12-19 02:05:27] Beginning epoch 291...
+Beginning epoch 291...
+Loss: 0.15614190697669983
+Loss: 0.13094446063041687
+Loss: 0.11832790076732635
+Loss: 0.10068506747484207
+Loss: 0.131000816822052
+[2025-12-19 02:05:28] (step=0002915) Train Loss: 0.1274, Train Steps/Sec: 3.78
+✓ Step 0002915 | Loss: 0.1274 | Steps/Sec: 3.78
+Loss: 0.14708545804023743
+Loss: 0.13528206944465637
+Loss: 0.13389968872070312
+Loss: 0.11861934512853622
+Loss: 0.13901959359645844
+[2025-12-19 02:05:29] (step=0002920) Train Loss: 0.1348, Train Steps/Sec: 4.90
+✓ Step 0002920 | Loss: 0.1348 | Steps/Sec: 4.90
+[2025-12-19 02:05:29] Beginning epoch 292...
+Beginning epoch 292...
+Loss: 0.13398268818855286
+Loss: 0.13938814401626587
+Loss: 0.1861756145954132
+Loss: 0.12919887900352478
+Loss: 0.16487853229045868
+[2025-12-19 02:05:31] (step=0002925) Train Loss: 0.1507, Train Steps/Sec: 3.78
+✓ Step 0002925 | Loss: 0.1507 | Steps/Sec: 3.78
+Loss: 0.11045069247484207
+Loss: 0.13760444521903992
+Loss: 0.18905875086784363
+Loss: 0.19019939005374908
+Loss: 0.1924893856048584
+[2025-12-19 02:05:32] (step=0002930) Train Loss: 0.1640, Train Steps/Sec: 4.90
+✓ Step 0002930 | Loss: 0.1640 | Steps/Sec: 4.90
+[2025-12-19 02:05:32] Beginning epoch 293...
+Beginning epoch 293...
+Loss: 0.19016404449939728
+Loss: 0.10545048117637634
+Loss: 0.11291889101266861
+Loss: 0.14550159871578217
+Loss: 0.08126142621040344
+[2025-12-19 02:05:33] (step=0002935) Train Loss: 0.1271, Train Steps/Sec: 3.78
+✓ Step 0002935 | Loss: 0.1271 | Steps/Sec: 3.78
+Loss: 0.15340039134025574
+Loss: 0.1392620950937271
+Loss: 0.16423307359218597
+Loss: 0.16222605109214783
+Loss: 0.18719713389873505
+[2025-12-19 02:05:34] (step=0002940) Train Loss: 0.1613, Train Steps/Sec: 4.90
+✓ Step 0002940 | Loss: 0.1613 | Steps/Sec: 4.90
+[2025-12-19 02:05:34] Beginning epoch 294...
+Beginning epoch 294...
+Loss: 0.14473570883274078
+Loss: 0.12373265624046326
+Loss: 0.15590888261795044
+Loss: 0.11832994222640991
+Loss: 0.1133374571800232
+[2025-12-19 02:05:35] (step=0002945) Train Loss: 0.1312, Train Steps/Sec: 3.79
+✓ Step 0002945 | Loss: 0.1312 | Steps/Sec: 3.79
+Loss: 0.11750376224517822
+Loss: 0.10444384068250656
+Loss: 0.1287098079919815
+Loss: 0.1658942699432373
+Loss: 0.11625315994024277
+[2025-12-19 02:05:36] (step=0002950) Train Loss: 0.1266, Train Steps/Sec: 4.89
+✓ Step 0002950 | Loss: 0.1266 | Steps/Sec: 4.89
+[2025-12-19 02:05:36] Beginning epoch 295...
+Beginning epoch 295...
+Loss: 0.14773297309875488
+Loss: 0.09130264073610306
+Loss: 0.12659236788749695
+Loss: 0.1875782012939453
+Loss: 0.11527364701032639
+[2025-12-19 02:05:38] (step=0002955) Train Loss: 0.1337, Train Steps/Sec: 3.79
+✓ Step 0002955 | Loss: 0.1337 | Steps/Sec: 3.79
+Loss: 0.1294725239276886
+Loss: 0.11075065284967422
+Loss: 0.18533934652805328
+Loss: 0.17229041457176208
+Loss: 0.14853236079216003
+[2025-12-19 02:05:39] (step=0002960) Train Loss: 0.1493, Train Steps/Sec: 4.89
+✓ Step 0002960 | Loss: 0.1493 | Steps/Sec: 4.89
+[2025-12-19 02:05:39] Beginning epoch 296...
+Beginning epoch 296...
+Loss: 0.10565846413373947
+Loss: 0.17568962275981903
+Loss: 0.09851274639368057
+Loss: 0.12342773377895355
+Loss: 0.15348927676677704
+[2025-12-19 02:05:40] (step=0002965) Train Loss: 0.1314, Train Steps/Sec: 3.79
+✓ Step 0002965 | Loss: 0.1314 | Steps/Sec: 3.79
+Loss: 0.1439606100320816
+Loss: 0.15804243087768555
+Loss: 0.18068592250347137
+Loss: 0.14960867166519165
+Loss: 0.10507965087890625
+[2025-12-19 02:05:41] (step=0002970) Train Loss: 0.1475, Train Steps/Sec: 4.88
+✓ Step 0002970 | Loss: 0.1475 | Steps/Sec: 4.88
+[2025-12-19 02:05:41] Beginning epoch 297...
+Beginning epoch 297...
+Loss: 0.156873419880867
+Loss: 0.13994228839874268
+Loss: 0.10558105260133743
+Loss: 0.165420800447464
+Loss: 0.09789763391017914
+[2025-12-19 02:05:42] (step=0002975) Train Loss: 0.1331, Train Steps/Sec: 3.80
+✓ Step 0002975 | Loss: 0.1331 | Steps/Sec: 3.80
+Loss: 0.13939686119556427
+Loss: 0.08457227796316147
+Loss: 0.14405588805675507
+Loss: 0.15805885195732117
+Loss: 0.14307668805122375
+[2025-12-19 02:05:43] (step=0002980) Train Loss: 0.1338, Train Steps/Sec: 4.90
+✓ Step 0002980 | Loss: 0.1338 | Steps/Sec: 4.90
+[2025-12-19 02:05:43] Beginning epoch 298...
+Beginning epoch 298...
+Loss: 0.16837984323501587
+Loss: 0.16941411793231964
+Loss: 0.1381361037492752
+Loss: 0.22277790307998657
+Loss: 0.14079466462135315
+[2025-12-19 02:05:45] (step=0002985) Train Loss: 0.1679, Train Steps/Sec: 3.80
+✓ Step 0002985 | Loss: 0.1679 | Steps/Sec: 3.80
+Loss: 0.12752194702625275
+Loss: 0.13892517983913422
+Loss: 0.12571917474269867
+Loss: 0.1485644280910492
+Loss: 0.14275477826595306
+[2025-12-19 02:05:46] (step=0002990) Train Loss: 0.1367, Train Steps/Sec: 4.89
+✓ Step 0002990 | Loss: 0.1367 | Steps/Sec: 4.89
+[2025-12-19 02:05:46] Beginning epoch 299...
+Beginning epoch 299...
+Loss: 0.1446024477481842
+Loss: 0.1722233146429062
+Loss: 0.12648068368434906
+Loss: 0.0880638137459755
+Loss: 0.10064245015382767
+[2025-12-19 02:05:47] (step=0002995) Train Loss: 0.1264, Train Steps/Sec: 3.83
+✓ Step 0002995 | Loss: 0.1264 | Steps/Sec: 3.83
+Loss: 0.14324671030044556
+Loss: 0.16884391009807587
+Loss: 0.1728818118572235
+Loss: 0.09847072511911392
+Loss: 0.13689324259757996
+[2025-12-19 02:05:48] (step=0003000) Train Loss: 0.1441, Train Steps/Sec: 4.90
+✓ Step 0003000 | Loss: 0.1441 | Steps/Sec: 4.90
+[2025-12-19 02:05:49] Saved checkpoint to ./dit_fine_resluts//000-DiT-XL-2-x2-finetune/checkpoints/0003000.pt (Model contains only trainable params)
+[2025-12-19 02:05:50] Beginning epoch 300...
+Beginning epoch 300...
+Loss: 0.10225921124219894
+Loss: 0.10449940711259842
+Loss: 0.1789320558309555
+Loss: 0.15336915850639343
+Loss: 0.11378190666437149
+[2025-12-19 02:05:51] (step=0003005) Train Loss: 0.1306, Train Steps/Sec: 1.84
+✓ Step 0003005 | Loss: 0.1306 | Steps/Sec: 1.84
+Loss: 0.11869896948337555
+Loss: 0.11741036176681519
+Loss: 0.13535736501216888
+Loss: 0.12077923864126205
+Loss: 0.17238707840442657
+[2025-12-19 02:05:52] (step=0003010) Train Loss: 0.1329, Train Steps/Sec: 4.90
+✓ Step 0003010 | Loss: 0.1329 | Steps/Sec: 4.90
+[2025-12-19 02:05:52] Beginning epoch 301...
+Beginning epoch 301...
+Loss: 0.1299222856760025
+Loss: 0.08927171677350998
+Loss: 0.13791032135486603
+Loss: 0.16593840718269348
+Loss: 0.13838914036750793
+[2025-12-19 02:05:53] (step=0003015) Train Loss: 0.1323, Train Steps/Sec: 3.79
+✓ Step 0003015 | Loss: 0.1323 | Steps/Sec: 3.79
+Loss: 0.11496274918317795
+Loss: 0.1536707729101181
+Loss: 0.1516251116991043
+Loss: 0.12379685044288635
+Loss: 0.13191023468971252
+[2025-12-19 02:05:54] (step=0003020) Train Loss: 0.1352, Train Steps/Sec: 4.90
+✓ Step 0003020 | Loss: 0.1352 | Steps/Sec: 4.90
+[2025-12-19 02:05:54] Beginning epoch 302...
+Beginning epoch 302...
+Loss: 0.15011194348335266
+Loss: 0.11708267033100128
+Loss: 0.15593545138835907
+Loss: 0.16960284113883972
+Loss: 0.1171015128493309
+[2025-12-19 02:05:56] (step=0003025) Train Loss: 0.1420, Train Steps/Sec: 3.78
+✓ Step 0003025 | Loss: 0.1420 | Steps/Sec: 3.78
+Loss: 0.1672077476978302
+Loss: 0.08157289028167725
+Loss: 0.2531444728374481
+Loss: 0.12110339850187302
+Loss: 0.13589221239089966
+[2025-12-19 02:05:57] (step=0003030) Train Loss: 0.1518, Train Steps/Sec: 4.90
+✓ Step 0003030 | Loss: 0.1518 | Steps/Sec: 4.90
+[2025-12-19 02:05:57] Beginning epoch 303...
+Beginning epoch 303...
+Loss: 0.18165190517902374
+Loss: 0.11326127499341965
+Loss: 0.10722815990447998
+Loss: 0.1374131739139557
+Loss: 0.16848279535770416
+[2025-12-19 02:05:58] (step=0003035) Train Loss: 0.1416, Train Steps/Sec: 3.73
+✓ Step 0003035 | Loss: 0.1416 | Steps/Sec: 3.73
+Loss: 0.1850796490907669
+Loss: 0.13520188629627228
+Loss: 0.12773527204990387
+Loss: 0.11735944449901581
+Loss: 0.17381896078586578
+[2025-12-19 02:05:59] (step=0003040) Train Loss: 0.1478, Train Steps/Sec: 4.89
+✓ Step 0003040 | Loss: 0.1478 | Steps/Sec: 4.89
+[2025-12-19 02:05:59] Beginning epoch 304...
+Beginning epoch 304...
+Loss: 0.1529238522052765
+Loss: 0.13103105127811432
+Loss: 0.14688144624233246
+Loss: 0.2058412879705429
+Loss: 0.199722558259964
+[2025-12-19 02:06:00] (step=0003045) Train Loss: 0.1673, Train Steps/Sec: 3.81
+✓ Step 0003045 | Loss: 0.1673 | Steps/Sec: 3.81
+Loss: 0.1491834968328476
+Loss: 0.13130202889442444
+Loss: 0.10335474461317062
+Loss: 0.2093295007944107
+Loss: 0.1010771170258522
+[2025-12-19 02:06:01] (step=0003050) Train Loss: 0.1388, Train Steps/Sec: 4.89
+✓ Step 0003050 | Loss: 0.1388 | Steps/Sec: 4.89
+[2025-12-19 02:06:01] Beginning epoch 305...
+Beginning epoch 305...
+Loss: 0.13778632879257202
+Loss: 0.13886478543281555
+Loss: 0.10942630469799042
+Loss: 0.15234017372131348
+Loss: 0.12890252470970154
+[2025-12-19 02:06:03] (step=0003055) Train Loss: 0.1335, Train Steps/Sec: 3.78
+✓ Step 0003055 | Loss: 0.1335 | Steps/Sec: 3.78
+Loss: 0.17285197973251343
+Loss: 0.12470018118619919
+Loss: 0.11543271690607071
+Loss: 0.19262923300266266
+Loss: 0.12499571591615677
+[2025-12-19 02:06:04] (step=0003060) Train Loss: 0.1461, Train Steps/Sec: 4.89
+✓ Step 0003060 | Loss: 0.1461 | Steps/Sec: 4.89
+[2025-12-19 02:06:04] Beginning epoch 306...
+Beginning epoch 306...
+Loss: 0.1397438645362854
+Loss: 0.13001076877117157
+Loss: 0.17972315847873688
+Loss: 0.1595970094203949
+Loss: 0.0864936038851738
+[2025-12-19 02:06:05] (step=0003065) Train Loss: 0.1391, Train Steps/Sec: 3.80
+✓ Step 0003065 | Loss: 0.1391 | Steps/Sec: 3.80
+Loss: 0.1138431504368782
+Loss: 0.10279558598995209
+Loss: 0.14803549647331238
+Loss: 0.14001937210559845
+Loss: 0.10894519835710526
+[2025-12-19 02:06:06] (step=0003070) Train Loss: 0.1227, Train Steps/Sec: 4.90
+✓ Step 0003070 | Loss: 0.1227 | Steps/Sec: 4.90
+[2025-12-19 02:06:06] Beginning epoch 307...
+Beginning epoch 307...
+^C
+W1219 02:06:06.819000 3003 torch/distributed/elastic/agent/server/api.py:719] Received 2 death signal, shutting down workers
+W1219 02:06:06.820000 3003 torch/distributed/elastic/multiprocessing/api.py:899] Sending process 3019 closing signal SIGINT
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/ubuntu/DiT/train_x2_finetune.py", line 387, in <module>
+[rank0]:     main(args)
+[rank0]:   File "/home/ubuntu/DiT/train_x2_finetune.py", line 280, in main
+[rank0]:     loss_dict = diffusion.training_losses(model, x, t, model_kwargs)
+[rank0]:                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/ubuntu/DiT/diffusion/respace.py", line 97, in training_losses
+[rank0]:     return super().training_losses(self._wrap_model(model), *args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/ubuntu/DiT/diffusion/gaussian_diffusion.py", line 747, in training_losses
+[rank0]:     model_output = model(x_t, t, **model_kwargs)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/ubuntu/DiT/diffusion/respace.py", line 129, in __call__
+[rank0]:     return self.model(x, new_ts, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/lib/python3/dist-packages/torch/nn/parallel/distributed.py", line 1637, in forward
+[rank0]:     else self._run_ddp_forward(*inputs, **kwargs)
+[rank0]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/lib/python3/dist-packages/torch/nn/parallel/distributed.py", line 1464, in _run_ddp_forward
+[rank0]:     return self.module(*inputs, **kwargs)  # type: ignore[index]
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/ubuntu/DiT/models.py", line 388, in forward
+[rank0]:     x = block(x, c)
+[rank0]:         ^^^^^^^^^^^
+[rank0]:   File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/ubuntu/DiT/models.py", line 120, in forward
+[rank0]:     shift_msa, scale_msa, gate_msa, shift_mlp, scale_mlp, gate_mlp = self.adaLN_modulation(c).chunk(6, dim=1)
+[rank0]:                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/lib/python3/dist-packages/torch/nn/modules/module.py", line 1747, in _wrapped_call_impl
+[rank0]:     def _wrapped_call_impl(self, *args, **kwargs):
+
+[rank0]: KeyboardInterrupt

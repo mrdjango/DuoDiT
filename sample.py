@@ -44,7 +44,7 @@ def main(args):
     vae = AutoencoderKL.from_pretrained(f"stabilityai/sd-vae-ft-{args.vae}").to(device)
 
     # Labels to condition the model with (feel free to change):
-    class_labels = [207, 360, 387, 974, 88, 979, 417, 279]
+    class_labels = [359, 360, 361, 362, 363, 364, 365, 366, 367, 368]
 
     # Create sampling noise:
     n = len(class_labels)
@@ -71,7 +71,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=str, choices=list(DiT_models.keys()), default="DiT-XL/2")
-    parser.add_argument("--vae", type=str, choices=["ema", "mse"], default="mse")
+    parser.add_argument("--vae", type=str, choices=["ema", "mse"], default="ema")
     parser.add_argument("--image-size", type=int, choices=[256, 512], default=256)
     parser.add_argument("--num-classes", type=int, default=1000)
     parser.add_argument("--cfg-scale", type=float, default=4.0)
