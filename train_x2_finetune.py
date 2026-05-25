@@ -415,14 +415,14 @@ if __name__ == "__main__":
     parser.add_argument("--num-classes", type=int, default=1000)
     parser.add_argument("--epochs", type=int, default=1400)
     parser.add_argument("--global-batch-size", type=int, default=256)
-    parser.add_argument("--global-seed", type=int, default=0)
+    parser.add_argument("--global-seed", type=int, default=42)
     parser.add_argument("--vae", type=str, choices=["ema", "mse"], default="ema")  # Choice doesn't affect training
     parser.add_argument("--num-workers", type=int, default=4)
     parser.add_argument("--log-every", type=int, default=100)
     parser.add_argument("--ckpt-every", type=int, default=50_000)
     
     # New arguments
-    parser.add_argument("--classes", type=int, nargs="+", default=list(range(10)), help="List of ImageNet class indices to train on (default: 0-9)")
+    parser.add_argument("--classes", type=int, nargs="+", required=True, help="List of ImageNet class indices to train on (default: 0-9)")
     parser.add_argument("--pretrained-ckpt", type=str, default=None, 
                         help="Path to base pre-trained DiT checkpoint (e.g., DiT-XL-2-256x256.pt). Required for proper fine-tuning.")
 
