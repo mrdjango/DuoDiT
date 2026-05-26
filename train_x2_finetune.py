@@ -656,7 +656,8 @@ if __name__ == "__main__":
                         help="Keep completed epoch progress bars visible.")
     
     # New arguments
-    parser.add_argument("--classes", type=int, nargs="+", required=True, help="List of ImageNet class indices to train on (default: 0-9)")
+    parser.add_argument("--classes", type=int, default=list(range(0,1000)),
+                        nargs="+", required=True, help="List of ImageNet class indices to train on (default: 0-9)")
     parser.add_argument("--pretrained-ckpt", type=str, default=None, 
                         help="Path to base pre-trained DiT checkpoint (e.g., DiT-XL-2-256x256.pt). Required for proper fine-tuning.")
 
