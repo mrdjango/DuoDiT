@@ -1,3 +1,17 @@
 .vscode/settings.json
 .cache/
 __pycache__/
+**/__pycache__/*
+__pycache__/**
+dit_fid50k_samples/
+dit_samples/
+duodit_samples/
+ILSVRC2012_devkit_t12/
+imagenet_train/
+ILSVRC2012_devkit_t12/**
+imagenet_val_organized/
+results/
+*.tar*
+pretrained_models/
+logs/
+.ipynb_checkpoints/
