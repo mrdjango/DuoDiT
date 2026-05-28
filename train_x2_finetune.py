@@ -14,7 +14,7 @@ torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.allow_tf32 = True
 import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel as DDP
-from torch.utils.data import DataLoader, Subset
+from torch.utils.data import DataLoader, Dataset, Subset
 from torch.utils.data.distributed import DistributedSampler
 from torchvision.datasets import ImageFolder
 from torchvision import transforms
@@ -25,6 +25,8 @@ from copy import deepcopy
 from glob import glob
 from time import time
 import argparse
+import hashlib
+import json
 import logging
 import os
 
@@ -33,22 +35,82 @@ from diffusion import create_diffusion
 from diffusers.models import AutoencoderKL
 from download import find_model
 
+try:
+    from tqdm import tqdm
+except ImportError:
+    tqdm = None
+
+CHECKPOINT_FORMAT = "x2_adapter_peft_v1"
+
 
 #################################################################################
 #                             Training Helper Functions                         #
 #################################################################################
 
+
+def unwrap_compiled_model(model):
+    """
+    Return the original nn.Module when torch.compile wraps it in an OptimizedModule.
+    """
+    return getattr(model, "_orig_mod", model)
+
+
+def get_trainable_keys(model):
+    """
+    Return parameter names that participate in PEFT updates.
+    """
+    model = unwrap_compiled_model(model)
+    return [name for name, param in model.named_parameters() if param.requires_grad]
+
+
+def filtered_state_dict(model, keys):
+    """
+    Return a CPU state dict containing only selected parameter keys.
+    """
+    model = unwrap_compiled_model(model)
+    state = model.state_dict()
+    return {key: state[key].detach().cpu() for key in keys if key in state}
+
+
 @torch.no_grad()
-def update_ema(ema_model, model, decay=0.9999):
+def update_ema(ema_model, model, trainable_keys=None, decay=0.9999):
     """
-    Step the EMA model towards the current model.
+    Step the EMA model towards the current model for trainable PEFT params only.
     """
+    model = unwrap_compiled_model(model)
     ema_params = OrderedDict(ema_model.named_parameters())
     model_params = OrderedDict(model.named_parameters())
+    keys = trainable_keys if trainable_keys is not None else model_params.keys()
 
-    for name, param in model_params.items():
-        # TODO: Consider applying only to params that require_grad to avoid small numerical changes of pos_embed
+    for name in keys:
+        param = model_params[name]
         ema_params[name].mul_(decay).add_(param.data, alpha=1 - decay)
+
+
+def build_peft_checkpoint(model, ema_model, opt, args, trainable_keys, step, loss=None, best=False):
+    """
+    Build a lightweight adapter-only checkpoint.
+    """
+    base_ckpt_abs = None
+    if args.pretrained_ckpt and os.path.isfile(args.pretrained_ckpt):
+        base_ckpt_abs = os.path.abspath(args.pretrained_ckpt)
+    checkpoint = {
+        "model": filtered_state_dict(model, trainable_keys),
+        "ema": filtered_state_dict(ema_model, trainable_keys),
+        "opt": opt.state_dict(),
+        "args": args,
+        "checkpoint_format": CHECKPOINT_FORMAT,
+        "base_ckpt": args.pretrained_ckpt,
+        "base_ckpt_abs": base_ckpt_abs,
+        "trainable_keys": list(trainable_keys),
+        "x2_finetune_only": True,
+        "step": step,
+    }
+    if loss is not None:
+        checkpoint["loss"] = loss
+    if best:
+        checkpoint["best"] = True
+    return checkpoint
 
 
 def requires_grad(model, flag=True):
@@ -105,6 +167,141 @@ def center_crop_arr(pil_image, image_size):
     return Image.fromarray(arr[crop_y: crop_y + image_size, crop_x: crop_x + image_size])
 
 
+class LatentCacheDataset(Dataset):
+    """
+    In-memory dataset backed by cached VAE latents and original ImageNet labels.
+    """
+    def __init__(self, cache_path):
+        payload = torch.load(cache_path, map_location="cpu", weights_only=False)
+        self.latents = payload["latents"]
+        self.labels = payload["labels"].long()
+        self.manifest = payload.get("manifest", {})
+
+    def __len__(self):
+        return self.labels.shape[0]
+
+    def __getitem__(self, index):
+        return self.latents[index], self.labels[index]
+
+
+def create_image_transform(image_size, random_flip):
+    ops = [transforms.Lambda(lambda pil_image: center_crop_arr(pil_image, image_size))]
+    if random_flip:
+        ops.append(transforms.RandomHorizontalFlip())
+    ops.extend([
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5], inplace=True)
+    ])
+    return transforms.Compose(ops)
+
+
+def dataloader_kwargs(args):
+    kwargs = {
+        "num_workers": args.num_workers,
+        "pin_memory": True,
+    }
+    if args.num_workers > 0:
+        kwargs["persistent_workers"] = True
+        kwargs["prefetch_factor"] = args.prefetch_factor
+    return kwargs
+
+
+def make_progress_bar(loader, args, rank, epoch, logger):
+    """
+    Return a rank-0 tqdm wrapper for training progress, or the raw loader.
+    """
+    if rank != 0 or not args.progress:
+        return loader, None
+    if tqdm is None:
+        if epoch == 0:
+            logger.warning("tqdm is not installed; progress bar disabled.")
+        return loader, None
+    progress = tqdm(
+        loader,
+        total=len(loader),
+        desc=f"epoch {epoch + 1}/{args.epochs}",
+        dynamic_ncols=True,
+        leave=args.progress_leave,
+    )
+    return progress, progress
+
+
+def update_progress_bar(progress, args, train_steps, epoch, loss, best_loss, opt, x, t, using_latent_cache):
+    if progress is None or train_steps % max(args.progress_update_every, 1) != 0:
+        return
+
+    postfix = {
+        "step": train_steps,
+        "loss": f"{loss.item():.4f}",
+    }
+    if args.debug_progress:
+        lr = opt.param_groups[0]["lr"] if opt.param_groups else 0.0
+        postfix.update({
+            "epoch": epoch + 1,
+            "batch": x.shape[0],
+            "lr": f"{lr:.1e}",
+            "best": f"{best_loss:.4f}" if best_loss < float("inf") else "inf",
+            "t": f"{int(t.min().item())}-{int(t.max().item())}",
+            "src": "cache" if using_latent_cache else "vae",
+        })
+    progress.set_postfix(postfix)
+
+
+def latent_cache_path(args, full_dataset, selected_indices):
+    data_path = os.path.abspath(args.data_path)
+    sample_entries = []
+    for index in selected_indices:
+        path, label = full_dataset.samples[index]
+        stat = os.stat(path)
+        sample_entries.append({
+            "path": os.path.relpath(path, data_path),
+            "label": int(label),
+            "size": int(stat.st_size),
+            "mtime_ns": int(stat.st_mtime_ns),
+        })
+
+    manifest = {
+        "data_path": data_path,
+        "image_size": args.image_size,
+        "vae": args.vae,
+        "classes": sorted(int(cls) for cls in args.classes),
+        "samples": sample_entries,
+    }
+    digest = hashlib.sha256(json.dumps(manifest, sort_keys=True).encode("utf-8")).hexdigest()[:16]
+    return os.path.join(args.latent_cache_dir, f"latents-{digest}.pt"), manifest
+
+
+@torch.no_grad()
+def build_latent_cache(dataset, cache_path, manifest, vae, device, args, logger):
+    os.makedirs(args.latent_cache_dir, exist_ok=True)
+    loader = DataLoader(
+        dataset,
+        batch_size=args.latent_cache_batch_size,
+        shuffle=False,
+        drop_last=False,
+        **dataloader_kwargs(args)
+    )
+    vae.eval()
+    latents = []
+    labels = []
+    logger.info(f"Building latent cache at {cache_path}...")
+    for x, y in loader:
+        x = x.to(device, non_blocking=True)
+        latent = vae.encode(x).latent_dist.sample().mul_(0.18215)
+        latents.append(latent.cpu())
+        labels.append(y.cpu())
+
+    payload = {
+        "latents": torch.cat(latents, dim=0),
+        "labels": torch.cat(labels, dim=0).long(),
+        "manifest": manifest,
+    }
+    tmp_path = f"{cache_path}.tmp"
+    torch.save(payload, tmp_path)
+    os.replace(tmp_path, cache_path)
+    logger.info(f"Saved latent cache with {payload['latents'].shape[0]:,} samples.")
+
+
 #################################################################################
 #                                  Training Loop                                #
 #################################################################################
@@ -119,7 +316,8 @@ def main(args):
     dist.init_process_group("nccl")
     assert args.global_batch_size % dist.get_world_size() == 0, f"Batch size must be divisible by world size."
     rank = dist.get_rank()
-    device = rank % torch.cuda.device_count()
+    device_id = rank % torch.cuda.device_count()
+    device = torch.device("cuda", device_id)
     seed = args.global_seed * dist.get_world_size() + rank
     torch.manual_seed(seed)
     torch.cuda.set_device(device)
@@ -233,25 +431,26 @@ def main(args):
     logger.info(f"  {'-'*60}")
     logger.info(f"  TOTAL TRAINABLE:    {trainable_params:>12,} / {total_params:,} ({trainable_params/total_params:.2%})")
     logger.info(f"{'='*60}\n")
+    trainable_keys = get_trainable_keys(model)
     # --- FREEZING LOGIC END ---
 
     ema = deepcopy(model).to(device)  # Create an EMA of the model for use after training
     requires_grad(ema, False)
-    model = DDP(model.to(device), device_ids=[rank])
+    model = model.to(device)
+    if args.compile:
+        if not hasattr(torch, "compile"):
+            raise RuntimeError("--compile requires PyTorch 2.0 or newer.")
+        logger.info(f"Compiling model with torch.compile(mode={args.compile_mode!r})...")
+        model = torch.compile(model, mode=args.compile_mode)
+    model = DDP(model, device_ids=[device_id])
     diffusion = create_diffusion(timestep_respacing="")  # default: 1000 steps, linear noise schedule
-    vae = AutoencoderKL.from_pretrained(f"stabilityai/sd-vae-ft-{args.vae}").to(device)
 
     # Setup optimizer (we used default Adam betas=(0.9, 0.999) and a constant learning rate of 1e-4 in our paper):
     # Only pass trainable parameters to the optimizer
     opt = torch.optim.AdamW(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-4, weight_decay=0)
 
     # Setup data:
-    transform = transforms.Compose([
-        transforms.Lambda(lambda pil_image: center_crop_arr(pil_image, args.image_size)),
-        transforms.RandomHorizontalFlip(),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5], inplace=True)
-    ])
+    transform = create_image_transform(args.image_size, random_flip=not args.cache_latents)
     
     # --- DATASET FILTERING START ---
     full_dataset = ImageFolder(args.data_path, transform=transform)
@@ -263,9 +462,29 @@ def main(args):
     if len(selected_indices) == 0:
         raise ValueError(f"No images found for classes {args.classes}. Check your dataset or class indices.")
         
-    dataset = Subset(full_dataset, selected_indices)
-    logger.info(f"Filtered Dataset contains {len(dataset):,} images (from {len(full_dataset)} total)")
+    image_dataset = Subset(full_dataset, selected_indices)
+    logger.info(f"Filtered Dataset contains {len(image_dataset):,} images (from {len(full_dataset)} total)")
     # --- DATASET FILTERING END ---
+
+    using_latent_cache = args.cache_latents
+    vae = None
+    if using_latent_cache:
+        cache_path, cache_manifest = latent_cache_path(args, full_dataset, selected_indices)
+        needs_cache_build = args.rebuild_latent_cache or not os.path.isfile(cache_path)
+        if rank == 0:
+            if needs_cache_build:
+                vae = AutoencoderKL.from_pretrained(f"stabilityai/sd-vae-ft-{args.vae}").to(device)
+                build_latent_cache(image_dataset, cache_path, cache_manifest, vae, device, args, logger)
+                del vae
+                vae = None
+            else:
+                logger.info(f"Reusing latent cache at {cache_path}")
+        dist.barrier()
+        dataset = LatentCacheDataset(cache_path)
+        logger.info(f"Latent cache contains {len(dataset):,} samples")
+    else:
+        dataset = image_dataset
+        vae = AutoencoderKL.from_pretrained(f"stabilityai/sd-vae-ft-{args.vae}").to(device)
 
     sampler = DistributedSampler(
         dataset,
@@ -279,13 +498,12 @@ def main(args):
         batch_size=int(args.global_batch_size // dist.get_world_size()),
         shuffle=False,
         sampler=sampler,
-        num_workers=args.num_workers,
-        pin_memory=True,
-        drop_last=True
+        drop_last=True,
+        **dataloader_kwargs(args)
     )
 
     # Prepare models for training:
-    update_ema(ema, model.module, decay=0)  # Ensure EMA is initialized with synced weights
+    update_ema(ema, model.module, trainable_keys=trainable_keys, decay=0)  # Ensure EMA is initialized with synced weights
     model.train()  # important! This enables embedding dropout for classifier-free guidance
     ema.eval()  # EMA model should always be in eval mode
 
@@ -300,26 +518,31 @@ def main(args):
     for epoch in range(args.epochs):
         sampler.set_epoch(epoch)
         logger.info(f"Beginning epoch {epoch}...")
-        print(f"Beginning epoch {epoch}...")
-        for x, y in loader:
-            x = x.to(device)
-            y = y.to(device)
-            with torch.no_grad():
-                # Map input images to latent space + normalize latents:
-                x = vae.encode(x).latent_dist.sample().mul_(0.18215)
+        epoch_loader, progress = make_progress_bar(loader, args, rank, epoch, logger)
+        for x, y in epoch_loader:
+            x = x.to(device, non_blocking=True)
+            y = y.to(device, non_blocking=True)
+            if using_latent_cache:
+                flip_ids = torch.rand(x.shape[0], device=device) < 0.5
+                if flip_ids.any():
+                    x[flip_ids] = torch.flip(x[flip_ids], dims=[3])
+            else:
+                with torch.no_grad():
+                    # Map input images to latent space + normalize latents:
+                    x = vae.encode(x).latent_dist.sample().mul_(0.18215)
             t = torch.randint(0, diffusion.num_timesteps, (x.shape[0],), device=device)
             model_kwargs = dict(y=y)
             loss_dict = diffusion.training_losses(model, x, t, model_kwargs)
             loss = loss_dict["loss"].mean()
-            opt.zero_grad()
+            opt.zero_grad(set_to_none=True)
             loss.backward()
             opt.step()
-            update_ema(ema, model.module)
-            print(f"Loss: {loss.item()}")
+            update_ema(ema, model.module, trainable_keys=trainable_keys)
             # Log loss values:
             running_loss += loss.item()
             log_steps += 1
             train_steps += 1
+            update_progress_bar(progress, args, train_steps, epoch, loss, best_loss, opt, x, t, using_latent_cache)
             if train_steps % args.log_every == 0:
                 # Measure training speed:
                 torch.cuda.synchronize()
@@ -336,27 +559,24 @@ def main(args):
                 # Save best checkpoint if loss improved
                 if rank == 0 and avg_loss < best_loss:
                     best_loss = avg_loss
-                    # Only save weights that were trainable to save space
-                    trainable_keys = [k for k, p in model.module.named_parameters() if p.requires_grad]
-                    model_state = {k: v for k, v in model.module.state_dict().items() if k in trainable_keys}
+                    checkpoint = build_peft_checkpoint(
+                        model.module,
+                        ema,
+                        opt,
+                        args,
+                        trainable_keys,
+                        train_steps,
+                        loss=avg_loss,
+                        best=True
+                    )
                     
                     # Verify x2_cls_tokens is included in checkpoint
                     cls_token_in_checkpoint = 'x2_cls_tokens' in trainable_keys
                     if cls_token_in_checkpoint:
-                        logger.info(f"✓ x2_cls_tokens included in checkpoint (shape: {model_state['x2_cls_tokens'].shape})")
+                        logger.info(f"✓ x2_cls_tokens included in checkpoint (shape: {checkpoint['model']['x2_cls_tokens'].shape})")
                     else:
                         logger.warning("⚠️  x2_cls_tokens NOT found in trainable keys - this should not happen!")
-                    
-                    checkpoint = {
-                        "model": model_state,
-                        "ema": ema.state_dict(),
-                        "opt": opt.state_dict(),
-                        "args": args,
-                        "x2_finetune_only": True,
-                        "step": train_steps,
-                        "loss": avg_loss,
-                        "best": True
-                    }
+
                     best_checkpoint_path = f"{checkpoint_dir}/epoch-{epoch}-loss-{best_loss:.4f}.pt"
                     torch.save(checkpoint, best_checkpoint_path)
                     logger.info(f"Saved BEST checkpoint to {best_checkpoint_path} (Loss: {avg_loss:.4f})")
@@ -370,33 +590,23 @@ def main(args):
             # Save DiT checkpoint (periodic):
             if train_steps % args.ckpt_every == 0 and train_steps > 0:
                 if rank == 0:
-                    # Only save weights that were trainable to save space
-                    trainable_keys = [k for k, p in model.module.named_parameters() if p.requires_grad]
-                    model_state = {k: v for k, v in model.module.state_dict().items() if k in trainable_keys}
-                    
                     # Verify x2_cls_tokens is included in checkpoint
                     if 'x2_cls_tokens' in trainable_keys:
                         logger.info(f"✓ x2_cls_tokens included in periodic checkpoint")
-                    
-                    checkpoint = {
-                        "model": model_state, 
-                        # We save full EMA for now to be safe, or we could also just save partial EMA if needed
-                        # But EMA usually keeps track of everything. To be safe for inference, let's keep full EMA or just trainable parts.
-                        # For simplicity in this specialized script, let's stick to full EMA so inference scripts don't break,
-                        # UNLESS the user explicitly wants lightweight.
-                        # Given the user asked for LoRA-like "efficient" storage, best to save only what changed. 
-                        # But standard inference scripts expect full state dict. 
-                        # Compromise: Save full EMA (for immediate use) but partial model (for resume/space).
-                        "ema": ema.state_dict(),
-                        "opt": opt.state_dict(),
-                        "args": args,
-                        "x2_finetune_only": True,
-                        "step": train_steps
-                    }
+                    checkpoint = build_peft_checkpoint(
+                        model.module,
+                        ema,
+                        opt,
+                        args,
+                        trainable_keys,
+                        train_steps
+                    )
                     checkpoint_path = f"{checkpoint_dir}/{train_steps:07d}.pt"
                     torch.save(checkpoint, checkpoint_path)
                     logger.info(f"Saved checkpoint to {checkpoint_path} (Model contains only trainable params, including x2_cls_tokens)")
                 dist.barrier()
+        if progress is not None:
+            progress.close()
 
     model.eval()  # important! This disables randomized embedding dropout
     # do any sampling/FID calculation/etc. with ema (or model) in eval mode ...
@@ -418,11 +628,36 @@ if __name__ == "__main__":
     parser.add_argument("--global-seed", type=int, default=42)
     parser.add_argument("--vae", type=str, choices=["ema", "mse"], default="ema")  # Choice doesn't affect training
     parser.add_argument("--num-workers", type=int, default=4)
+    parser.add_argument("--prefetch-factor", type=int, default=4)
     parser.add_argument("--log-every", type=int, default=100)
     parser.add_argument("--ckpt-every", type=int, default=50_000)
+    cache_group = parser.add_mutually_exclusive_group()
+    cache_group.add_argument("--cache-latents", dest="cache_latents", action="store_true",
+                             help="Precompute and reuse VAE latents for this dataset/class subset.")
+    cache_group.add_argument("--no-cache-latents", dest="cache_latents", action="store_false",
+                             help="Encode images through the VAE on every training step.")
+    parser.set_defaults(cache_latents=True)
+    parser.add_argument("--latent-cache-dir", type=str, default=".cache/duodit_latents")
+    parser.add_argument("--rebuild-latent-cache", action="store_true")
+    parser.add_argument("--latent-cache-batch-size", type=int, default=64)
+    parser.add_argument("--compile", action="store_true", help="Enable torch.compile for the DiT model before DDP wrapping.")
+    parser.add_argument("--compile-mode", type=str, default="default")
+    progress_group = parser.add_mutually_exclusive_group()
+    progress_group.add_argument("--progress", dest="progress", action="store_true",
+                                help="Show a rank-0 tqdm progress bar during training.")
+    progress_group.add_argument("--no-progress", dest="progress", action="store_false",
+                                help="Disable the tqdm training progress bar.")
+    parser.set_defaults(progress=True)
+    parser.add_argument("--debug-progress", action="store_true",
+                        help="Show detailed progress-bar fields such as lr, timestep range, and data source.")
+    parser.add_argument("--progress-update-every", type=int, default=1,
+                        help="Update tqdm postfix every N train steps.")
+    parser.add_argument("--progress-leave", action="store_true",
+                        help="Keep completed epoch progress bars visible.")
     
     # New arguments
-    parser.add_argument("--classes", type=int, nargs="+", required=True, help="List of ImageNet class indices to train on (default: 0-9)")
+    parser.add_argument("--classes", type=int, default=list(range(0,1000)),
+                        nargs="+", required=True, help="List of ImageNet class indices to train on (default: 0-9)")
     parser.add_argument("--pretrained-ckpt", type=str, default=None, 
                         help="Path to base pre-trained DiT checkpoint (e.g., DiT-XL-2-256x256.pt). Required for proper fine-tuning.")
 

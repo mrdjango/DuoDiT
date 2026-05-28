@@ -1,4 +1,6 @@
 .vscode/settings.json
+.cache/
+__pycache__/
 **/__pycache__/*
 __pycache__/**
 dit_fid50k_samples/

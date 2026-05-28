@@ -13,6 +13,7 @@ import os
 
 
 pretrained_models = {'DiT-XL-2-512x512.pt', 'DiT-XL-2-256x256.pt'}
+X2_ADAPTER_CHECKPOINT_FORMAT = "x2_adapter_peft_v1"
 
 
 def find_model(model_name):
@@ -24,9 +25,31 @@ def find_model(model_name):
     else:  # Load a custom DiT checkpoint:
         assert os.path.isfile(model_name), f'Could not find DiT checkpoint at {model_name}'
         checkpoint = torch.load(model_name, map_location=lambda storage, loc: storage, weights_only=False)
+        if isinstance(checkpoint, dict) and checkpoint.get("checkpoint_format") == X2_ADAPTER_CHECKPOINT_FORMAT:
+            return load_x2_adapter_checkpoint(checkpoint)
         if "ema" in checkpoint:  # supports checkpoints from train.py
             checkpoint = checkpoint["ema"]
         return checkpoint
+
+
+def load_x2_adapter_checkpoint(checkpoint):
+    """
+    Merge a lightweight x2 PEFT checkpoint into its recorded base DiT state dict.
+    """
+    base_ckpt = checkpoint.get("base_ckpt")
+    base_ckpt_abs = checkpoint.get("base_ckpt_abs")
+    if base_ckpt and base_ckpt not in pretrained_models and not os.path.isfile(base_ckpt) and base_ckpt_abs:
+        base_ckpt = base_ckpt_abs
+    if not base_ckpt:
+        raise ValueError("x2 adapter checkpoints require a non-empty 'base_ckpt' field for inference.")
+
+    base_state = find_model(base_ckpt).copy()
+    adapter_state = checkpoint.get("ema") or checkpoint.get("model")
+    if not isinstance(adapter_state, dict):
+        raise ValueError("x2 adapter checkpoint is missing a valid 'ema' or 'model' state dict.")
+
+    base_state.update(adapter_state)
+    return base_state
 
 
 def download_model(model_name):
