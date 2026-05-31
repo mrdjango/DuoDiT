@@ -170,7 +170,6 @@ class DiT(nn.Module):
         self.patch_size = patch_size
         self.hidden_size = hidden_size
         self.num_heads = num_heads
-        self.debug_forward = False
 
         self.x_embedder = PatchEmbed(input_size, patch_size, in_channels, hidden_size, bias=True)
         self.x2_embedder = PatchEmbed(input_size, patch_size // 2, in_channels, hidden_size, bias=True)
@@ -434,8 +433,8 @@ class DiT(nn.Module):
             x2 = self.x2_vit_proj_out(x2)  # Project back to hidden_size
         # extract CLS tokens from x2
         x2 = x2[:, 4::5, :]  # Extract CLS tokens: (N, T, D)
-        if self.debug_forward:
-            print(f"[DiT Forward] x2 shape: {x2.shape}, x shape: {x.shape}", flush=True)
+        # shape of x2 and x
+        print(f"[DiT Forward] x2 shape: {x2.shape}, x shape: {x.shape}", flush=True)
         for i, block in enumerate(self.blocks):
             x = block(x, c)
             if self.x2_fuse_every and (i + 1) % self.x2_fuse_every == 0:
@@ -444,10 +443,10 @@ class DiT(nn.Module):
             x = x + x2
         
         # print(f"[DiT Forward] ✓ Skip org connection applied across {len(self.blocks)} blocks", flush=True)
-        if self.debug_forward:
-            print(f"[DiT Forward] x norm: {torch.norm(x)}, x2 norm: {torch.norm(x2)}", flush=True)
-            print(f"[DiT Forward] x min: {torch.min(x)}, x2 min: {torch.min(x2)}", flush=True)
-            print(f"[DiT Forward] x max: {torch.max(x)}, x2 max: {torch.max(x2)}", flush=True)
+        # print norms and min/max of x and x2
+        print(f"[DiT Forward] x norm: {torch.norm(x)}, x2 norm: {torch.norm(x2)}", flush=True)
+        print(f"[DiT Forward] x min: {torch.min(x)}, x2 min: {torch.min(x2)}", flush=True)
+        print(f"[DiT Forward] x max: {torch.max(x)}, x2 max: {torch.max(x2)}", flush=True)
         
         x = self.final_layer(x, c)                # (N, T, patch_size ** 2 * out_channels)
 
@@ -458,9 +457,8 @@ class DiT(nn.Module):
         """
         Forward pass of DiT, but also batches the unconditional forward pass for classifier-free guidance.
         """
-        if self.debug_forward:
-            print(f"\n{'='*60}")
-            print(f"[CFG] Input: {x.shape}, CFG scale: {cfg_scale}")
+        print(f"\n{'='*60}")
+        print(f"[CFG] Input: {x.shape}, CFG scale: {cfg_scale}")
         
         # https://github.com/openai/glide-text2im/blob/main/notebooks/text2im.ipynb
         half = x[: len(x) // 2]
@@ -477,12 +475,10 @@ class DiT(nn.Module):
         half_eps = uncond_eps + cfg_scale * (cond_eps - uncond_eps)
         eps = torch.cat([half_eps, half_eps], dim=0)
         
-        out = torch.cat([eps, rest], dim=1)
-        if self.debug_forward:
-            print(f"[CFG] ✓ Guidance applied, output: {out.shape}")
-            print(f"{'='*60}\n")
+        print(f"[CFG] ✓ Guidance applied, output: {torch.cat([eps, rest], dim=1).shape}")
+        print(f"{'='*60}\n")
         
-        return out
+        return torch.cat([eps, rest], dim=1)
 
 
 #################################################################################

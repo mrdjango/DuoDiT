@@ -1,0 +1,156 @@
+Starting rank=0, seed=42, world_size=1.
+[2026-05-26 15:44:50] Experiment directory created at /content/dit_checkpoints/000-DiT-XL-2-x2-finetune
+Creating DiT-XL/2 model...
+[DiT] Loading pre-trained ViT model: vit_large_patch16_224
+[2026-05-26 15:45:24] Loading pretrained weights from Hugging Face hub (timm/vit_large_patch16_224.augreg_in21k_ft_in1k)
+[2026-05-26 15:45:24] HTTP Request: HEAD https://huggingface.co/timm/vit_large_patch16_224.augreg_in21k_ft_in1k/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[2026-05-26 15:45:24] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[2026-05-26 15:45:24] HTTP Request: GET https://huggingface.co/api/models/timm/vit_large_patch16_224.augreg_in21k_ft_in1k/xet-read-token/0930ab3308b84cb2ae091a4a80703c459412a4c7 "HTTP/1.1 200 OK"
+model.safetensors: 100%|████████████████████| 1.22G/1.22G [00:03<00:00, 377MB/s]
+[2026-05-26 15:45:28] [timm/vit_large_patch16_224.augreg_in21k_ft_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+[DiT] Pre-trained ViT block: dim=1024, num_heads=16
+[DiT] Target x2_vit_block: dim=1152, num_heads=16
+[DiT] Dimensions don't match. Creating block with pretrained dimensions and projection layers...
+[DiT] ✓ Successfully loaded pre-trained ViT weights into block with dim=1024
+[DiT] Using projection layers to adapt dimensions: 1152 -> 1024 -> 1152
+[2026-05-26 15:45:29] Loading base pre-trained model from DiT-XL-2-256x256.pt...
+100%|██████████████████████████████████████| 2.70G/2.70G [02:23<00:00, 18.8MB/s]
+[2026-05-26 15:48:05] Missing keys when loading base model (will use random init): 19 keys
+[2026-05-26 15:48:05] x2-related keys missing (expected): 19 keys
+[2026-05-26 15:48:05] ✓ Base pre-trained model loaded successfully
+[2026-05-26 15:48:05] Freezing main DiT model...
+[2026-05-26 15:48:05] Unfreezing x2 components...
+[2026-05-26 15:48:05]   - Unfreezing x2_embedder...
+[2026-05-26 15:48:05]   - Unfreezing x2_cls_tokens (learnable CLS tokens)...
+[2026-05-26 15:48:05]     ✓ x2_cls_tokens shape: torch.Size([1, 256, 1152]), parameters: 294,912
+[2026-05-26 15:48:05]   - Unfreezing x2_vit_block...
+[2026-05-26 15:48:05]   - Unfreezing x2_vit_proj_in...
+[2026-05-26 15:48:05]   - Unfreezing x2_vit_proj_out...
+[2026-05-26 15:48:05]   - Unfreezing final_layer...
+[2026-05-26 15:48:05] 
+============================================================
+[2026-05-26 15:48:05] Trainable Parameters Breakdown:
+[2026-05-26 15:48:05]   x2_embedder:               5,760
+[2026-05-26 15:48:05]   x2_cls_tokens:           294,912  ⭐ (LEARNABLE CLS TOKENS)
+[2026-05-26 15:48:05]   x2_vit_block:         12,596,224
+[2026-05-26 15:48:05]   x2_vit_proj_in:        1,180,672
+[2026-05-26 15:48:05]   x2_vit_proj_out:       1,180,800
+[2026-05-26 15:48:05]   final_layer:           2,693,408
+[2026-05-26 15:48:05]   ------------------------------------------------------------
+[2026-05-26 15:48:05]   TOTAL TRAINABLE:      17,951,776 / 690,388,000 (2.60%)
+[2026-05-26 15:48:05] ============================================================
+
+[2026-05-26 15:48:14] Filtering dataset for classes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493, 494, 495, 496, 497, 498, 499, 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 512, 513, 514, 515, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564, 565, 566, 567, 568, 569, 570, 571, 572, 573, 574, 575, 576, 577, 578, 579, 580, 581, 582, 583, 584, 585, 586, 587, 588, 589, 590, 591, 592, 593, 594, 595, 596, 597, 598, 599, 600, 601, 602, 603, 604, 605, 606, 607, 608, 609, 610, 611, 612, 613, 614, 615, 616, 617, 618, 619, 620, 621, 622, 623, 624, 625, 626, 627, 628, 629, 630, 631, 632, 633, 634, 635, 636, 637, 638, 639, 640, 641, 642, 643, 644, 645, 646, 647, 648, 649, 650, 651, 652, 653, 654, 655, 656, 657, 658, 659, 660, 661, 662, 663, 664, 665, 666, 667, 668, 669, 670, 671, 672, 673, 674, 675, 676, 677, 678, 679, 680, 681, 682, 683, 684, 685, 686, 687, 688, 689, 690, 691, 692, 693, 694, 695, 696, 697, 698, 699, 700, 701, 702, 703, 704, 705, 706, 707, 708, 709, 710, 711, 712, 713, 714, 715, 716, 717, 718, 719, 720, 721, 722, 723, 724, 725, 726, 727, 728, 729, 730, 731, 732, 733, 734, 735, 736, 737, 738, 739, 740, 741, 742, 743, 744, 745, 746, 747, 748, 749, 750, 751, 752, 753, 754, 755, 756, 757, 758, 759, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 804, 805, 806, 807, 808, 809, 810, 811, 812, 813, 814, 815, 816, 817, 818, 819, 820, 821, 822, 823, 824, 825, 826, 827, 828, 829, 830, 831, 832, 833, 834, 835, 836, 837, 838, 839, 840, 841, 842, 843, 844, 845, 846, 847, 848, 849, 850, 851, 852, 853, 854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 872, 873, 874, 875, 876, 877, 878, 879, 880, 881, 882, 883, 884, 885, 886, 887, 888, 889, 890, 891, 892, 893, 894, 895, 896, 897, 898, 899, 900, 901, 902, 903, 904, 905, 906, 907, 908, 909, 910, 911, 912, 913, 914, 915, 916, 917, 918, 919, 920, 921, 922, 923, 924, 925, 926, 927, 928, 929, 930, 931, 932, 933, 934, 935, 936, 937, 938, 939, 940, 941, 942, 943, 944, 945, 946, 947, 948, 949, 950, 951, 952, 953, 954, 955, 956, 957, 958, 959, 960, 961, 962, 963, 964, 965, 966, 967, 968, 969, 970, 971, 972, 973, 974, 975, 976, 977, 978, 979, 980, 981, 982, 983, 984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 996, 997, 998, 999]
+[2026-05-26 15:48:15] Filtered Dataset contains 50,000 images (from 50000 total)
+/usr/local/lib/python3.12/dist-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+[2026-05-26 15:48:16] HTTP Request: HEAD https://huggingface.co/stabilityai/sd-vae-ft-ema/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+[2026-05-26 15:48:16] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/stabilityai/sd-vae-ft-ema/f04b2c4b98319346dad8c65879f680b1997b204a/config.json "HTTP/1.1 200 OK"
+[2026-05-26 15:48:16] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/stabilityai/sd-vae-ft-ema/f04b2c4b98319346dad8c65879f680b1997b204a/config.json "HTTP/1.1 200 OK"
+config.json: 100%|██████████████████████████████| 547/547 [00:00<00:00, 834kB/s]
+[2026-05-26 15:48:17] HTTP Request: HEAD https://huggingface.co/stabilityai/sd-vae-ft-ema/resolve/f04b2c4b98319346dad8c65879f680b1997b204a/diffusion_pytorch_model.safetensors.index.json "HTTP/1.1 404 Not Found"
+[2026-05-26 15:48:17] HTTP Request: HEAD https://huggingface.co/stabilityai/sd-vae-ft-ema/resolve/f04b2c4b98319346dad8c65879f680b1997b204a/diffusion_pytorch_model.safetensors "HTTP/1.1 302 Found"
+[2026-05-26 15:48:17] HTTP Request: GET https://huggingface.co/api/models/stabilityai/sd-vae-ft-ema/xet-read-token/f04b2c4b98319346dad8c65879f680b1997b204a "HTTP/1.1 200 OK"
+diffusion_pytorch_model.safetensors: 100%|███| 335M/335M [00:03<00:00, 87.6MB/s]
+[2026-05-26 15:48:21] Building latent cache at .cache/duodit_latents/latents-bd230994f987626c.pt...
+[2026-05-26 15:57:06] Saved latent cache with 50,000 samples.
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[2026-05-26 15:57:08] Latent cache contains 50,000 samples
+[2026-05-26 15:57:08] Training for 400 epochs...
+[2026-05-26 15:57:08] Beginning epoch 0...
+epoch 1/400: 100%|█| 200/200 [02:18<00:00,  1.45it/s, step=200, loss=0.1525, epo
+[2026-05-26 15:59:26] Beginning epoch 1...
+epoch 2/400: 100%|█| 200/200 [02:15<00:00,  1.47it/s, step=400, loss=0.1839, epo
+[2026-05-26 16:01:42] Beginning epoch 2...
+epoch 3/400:  50%|▍| 99/200 [01:08<01:08,  1.47it/s, step=500, loss=0.1568, epoc[2026-05-26 16:02:50] (step=0000500) Train Loss: 0.1595, Train Steps/Sec: 1.46
+✓ Step 0000500 | Loss: 0.1595 | Steps/Sec: 1.46
+[2026-05-26 16:02:51] ✓ x2_cls_tokens included in checkpoint (shape: torch.Size([1, 256, 1152]))
+[2026-05-26 16:02:51] Saved BEST checkpoint to /content/dit_checkpoints/000-DiT-XL-2-x2-finetune/checkpoints/epoch-2-loss-0.1595.pt (Loss: 0.1595)
+🏆 New best checkpoint saved! Loss: 0.1595
+[2026-05-26 16:02:51] ✓ x2_cls_tokens included in periodic checkpoint
+[2026-05-26 16:02:52] Saved checkpoint to /content/dit_checkpoints/000-DiT-XL-2-x2-finetune/checkpoints/0000500.pt (Model contains only trainable params, including x2_cls_tokens)
+epoch 3/400: 100%|█| 200/200 [02:18<00:00,  1.44it/s, step=600, loss=0.1470, epo
+[2026-05-26 16:04:00] Beginning epoch 3...
+epoch 4/400: 100%|█| 200/200 [02:16<00:00,  1.47it/s, step=800, loss=0.1917, epo
+[2026-05-26 16:06:17] Beginning epoch 4...
+epoch 5/400: 100%|▉| 199/200 [02:15<00:00,  1.48it/s, step=1000, loss=0.1790, ep[2026-05-26 16:08:32] (step=0001000) Train Loss: 0.1619, Train Steps/Sec: 1.47
+✓ Step 0001000 | Loss: 0.1619 | Steps/Sec: 1.47
+[2026-05-26 16:08:32] ✓ x2_cls_tokens included in periodic checkpoint
+[2026-05-26 16:08:33] Saved checkpoint to /content/dit_checkpoints/000-DiT-XL-2-x2-finetune/checkpoints/0001000.pt (Model contains only trainable params, including x2_cls_tokens)
+epoch 5/400: 100%|█| 200/200 [02:16<00:00,  1.47it/s, step=1000, loss=0.1790, ep
+[2026-05-26 16:08:33] Beginning epoch 5...
+epoch 6/400: 100%|█| 200/200 [02:15<00:00,  1.47it/s, step=1200, loss=0.1620, ep
+[2026-05-26 16:10:49] Beginning epoch 6...
+epoch 7/400:  84%|▊| 169/200 [01:55<00:21,  1.46it/s, step=1369, loss=0.1524, ep
+
+======== Resources =========================================
+============================================================
+SYSTEM INFORMATION
+============================================================
+Hostname: 452b1b359e0e
+Platform: Linux-5.15.0-136-generic-x86_64-with-glibc2.39
+Python: 3.12.13
+
+============================================================
+CPU INFORMATION
+============================================================
+Physical cores: 96
+Logical cores: 192
+CPU usage: 4.9%
+Model name:                           INTEL(R) XEON(R) PLATINUM 8568Y+
+
+============================================================
+RAM INFORMATION
+============================================================
+Total RAM: 2015.36 GB
+Available RAM: 1911.86 GB
+Used RAM: 103.50 GB
+RAM Usage: 5.1%
+
+============================================================
+DISK INFORMATION
+============================================================
+Total Disk: 32.00 GB
+Used Disk: 31.21 GB
+Free Disk: 0.79 GB
+
+============================================================
+GPU INFORMATION
+============================================================
+Torch version: 2.11.0+cu128
+CUDA version: 12.8
+CUDA available: True
+GPU count: 1
+
+----------------------------------------
+GPU 0: NVIDIA H200
+VRAM Total: 139.81 GB
+VRAM Allocated: 0.00 GB
+VRAM Reserved: 0.00 GB
+Compute Capability: 9.0
+Multiprocessors: 132
+
+============================================================
+NVIDIA-SMI
+============================================================
+Tue May 26 16:13:32 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H200                    On  |   00000000:CB:00.0 Off |                    0 |
+| N/A   47C    P0             82W /  700W |       4MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |

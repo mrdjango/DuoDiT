@@ -16,6 +16,7 @@ import torch.distributed as dist
 from models import DiT_models
 from download import find_model
 from diffusion import create_diffusion
+# pyrefly: ignore [missing-import]
 from diffusers.models import AutoencoderKL
 from tqdm import tqdm
 import os
@@ -23,6 +24,17 @@ from PIL import Image
 import numpy as np
 import math
 import argparse
+
+
+def format_class_label(classes, num_classes):
+    """
+    Return a compact folder-name label for the sampled class set.
+    """
+    if len(classes) == num_classes and classes == list(range(num_classes)):
+        return "all"
+    if len(classes) <= 8:
+        return "-".join(str(cls) for cls in classes)
+    return f"{classes[0]}-{classes[-1]}-n{len(classes)}"
 
 
 def create_npz_from_sample_folder(sample_dir, num=50_000):
@@ -79,12 +91,19 @@ def main(args):
     vae = AutoencoderKL.from_pretrained(f"stabilityai/sd-vae-ft-{args.vae}").to(device)
     assert args.cfg_scale >= 1.0, "In almost all cases, cfg_scale be >= 1.0"
     using_cfg = args.cfg_scale > 1.0
+    if len(args.classes) == 0:
+        raise ValueError("--classes must contain at least one class index.")
+    invalid_classes = [cls for cls in args.classes if cls < 0 or cls >= args.num_classes]
+    if invalid_classes:
+        raise ValueError(f"--classes contains invalid class indices for num_classes={args.num_classes}: {invalid_classes}")
+    class_choices = torch.tensor(args.classes, device=device, dtype=torch.long)
 
     # Create folder to save samples:
     model_string_name = args.model.replace("/", "-")
     ckpt_string_name = os.path.basename(args.ckpt).replace(".pt", "") if args.ckpt else "pretrained"
+    class_string_name = format_class_label(args.classes, args.num_classes)
     folder_name = f"{model_string_name}-{ckpt_string_name}-size-{args.image_size}-vae-{args.vae}-" \
-                  f"cfg-{args.cfg_scale}-seed-{args.global_seed}"
+                  f"cfg-{args.cfg_scale}-classes-{class_string_name}-seed-{args.global_seed}"
     sample_folder_dir = f"{args.sample_dir}/{folder_name}"
     if rank == 0:
         os.makedirs(sample_folder_dir, exist_ok=True)
@@ -108,7 +127,7 @@ def main(args):
     for _ in pbar:
         # Sample inputs:
         z = torch.randn(n, model.in_channels, latent_size, latent_size, device=device)
-        y = torch.randint(0, args.num_classes, (n,), device=device)
+        y = class_choices[torch.randint(0, len(class_choices), (n,), device=device)]
 
         # Setup classifier-free guidance:
         if using_cfg:
@@ -155,6 +174,8 @@ if __name__ == "__main__":
     parser.add_argument("--num-fid-samples", type=int, default=50_000)
     parser.add_argument("--image-size", type=int, choices=[256, 512], default=256)
     parser.add_argument("--num-classes", type=int, default=1000)
+    parser.add_argument("--classes", type=int, nargs="+", default=None,
+                        help="Optional ImageNet class indices to sample from. Defaults to all classes.")
     parser.add_argument("--cfg-scale",  type=float, default=1.5)
     parser.add_argument("--num-sampling-steps", type=int, default=250)
     parser.add_argument("--global-seed", type=int, default=0)
@@ -163,4 +184,8 @@ if __name__ == "__main__":
     parser.add_argument("--ckpt", type=str, default=None,
                         help="Optional path to a DiT checkpoint (default: auto-download a pre-trained DiT-XL/2 model).")
     args = parser.parse_args()
+    if args.classes is None:
+        args.classes = list(range(args.num_classes))
+    else:
+        args.classes = sorted(set(args.classes))
     main(args)
