@@ -188,4 +188,8 @@ if __name__ == "__main__":
         args.classes = list(range(args.num_classes))
     else:
         args.classes = sorted(set(args.classes))
-    main(args)
+    try:
+        main(args)
+    finally:
+        if dist.is_available() and dist.is_initialized():
+            dist.destroy_process_group()

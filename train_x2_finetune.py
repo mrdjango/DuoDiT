@@ -31,6 +31,7 @@ import os
 from models import DiT_models
 from diffusion import create_diffusion
 from diffusers.models import AutoencoderKL
+from checkpoint_io import atomic_torch_save
 from download import find_model
 
 
@@ -358,7 +359,7 @@ def main(args):
                         "best": True
                     }
                     best_checkpoint_path = f"{checkpoint_dir}/epoch-{epoch}-loss-{best_loss:.4f}.pt"
-                    torch.save(checkpoint, best_checkpoint_path)
+                    atomic_torch_save(checkpoint, best_checkpoint_path)
                     logger.info(f"Saved BEST checkpoint to {best_checkpoint_path} (Loss: {avg_loss:.4f})")
                     print(f"🏆 New best checkpoint saved! Loss: {avg_loss:.4f}", flush=True)
 
@@ -394,7 +395,7 @@ def main(args):
                         "step": train_steps
                     }
                     checkpoint_path = f"{checkpoint_dir}/{train_steps:07d}.pt"
-                    torch.save(checkpoint, checkpoint_path)
+                    atomic_torch_save(checkpoint, checkpoint_path)
                     logger.info(f"Saved checkpoint to {checkpoint_path} (Model contains only trainable params, including x2_cls_tokens)")
                 dist.barrier()
 
