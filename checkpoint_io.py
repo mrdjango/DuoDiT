@@ -58,6 +58,35 @@ def load_torch_checkpoint(path, map_location="cpu"):
         ) from exc
 
 
+def get_resume_position(checkpoint, steps_per_epoch):
+    """
+    Return ``(train_steps, epoch, step_in_epoch)`` for old and new checkpoints.
+
+    Older checkpoints only stored the global step, so derive their position from
+    the current loader length. New checkpoints store the explicit position.
+    """
+    if steps_per_epoch <= 0:
+        raise ValueError("steps_per_epoch must be positive")
+    if not isinstance(checkpoint, dict):
+        raise TypeError("checkpoint must be a dictionary")
+
+    train_steps = int(checkpoint.get("step", 0))
+    if train_steps < 0:
+        raise ValueError("checkpoint step cannot be negative")
+
+    if "epoch" in checkpoint and "step_in_epoch" in checkpoint:
+        epoch = int(checkpoint["epoch"])
+        step_in_epoch = int(checkpoint["step_in_epoch"])
+        if epoch < 0 or step_in_epoch < 0:
+            raise ValueError("checkpoint epoch position cannot be negative")
+        completed_epochs, step_in_epoch = divmod(step_in_epoch, steps_per_epoch)
+        epoch += completed_epochs
+    else:
+        epoch, step_in_epoch = divmod(train_steps, steps_per_epoch)
+
+    return train_steps, epoch, step_in_epoch
+
+
 def _fsync_directory(directory):
     flags = os.O_RDONLY
     if hasattr(os, "O_DIRECTORY"):

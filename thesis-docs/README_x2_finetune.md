@@ -48,6 +48,26 @@ To load these checkpoints for inference or resuming, you will need to:
 2.  Load the checkpoint with `strict=False` (since it's missing the frozen backbone weights).
     *   *Note: The script currently saves the full EMA state dict for valid inference out-of-the-box, but the 'model' key inside the checkpoint only has trainable weights.*
 
+### 4. Resume Training
+
+Use the same model, data, class, and batch-size arguments as the original run, and
+pass both the original base checkpoint and the training checkpoint:
+
+```bash
+torchrun --nnodes=1 --nproc_per_node=8 train_x2_finetune.py \
+    --model DiT-XL/2 \
+    --data-path /path/to/imagenet/train \
+    --classes 0 1 2 3 4 5 6 7 8 9 \
+    --global-batch-size 256 \
+    --epochs 400 \
+    --pretrained-ckpt DiT-XL-2-256x256.pt \
+    --resume results/000-DiT-XL-2-x2-finetune/checkpoints/0150000.pt
+```
+
+`--epochs` is the total target, not the number of additional epochs. The script
+restores model, EMA, optimizer, global step, and data position. Older checkpoints
+that only contain `step` are supported.
+
 ## Verification
 A test script `test_freezing.py` is included to verify that the freezing logic is working correctly (backbone gradients disabled, x2 gradients enabled).
 

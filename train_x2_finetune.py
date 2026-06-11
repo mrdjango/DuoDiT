@@ -27,11 +27,12 @@ from time import time
 import argparse
 import logging
 import os
+from pathlib import Path
 
 from models import DiT_models
 from diffusion import create_diffusion
 from diffusers.models import AutoencoderKL
-from checkpoint_io import atomic_torch_save
+from checkpoint_io import atomic_torch_save, get_resume_position, load_torch_checkpoint
 from download import find_model
 
 
@@ -128,14 +129,21 @@ def main(args):
 
     # Setup an experiment folder:
     if rank == 0:
-        os.makedirs(args.results_dir, exist_ok=True)  # Make results folder (holds all experiment subfolders)
-        experiment_index = len(glob(f"{args.results_dir}/*"))
-        model_string_name = args.model.replace("/", "-")  # e.g., DiT-XL/2 --> DiT-XL-2 (for naming folders)
-        experiment_dir = f"{args.results_dir}/{experiment_index:03d}-{model_string_name}-x2-finetune"  # Create an experiment folder
-        checkpoint_dir = f"{experiment_dir}/checkpoints"  # Stores saved model checkpoints
+        if args.resume is not None and Path(args.resume).parent.name == "checkpoints":
+            checkpoint_dir = str(Path(args.resume).resolve().parent)
+            experiment_dir = str(Path(checkpoint_dir).parent)
+        else:
+            os.makedirs(args.results_dir, exist_ok=True)  # Make results folder (holds all experiment subfolders)
+            experiment_index = len(glob(f"{args.results_dir}/*"))
+            model_string_name = args.model.replace("/", "-")  # e.g., DiT-XL/2 --> DiT-XL-2 (for naming folders)
+            experiment_dir = f"{args.results_dir}/{experiment_index:03d}-{model_string_name}-x2-finetune"
+            checkpoint_dir = f"{experiment_dir}/checkpoints"  # Stores saved model checkpoints
         os.makedirs(checkpoint_dir, exist_ok=True)
         logger = create_logger(experiment_dir)
-        logger.info(f"Experiment directory created at {experiment_dir}")
+        if args.resume is not None:
+            logger.info(f"Resuming experiment in {experiment_dir}")
+        else:
+            logger.info(f"Experiment directory created at {experiment_dir}")
     else:
         logger = create_logger(None)
 
@@ -286,23 +294,73 @@ def main(args):
     )
 
     # Prepare models for training:
-    update_ema(ema, model.module, decay=0)  # Ensure EMA is initialized with synced weights
+    train_steps = 0
+    start_epoch = 0
+    start_step_in_epoch = 0
+    best_loss = float('inf')
+    ema_restored = False
+
+    if args.resume is not None:
+        logger.info(f"Loading training state from {args.resume}...")
+        resume_checkpoint = load_torch_checkpoint(args.resume, map_location="cpu")
+        if "model" not in resume_checkpoint:
+            raise ValueError(f"Resume checkpoint {args.resume} does not contain a 'model' state")
+
+        missing_keys, unexpected_keys = model.module.load_state_dict(
+            resume_checkpoint["model"],
+            strict=False,
+        )
+        if unexpected_keys:
+            raise ValueError(f"Unexpected model keys in resume checkpoint: {unexpected_keys[:5]}")
+        logger.info(
+            f"Loaded model state ({len(resume_checkpoint['model']):,} tensors; "
+            f"{len(missing_keys):,} frozen/base tensors retained)"
+        )
+
+        if "ema" in resume_checkpoint:
+            ema.load_state_dict(resume_checkpoint["ema"], strict=True)
+            ema_restored = True
+        else:
+            logger.warning("Resume checkpoint has no EMA state; initializing EMA from the resumed model")
+
+        if "opt" not in resume_checkpoint:
+            raise ValueError(f"Resume checkpoint {args.resume} does not contain optimizer state")
+        opt.load_state_dict(resume_checkpoint["opt"])
+
+        train_steps, start_epoch, start_step_in_epoch = get_resume_position(
+            resume_checkpoint,
+            len(loader),
+        )
+        if resume_checkpoint.get("best", False):
+            best_loss = float(resume_checkpoint.get("loss", best_loss))
+        best_loss = float(resume_checkpoint.get("best_loss", best_loss))
+        logger.info(
+            f"Resume complete: global step {train_steps:,}, epoch {start_epoch}, "
+            f"batch {start_step_in_epoch}/{len(loader)}"
+        )
+
+    if not ema_restored:
+        update_ema(ema, model.module, decay=0)  # Initialize EMA with synced weights
     model.train()  # important! This enables embedding dropout for classifier-free guidance
     ema.eval()  # EMA model should always be in eval mode
 
     # Variables for monitoring/logging purposes:
-    train_steps = 0
     log_steps = 0
     running_loss = 0
     start_time = time()
-    best_loss = float('inf')  # Track best loss for saving best checkpoint
 
-    logger.info(f"Training for {args.epochs} epochs...")
-    for epoch in range(args.epochs):
+    logger.info(f"Training through epoch {args.epochs - 1} ({args.epochs} total epochs)...")
+    for epoch in range(start_epoch, args.epochs):
         sampler.set_epoch(epoch)
         logger.info(f"Beginning epoch {epoch}...")
         print(f"Beginning epoch {epoch}...")
-        for x, y in loader:
+        batches_to_skip = start_step_in_epoch if epoch == start_epoch else 0
+        if batches_to_skip:
+            logger.info(f"Skipping {batches_to_skip} already-completed batches in epoch {epoch}")
+
+        for batch_index, (x, y) in enumerate(loader):
+            if batch_index < batches_to_skip:
+                continue
             x = x.to(device)
             y = y.to(device)
             with torch.no_grad():
@@ -355,7 +413,10 @@ def main(args):
                         "args": args,
                         "x2_finetune_only": True,
                         "step": train_steps,
+                        "epoch": epoch,
+                        "step_in_epoch": batch_index + 1,
                         "loss": avg_loss,
+                        "best_loss": best_loss,
                         "best": True
                     }
                     best_checkpoint_path = f"{checkpoint_dir}/epoch-{epoch}-loss-{best_loss:.4f}.pt"
@@ -392,7 +453,10 @@ def main(args):
                         "opt": opt.state_dict(),
                         "args": args,
                         "x2_finetune_only": True,
-                        "step": train_steps
+                        "step": train_steps,
+                        "epoch": epoch,
+                        "step_in_epoch": batch_index + 1,
+                        "best_loss": best_loss
                     }
                     checkpoint_path = f"{checkpoint_dir}/{train_steps:07d}.pt"
                     atomic_torch_save(checkpoint, checkpoint_path)
@@ -426,6 +490,8 @@ if __name__ == "__main__":
     parser.add_argument("--classes", type=int, nargs="+", required=True, help="List of ImageNet class indices to train on (default: 0-9)")
     parser.add_argument("--pretrained-ckpt", type=str, default=None, 
                         help="Path to base pre-trained DiT checkpoint (e.g., DiT-XL-2-256x256.pt). Required for proper fine-tuning.")
+    parser.add_argument("--resume", type=str, default=None,
+                        help="Training checkpoint to resume, restoring model, EMA, optimizer, epoch, and global step.")
 
     args = parser.parse_args()
     main(args)

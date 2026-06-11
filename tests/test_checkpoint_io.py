@@ -6,10 +6,23 @@ from unittest import mock
 
 import torch
 
-from checkpoint_io import CheckpointLoadError, atomic_torch_save, load_torch_checkpoint
+from checkpoint_io import (
+    CheckpointLoadError,
+    atomic_torch_save,
+    get_resume_position,
+    load_torch_checkpoint,
+)
 
 
 class CheckpointIoTest(unittest.TestCase):
+    def test_resume_position_from_legacy_global_step(self):
+        self.assertEqual(get_resume_position({"step": 150_000}, 1000), (150_000, 150, 0))
+        self.assertEqual(get_resume_position({"step": 150_123}, 1000), (150_123, 150, 123))
+
+    def test_resume_position_normalizes_completed_epoch(self):
+        checkpoint = {"step": 150_000, "epoch": 149, "step_in_epoch": 1000}
+        self.assertEqual(get_resume_position(checkpoint, 1000), (150_000, 150, 0))
+
     def test_atomic_save_round_trip(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "checkpoint.pt"
