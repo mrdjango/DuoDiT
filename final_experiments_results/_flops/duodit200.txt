@@ -1,0 +1,24 @@
+{'Image size': '256x256',
+ 'FLOPs': '267.10 GFLOPs per forward pass',
+ 'Parameters': '690.39M total; 17.95M trainable',
+ 'GPU': 'NVIDIA GeForce RTX 4090',
+ 'Time per epoch': '13 mins (1.29 sec/step)',
+ 'GPU usage per epoch': 'mean 93.0% / max 99.0% GPU; mean 31.7% / max 34.0% VRAM',
+ 'VRAM per epoch': 'peak 2.91 GB allocated; 3.16 GB reserved'}
+
+
+ [[34m2026-06-06 23:18:32[0m] Trainable Parameters Breakdown:
+[[34m2026-06-06 23:18:32[0m]   x2_embedder:               5,760
+[[34m2026-06-06 23:18:32[0m]   x2_cls_tokens:           294,912  ⭐ (LEARNABLE CLS TOKENS)
+[[34m2026-06-06 23:18:32[0m]   x2_vit_block:         12,596,224
+[[34m2026-06-06 23:18:32[0m]   x2_vit_proj_in:        1,180,672
+[[34m2026-06-06 23:18:32[0m]   x2_vit_proj_out:       1,180,800
+[[34m2026-06-06 23:18:32[0m]   final_layer:           2,693,408
+[[34m2026-06-06 23:18:32[0m]   ------------------------------------------------------------
+[[34m2026-06-06 23:18:32[0m]   TOTAL TRAINABLE:      17,951,776 / 690,388,000 (2.60%)
+
+
+[[34m2026-06-06 23:57:23[0m] Beginning epoch 3...
+[[34m2026-06-07 00:10:18[0m] (step=0004000) Train Loss: 0.1395, Train Steps/Sec: 1.29
+[[34m2026-06-07 00:10:18[0m] Beginning epoch 4...
+[[34m2026-06-07 00:23:13[0m] (step=0005000) Train Loss: 0.1396, Train Steps/Sec: 1.29

@@ -132,6 +132,51 @@ torchrun --nnodes=1 --nproc_per_node=N sample_ddp.py --model DiT-XL/2 --num-fid-
 
 There are several additional options; see [`sample_ddp.py`](sample_ddp.py) for details. 
 
+### Class-wise clean-fid
+
+Use `compute_classwise_fid.py` when real images are organized as one directory
+per class and generated images are in one flat directory with class labels in
+their filenames. Install `clean-fid` first (`pip install clean-fid`), or update
+the Conda environment from `environment.yml`:
+
+```bash
+python compute_classwise_fid.py \
+  --real-dir /path/to/real \
+  --samples-dir /path/to/generated \
+  --output classwise_fid.json
+```
+
+The default parser supports balanced sampler names such as
+`000000-class0972.png`, direct ImageNet synsets such as
+`000000-classn02099601.png`, and delimited class folder names in filenames.
+If filenames use numeric ImageNet IDs while real folders use synsets such as
+`n02099601`, provide an index-to-synset map:
+
+```bash
+python compute_classwise_fid.py \
+  --real-dir /path/to/imagenet/train \
+  --samples-dir /path/to/generated \
+  --class-map /path/to/imagenet_class_index.json \
+  --output classwise_fid.json
+```
+
+The map may use the common Keras `imagenet_class_index.json` format, a simple
+index-to-synset JSON object, or a text file containing one synset per line in
+class-index order. For another filename format, provide a regex with a
+`class_name` capture:
+
+```bash
+python compute_classwise_fid.py \
+  --real-dir /path/to/real \
+  --samples-dir /path/to/generated \
+  --class-regex 'label_(?P<class_name>[^_]+)_' \
+  --classes cat dog \
+  --output classwise_fid.json
+```
+
+At least two real and two generated images are required per evaluated class.
+Class-wise FID based on small image sets is statistically noisy.
+
 
 ## Differences from JAX
 

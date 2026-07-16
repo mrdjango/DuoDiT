@@ -1,0 +1,6005 @@
+{
+  "classes": [
+    {
+      "class_name": "class_0000",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 69.069817445099
+    },
+    {
+      "class_name": "class_0001",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 106.06129700075732
+    },
+    {
+      "class_name": "class_0002",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 254.37533413466696
+    },
+    {
+      "class_name": "class_0003",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 256.0253596017003
+    },
+    {
+      "class_name": "class_0004",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 264.51267222076484
+    },
+    {
+      "class_name": "class_0005",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 269.93459478013267
+    },
+    {
+      "class_name": "class_0006",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 201.1056943500406
+    },
+    {
+      "class_name": "class_0007",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 347.60034032920714
+    },
+    {
+      "class_name": "class_0008",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 257.37943959308797
+    },
+    {
+      "class_name": "class_0009",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 272.4301676552518
+    },
+    {
+      "class_name": "class_0010",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 246.94225623021046
+    },
+    {
+      "class_name": "class_0011",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 268.35057752023255
+    },
+    {
+      "class_name": "class_0012",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 261.8798947552342
+    },
+    {
+      "class_name": "class_0013",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 282.3632275740531
+    },
+    {
+      "class_name": "class_0014",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 260.64364219088304
+    },
+    {
+      "class_name": "class_0015",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 256.137304096502
+    },
+    {
+      "class_name": "class_0016",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 282.556236206457
+    },
+    {
+      "class_name": "class_0017",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 206.69152671003565
+    },
+    {
+      "class_name": "class_0018",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 210.78992571935856
+    },
+    {
+      "class_name": "class_0019",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 270.7719898658368
+    },
+    {
+      "class_name": "class_0020",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 259.21172612710234
+    },
+    {
+      "class_name": "class_0021",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 239.72937575396068
+    },
+    {
+      "class_name": "class_0022",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 308.3241736527886
+    },
+    {
+      "class_name": "class_0023",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 198.60964388510243
+    },
+    {
+      "class_name": "class_0024",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 279.9936795924282
+    },
+    {
+      "class_name": "class_0025",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 341.2508638887892
+    },
+    {
+      "class_name": "class_0026",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 265.00537778029434
+    },
+    {
+      "class_name": "class_0027",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 266.38966143245653
+    },
+    {
+      "class_name": "class_0028",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 279.6946569113699
+    },
+    {
+      "class_name": "class_0029",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 223.8673734393299
+    },
+    {
+      "class_name": "class_0030",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 222.9167971751018
+    },
+    {
+      "class_name": "class_0031",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 283.20693381412514
+    },
+    {
+      "class_name": "class_0032",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 282.8770663795483
+    },
+    {
+      "class_name": "class_0033",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 245.1747573083723
+    },
+    {
+      "class_name": "class_0034",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 251.05797639421715
+    },
+    {
+      "class_name": "class_0035",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 293.7690534627971
+    },
+    {
+      "class_name": "class_0036",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 267.1287336593355
+    },
+    {
+      "class_name": "class_0037",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 277.5641314835754
+    },
+    {
+      "class_name": "class_0038",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 238.75036692008976
+    },
+    {
+      "class_name": "class_0039",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 319.5880999061527
+    },
+    {
+      "class_name": "class_0040",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 290.21343194506886
+    },
+    {
+      "class_name": "class_0041",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 278.1590975823953
+    },
+    {
+      "class_name": "class_0042",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 252.72631224921298
+    },
+    {
+      "class_name": "class_0043",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 239.11114408962712
+    },
+    {
+      "class_name": "class_0044",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 292.83910918574526
+    },
+    {
+      "class_name": "class_0045",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 299.54920724227605
+    },
+    {
+      "class_name": "class_0046",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 255.62319320262299
+    },
+    {
+      "class_name": "class_0047",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 239.88011317999735
+    },
+    {
+      "class_name": "class_0048",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 234.9028623306291
+    },
+    {
+      "class_name": "class_0049",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 239.04980368029987
+    },
+    {
+      "class_name": "class_0050",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 246.77361701822284
+    },
+    {
+      "class_name": "class_0051",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 268.52451392657986
+    },
+    {
+      "class_name": "class_0052",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 283.66725714932045
+    },
+    {
+      "class_name": "class_0053",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 262.9554773090141
+    },
+    {
+      "class_name": "class_0054",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 271.88070813199283
+    },
+    {
+      "class_name": "class_0055",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 271.33858443410315
+    },
+    {
+      "class_name": "class_0056",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 245.96268337677412
+    },
+    {
+      "class_name": "class_0057",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 217.6569654368014
+    },
+    {
+      "class_name": "class_0058",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 295.8656385208608
+    },
+    {
+      "class_name": "class_0059",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 269.241074033703
+    },
+    {
+      "class_name": "class_0060",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 229.11736759029148
+    },
+    {
+      "class_name": "class_0061",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 237.46632271938614
+    },
+    {
+      "class_name": "class_0062",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 217.2321987466126
+    },
+    {
+      "class_name": "class_0063",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 272.7317889593089
+    },
+    {
+      "class_name": "class_0064",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 221.61277339154555
+    },
+    {
+      "class_name": "class_0065",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 260.9636330203782
+    },
+    {
+      "class_name": "class_0066",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 199.49078364635454
+    },
+    {
+      "class_name": "class_0067",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 308.29912455411426
+    },
+    {
+      "class_name": "class_0068",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 276.1645953597899
+    },
+    {
+      "class_name": "class_0069",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 270.20163695744134
+    },
+    {
+      "class_name": "class_0070",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 255.24618307489388
+    },
+    {
+      "class_name": "class_0071",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 252.95251820003082
+    },
+    {
+      "class_name": "class_0072",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 225.29928587637394
+    },
+    {
+      "class_name": "class_0073",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 240.19565714538848
+    },
+    {
+      "class_name": "class_0074",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 218.92419738569225
+    },
+    {
+      "class_name": "class_0075",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 233.7141560643702
+    },
+    {
+      "class_name": "class_0076",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 271.2737315992041
+    },
+    {
+      "class_name": "class_0077",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 233.98086147205007
+    },
+    {
+      "class_name": "class_0078",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 232.13108697948473
+    },
+    {
+      "class_name": "class_0079",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 250.63535425609123
+    },
+    {
+      "class_name": "class_0080",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 248.4497961754313
+    },
+    {
+      "class_name": "class_0081",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 277.4092547810211
+    },
+    {
+      "class_name": "class_0082",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 271.75094225273324
+    },
+    {
+      "class_name": "class_0083",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 256.75441773418703
+    },
+    {
+      "class_name": "class_0084",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 208.05848485321775
+    },
+    {
+      "class_name": "class_0085",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 247.9955499660826
+    },
+    {
+      "class_name": "class_0086",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 284.09491286854626
+    },
+    {
+      "class_name": "class_0087",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 265.0288075344334
+    },
+    {
+      "class_name": "class_0088",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 268.6455186900817
+    },
+    {
+      "class_name": "class_0089",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 319.558571549508
+    },
+    {
+      "class_name": "class_0090",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 276.7514958596058
+    },
+    {
+      "class_name": "class_0091",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 252.76666492142152
+    },
+    {
+      "class_name": "class_0092",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 286.0758494721142
+    },
+    {
+      "class_name": "class_0093",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 292.2711440435799
+    },
+    {
+      "class_name": "class_0094",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 282.3794146311703
+    },
+    {
+      "class_name": "class_0095",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 225.1999000168332
+    },
+    {
+      "class_name": "class_0096",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 240.9169377227157
+    },
+    {
+      "class_name": "class_0097",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 271.17785387192885
+    },
+    {
+      "class_name": "class_0098",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 230.24166633699954
+    },
+    {
+      "class_name": "class_0099",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 281.17217493396157
+    },
+    {
+      "class_name": "class_0100",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 220.2665655373572
+    },
+    {
+      "class_name": "class_0101",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 274.6049181853359
+    },
+    {
+      "class_name": "class_0102",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 274.36583695356086
+    },
+    {
+      "class_name": "class_0103",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 264.23911093285096
+    },
+    {
+      "class_name": "class_0104",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 260.7360180869994
+    },
+    {
+      "class_name": "class_0105",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 300.7747113586293
+    },
+    {
+      "class_name": "class_0106",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 257.6374261826514
+    },
+    {
+      "class_name": "class_0107",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 278.34628034807923
+    },
+    {
+      "class_name": "class_0108",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 269.3822526153845
+    },
+    {
+      "class_name": "class_0109",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 249.05348036099446
+    },
+    {
+      "class_name": "class_0110",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 272.64644596627573
+    },
+    {
+      "class_name": "class_0111",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 226.79000838472317
+    },
+    {
+      "class_name": "class_0112",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 248.29147745636055
+    },
+    {
+      "class_name": "class_0113",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 248.22519542856662
+    },
+    {
+      "class_name": "class_0114",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 232.667883033712
+    },
+    {
+      "class_name": "class_0115",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 251.8204273105074
+    },
+    {
+      "class_name": "class_0116",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 251.0735767453421
+    },
+    {
+      "class_name": "class_0117",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 267.9226183952135
+    },
+    {
+      "class_name": "class_0118",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 254.72502703330534
+    },
+    {
+      "class_name": "class_0119",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 235.78808741317334
+    },
+    {
+      "class_name": "class_0120",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 290.3729896457677
+    },
+    {
+      "class_name": "class_0121",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 234.7688638048346
+    },
+    {
+      "class_name": "class_0122",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 245.74395559953194
+    },
+    {
+      "class_name": "class_0123",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 250.8505437130857
+    },
+    {
+      "class_name": "class_0124",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 270.16456703276924
+    },
+    {
+      "class_name": "class_0125",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 272.3597905249951
+    },
+    {
+      "class_name": "class_0126",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 274.0437460317025
+    },
+    {
+      "class_name": "class_0127",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 268.83901234144616
+    },
+    {
+      "class_name": "class_0128",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 243.5913271837749
+    },
+    {
+      "class_name": "class_0129",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 247.84736977824986
+    },
+    {
+      "class_name": "class_0130",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 272.97725516572535
+    },
+    {
+      "class_name": "class_0131",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 401.1850398248645
+    },
+    {
+      "class_name": "class_0132",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 227.8532480121084
+    },
+    {
+      "class_name": "class_0133",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 259.45534166840486
+    },
+    {
+      "class_name": "class_0134",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 314.22900759250183
+    },
+    {
+      "class_name": "class_0135",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 234.7116093479799
+    },
+    {
+      "class_name": "class_0136",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 239.1115381237402
+    },
+    {
+      "class_name": "class_0137",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 317.559543536923
+    },
+    {
+      "class_name": "class_0138",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 381.2713761488846
+    },
+    {
+      "class_name": "class_0139",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 269.082349880589
+    },
+    {
+      "class_name": "class_0140",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 274.70476771309416
+    },
+    {
+      "class_name": "class_0141",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 279.4628969903543
+    },
+    {
+      "class_name": "class_0142",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 343.5260497014411
+    },
+    {
+      "class_name": "class_0143",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 299.4135062212853
+    },
+    {
+      "class_name": "class_0144",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 366.1747326659213
+    },
+    {
+      "class_name": "class_0145",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 276.1156472892435
+    },
+    {
+      "class_name": "class_0146",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 302.9212597880045
+    },
+    {
+      "class_name": "class_0147",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 234.9397056226503
+    },
+    {
+      "class_name": "class_0148",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 233.02010956250749
+    },
+    {
+      "class_name": "class_0149",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 270.5532140904989
+    },
+    {
+      "class_name": "class_0150",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 390.2967277431275
+    },
+    {
+      "class_name": "class_0151",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 279.17216479336633
+    },
+    {
+      "class_name": "class_0152",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 290.84149389665646
+    },
+    {
+      "class_name": "class_0153",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 279.7618525528654
+    },
+    {
+      "class_name": "class_0154",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 306.89415379705105
+    },
+    {
+      "class_name": "class_0155",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 296.8648672250215
+    },
+    {
+      "class_name": "class_0156",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 214.55043927869824
+    },
+    {
+      "class_name": "class_0157",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 337.02312806035934
+    },
+    {
+      "class_name": "class_0158",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 235.81582183552683
+    },
+    {
+      "class_name": "class_0159",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 293.7883431829173
+    },
+    {
+      "class_name": "class_0160",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 245.96894154390054
+    },
+    {
+      "class_name": "class_0161",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 255.07026593432403
+    },
+    {
+      "class_name": "class_0162",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 270.59288721684743
+    },
+    {
+      "class_name": "class_0163",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 251.72845165296707
+    },
+    {
+      "class_name": "class_0164",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 365.02282517497895
+    },
+    {
+      "class_name": "class_0165",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 311.81850267586486
+    },
+    {
+      "class_name": "class_0166",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 283.97591247888255
+    },
+    {
+      "class_name": "class_0167",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 265.830161895777
+    },
+    {
+      "class_name": "class_0168",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 300.3168638358919
+    },
+    {
+      "class_name": "class_0169",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 295.2637718011259
+    },
+    {
+      "class_name": "class_0170",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 323.8573321764329
+    },
+    {
+      "class_name": "class_0171",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 270.8895568960885
+    },
+    {
+      "class_name": "class_0172",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 302.0922164082381
+    },
+    {
+      "class_name": "class_0173",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 292.4145412606274
+    },
+    {
+      "class_name": "class_0174",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 314.18671187306296
+    },
+    {
+      "class_name": "class_0175",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 264.5499556073635
+    },
+    {
+      "class_name": "class_0176",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 343.43323124863605
+    },
+    {
+      "class_name": "class_0177",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 384.94635147277853
+    },
+    {
+      "class_name": "class_0178",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 289.9324470934321
+    },
+    {
+      "class_name": "class_0179",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 275.3067165315431
+    },
+    {
+      "class_name": "class_0180",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 310.7855565021688
+    },
+    {
+      "class_name": "class_0181",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 243.1200494773441
+    },
+    {
+      "class_name": "class_0182",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 255.04376230793014
+    },
+    {
+      "class_name": "class_0183",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 272.0719651406825
+    },
+    {
+      "class_name": "class_0184",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 234.92019173593025
+    },
+    {
+      "class_name": "class_0185",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 274.6619059834406
+    },
+    {
+      "class_name": "class_0186",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 291.71535829396936
+    },
+    {
+      "class_name": "class_0187",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 232.84508163008658
+    },
+    {
+      "class_name": "class_0188",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 311.77706515777845
+    },
+    {
+      "class_name": "class_0189",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 235.79851283731801
+    },
+    {
+      "class_name": "class_0190",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 284.8010990329525
+    },
+    {
+      "class_name": "class_0191",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 259.4605870152747
+    },
+    {
+      "class_name": "class_0192",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 242.45668033070197
+    },
+    {
+      "class_name": "class_0193",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 272.3851351644878
+    },
+    {
+      "class_name": "class_0194",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 237.5303105174529
+    },
+    {
+      "class_name": "class_0195",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 285.080716567406
+    },
+    {
+      "class_name": "class_0196",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 304.70329811680426
+    },
+    {
+      "class_name": "class_0197",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 238.53368455443774
+    },
+    {
+      "class_name": "class_0198",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 287.79488613305426
+    },
+    {
+      "class_name": "class_0199",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 264.4196079120317
+    },
+    {
+      "class_name": "class_0200",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 237.205126441487
+    },
+    {
+      "class_name": "class_0201",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 237.0328376082655
+    },
+    {
+      "class_name": "class_0202",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 247.21043719297995
+    },
+    {
+      "class_name": "class_0203",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 271.08058838939985
+    },
+    {
+      "class_name": "class_0204",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 257.95473605348616
+    },
+    {
+      "class_name": "class_0205",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 219.3169318652932
+    },
+    {
+      "class_name": "class_0206",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 240.84886976931844
+    },
+    {
+      "class_name": "class_0207",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 247.6628074551959
+    },
+    {
+      "class_name": "class_0208",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 215.23349815300566
+    },
+    {
+      "class_name": "class_0209",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 270.3185711663195
+    },
+    {
+      "class_name": "class_0210",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 260.40852864521935
+    },
+    {
+      "class_name": "class_0211",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 244.45056274859758
+    },
+    {
+      "class_name": "class_0212",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 248.3088866114328
+    },
+    {
+      "class_name": "class_0213",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 344.4660462370767
+    },
+    {
+      "class_name": "class_0214",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 220.78731494594086
+    },
+    {
+      "class_name": "class_0215",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 278.7161411070398
+    },
+    {
+      "class_name": "class_0216",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 436.85768047259614
+    },
+    {
+      "class_name": "class_0217",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 267.03346313449714
+    },
+    {
+      "class_name": "class_0218",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 327.2133953607842
+    },
+    {
+      "class_name": "class_0219",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 391.2064844351979
+    },
+    {
+      "class_name": "class_0220",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 235.18484189474793
+    },
+    {
+      "class_name": "class_0221",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 308.8107037935428
+    },
+    {
+      "class_name": "class_0222",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 352.27903095406725
+    },
+    {
+      "class_name": "class_0223",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 266.3239785863228
+    },
+    {
+      "class_name": "class_0224",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 313.5275479175174
+    },
+    {
+      "class_name": "class_0225",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 309.53335035288023
+    },
+    {
+      "class_name": "class_0226",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 297.35907062333223
+    },
+    {
+      "class_name": "class_0227",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 266.1655326122295
+    },
+    {
+      "class_name": "class_0228",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 323.6351466081607
+    },
+    {
+      "class_name": "class_0229",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 227.90990522111534
+    },
+    {
+      "class_name": "class_0230",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 290.8100772554975
+    },
+    {
+      "class_name": "class_0231",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 590.0783873034353
+    },
+    {
+      "class_name": "class_0232",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 325.8478925035242
+    },
+    {
+      "class_name": "class_0233",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 332.2593431441767
+    },
+    {
+      "class_name": "class_0234",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 378.2958225538435
+    },
+    {
+      "class_name": "class_0235",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 267.5736266361352
+    },
+    {
+      "class_name": "class_0236",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 295.25839687970426
+    },
+    {
+      "class_name": "class_0237",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 331.625666528478
+    },
+    {
+      "class_name": "class_0238",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 286.0729378514075
+    },
+    {
+      "class_name": "class_0239",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 315.97606215163864
+    },
+    {
+      "class_name": "class_0240",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 273.4197273449271
+    },
+    {
+      "class_name": "class_0241",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 255.5135523290764
+    },
+    {
+      "class_name": "class_0242",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 271.0450875521746
+    },
+    {
+      "class_name": "class_0243",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 248.03457391849756
+    },
+    {
+      "class_name": "class_0244",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 321.2763794016462
+    },
+    {
+      "class_name": "class_0245",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 270.44695324980273
+    },
+    {
+      "class_name": "class_0246",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 332.1312849541011
+    },
+    {
+      "class_name": "class_0247",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 450.4830563919456
+    },
+    {
+      "class_name": "class_0248",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 314.5216286889485
+    },
+    {
+      "class_name": "class_0249",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 408.0650988446356
+    },
+    {
+      "class_name": "class_0250",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 336.6955880585195
+    },
+    {
+      "class_name": "class_0251",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 309.32367456184824
+    },
+    {
+      "class_name": "class_0252",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 299.52956972403734
+    },
+    {
+      "class_name": "class_0253",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 307.6494163253578
+    },
+    {
+      "class_name": "class_0254",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 282.9626067849408
+    },
+    {
+      "class_name": "class_0255",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 267.9313096908745
+    },
+    {
+      "class_name": "class_0256",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 414.30914709383666
+    },
+    {
+      "class_name": "class_0257",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 355.90928037544495
+    },
+    {
+      "class_name": "class_0258",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 421.1211074753588
+    },
+    {
+      "class_name": "class_0259",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 303.2293611327113
+    },
+    {
+      "class_name": "class_0260",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 281.3925135533982
+    },
+    {
+      "class_name": "class_0261",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 256.8810513333896
+    },
+    {
+      "class_name": "class_0262",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 392.29879517722935
+    },
+    {
+      "class_name": "class_0263",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 325.7809059394729
+    },
+    {
+      "class_name": "class_0264",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 287.7506389535713
+    },
+    {
+      "class_name": "class_0265",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 283.2566168035647
+    },
+    {
+      "class_name": "class_0266",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 392.12995344395284
+    },
+    {
+      "class_name": "class_0267",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 287.2330215546158
+    },
+    {
+      "class_name": "class_0268",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 287.6512483880654
+    },
+    {
+      "class_name": "class_0269",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 395.8193985081197
+    },
+    {
+      "class_name": "class_0270",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 311.39621165140164
+    },
+    {
+      "class_name": "class_0271",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 290.27297718269676
+    },
+    {
+      "class_name": "class_0272",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 462.2035112238352
+    },
+    {
+      "class_name": "class_0273",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 301.6260133294779
+    },
+    {
+      "class_name": "class_0274",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 277.80498057456003
+    },
+    {
+      "class_name": "class_0275",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 252.13598827384692
+    },
+    {
+      "class_name": "class_0276",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 231.8052696167374
+    },
+    {
+      "class_name": "class_0277",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 247.3611817139501
+    },
+    {
+      "class_name": "class_0278",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 294.2871405121242
+    },
+    {
+      "class_name": "class_0279",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 266.4130357434101
+    },
+    {
+      "class_name": "class_0280",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 297.4929847764942
+    },
+    {
+      "class_name": "class_0281",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 345.60998395669037
+    },
+    {
+      "class_name": "class_0282",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 340.3956750507914
+    },
+    {
+      "class_name": "class_0283",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 287.72824312668956
+    },
+    {
+      "class_name": "class_0284",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 236.4684365990626
+    },
+    {
+      "class_name": "class_0285",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 240.5937139806137
+    },
+    {
+      "class_name": "class_0286",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 318.5468219074872
+    },
+    {
+      "class_name": "class_0287",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 393.3367818864983
+    },
+    {
+      "class_name": "class_0288",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 264.13878427824
+    },
+    {
+      "class_name": "class_0289",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 357.111073993057
+    },
+    {
+      "class_name": "class_0290",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 302.01667953543847
+    },
+    {
+      "class_name": "class_0291",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 242.33171196698916
+    },
+    {
+      "class_name": "class_0292",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 254.18005465238792
+    },
+    {
+      "class_name": "class_0293",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 300.2336819016301
+    },
+    {
+      "class_name": "class_0294",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 280.62307163100104
+    },
+    {
+      "class_name": "class_0295",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 313.18723695940906
+    },
+    {
+      "class_name": "class_0296",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 304.4746228917038
+    },
+    {
+      "class_name": "class_0297",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 299.1733738680192
+    },
+    {
+      "class_name": "class_0298",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 240.51616824164086
+    },
+    {
+      "class_name": "class_0299",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 329.73030797669986
+    },
+    {
+      "class_name": "class_0300",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 374.90205560748217
+    },
+    {
+      "class_name": "class_0301",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 351.5277951856834
+    },
+    {
+      "class_name": "class_0302",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 305.2623505039292
+    },
+    {
+      "class_name": "class_0303",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 748.5518958480482
+    },
+    {
+      "class_name": "class_0304",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 316.6004548002926
+    },
+    {
+      "class_name": "class_0305",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 354.28165842501636
+    },
+    {
+      "class_name": "class_0306",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 398.08317036659145
+    },
+    {
+      "class_name": "class_0307",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 354.0206580899128
+    },
+    {
+      "class_name": "class_0308",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 336.8932417882874
+    },
+    {
+      "class_name": "class_0309",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 319.3480837859902
+    },
+    {
+      "class_name": "class_0310",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 322.5544411985205
+    },
+    {
+      "class_name": "class_0311",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 376.0766679916706
+    },
+    {
+      "class_name": "class_0312",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 323.7656123775672
+    },
+    {
+      "class_name": "class_0313",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 354.9626729369395
+    },
+    {
+      "class_name": "class_0314",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 807.0561568146327
+    },
+    {
+      "class_name": "class_0315",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 296.3828030827208
+    },
+    {
+      "class_name": "class_0316",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 387.8546954542629
+    },
+    {
+      "class_name": "class_0317",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 259.3011830275511
+    },
+    {
+      "class_name": "class_0318",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 258.75620752082386
+    },
+    {
+      "class_name": "class_0319",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 241.72707484118024
+    },
+    {
+      "class_name": "class_0320",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 269.0559688958582
+    },
+    {
+      "class_name": "class_0321",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 302.23421088318867
+    },
+    {
+      "class_name": "class_0322",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 308.1355394766607
+    },
+    {
+      "class_name": "class_0323",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 280.65669916044783
+    },
+    {
+      "class_name": "class_0324",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 258.47565148057146
+    },
+    {
+      "class_name": "class_0325",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 271.42287187159326
+    },
+    {
+      "class_name": "class_0326",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 268.71598083440347
+    },
+    {
+      "class_name": "class_0327",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 246.9360326081035
+    },
+    {
+      "class_name": "class_0328",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 293.093842057489
+    },
+    {
+      "class_name": "class_0329",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 437.13352086797624
+    },
+    {
+      "class_name": "class_0330",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 317.630775236586
+    },
+    {
+      "class_name": "class_0331",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 239.0203830306384
+    },
+    {
+      "class_name": "class_0332",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 274.6040506854019
+    },
+    {
+      "class_name": "class_0333",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 316.8063954139075
+    },
+    {
+      "class_name": "class_0334",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 401.7988184211729
+    },
+    {
+      "class_name": "class_0335",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 417.48392493855505
+    },
+    {
+      "class_name": "class_0336",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 289.6195048493965
+    },
+    {
+      "class_name": "class_0337",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 282.8559489316079
+    },
+    {
+      "class_name": "class_0338",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 341.46379616828955
+    },
+    {
+      "class_name": "class_0339",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 280.5295551444666
+    },
+    {
+      "class_name": "class_0340",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 360.50754154885885
+    },
+    {
+      "class_name": "class_0341",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 248.21783954777152
+    },
+    {
+      "class_name": "class_0342",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 295.67762542133505
+    },
+    {
+      "class_name": "class_0343",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 428.15401858916397
+    },
+    {
+      "class_name": "class_0344",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 279.2444582624437
+    },
+    {
+      "class_name": "class_0345",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 292.1588885953364
+    },
+    {
+      "class_name": "class_0346",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 307.665873707719
+    },
+    {
+      "class_name": "class_0347",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 224.43556492946422
+    },
+    {
+      "class_name": "class_0348",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 269.21342808505386
+    },
+    {
+      "class_name": "class_0349",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 319.8543152469201
+    },
+    {
+      "class_name": "class_0350",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 327.7777514528287
+    },
+    {
+      "class_name": "class_0351",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 314.06250250232273
+    },
+    {
+      "class_name": "class_0352",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 295.686747194846
+    },
+    {
+      "class_name": "class_0353",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 264.03051365525926
+    },
+    {
+      "class_name": "class_0354",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 252.49247669904656
+    },
+    {
+      "class_name": "class_0355",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 306.0113295088262
+    },
+    {
+      "class_name": "class_0356",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 296.42814094234046
+    },
+    {
+      "class_name": "class_0357",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 361.39159350412774
+    },
+    {
+      "class_name": "class_0358",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 276.8527732326716
+    },
+    {
+      "class_name": "class_0359",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 286.82681449730524
+    },
+    {
+      "class_name": "class_0360",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 263.41987409246497
+    },
+    {
+      "class_name": "class_0361",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 245.41097350294856
+    },
+    {
+      "class_name": "class_0362",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 255.9898034641331
+    },
+    {
+      "class_name": "class_0363",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 299.92644662165327
+    },
+    {
+      "class_name": "class_0364",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 241.28152810060692
+    },
+    {
+      "class_name": "class_0365",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 384.8229954843853
+    },
+    {
+      "class_name": "class_0366",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 342.98698389041243
+    },
+    {
+      "class_name": "class_0367",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 215.4243938278173
+    },
+    {
+      "class_name": "class_0368",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 361.71131921054246
+    },
+    {
+      "class_name": "class_0369",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 354.4042384002166
+    },
+    {
+      "class_name": "class_0370",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 318.1445291068268
+    },
+    {
+      "class_name": "class_0371",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 370.3416103695164
+    },
+    {
+      "class_name": "class_0372",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 361.3382535053984
+    },
+    {
+      "class_name": "class_0373",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 243.75565589610372
+    },
+    {
+      "class_name": "class_0374",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 318.18438554147235
+    },
+    {
+      "class_name": "class_0375",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 258.8929199150502
+    },
+    {
+      "class_name": "class_0376",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 321.5198093354695
+    },
+    {
+      "class_name": "class_0377",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 341.2142726449888
+    },
+    {
+      "class_name": "class_0378",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 355.3981266447071
+    },
+    {
+      "class_name": "class_0379",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 352.8025540919501
+    },
+    {
+      "class_name": "class_0380",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 289.6347907265488
+    },
+    {
+      "class_name": "class_0381",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 445.6519705476421
+    },
+    {
+      "class_name": "class_0382",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 289.2243023722196
+    },
+    {
+      "class_name": "class_0383",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 275.9996626675256
+    },
+    {
+      "class_name": "class_0384",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 280.2401539390378
+    },
+    {
+      "class_name": "class_0385",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 292.59822120585034
+    },
+    {
+      "class_name": "class_0386",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 197.04109852872858
+    },
+    {
+      "class_name": "class_0387",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 239.29979072978895
+    },
+    {
+      "class_name": "class_0388",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 214.78416816183048
+    },
+    {
+      "class_name": "class_0389",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 224.32434688001456
+    },
+    {
+      "class_name": "class_0390",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 316.1868763870684
+    },
+    {
+      "class_name": "class_0391",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 250.5991283387039
+    },
+    {
+      "class_name": "class_0392",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 243.85423967622094
+    },
+    {
+      "class_name": "class_0393",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 237.2087654520275
+    },
+    {
+      "class_name": "class_0394",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 225.60285856370518
+    },
+    {
+      "class_name": "class_0395",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 239.29935452112093
+    },
+    {
+      "class_name": "class_0396",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 256.46089634444945
+    },
+    {
+      "class_name": "class_0397",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 240.87496539487194
+    },
+    {
+      "class_name": "class_0398",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 293.9537772691432
+    },
+    {
+      "class_name": "class_0399",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 262.9151904612658
+    },
+    {
+      "class_name": "class_0400",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 235.9201485154269
+    },
+    {
+      "class_name": "class_0401",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 267.5657954318235
+    },
+    {
+      "class_name": "class_0402",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 240.38962916782634
+    },
+    {
+      "class_name": "class_0403",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 217.08337739553338
+    },
+    {
+      "class_name": "class_0404",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 319.2093838574618
+    },
+    {
+      "class_name": "class_0405",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 233.25886949166593
+    },
+    {
+      "class_name": "class_0406",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 220.48794388295667
+    },
+    {
+      "class_name": "class_0407",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 256.0249511131713
+    },
+    {
+      "class_name": "class_0408",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 218.84212854687726
+    },
+    {
+      "class_name": "class_0409",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 316.6625007035472
+    },
+    {
+      "class_name": "class_0410",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 222.3827162219642
+    },
+    {
+      "class_name": "class_0411",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 237.78225053823363
+    },
+    {
+      "class_name": "class_0412",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 204.7707184638895
+    },
+    {
+      "class_name": "class_0413",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 232.8019460242213
+    },
+    {
+      "class_name": "class_0414",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 248.37793675467788
+    },
+    {
+      "class_name": "class_0415",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 220.93570975707226
+    },
+    {
+      "class_name": "class_0416",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 452.878832934434
+    },
+    {
+      "class_name": "class_0417",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 243.09536823122232
+    },
+    {
+      "class_name": "class_0418",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 242.11011188365143
+    },
+    {
+      "class_name": "class_0419",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 281.46016750696907
+    },
+    {
+      "class_name": "class_0420",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 209.82579374697096
+    },
+    {
+      "class_name": "class_0421",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 258.48763602882497
+    },
+    {
+      "class_name": "class_0422",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 225.64132537429902
+    },
+    {
+      "class_name": "class_0423",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 217.72494145116417
+    },
+    {
+      "class_name": "class_0424",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 206.804926312724
+    },
+    {
+      "class_name": "class_0425",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 269.2361605490761
+    },
+    {
+      "class_name": "class_0426",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 227.5201287414589
+    },
+    {
+      "class_name": "class_0427",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 265.69521390526194
+    },
+    {
+      "class_name": "class_0428",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 238.02909152027092
+    },
+    {
+      "class_name": "class_0429",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 274.1482943160156
+    },
+    {
+      "class_name": "class_0430",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 272.4902794113713
+    },
+    {
+      "class_name": "class_0431",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 300.31600680937584
+    },
+    {
+      "class_name": "class_0432",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 214.3788871474716
+    },
+    {
+      "class_name": "class_0433",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 241.14947033522589
+    },
+    {
+      "class_name": "class_0434",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 264.5181379527621
+    },
+    {
+      "class_name": "class_0435",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 281.3812697409684
+    },
+    {
+      "class_name": "class_0436",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 230.1094168288129
+    },
+    {
+      "class_name": "class_0437",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 272.70991768822876
+    },
+    {
+      "class_name": "class_0438",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 207.8952119546296
+    },
+    {
+      "class_name": "class_0439",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 275.82149889161576
+    },
+    {
+      "class_name": "class_0440",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 236.61857358903075
+    },
+    {
+      "class_name": "class_0441",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 246.39874944052934
+    },
+    {
+      "class_name": "class_0442",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 190.20180742925047
+    },
+    {
+      "class_name": "class_0443",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 254.57613553427163
+    },
+    {
+      "class_name": "class_0444",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 287.66183919974617
+    },
+    {
+      "class_name": "class_0445",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 244.1495616751914
+    },
+    {
+      "class_name": "class_0446",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 234.8677669364339
+    },
+    {
+      "class_name": "class_0447",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 289.2712540417013
+    },
+    {
+      "class_name": "class_0448",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 357.3647069430042
+    },
+    {
+      "class_name": "class_0449",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 252.5948450343318
+    },
+    {
+      "class_name": "class_0450",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 310.1380306841039
+    },
+    {
+      "class_name": "class_0451",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 307.08401924728753
+    },
+    {
+      "class_name": "class_0452",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 292.711709183859
+    },
+    {
+      "class_name": "class_0453",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 258.031741969384
+    },
+    {
+      "class_name": "class_0454",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 282.0855618278799
+    },
+    {
+      "class_name": "class_0455",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 310.9792675606526
+    },
+    {
+      "class_name": "class_0456",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 276.29736352550714
+    },
+    {
+      "class_name": "class_0457",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 326.37640928764347
+    },
+    {
+      "class_name": "class_0458",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 330.4036816892016
+    },
+    {
+      "class_name": "class_0459",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 354.6391462836713
+    },
+    {
+      "class_name": "class_0460",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 323.72650649799124
+    },
+    {
+      "class_name": "class_0461",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 315.10266606738173
+    },
+    {
+      "class_name": "class_0462",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 300.5530684397379
+    },
+    {
+      "class_name": "class_0463",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 298.60586079390606
+    },
+    {
+      "class_name": "class_0464",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 277.6732297328474
+    },
+    {
+      "class_name": "class_0465",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 236.62631179169836
+    },
+    {
+      "class_name": "class_0466",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 370.8190406145676
+    },
+    {
+      "class_name": "class_0467",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 278.53608150355876
+    },
+    {
+      "class_name": "class_0468",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 300.82213890769634
+    },
+    {
+      "class_name": "class_0469",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 320.06091319132145
+    },
+    {
+      "class_name": "class_0470",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 242.48116103458125
+    },
+    {
+      "class_name": "class_0471",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 302.1624811029799
+    },
+    {
+      "class_name": "class_0472",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 233.2907090839184
+    },
+    {
+      "class_name": "class_0473",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 506.95746063878426
+    },
+    {
+      "class_name": "class_0474",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 280.2226309487688
+    },
+    {
+      "class_name": "class_0475",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 412.7729214233113
+    },
+    {
+      "class_name": "class_0476",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 271.18703001145843
+    },
+    {
+      "class_name": "class_0477",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 282.17727928816083
+    },
+    {
+      "class_name": "class_0478",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 315.94876025441624
+    },
+    {
+      "class_name": "class_0479",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 250.23867911927735
+    },
+    {
+      "class_name": "class_0480",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 253.57649223005578
+    },
+    {
+      "class_name": "class_0481",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 263.9942281974097
+    },
+    {
+      "class_name": "class_0482",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 369.68325644803224
+    },
+    {
+      "class_name": "class_0483",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 288.3072929955169
+    },
+    {
+      "class_name": "class_0484",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 283.169874605207
+    },
+    {
+      "class_name": "class_0485",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 361.93939628036884
+    },
+    {
+      "class_name": "class_0486",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 363.94980645763644
+    },
+    {
+      "class_name": "class_0487",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 354.23448505764276
+    },
+    {
+      "class_name": "class_0488",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 290.1292194325781
+    },
+    {
+      "class_name": "class_0489",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 248.7333035627716
+    },
+    {
+      "class_name": "class_0490",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 247.80487768751937
+    },
+    {
+      "class_name": "class_0491",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 263.6839466042333
+    },
+    {
+      "class_name": "class_0492",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 279.18283550777534
+    },
+    {
+      "class_name": "class_0493",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 282.42335964097333
+    },
+    {
+      "class_name": "class_0494",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 284.702882589391
+    },
+    {
+      "class_name": "class_0495",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 310.30932738376055
+    },
+    {
+      "class_name": "class_0496",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 296.3937832332775
+    },
+    {
+      "class_name": "class_0497",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 270.4247179086388
+    },
+    {
+      "class_name": "class_0498",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 285.065762344629
+    },
+    {
+      "class_name": "class_0499",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 240.23545701321552
+    },
+    {
+      "class_name": "class_0500",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 279.84719048260285
+    },
+    {
+      "class_name": "class_0501",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 352.0477657480155
+    },
+    {
+      "class_name": "class_0502",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 243.01295270556358
+    },
+    {
+      "class_name": "class_0503",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 333.85886449489385
+    },
+    {
+      "class_name": "class_0504",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 353.7503507812597
+    },
+    {
+      "class_name": "class_0505",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 355.18359463616974
+    },
+    {
+      "class_name": "class_0506",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 284.0213971883969
+    },
+    {
+      "class_name": "class_0507",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 286.31860542636116
+    },
+    {
+      "class_name": "class_0508",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 417.3563442816014
+    },
+    {
+      "class_name": "class_0509",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 319.94235191908956
+    },
+    {
+      "class_name": "class_0510",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 539.4372711115568
+    },
+    {
+      "class_name": "class_0511",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 303.88086669404294
+    },
+    {
+      "class_name": "class_0512",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 337.3801898220632
+    },
+    {
+      "class_name": "class_0513",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 356.0758200491989
+    },
+    {
+      "class_name": "class_0514",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 330.9048364662031
+    },
+    {
+      "class_name": "class_0515",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 286.15249491912886
+    },
+    {
+      "class_name": "class_0516",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 605.5278610830135
+    },
+    {
+      "class_name": "class_0517",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 253.40195750935953
+    },
+    {
+      "class_name": "class_0518",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 476.9445396618612
+    },
+    {
+      "class_name": "class_0519",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 195.60380016883315
+    },
+    {
+      "class_name": "class_0520",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 482.79963637694993
+    },
+    {
+      "class_name": "class_0521",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 303.49141983115294
+    },
+    {
+      "class_name": "class_0522",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 337.1432961513721
+    },
+    {
+      "class_name": "class_0523",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 273.7005374288614
+    },
+    {
+      "class_name": "class_0524",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 319.43764581550863
+    },
+    {
+      "class_name": "class_0525",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 329.45009086582905
+    },
+    {
+      "class_name": "class_0526",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 366.6458057152087
+    },
+    {
+      "class_name": "class_0527",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 290.13795608844976
+    },
+    {
+      "class_name": "class_0528",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 418.13419081625955
+    },
+    {
+      "class_name": "class_0529",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 446.8943008106747
+    },
+    {
+      "class_name": "class_0530",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 342.34997768632496
+    },
+    {
+      "class_name": "class_0531",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 329.40975943046533
+    },
+    {
+      "class_name": "class_0532",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 413.751858232558
+    },
+    {
+      "class_name": "class_0533",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 306.3536369385546
+    },
+    {
+      "class_name": "class_0534",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 380.54636433231514
+    },
+    {
+      "class_name": "class_0535",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 350.50326331312067
+    },
+    {
+      "class_name": "class_0536",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 364.46654439096056
+    },
+    {
+      "class_name": "class_0537",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 365.7060028490621
+    },
+    {
+      "class_name": "class_0538",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 315.9468099589197
+    },
+    {
+      "class_name": "class_0539",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 312.6804607437015
+    },
+    {
+      "class_name": "class_0540",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 350.22030885940615
+    },
+    {
+      "class_name": "class_0541",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 300.709100631009
+    },
+    {
+      "class_name": "class_0542",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 373.97368610243655
+    },
+    {
+      "class_name": "class_0543",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 367.99923891007234
+    },
+    {
+      "class_name": "class_0544",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 283.9622066205876
+    },
+    {
+      "class_name": "class_0545",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 325.373908978289
+    },
+    {
+      "class_name": "class_0546",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 251.65339705029342
+    },
+    {
+      "class_name": "class_0547",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 308.0351442610523
+    },
+    {
+      "class_name": "class_0548",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 303.2158441537791
+    },
+    {
+      "class_name": "class_0549",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 335.325905522756
+    },
+    {
+      "class_name": "class_0550",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 286.1944157722117
+    },
+    {
+      "class_name": "class_0551",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 304.9537875304201
+    },
+    {
+      "class_name": "class_0552",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 287.83744908418004
+    },
+    {
+      "class_name": "class_0553",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 249.40012556260902
+    },
+    {
+      "class_name": "class_0554",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 526.858171874734
+    },
+    {
+      "class_name": "class_0555",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 291.30752546498906
+    },
+    {
+      "class_name": "class_0556",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 281.28417745635886
+    },
+    {
+      "class_name": "class_0557",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 256.48370317090604
+    },
+    {
+      "class_name": "class_0558",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 365.5492611795733
+    },
+    {
+      "class_name": "class_0559",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 304.50419629567375
+    },
+    {
+      "class_name": "class_0560",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 334.6481706183167
+    },
+    {
+      "class_name": "class_0561",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 337.20240963591885
+    },
+    {
+      "class_name": "class_0562",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 292.92185975190034
+    },
+    {
+      "class_name": "class_0563",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 360.01993373136224
+    },
+    {
+      "class_name": "class_0564",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 257.12800919199645
+    },
+    {
+      "class_name": "class_0565",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 360.3121224258694
+    },
+    {
+      "class_name": "class_0566",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 275.29066027681876
+    },
+    {
+      "class_name": "class_0567",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 319.0163513830154
+    },
+    {
+      "class_name": "class_0568",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 314.14383410049436
+    },
+    {
+      "class_name": "class_0569",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 381.482912451196
+    },
+    {
+      "class_name": "class_0570",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 312.1923100178897
+    },
+    {
+      "class_name": "class_0571",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 311.68510863090455
+    },
+    {
+      "class_name": "class_0572",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 305.88312129760135
+    },
+    {
+      "class_name": "class_0573",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 395.75481334203465
+    },
+    {
+      "class_name": "class_0574",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 393.7139958777801
+    },
+    {
+      "class_name": "class_0575",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 351.75291134877585
+    },
+    {
+      "class_name": "class_0576",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 335.3691616712387
+    },
+    {
+      "class_name": "class_0577",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 305.2666834380583
+    },
+    {
+      "class_name": "class_0578",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 461.5614305269373
+    },
+    {
+      "class_name": "class_0579",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 346.05883540631606
+    },
+    {
+      "class_name": "class_0580",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 370.27262597543694
+    },
+    {
+      "class_name": "class_0581",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 324.75694990285143
+    },
+    {
+      "class_name": "class_0582",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 327.05316285317576
+    },
+    {
+      "class_name": "class_0583",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 281.1297128514172
+    },
+    {
+      "class_name": "class_0584",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 292.47875179329793
+    },
+    {
+      "class_name": "class_0585",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 370.5874012846891
+    },
+    {
+      "class_name": "class_0586",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 286.4298079714952
+    },
+    {
+      "class_name": "class_0587",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 369.7845916221035
+    },
+    {
+      "class_name": "class_0588",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 478.85785541795747
+    },
+    {
+      "class_name": "class_0589",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 279.465950507767
+    },
+    {
+      "class_name": "class_0590",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 322.5961211238709
+    },
+    {
+      "class_name": "class_0591",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 216.47992257404442
+    },
+    {
+      "class_name": "class_0592",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 344.1685340660121
+    },
+    {
+      "class_name": "class_0593",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 370.5052168888798
+    },
+    {
+      "class_name": "class_0594",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 340.8564977092847
+    },
+    {
+      "class_name": "class_0595",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 343.2388117256372
+    },
+    {
+      "class_name": "class_0596",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 297.15184007320175
+    },
+    {
+      "class_name": "class_0597",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 255.79251449073882
+    },
+    {
+      "class_name": "class_0598",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 430.5256828033162
+    },
+    {
+      "class_name": "class_0599",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 286.33450669296553
+    },
+    {
+      "class_name": "class_0600",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 232.41424217828165
+    },
+    {
+      "class_name": "class_0601",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 246.41538562740726
+    },
+    {
+      "class_name": "class_0602",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 313.53131656568974
+    },
+    {
+      "class_name": "class_0603",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 229.66452396793835
+    },
+    {
+      "class_name": "class_0604",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 247.18295647351846
+    },
+    {
+      "class_name": "class_0605",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 225.95762509404958
+    },
+    {
+      "class_name": "class_0606",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 217.0107765424379
+    },
+    {
+      "class_name": "class_0607",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 244.96836901847684
+    },
+    {
+      "class_name": "class_0608",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 263.3231523079062
+    },
+    {
+      "class_name": "class_0609",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 241.56981290766169
+    },
+    {
+      "class_name": "class_0610",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 242.32712543683448
+    },
+    {
+      "class_name": "class_0611",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 296.6452711646477
+    },
+    {
+      "class_name": "class_0612",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 266.15436398627116
+    },
+    {
+      "class_name": "class_0613",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 297.2158410069337
+    },
+    {
+      "class_name": "class_0614",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 327.3601642336352
+    },
+    {
+      "class_name": "class_0615",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 248.2716660772752
+    },
+    {
+      "class_name": "class_0616",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 277.7677231893306
+    },
+    {
+      "class_name": "class_0617",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 232.31331533632658
+    },
+    {
+      "class_name": "class_0618",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 312.76711858371834
+    },
+    {
+      "class_name": "class_0619",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 276.4070401413918
+    },
+    {
+      "class_name": "class_0620",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 252.15103677249266
+    },
+    {
+      "class_name": "class_0621",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 538.8081000544719
+    },
+    {
+      "class_name": "class_0622",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 301.0994491765084
+    },
+    {
+      "class_name": "class_0623",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 264.03785945894066
+    },
+    {
+      "class_name": "class_0624",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 245.83930979185865
+    },
+    {
+      "class_name": "class_0625",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 302.30452650959444
+    },
+    {
+      "class_name": "class_0626",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 373.28588758739625
+    },
+    {
+      "class_name": "class_0627",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 350.1332946067196
+    },
+    {
+      "class_name": "class_0628",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 375.9019975508688
+    },
+    {
+      "class_name": "class_0629",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 340.3136451691039
+    },
+    {
+      "class_name": "class_0630",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 320.72946053780134
+    },
+    {
+      "class_name": "class_0631",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 334.1712569454615
+    },
+    {
+      "class_name": "class_0632",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 290.69103356140675
+    },
+    {
+      "class_name": "class_0633",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 356.5327344281708
+    },
+    {
+      "class_name": "class_0634",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 292.97290643951465
+    },
+    {
+      "class_name": "class_0635",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 296.9768211810827
+    },
+    {
+      "class_name": "class_0636",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 280.77267683496893
+    },
+    {
+      "class_name": "class_0637",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 283.0269182366467
+    },
+    {
+      "class_name": "class_0638",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 274.8767804067748
+    },
+    {
+      "class_name": "class_0639",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 248.8547587573185
+    },
+    {
+      "class_name": "class_0640",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 327.7918753203996
+    },
+    {
+      "class_name": "class_0641",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 247.28650514775828
+    },
+    {
+      "class_name": "class_0642",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 258.9600393408967
+    },
+    {
+      "class_name": "class_0643",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 333.88508962206004
+    },
+    {
+      "class_name": "class_0644",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 228.55422743936057
+    },
+    {
+      "class_name": "class_0645",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 250.8633548479679
+    },
+    {
+      "class_name": "class_0646",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 274.0468574977109
+    },
+    {
+      "class_name": "class_0647",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 266.4104383799124
+    },
+    {
+      "class_name": "class_0648",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 253.09243497858853
+    },
+    {
+      "class_name": "class_0649",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 394.4362759545751
+    },
+    {
+      "class_name": "class_0650",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 330.0182349193402
+    },
+    {
+      "class_name": "class_0651",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 317.83594664753286
+    },
+    {
+      "class_name": "class_0652",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 317.7540012592601
+    },
+    {
+      "class_name": "class_0653",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 494.91026822220044
+    },
+    {
+      "class_name": "class_0654",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 274.4399331072372
+    },
+    {
+      "class_name": "class_0655",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 274.76358164823745
+    },
+    {
+      "class_name": "class_0656",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 281.6084878384306
+    },
+    {
+      "class_name": "class_0657",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 284.3369926066462
+    },
+    {
+      "class_name": "class_0658",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 460.30451139070453
+    },
+    {
+      "class_name": "class_0659",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 316.4726902212139
+    },
+    {
+      "class_name": "class_0660",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 318.9898137321954
+    },
+    {
+      "class_name": "class_0661",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 387.3866874329565
+    },
+    {
+      "class_name": "class_0662",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 321.01041819711895
+    },
+    {
+      "class_name": "class_0663",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 437.48310468231847
+    },
+    {
+      "class_name": "class_0664",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 398.34800117303274
+    },
+    {
+      "class_name": "class_0665",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 361.9506374962958
+    },
+    {
+      "class_name": "class_0666",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 459.1208147970745
+    },
+    {
+      "class_name": "class_0667",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 304.1453940383794
+    },
+    {
+      "class_name": "class_0668",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 323.0230922248213
+    },
+    {
+      "class_name": "class_0669",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 326.5524753521305
+    },
+    {
+      "class_name": "class_0670",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 358.6876702451091
+    },
+    {
+      "class_name": "class_0671",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 327.9147130506616
+    },
+    {
+      "class_name": "class_0672",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 306.9439295402282
+    },
+    {
+      "class_name": "class_0673",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 371.61239521915365
+    },
+    {
+      "class_name": "class_0674",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 336.5914358642784
+    },
+    {
+      "class_name": "class_0675",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 455.7714109699492
+    },
+    {
+      "class_name": "class_0676",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 287.9140394724133
+    },
+    {
+      "class_name": "class_0677",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 309.525927073752
+    },
+    {
+      "class_name": "class_0678",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 327.05243893852474
+    },
+    {
+      "class_name": "class_0679",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 250.74209130289157
+    },
+    {
+      "class_name": "class_0680",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 355.23354233292946
+    },
+    {
+      "class_name": "class_0681",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 349.96046499527745
+    },
+    {
+      "class_name": "class_0682",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 258.91824063613035
+    },
+    {
+      "class_name": "class_0683",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 391.2416651664565
+    },
+    {
+      "class_name": "class_0684",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 276.7421861792807
+    },
+    {
+      "class_name": "class_0685",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 262.7916799006624
+    },
+    {
+      "class_name": "class_0686",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 343.48721671752503
+    },
+    {
+      "class_name": "class_0687",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 504.5576946021305
+    },
+    {
+      "class_name": "class_0688",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 260.80587317863944
+    },
+    {
+      "class_name": "class_0689",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 350.410680599139
+    },
+    {
+      "class_name": "class_0690",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 239.80998888409604
+    },
+    {
+      "class_name": "class_0691",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 592.8353241836203
+    },
+    {
+      "class_name": "class_0692",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 278.80707897241695
+    },
+    {
+      "class_name": "class_0693",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 395.2953839327394
+    },
+    {
+      "class_name": "class_0694",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 394.00922673012843
+    },
+    {
+      "class_name": "class_0695",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 310.9437480378186
+    },
+    {
+      "class_name": "class_0696",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 314.44271956862974
+    },
+    {
+      "class_name": "class_0697",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 433.46073507434755
+    },
+    {
+      "class_name": "class_0698",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 261.29461540471317
+    },
+    {
+      "class_name": "class_0699",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 350.766569969216
+    },
+    {
+      "class_name": "class_0700",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 321.4699524965851
+    },
+    {
+      "class_name": "class_0701",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 352.95043510373347
+    },
+    {
+      "class_name": "class_0702",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 361.04485057622844
+    },
+    {
+      "class_name": "class_0703",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 345.7664185654154
+    },
+    {
+      "class_name": "class_0704",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 408.0901834222584
+    },
+    {
+      "class_name": "class_0705",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 348.1286732406837
+    },
+    {
+      "class_name": "class_0706",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 337.60841949376095
+    },
+    {
+      "class_name": "class_0707",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 312.8154464749568
+    },
+    {
+      "class_name": "class_0708",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 484.07859270385353
+    },
+    {
+      "class_name": "class_0709",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 323.8535840856141
+    },
+    {
+      "class_name": "class_0710",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 371.39250112514407
+    },
+    {
+      "class_name": "class_0711",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 388.24474881151355
+    },
+    {
+      "class_name": "class_0712",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 295.8510649377649
+    },
+    {
+      "class_name": "class_0713",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 374.950775151487
+    },
+    {
+      "class_name": "class_0714",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 306.53421987673045
+    },
+    {
+      "class_name": "class_0715",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 261.8877316277213
+    },
+    {
+      "class_name": "class_0716",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 319.2721744670859
+    },
+    {
+      "class_name": "class_0717",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 345.5548167715383
+    },
+    {
+      "class_name": "class_0718",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 269.36033012814096
+    },
+    {
+      "class_name": "class_0719",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 339.043264929756
+    },
+    {
+      "class_name": "class_0720",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 470.28078907662444
+    },
+    {
+      "class_name": "class_0721",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 324.0574134781609
+    },
+    {
+      "class_name": "class_0722",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 433.23764212852706
+    },
+    {
+      "class_name": "class_0723",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 302.038487019497
+    },
+    {
+      "class_name": "class_0724",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 309.71598556361454
+    },
+    {
+      "class_name": "class_0725",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 281.0475378858757
+    },
+    {
+      "class_name": "class_0726",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 428.5928719067669
+    },
+    {
+      "class_name": "class_0727",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 306.45672676180965
+    },
+    {
+      "class_name": "class_0728",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 343.47742920397394
+    },
+    {
+      "class_name": "class_0729",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 346.73849337854523
+    },
+    {
+      "class_name": "class_0730",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 418.6136671355109
+    },
+    {
+      "class_name": "class_0731",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 289.15210603602765
+    },
+    {
+      "class_name": "class_0732",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 289.7061788220133
+    },
+    {
+      "class_name": "class_0733",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 418.7169169096577
+    },
+    {
+      "class_name": "class_0734",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 262.8830110134887
+    },
+    {
+      "class_name": "class_0735",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 313.41608312393583
+    },
+    {
+      "class_name": "class_0736",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 380.17492575263026
+    },
+    {
+      "class_name": "class_0737",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 234.88657786758256
+    },
+    {
+      "class_name": "class_0738",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 297.1863301174944
+    },
+    {
+      "class_name": "class_0739",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 364.3642358328975
+    },
+    {
+      "class_name": "class_0740",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 407.2150276598145
+    },
+    {
+      "class_name": "class_0741",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 329.83630816724667
+    },
+    {
+      "class_name": "class_0742",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 265.4810932006902
+    },
+    {
+      "class_name": "class_0743",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 300.3775278615957
+    },
+    {
+      "class_name": "class_0744",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 370.05236965054524
+    },
+    {
+      "class_name": "class_0745",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 246.2754868930887
+    },
+    {
+      "class_name": "class_0746",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 356.20673206337295
+    },
+    {
+      "class_name": "class_0747",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 322.677628606364
+    },
+    {
+      "class_name": "class_0748",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 368.7296949034013
+    },
+    {
+      "class_name": "class_0749",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 398.5592088623738
+    },
+    {
+      "class_name": "class_0750",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 354.8236238037644
+    },
+    {
+      "class_name": "class_0751",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 357.7033093300784
+    },
+    {
+      "class_name": "class_0752",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 294.58958795338447
+    },
+    {
+      "class_name": "class_0753",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 360.44282789926854
+    },
+    {
+      "class_name": "class_0754",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 521.8319637075482
+    },
+    {
+      "class_name": "class_0755",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 366.2369974871595
+    },
+    {
+      "class_name": "class_0756",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 329.4637889423814
+    },
+    {
+      "class_name": "class_0757",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 281.77365948373665
+    },
+    {
+      "class_name": "class_0758",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 329.51682873873443
+    },
+    {
+      "class_name": "class_0759",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 366.4964303256267
+    },
+    {
+      "class_name": "class_0760",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 314.827587330672
+    },
+    {
+      "class_name": "class_0761",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 336.0067774108947
+    },
+    {
+      "class_name": "class_0762",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 372.5188242839511
+    },
+    {
+      "class_name": "class_0763",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 319.71070586107027
+    },
+    {
+      "class_name": "class_0764",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 340.6223922838039
+    },
+    {
+      "class_name": "class_0765",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 406.47746501314367
+    },
+    {
+      "class_name": "class_0766",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 264.1122669286099
+    },
+    {
+      "class_name": "class_0767",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 300.66467507663845
+    },
+    {
+      "class_name": "class_0768",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 365.67892711476577
+    },
+    {
+      "class_name": "class_0769",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 330.02796280274663
+    },
+    {
+      "class_name": "class_0770",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 322.20917119596015
+    },
+    {
+      "class_name": "class_0771",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 325.43387763707324
+    },
+    {
+      "class_name": "class_0772",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 364.4532893849455
+    },
+    {
+      "class_name": "class_0773",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 548.6379119479313
+    },
+    {
+      "class_name": "class_0774",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 322.9848744717803
+    },
+    {
+      "class_name": "class_0775",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 288.4623599382189
+    },
+    {
+      "class_name": "class_0776",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 299.7291299432418
+    },
+    {
+      "class_name": "class_0777",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 289.60963608736307
+    },
+    {
+      "class_name": "class_0778",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 419.4169787541402
+    },
+    {
+      "class_name": "class_0779",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 332.4992237551206
+    },
+    {
+      "class_name": "class_0780",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 405.6655961064921
+    },
+    {
+      "class_name": "class_0781",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 283.81323901636847
+    },
+    {
+      "class_name": "class_0782",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 359.40063678270195
+    },
+    {
+      "class_name": "class_0783",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 351.94840341284214
+    },
+    {
+      "class_name": "class_0784",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 306.72496902435466
+    },
+    {
+      "class_name": "class_0785",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 359.23911157422305
+    },
+    {
+      "class_name": "class_0786",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 288.6270802218178
+    },
+    {
+      "class_name": "class_0787",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 306.908680802022
+    },
+    {
+      "class_name": "class_0788",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 284.1818497397682
+    },
+    {
+      "class_name": "class_0789",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 305.92986033844204
+    },
+    {
+      "class_name": "class_0790",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 338.3647989009075
+    },
+    {
+      "class_name": "class_0791",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 257.7671245875996
+    },
+    {
+      "class_name": "class_0792",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 231.73290050130623
+    },
+    {
+      "class_name": "class_0793",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 413.8665759850122
+    },
+    {
+      "class_name": "class_0794",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 320.7860661869273
+    },
+    {
+      "class_name": "class_0795",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 403.81007274460706
+    },
+    {
+      "class_name": "class_0796",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 362.22145834469046
+    },
+    {
+      "class_name": "class_0797",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 327.4842750652347
+    },
+    {
+      "class_name": "class_0798",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 337.49237875194
+    },
+    {
+      "class_name": "class_0799",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 305.11240908596346
+    },
+    {
+      "class_name": "class_0800",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 298.5134110636899
+    },
+    {
+      "class_name": "class_0801",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 362.78171973350703
+    },
+    {
+      "class_name": "class_0802",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 277.55192503768853
+    },
+    {
+      "class_name": "class_0803",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 363.64376064227946
+    },
+    {
+      "class_name": "class_0804",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 317.8812881255677
+    },
+    {
+      "class_name": "class_0805",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 313.79576321851346
+    },
+    {
+      "class_name": "class_0806",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 300.1007756464813
+    },
+    {
+      "class_name": "class_0807",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 324.9140115899605
+    },
+    {
+      "class_name": "class_0808",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 295.36304420092677
+    },
+    {
+      "class_name": "class_0809",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 383.99123357601735
+    },
+    {
+      "class_name": "class_0810",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 272.02390615889914
+    },
+    {
+      "class_name": "class_0811",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 328.9880635466293
+    },
+    {
+      "class_name": "class_0812",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 312.16721609535796
+    },
+    {
+      "class_name": "class_0813",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 320.1865910646397
+    },
+    {
+      "class_name": "class_0814",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 319.4834416177355
+    },
+    {
+      "class_name": "class_0815",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 320.0477712081962
+    },
+    {
+      "class_name": "class_0816",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 369.5724551604103
+    },
+    {
+      "class_name": "class_0817",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 275.94146629133866
+    },
+    {
+      "class_name": "class_0818",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 325.89564728406685
+    },
+    {
+      "class_name": "class_0819",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 330.97333916935577
+    },
+    {
+      "class_name": "class_0820",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 267.98432106922013
+    },
+    {
+      "class_name": "class_0821",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 368.8712379055252
+    },
+    {
+      "class_name": "class_0822",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 346.0800731264196
+    },
+    {
+      "class_name": "class_0823",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 282.777694209948
+    },
+    {
+      "class_name": "class_0824",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 421.52221944462997
+    },
+    {
+      "class_name": "class_0825",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 313.4139961876532
+    },
+    {
+      "class_name": "class_0826",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 366.1067281051232
+    },
+    {
+      "class_name": "class_0827",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 318.4923798772211
+    },
+    {
+      "class_name": "class_0828",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 285.24504483707335
+    },
+    {
+      "class_name": "class_0829",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 405.26620524884424
+    },
+    {
+      "class_name": "class_0830",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 285.4286923548668
+    },
+    {
+      "class_name": "class_0831",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 331.45341380030345
+    },
+    {
+      "class_name": "class_0832",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 553.6885412309716
+    },
+    {
+      "class_name": "class_0833",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 320.458868781276
+    },
+    {
+      "class_name": "class_0834",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 312.16939197061447
+    },
+    {
+      "class_name": "class_0835",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 339.49057707349823
+    },
+    {
+      "class_name": "class_0836",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 334.341325499608
+    },
+    {
+      "class_name": "class_0837",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 333.4765436377339
+    },
+    {
+      "class_name": "class_0838",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 437.10045814666336
+    },
+    {
+      "class_name": "class_0839",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 338.38118783258466
+    },
+    {
+      "class_name": "class_0840",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 348.7357920727775
+    },
+    {
+      "class_name": "class_0841",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 351.3917610485112
+    },
+    {
+      "class_name": "class_0842",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 291.0673434468249
+    },
+    {
+      "class_name": "class_0843",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 224.64104829855407
+    },
+    {
+      "class_name": "class_0844",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 346.61100262959326
+    },
+    {
+      "class_name": "class_0845",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 416.78249337825264
+    },
+    {
+      "class_name": "class_0846",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 384.1947854333116
+    },
+    {
+      "class_name": "class_0847",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 571.784087316931
+    },
+    {
+      "class_name": "class_0848",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 342.20763277557415
+    },
+    {
+      "class_name": "class_0849",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 368.192970019618
+    },
+    {
+      "class_name": "class_0850",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 388.129840070549
+    },
+    {
+      "class_name": "class_0851",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 334.0337230133594
+    },
+    {
+      "class_name": "class_0852",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 321.54166268995124
+    },
+    {
+      "class_name": "class_0853",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 438.05015068608463
+    },
+    {
+      "class_name": "class_0854",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 281.94942235547086
+    },
+    {
+      "class_name": "class_0855",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 389.24864066447503
+    },
+    {
+      "class_name": "class_0856",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 285.03890552152245
+    },
+    {
+      "class_name": "class_0857",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 300.70378687455235
+    },
+    {
+      "class_name": "class_0858",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 323.51807363137755
+    },
+    {
+      "class_name": "class_0859",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 323.8739029700706
+    },
+    {
+      "class_name": "class_0860",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 351.0099318787815
+    },
+    {
+      "class_name": "class_0861",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 406.42937492537527
+    },
+    {
+      "class_name": "class_0862",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 282.0122512488785
+    },
+    {
+      "class_name": "class_0863",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 333.32647568655136
+    },
+    {
+      "class_name": "class_0864",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 404.64583778486343
+    },
+    {
+      "class_name": "class_0865",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 353.0042280541549
+    },
+    {
+      "class_name": "class_0866",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 339.94782982763695
+    },
+    {
+      "class_name": "class_0867",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 338.97818691700127
+    },
+    {
+      "class_name": "class_0868",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 356.9247386503765
+    },
+    {
+      "class_name": "class_0869",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 242.51302014139569
+    },
+    {
+      "class_name": "class_0870",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 308.07479572110105
+    },
+    {
+      "class_name": "class_0871",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 323.3056720080508
+    },
+    {
+      "class_name": "class_0872",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 303.2422577572212
+    },
+    {
+      "class_name": "class_0873",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 301.8587589159282
+    },
+    {
+      "class_name": "class_0874",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 308.9604597835285
+    },
+    {
+      "class_name": "class_0875",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 350.1319713437908
+    },
+    {
+      "class_name": "class_0876",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 203.2095860839009
+    },
+    {
+      "class_name": "class_0877",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 336.5176782265221
+    },
+    {
+      "class_name": "class_0878",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 331.17569294925136
+    },
+    {
+      "class_name": "class_0879",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 484.4733238002242
+    },
+    {
+      "class_name": "class_0880",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 405.3597831307199
+    },
+    {
+      "class_name": "class_0881",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 217.37273684593305
+    },
+    {
+      "class_name": "class_0882",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 232.20129851830524
+    },
+    {
+      "class_name": "class_0883",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 350.35801611059577
+    },
+    {
+      "class_name": "class_0884",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 339.311714260033
+    },
+    {
+      "class_name": "class_0885",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 229.35318036633484
+    },
+    {
+      "class_name": "class_0886",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 296.4152343450482
+    },
+    {
+      "class_name": "class_0887",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 375.04770057168633
+    },
+    {
+      "class_name": "class_0888",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 367.69392299055346
+    },
+    {
+      "class_name": "class_0889",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 326.3339865274523
+    },
+    {
+      "class_name": "class_0890",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 321.3572747237358
+    },
+    {
+      "class_name": "class_0891",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 387.36111132449344
+    },
+    {
+      "class_name": "class_0892",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 318.7418162066696
+    },
+    {
+      "class_name": "class_0893",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 280.294004848286
+    },
+    {
+      "class_name": "class_0894",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 350.0996895215707
+    },
+    {
+      "class_name": "class_0895",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 371.6897096295511
+    },
+    {
+      "class_name": "class_0896",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 278.27632992302495
+    },
+    {
+      "class_name": "class_0897",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 356.135012559963
+    },
+    {
+      "class_name": "class_0898",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 374.1270830292219
+    },
+    {
+      "class_name": "class_0899",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 334.8102235890957
+    },
+    {
+      "class_name": "class_0900",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 493.78527634087527
+    },
+    {
+      "class_name": "class_0901",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 248.13009150743005
+    },
+    {
+      "class_name": "class_0902",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 268.55960550320447
+    },
+    {
+      "class_name": "class_0903",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 318.0298454333577
+    },
+    {
+      "class_name": "class_0904",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 306.4357646634805
+    },
+    {
+      "class_name": "class_0905",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 302.49127783808666
+    },
+    {
+      "class_name": "class_0906",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 302.34746099617035
+    },
+    {
+      "class_name": "class_0907",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 303.53225160761576
+    },
+    {
+      "class_name": "class_0908",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 333.17048129570253
+    },
+    {
+      "class_name": "class_0909",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 385.0254551207157
+    },
+    {
+      "class_name": "class_0910",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 341.69421660822405
+    },
+    {
+      "class_name": "class_0911",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 307.98100877619845
+    },
+    {
+      "class_name": "class_0912",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 241.3368111742884
+    },
+    {
+      "class_name": "class_0913",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 298.7774507528127
+    },
+    {
+      "class_name": "class_0914",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 322.6769702761481
+    },
+    {
+      "class_name": "class_0915",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 340.16884972617225
+    },
+    {
+      "class_name": "class_0916",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 297.6635763625644
+    },
+    {
+      "class_name": "class_0917",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 453.2810534005249
+    },
+    {
+      "class_name": "class_0918",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 359.662422654228
+    },
+    {
+      "class_name": "class_0919",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 258.00029240343366
+    },
+    {
+      "class_name": "class_0920",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 303.9734417748018
+    },
+    {
+      "class_name": "class_0921",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 293.8034016192783
+    },
+    {
+      "class_name": "class_0922",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 377.1029670891867
+    },
+    {
+      "class_name": "class_0923",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 308.06937600370145
+    },
+    {
+      "class_name": "class_0924",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 394.62248244441895
+    },
+    {
+      "class_name": "class_0925",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 347.0933396696937
+    },
+    {
+      "class_name": "class_0926",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 273.0176022348211
+    },
+    {
+      "class_name": "class_0927",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 315.5009604174575
+    },
+    {
+      "class_name": "class_0928",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 271.6380415479814
+    },
+    {
+      "class_name": "class_0929",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 334.0092745970073
+    },
+    {
+      "class_name": "class_0930",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 261.67052105079927
+    },
+    {
+      "class_name": "class_0931",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 319.5116151402422
+    },
+    {
+      "class_name": "class_0932",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 291.5547499497166
+    },
+    {
+      "class_name": "class_0933",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 421.5384296430194
+    },
+    {
+      "class_name": "class_0934",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 313.98891320807445
+    },
+    {
+      "class_name": "class_0935",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 269.10541355971384
+    },
+    {
+      "class_name": "class_0936",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 312.2801855716316
+    },
+    {
+      "class_name": "class_0937",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 386.53873857483484
+    },
+    {
+      "class_name": "class_0938",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 320.4283772430107
+    },
+    {
+      "class_name": "class_0939",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 387.774439735025
+    },
+    {
+      "class_name": "class_0940",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 340.6428581152957
+    },
+    {
+      "class_name": "class_0941",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 250.69957770110494
+    },
+    {
+      "class_name": "class_0942",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 289.38118943199396
+    },
+    {
+      "class_name": "class_0943",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 409.7476512166878
+    },
+    {
+      "class_name": "class_0944",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 364.83298964414325
+    },
+    {
+      "class_name": "class_0945",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 317.2255045885486
+    },
+    {
+      "class_name": "class_0946",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 277.84739762697393
+    },
+    {
+      "class_name": "class_0947",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 310.98372797276335
+    },
+    {
+      "class_name": "class_0948",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 327.3947197871048
+    },
+    {
+      "class_name": "class_0949",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 393.7537775174158
+    },
+    {
+      "class_name": "class_0950",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 294.44205292906196
+    },
+    {
+      "class_name": "class_0951",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 286.1585738609475
+    },
+    {
+      "class_name": "class_0952",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 390.11562237623355
+    },
+    {
+      "class_name": "class_0953",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 362.36349682834543
+    },
+    {
+      "class_name": "class_0954",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 329.2249426565304
+    },
+    {
+      "class_name": "class_0955",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 244.79470216712005
+    }
+    {
+      "class_name": "class_0956",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 396.3648857265847
+    },
+    {
+      "class_name": "class_0957",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 407.2967223191226
+    },
+    {
+      "class_name": "class_0958",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 333.5366399517825
+    },
+    {
+      "class_name": "class_0959",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 428.0968903190208
+    },
+    {
+      "class_name": "class_0960",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 339.5950699575145
+    },
+    {
+      "class_name": "class_0961",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 287.08905751335743
+    },
+    {
+      "class_name": "class_0962",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 436.78141005103913
+    },
+    {
+      "class_name": "class_0963",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 429.2092907374339
+    },
+    {
+      "class_name": "class_0964",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 310.64960567222624
+    },
+    {
+      "class_name": "class_0965",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 344.65613077603297
+    },
+    {
+      "class_name": "class_0966",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 417.3993611066606
+    },
+    {
+      "class_name": "class_0967",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 352.32487143710705
+    },
+    {
+      "class_name": "class_0968",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 360.4820548584745
+    },
+    {
+      "class_name": "class_0969",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 293.6274279306495
+    },
+    {
+      "class_name": "class_0970",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 303.32784762807853
+    },
+    {
+      "class_name": "class_0971",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 361.7298315819118
+    },
+    {
+      "class_name": "class_0972",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 317.8315453831653
+    },
+    {
+      "class_name": "class_0973",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 329.70188572160686
+    },
+    {
+      "class_name": "class_0974",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 336.4548633788178
+    },
+    {
+      "class_name": "class_0975",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 286.84772969838997
+    },
+    {
+      "class_name": "class_0976",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 311.24218176528376
+    },
+    {
+      "class_name": "class_0977",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 275.74215076163625
+    },
+    {
+      "class_name": "class_0978",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 298.16081207679076
+    },
+    {
+      "class_name": "class_0979",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 269.89036608971134
+    },
+    {
+      "class_name": "class_0980",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 271.7454292227707
+    },
+    {
+      "class_name": "class_0981",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 263.29254929069833
+    },
+    {
+      "class_name": "class_0982",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 291.42628368404377
+    },
+    {
+      "class_name": "class_0983",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 317.2773552854213
+    },
+    {
+      "class_name": "class_0984",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 320.51985840929257
+    },
+    {
+      "class_name": "class_0985",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 280.78716696332236
+    },
+    {
+      "class_name": "class_0986",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 251.44662335237547
+    },
+    {
+      "class_name": "class_0987",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 372.78002180378945
+    },
+    {
+      "class_name": "class_0988",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 321.529307561555
+    },
+    {
+      "class_name": "class_0989",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 287.9543918022231
+    },
+    {
+      "class_name": "class_0990",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 172.1670474152834
+    },
+    {
+      "class_name": "class_0991",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 140.62512772267286
+    },
+    {
+      "class_name": "class_0992",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 70.25806968207793
+    },
+    {
+      "class_name": "class_0993",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 139.64615870886374
+    },
+    {
+      "class_name": "class_0994",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 133.08895909629223
+    },
+    {
+      "class_name": "class_0995",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 139.2528851494028
+    },
+    {
+      "class_name": "class_0996",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 178.7280062005729
+    },
+    {
+      "class_name": "class_0997",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 140.7161936784591
+    },
+    {
+      "class_name": "class_0998",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 83.70669762403168
+    },
+    {
+      "class_name": "class_0999",
+      "real_images": 50,
+      "sample_images": 50,
+      "fid": 178.6274583889409
+    }
+  ]
+}
+

@@ -1,0 +1,6 @@
+compute KID between two folders
+Found 50000 images in the folder DiT
+KID DiT : 100%|██████████| 1563/1563 [00:51<00:00, 30.12it/s]
+Found 50000 images in the folder validation
+KID validation : 100%|██████████| 1563/1563 [00:51<00:00, 30.29it/s]
+KID: 0.0023

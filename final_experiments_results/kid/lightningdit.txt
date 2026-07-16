@@ -1,0 +1,6 @@
+compute KID between two folders
+Found 50000 images in the folder lightening
+KID lightening : 100%|██████████| 1563/1563 [00:59<00:00, 26.35it/s]
+Found 50000 images in the folder validation
+KID validation : 100%|██████████| 1563/1563 [01:00<00:00, 25.78it/s]
+KID: 0.0016

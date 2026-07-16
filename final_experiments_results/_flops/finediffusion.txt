@@ -1,0 +1,24 @@
+{'Image size': '256x256',
+ 'FLOPs': '228.84 GFLOPs per forward pass',
+ 'Parameters': '685.64M total; 12.15M trainable',
+ 'GPU': 'NVIDIA GeForce RTX 4090',
+ 'Time per epoch': '22 mins 10s',
+ 'GPU usage per epoch': 'mean 90.3% / max 94.0% GPU; mean 26.2% / max 28.0% VRAM',
+ 'VRAM per epoch': 'peak 3.19 GB allocated; 3.30 GB reserved'}
+
+
+ [[34m2026-05-28 23:02:48[0m] DiT Parameters: 675,260,960
+[[34m2026-05-28 23:02:48[0m] DiT Parameters with requires_grad=True: 1,774,112
+[[34m2026-05-28 23:02:48[0m] Dataset contains 50,000 images (/home/deepten/github/shahbazi/FineDiffusion/imagenet_val_organized)
+[[34m2026-05-28 23:02:48[0m] Dataset contains 1000 classes in 1 superclasses
+[[34m2026-05-28 23:02:48[0m] Training for 100 epochs...
+[[34m2026-05-28 23:02:48[0m] Beginning epoch 0...
+[[34m2026-05-28 23:02:56[0m] (step=0000100) Train Loss: 0.1496, Train Steps/Sec: 12.31
+[[34m2026-05-28 23:03:04[0m] (step=0000200) Train Loss: 0.1419, Train Steps/Sec: 12.97
+[[34m2026-05-28 23:03:12[0m] (step=0000300) Train Loss: 0.1671, Train Steps/Sec: 12.97
+.
+.
+.
+[[34m2026-05-28 23:24:09[0m] (step=0016500) Train Loss: 0.1507, Train Steps/Sec: 12.92
+[[34m2026-05-28 23:24:17[0m] (step=0016600) Train Loss: 0.1183, Train Steps/Sec: 12.94
+[[34m2026-05-28 23:24:22[0m] Beginning epoch 1...

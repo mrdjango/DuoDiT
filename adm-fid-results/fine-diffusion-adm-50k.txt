@@ -1,0 +1,4 @@
+samples = class Wise
+Inception Score: 67.24732971191406
+FID: 9.676378676660363
+sFID: 8.85018798329088

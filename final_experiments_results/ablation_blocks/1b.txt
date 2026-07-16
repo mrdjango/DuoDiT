@@ -1,0 +1,10 @@
+Paper-ready values
+Image size: 256x256
+FLOPs: 267.10 GFLOPs per forward pass
+Parameters: 690.39M total; 17.95M trainable
+GPU: NVIDIA GeForce RTX 4090
+Time per epoch: 4s (0.0222 sec/step x 200 steps/epoch)
+GPU usage per epoch: mean 89.8% / max 96.0% GPU; mean 29.1% / max 32.0% VRAM
+VRAM per epoch: peak 2.91 GB allocated; 3.13 GB reserved
+Estimated total training time: 29m 33s
+Estimated training compute: 16410.75 PFLOPs

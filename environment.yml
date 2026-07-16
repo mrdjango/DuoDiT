@@ -8,6 +8,7 @@ dependencies:
   - torchvision
   - pytorch-cuda=11.7
   - pip:
+    - clean-fid
     - timm
     - diffusers
     - accelerate

@@ -1,0 +1,6 @@
+compute KID between two folders
+Found 50000 images in the folder /home/mahmood/shahbazi/FineDiffusion/samples/imagenet_classwise
+KID FineDiffusion : 100%|██████████| 1563/1563 [00:46<00:00, 33.58it/s]
+Found 50000 images in the folder validation
+KID validation : 100%|██████████| 1563/1563 [01:00<00:00, 25.66it/s]
+KID: 0.0093

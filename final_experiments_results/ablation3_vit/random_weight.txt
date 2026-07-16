@@ -1,0 +1,6 @@
+x2 = torch.randn_like(x2)
+FID: 216.7914, KID: 0.0512
+
+
+x2 = self.x2_vit_block(x2)
+FID: 215.7946, KID: 0.0503
