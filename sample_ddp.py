@@ -80,7 +80,8 @@ def main(args):
     latent_size = args.image_size // 8
     model = DiT_models[args.model](
         input_size=latent_size,
-        num_classes=args.num_classes
+        num_classes=args.num_classes,
+        x2_vit_depth=args.x2_vit_depth,
     ).to(device)
     # Auto-download a pre-trained model or load a custom DiT checkpoint from train.py:
     ckpt_path = args.ckpt or f"DiT-XL-2-{args.image_size}x{args.image_size}.pt"
@@ -178,6 +179,8 @@ if __name__ == "__main__":
                         help="Optional ImageNet class indices to sample from. Defaults to all classes.")
     parser.add_argument("--cfg-scale",  type=float, default=1.5)
     parser.add_argument("--num-sampling-steps", type=int, default=250)
+    parser.add_argument("--x2-vit-depth", type=int, choices=[1, 2, 4], default=1,
+                        help="Must match the final ViT block count used during training.")
     parser.add_argument("--global-seed", type=int, default=0)
     parser.add_argument("--tf32", action=argparse.BooleanOptionalAction, default=True,
                         help="By default, use TF32 matmuls. This massively accelerates sampling on Ampere GPUs.")

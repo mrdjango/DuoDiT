@@ -14,6 +14,7 @@ import torch.nn as nn
 import numpy as np
 import math
 import timm
+from copy import deepcopy
 from timm.models.vision_transformer import PatchEmbed, Attention, Mlp, VisionTransformer, Block
 
 
@@ -162,14 +163,18 @@ class DiT(nn.Module):
         x2_fuse_every=0,           # >0 to fuse x2 into x every N blocks (early/throughout)
         x2_condition_with_c=False,  # True to FiLM-condition x2 with t+y before its ViT block
         x2_final_fuse=True,        # keep the final add of x2 after all blocks
+        x2_vit_depth=1,            # number of final pretrained ViT blocks used by x2
     ):
         super().__init__()
+        if x2_vit_depth < 1:
+            raise ValueError(f"x2_vit_depth must be at least 1, got {x2_vit_depth}")
         self.learn_sigma = learn_sigma
         self.in_channels = in_channels
         self.out_channels = in_channels * 2 if learn_sigma else in_channels
         self.patch_size = patch_size
         self.hidden_size = hidden_size
         self.num_heads = num_heads
+        self.x2_vit_depth = x2_vit_depth
 
         self.x_embedder = PatchEmbed(input_size, patch_size, in_channels, hidden_size, bias=True)
         self.x2_embedder = PatchEmbed(input_size, patch_size // 2, in_channels, hidden_size, bias=True)
@@ -184,14 +189,17 @@ class DiT(nn.Module):
         self.blocks = nn.ModuleList([
             DiTBlock(hidden_size, num_heads, mlp_ratio=mlp_ratio) for _ in range(depth)
         ])
-        # ViT block for processing x2
-        # Will be initialized with target dimensions, but may be replaced with pretrained block if dimensions differ
-        self.x2_vit_block = Block(
-            dim=hidden_size,
-            num_heads=num_heads,
-            mlp_ratio=mlp_ratio,
-            qkv_bias=True
-        )
+        # This list is replaced with the final N blocks of the pretrained ViT.
+        # The random blocks remain as a fallback if pretrained loading fails.
+        self.x2_vit_blocks = nn.ModuleList([
+            Block(
+                dim=hidden_size,
+                num_heads=num_heads,
+                mlp_ratio=mlp_ratio,
+                qkv_bias=True,
+            )
+            for _ in range(x2_vit_depth)
+        ])
         # Optional FiLM to condition x2 on c (t+y)
         self.x2_condition_with_c = x2_condition_with_c
         if self.x2_condition_with_c:
@@ -245,98 +253,54 @@ class DiT(nn.Module):
         nn.init.constant_(self.final_layer.linear.weight, 0)
         nn.init.constant_(self.final_layer.linear.bias, 0)
         
-        # Load pre-trained timm ViT weights for x2_vit_block
+        # Load the final pretrained timm ViT blocks used by x2.
         self.load_pretrained_vit_weights()
 
     def load_pretrained_vit_weights(self, vit_model_name='vit_large_patch16_224'):
         """
-        Load pre-trained timm ViT weights for x2_vit_block.
-        If dimensions don't match, uses projection layers to adapt.
+        Use the final ``x2_vit_depth`` blocks of a pretrained timm ViT.
+
+        x2 is projected to the ViT dimension when needed, passed sequentially
+        through those exact tail blocks, and then projected back.
         """
         try:
-            # Load pre-trained ViT model
             print(f"[DiT] Loading pre-trained ViT model: {vit_model_name}", flush=True)
             pretrained_vit = timm.create_model(vit_model_name, pretrained=True)
             pretrained_vit.eval()
-            
-            # Extract the last block
-            pretrained_block = pretrained_vit.blocks[-1]
-            pretrained_dim = pretrained_vit.embed_dim
-            # Get num_heads from the attention module or infer from qkv weight shape
-            pretrained_num_heads = None
-            # Try multiple ways to get num_heads
-            if hasattr(pretrained_block.attn, 'num_heads'):
-                pretrained_num_heads = pretrained_block.attn.num_heads
-            elif hasattr(pretrained_vit, 'num_heads'):
-                pretrained_num_heads = pretrained_vit.num_heads
-            else:
-                # Infer from qkv weight shape
-                # qkv weight shape is (3 * num_heads * head_dim, embed_dim)
-                # where embed_dim = num_heads * head_dim
-                # So: qkv_out_dim = 3 * embed_dim, and head_dim = embed_dim / num_heads
-                # Therefore: qkv_out_dim = 3 * num_heads * (embed_dim / num_heads) = 3 * embed_dim
-                # This means we can't directly get num_heads from qkv_out_dim alone
-                # But we can calculate: num_heads = embed_dim / head_dim
-                # And head_dim = qkv_out_dim / (3 * num_heads) = embed_dim / num_heads
-                # So: qkv_out_dim = 3 * embed_dim (always true for standard ViT)
-                # We need to infer head_dim. Standard head_dim values: 64 (most common)
-                qkv_out_dim = pretrained_block.attn.qkv.weight.shape[0]
-                # Calculate head_dim from qkv: head_dim = qkv_out_dim / (3 * num_heads)
-                # Since we don't know num_heads, let's use common defaults
-                # Common ViT configs: embed_dim 768 -> 12 heads (head_dim=64), 1024 -> 16 heads (head_dim=64)
-                if pretrained_dim == 768:
-                    pretrained_num_heads = 12
-                elif pretrained_dim == 1024:
-                    pretrained_num_heads = 16
-                elif pretrained_dim == 1280:
-                    pretrained_num_heads = 16
-                else:
-                    # Calculate: assume head_dim = 64 (most common)
-                    pretrained_num_heads = pretrained_dim // 64
-                    if pretrained_num_heads <= 0 or pretrained_num_heads > 32:
-                        pretrained_num_heads = 16  # fallback to common value
-                print(f"[DiT] Inferred num_heads={pretrained_num_heads} from embed_dim={pretrained_dim}", flush=True)
-            
-            print(f"[DiT] Pre-trained ViT block: dim={pretrained_dim}, num_heads={pretrained_num_heads}", flush=True)
-            print(f"[DiT] Target x2_vit_block: dim={self.x2_vit_block.norm1.normalized_shape[0]}, num_heads={self.num_heads}", flush=True)
-            
-            # Check if dimensions match
-            if pretrained_dim == self.hidden_size and pretrained_num_heads == self.num_heads:
-                # Direct weight loading if dimensions match
-                print(f"[DiT] Dimensions match! Loading weights directly...", flush=True)
-                self.x2_vit_block.load_state_dict(pretrained_block.state_dict(), strict=True)
-                print(f"[DiT] ✓ Successfully loaded pre-trained ViT weights for x2_vit_block", flush=True)
-            else:
-                # Dimensions don't match - replace block with pretrained dimensions and use projection layers
-                print(f"[DiT] Dimensions don't match. Creating block with pretrained dimensions and projection layers...", flush=True)
-                
-                # Create a new block with pretrained dimensions
-                pretrained_mlp_ratio = pretrained_vit.mlp_ratio if hasattr(pretrained_vit, 'mlp_ratio') else 4.0
-                self.x2_vit_block = Block(
-                    dim=pretrained_dim,
-                    num_heads=pretrained_num_heads,
-                    mlp_ratio=pretrained_mlp_ratio,
-                    qkv_bias=True
+
+            if self.x2_vit_depth > len(pretrained_vit.blocks):
+                raise ValueError(
+                    f"x2_vit_depth={self.x2_vit_depth} exceeds the "
+                    f"{len(pretrained_vit.blocks)} blocks in {vit_model_name}"
                 )
-                
-                # Load pre-trained weights into the new block
-                self.x2_vit_block.load_state_dict(pretrained_block.state_dict(), strict=True)
-                
-                # Create projection layers
+
+            # For depth=N, select blocks [-N], ..., [-1] in their original order.
+            selected_blocks = pretrained_vit.blocks[-self.x2_vit_depth:]
+            self.x2_vit_blocks = nn.ModuleList(deepcopy(list(selected_blocks)))
+            pretrained_dim = pretrained_vit.embed_dim
+
+            if pretrained_dim != self.hidden_size:
                 self.x2_vit_proj_in = nn.Linear(self.hidden_size, pretrained_dim)
                 self.x2_vit_proj_out = nn.Linear(pretrained_dim, self.hidden_size)
-                # Initialize projection layers
                 nn.init.xavier_uniform_(self.x2_vit_proj_in.weight)
                 nn.init.constant_(self.x2_vit_proj_in.bias, 0)
                 nn.init.xavier_uniform_(self.x2_vit_proj_out.weight)
                 nn.init.constant_(self.x2_vit_proj_out.bias, 0)
-                
-                print(f"[DiT] ✓ Successfully loaded pre-trained ViT weights into block with dim={pretrained_dim}", flush=True)
-                print(f"[DiT] Using projection layers to adapt dimensions: {self.hidden_size} -> {pretrained_dim} -> {self.hidden_size}", flush=True)
-                
+
+            selected_indices = list(range(len(pretrained_vit.blocks) - self.x2_vit_depth, len(pretrained_vit.blocks)))
+            print(
+                f"[DiT] ✓ x2 uses pretrained ViT blocks {selected_indices} "
+                f"(depth={self.x2_vit_depth}, dim={pretrained_dim})",
+                flush=True,
+            )
+            if self.x2_vit_proj_in is not None:
+                print(
+                    f"[DiT] Projection: {self.hidden_size} -> {pretrained_dim} -> {self.hidden_size}",
+                    flush=True,
+                )
         except Exception as e:
             print(f"[DiT] Warning: Could not load pre-trained ViT weights: {e}", flush=True)
-            print(f"[DiT] Using randomly initialized weights for x2_vit_block", flush=True)
+            print(f"[DiT] Using {self.x2_vit_depth} randomly initialized x2 ViT block(s)", flush=True)
 
     def patchify(self, imgs):
         """
@@ -428,7 +392,9 @@ class DiT(nn.Module):
         # Use projection layers if dimensions don't match
         if self.x2_vit_proj_in is not None:
             x2 = self.x2_vit_proj_in(x2)  # Project to pre-trained ViT dimension
-        x2 = self.x2_vit_block(x2)  # (N, T, D) - processed by pre-trained ViT block
+        # Feed x2 through the selected final ViT blocks in order: [-depth] ... [-1].
+        for vit_block in self.x2_vit_blocks:
+            x2 = vit_block(x2)
         if self.x2_vit_proj_out is not None:
             x2 = self.x2_vit_proj_out(x2)  # Project back to hidden_size
         # extract CLS tokens from x2

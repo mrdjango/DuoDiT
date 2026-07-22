@@ -152,7 +152,8 @@ def main(args):
     latent_size = args.image_size // 8
     model = DiT_models[args.model](
         input_size=latent_size,
-        num_classes=args.num_classes
+        num_classes=args.num_classes,
+        x2_vit_depth=args.x2_vit_depth,
     )
     # Note that parameter initialization is done within the DiT constructor
     
@@ -198,9 +199,9 @@ def main(args):
     else:
         logger.warning("  ⚠️  model.x2_cls_tokens not found! This should not happen.")
     
-    # Unfreeze x2_vit_block
-    logger.info("  - Unfreezing x2_vit_block...")
-    for p in model.x2_vit_block.parameters():
+    # Unfreeze all selected final ViT blocks in the x2 branch.
+    logger.info(f"  - Unfreezing {model.x2_vit_depth} x2_vit_blocks...")
+    for p in model.x2_vit_blocks.parameters():
         p.requires_grad = True
         
     # Unfreeze projections if they exist
@@ -226,7 +227,7 @@ def main(args):
     # Breakdown of trainable parameters
     x2_embedder_params = sum(p.numel() for p in model.x2_embedder.parameters() if p.requires_grad)
     x2_cls_token_params = model.x2_cls_tokens.numel() if hasattr(model, 'x2_cls_tokens') and model.x2_cls_tokens.requires_grad else 0
-    x2_vit_block_params = sum(p.numel() for p in model.x2_vit_block.parameters() if p.requires_grad)
+    x2_vit_block_params = sum(p.numel() for p in model.x2_vit_blocks.parameters() if p.requires_grad)
     x2_proj_in_params = sum(p.numel() for p in model.x2_vit_proj_in.parameters() if p.requires_grad) if model.x2_vit_proj_in is not None else 0
     x2_proj_out_params = sum(p.numel() for p in model.x2_vit_proj_out.parameters() if p.requires_grad) if model.x2_vit_proj_out is not None else 0
     final_layer_params = sum(p.numel() for p in model.final_layer.parameters() if p.requires_grad)
@@ -485,6 +486,8 @@ if __name__ == "__main__":
     parser.add_argument("--num-workers", type=int, default=4)
     parser.add_argument("--log-every", type=int, default=100)
     parser.add_argument("--ckpt-every", type=int, default=50_000)
+    parser.add_argument("--x2-vit-depth", type=int, choices=[1, 2, 4], default=1,
+                        help="Use the final N pretrained ViT blocks for x2 (1, 2, or 4).")
     
     # New arguments
     parser.add_argument("--classes", type=int, nargs="+", required=True, help="List of ImageNet class indices to train on (default: 0-9)")

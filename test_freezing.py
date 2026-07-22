@@ -8,11 +8,12 @@ sys.path.append(os.getcwd())
 
 from models import DiT_models
 
-def verify_freezing():
+def verify_freezing(x2_vit_depth=4):
     print("Initializing model...")
     model = DiT_models['DiT-XL/2'](
         input_size=32,
-        num_classes=1000
+        num_classes=1000,
+        x2_vit_depth=x2_vit_depth,
     )
     
     print("Applying freezing logic...")
@@ -24,8 +25,8 @@ def verify_freezing():
     for p in model.x2_embedder.parameters():
         p.requires_grad = True
     
-    # Check x2_vit_block
-    for p in model.x2_vit_block.parameters():
+    # Check all selected x2 ViT blocks
+    for p in model.x2_vit_blocks.parameters():
         p.requires_grad = True
         
     if model.x2_vit_proj_in is not None:
@@ -55,7 +56,8 @@ def verify_freezing():
     # 2. Verify x2 branch and final_layer are unfrozen
     unfrozen_params = [
         model.x2_embedder.proj.weight,
-        model.x2_vit_block.norm1.weight,
+        model.x2_vit_blocks[0].norm1.weight,
+        model.x2_vit_blocks[-1].norm1.weight,
         model.final_layer.linear.weight  # final_layer should be trainable
     ]
     if model.x2_vit_proj_in is not None:

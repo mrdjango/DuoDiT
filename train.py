@@ -142,7 +142,8 @@ def main(args):
     latent_size = args.image_size // 8
     model = DiT_models[args.model](
         input_size=latent_size,
-        num_classes=args.num_classes
+        num_classes=args.num_classes,
+        x2_vit_depth=args.x2_vit_depth,
     )
     # Note that parameter initialization is done within the DiT constructor
     ema = deepcopy(model).to(device)  # Create an EMA of the model for use after training
@@ -266,5 +267,7 @@ if __name__ == "__main__":
     parser.add_argument("--num-workers", type=int, default=4)
     parser.add_argument("--log-every", type=int, default=100)
     parser.add_argument("--ckpt-every", type=int, default=50_000)
+    parser.add_argument("--x2-vit-depth", type=int, choices=[1, 2, 4], default=1,
+                        help="Use the final N pretrained ViT blocks for x2 (1, 2, or 4).")
     args = parser.parse_args()
     main(args)

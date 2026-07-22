@@ -147,7 +147,8 @@ def build_run_name(args: argparse.Namespace, classes: Sequence[int]) -> str:
     """Build the single configuration-named output directory."""
     model_name = args.model.replace("/", "-")
     return (
-        f"{model_name}-{checkpoint_label(args.ckpt)}-size-{args.image_size}-vae-{args.vae}-"
+        f"{model_name}-{checkpoint_label(args.ckpt)}-x2vit-{getattr(args, 'x2_vit_depth', 1)}b-"
+        f"size-{args.image_size}-vae-{args.vae}-"
         f"steps-{args.num_sampling_steps}-cfg-{args.cfg_scale:g}-"
         f"classes-{format_class_label(classes, args.num_classes)}-"
         f"samples-{args.num_samples}-seed-{args.global_seed}"
@@ -361,6 +362,7 @@ def run_sampling(args: argparse.Namespace) -> tuple[Path, Path]:
     model = DiT_models[args.model](
         input_size=latent_size,
         num_classes=args.num_classes,
+        x2_vit_depth=args.x2_vit_depth,
     ).to(device)
     state_dict = find_model(args.ckpt)
     model.load_state_dict(state_dict)
@@ -457,6 +459,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--cfg-scale", type=float, default=1.0)
     parser.add_argument("--num-sampling-steps", type=int, default=250)
+    parser.add_argument("--x2-vit-depth", type=int, choices=[1, 2, 4], default=1,
+                        help="Must match the final ViT block count used during training.")
     parser.add_argument("--global-seed", type=int, default=0)
     parser.add_argument(
         "--tf32",
