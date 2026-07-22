@@ -21,6 +21,18 @@ def modulate(x, shift, scale):
     return x * (1 + scale.unsqueeze(1)) + shift.unsqueeze(1)
 
 
+def max_pool_token_groups(tokens, group_size=4):
+    """Take element-wise maxima across adjacent token groups."""
+    batch_size, sequence_length, hidden_size = tokens.shape
+    if sequence_length % group_size != 0:
+        raise ValueError(
+            f"sequence length {sequence_length} must be divisible by group_size {group_size}"
+        )
+    return tokens.reshape(
+        batch_size, sequence_length // group_size, group_size, hidden_size
+    ).amax(dim=2)
+
+
 #################################################################################
 #               Embedding Layers for Timesteps and Class Labels                 #
 #################################################################################
@@ -178,8 +190,6 @@ class DiT(nn.Module):
         num_patches = self.x_embedder.num_patches
         # Will use fixed sin-cos embedding:
         self.pos_embed = nn.Parameter(torch.zeros(1, num_patches, hidden_size), requires_grad=False)
-        # Learnable CLS tokens for x2 (one per group of 4 patches)
-        self.x2_cls_tokens = nn.Parameter(torch.randn(1, num_patches, hidden_size) * 0.02)
 
         self.blocks = nn.ModuleList([
             DiTBlock(hidden_size, num_heads, mlp_ratio=mlp_ratio) for _ in range(depth)
@@ -389,35 +399,11 @@ class DiT(nn.Module):
         # skip = self.x_embedder(x)                                 # preserve pre-block representation
         x2 = self.x2_embedder(x)  # (N, 4T, D)
         
-        # Insert CLS tokens after every 4 rows: (N, 4T, D) -> (N, 5T, D)
-        N, seq_len, D = x2.shape
-        T = seq_len // 4  # Number of groups
-        # Reshape to group patches in sets of 4: (N, 4T, D) -> (N, T, 4, D)
-        x2 = x2.reshape(N, T, 4, D)
-        # Expand learnable CLS tokens: (1, T, D) -> (N, T, 1, D)
-        # Use repeat instead of expand to ensure gradients flow properly to the learnable parameter
-        x2_cls_tokens_expanded = self.x2_cls_tokens.repeat(N, 1, 1).unsqueeze(2)  # (N, T, 1, D)
-        # Concatenate CLS tokens after each group of 4: (N, T, 4, D) + (N, T, 1, D) -> (N, T, 5, D)
-        x2 = torch.cat([x2, x2_cls_tokens_expanded], dim=2)  # (N, T, 5, D)
-        # Reshape back to sequence: (N, T, 5, D) -> (N, 5T, D)
-        x2 = x2.reshape(N, 5 * T, D)
-        
         # print(f"[DiT Forward] skip: {skip.shape}", flush=True)
         x = self.x_embedder(x) + self.pos_embed  # (N, T, D), where T = H * W / patch_size ** 2
         t = self.t_embedder(t)                   # (N, D), t =
         y = self.y_embedder(y, self.training)    # (N, D)
         c = t + y                                # (N, D)
-        # Pool x2 from shape (N, 5T, D) to (N, T, D) to match x
-        # Need to transpose for avg_pool1d which expects (N, C, L) format
-        # x2 = x2.transpose(1, 2)  # (N, D, 5T)
-        # x2 = torch.avg_pool1d(x2, kernel_size=5, stride=5) # my approach
-        # x2 = -torch.max_pool1d(-x2, kernel_size=5, stride=5) # min pooling (rezghi approach)
-        # Extract CLS tokens: take every 5th row starting from index 4 (before transpose, CLS tokens were at positions 4, 9, 14, ...)
-        # After transpose and pooling, we need to extract from the original x2 before pooling
-        # So we extract from x2 before the pooling operation
-        # x2_cls = x2[:, :, 4::5]  # Extract CLS tokens: (N, D, T)
-        # x2_cls = x2_cls.transpose(1, 2)  # (N, T, D)
-        # x2 = x2.transpose(1, 2)  # (N, T, D)
         # Inject positional info so x2 tokens carry spatial cues like x
         # x2 = x2 + self.pos_embed # turn off for now because it increases FID
         # Optionally condition x2 on c via FiLM before the ViT block
@@ -428,11 +414,10 @@ class DiT(nn.Module):
         # Use projection layers if dimensions don't match
         if self.x2_vit_proj_in is not None:
             x2 = self.x2_vit_proj_in(x2)  # Project to pre-trained ViT dimension
-        x2 = self.x2_vit_block(x2)  # (N, T, D) - processed by pre-trained ViT block
+        x2 = self.x2_vit_block(x2)  # (N, 4T, D) - processed by pre-trained ViT block
         if self.x2_vit_proj_out is not None:
             x2 = self.x2_vit_proj_out(x2)  # Project back to hidden_size
-        # extract CLS tokens from x2
-        x2 = x2[:, 4::5, :]  # Extract CLS tokens: (N, T, D)
+        x2 = max_pool_token_groups(x2, group_size=4)  # (N, T, D)
         # shape of x2 and x
         print(f"[DiT Forward] x2 shape: {x2.shape}, x shape: {x.shape}", flush=True)
         for i, block in enumerate(self.blocks):
