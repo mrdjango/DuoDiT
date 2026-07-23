@@ -188,15 +188,10 @@ def main(args):
     for p in model.x2_embedder.parameters():
         p.requires_grad = True
     
-    # Unfreeze x2_cls_tokens (LEARNABLE CLS TOKENS)
-    if hasattr(model, 'x2_cls_tokens'):
-        logger.info("  - Unfreezing x2_cls_tokens (learnable CLS tokens)...")
-        model.x2_cls_tokens.requires_grad = True
-        cls_token_params = model.x2_cls_tokens.numel()
-        logger.info(f"    ✓ x2_cls_tokens shape: {model.x2_cls_tokens.shape}, parameters: {cls_token_params:,}")
-        assert model.x2_cls_tokens.requires_grad, "x2_cls_tokens should be trainable!"
-    else:
-        logger.warning("  ⚠️  model.x2_cls_tokens not found! This should not happen.")
+    # Unfreeze learned aggregation from four x2 tokens to one main-stream token
+    logger.info("  - Unfreezing x2_group_projection...")
+    for p in model.x2_group_projection.parameters():
+        p.requires_grad = True
     
     # Unfreeze x2_vit_block
     logger.info("  - Unfreezing x2_vit_block...")
@@ -225,7 +220,9 @@ def main(args):
     
     # Breakdown of trainable parameters
     x2_embedder_params = sum(p.numel() for p in model.x2_embedder.parameters() if p.requires_grad)
-    x2_cls_token_params = model.x2_cls_tokens.numel() if hasattr(model, 'x2_cls_tokens') and model.x2_cls_tokens.requires_grad else 0
+    x2_group_projection_params = sum(
+        p.numel() for p in model.x2_group_projection.parameters() if p.requires_grad
+    )
     x2_vit_block_params = sum(p.numel() for p in model.x2_vit_block.parameters() if p.requires_grad)
     x2_proj_in_params = sum(p.numel() for p in model.x2_vit_proj_in.parameters() if p.requires_grad) if model.x2_vit_proj_in is not None else 0
     x2_proj_out_params = sum(p.numel() for p in model.x2_vit_proj_out.parameters() if p.requires_grad) if model.x2_vit_proj_out is not None else 0
@@ -234,7 +231,7 @@ def main(args):
     logger.info(f"\n{'='*60}")
     logger.info(f"Trainable Parameters Breakdown:")
     logger.info(f"  x2_embedder:        {x2_embedder_params:>12,}")
-    logger.info(f"  x2_cls_tokens:      {x2_cls_token_params:>12,}  ⭐ (LEARNABLE CLS TOKENS)")
+    logger.info(f"  x2_group_projection:{x2_group_projection_params:>12,}")
     logger.info(f"  x2_vit_block:       {x2_vit_block_params:>12,}")
     logger.info(f"  x2_vit_proj_in:     {x2_proj_in_params:>12,}")
     logger.info(f"  x2_vit_proj_out:    {x2_proj_out_params:>12,}")
@@ -399,13 +396,6 @@ def main(args):
                     trainable_keys = [k for k, p in model.module.named_parameters() if p.requires_grad]
                     model_state = {k: v for k, v in model.module.state_dict().items() if k in trainable_keys}
 
-                    # Verify x2_cls_tokens is included in checkpoint
-                    cls_token_in_checkpoint = 'x2_cls_tokens' in trainable_keys
-                    if cls_token_in_checkpoint:
-                        logger.info(f"✓ x2_cls_tokens included in checkpoint (shape: {model_state['x2_cls_tokens'].shape})")
-                    else:
-                        logger.warning("⚠️  x2_cls_tokens NOT found in trainable keys - this should not happen!")
-
                     checkpoint = {
                         "model": model_state,
                         "ema": ema.state_dict(),
@@ -436,10 +426,6 @@ def main(args):
                     trainable_keys = [k for k, p in model.module.named_parameters() if p.requires_grad]
                     model_state = {k: v for k, v in model.module.state_dict().items() if k in trainable_keys}
 
-                    # Verify x2_cls_tokens is included in checkpoint
-                    if 'x2_cls_tokens' in trainable_keys:
-                        logger.info(f"✓ x2_cls_tokens included in periodic checkpoint")
-
                     checkpoint = {
                         "model": model_state,
                         # We save full EMA for now to be safe, or we could also just save partial EMA if needed
@@ -460,7 +446,7 @@ def main(args):
                     }
                     checkpoint_path = f"{checkpoint_dir}/{train_steps:07d}.pt"
                     atomic_torch_save(checkpoint, checkpoint_path)
-                    logger.info(f"Saved checkpoint to {checkpoint_path} (Model contains only trainable params, including x2_cls_tokens)")
+                    logger.info(f"Saved checkpoint to {checkpoint_path} (model contains only trainable parameters)")
                 dist.barrier()
 
     model.eval()  # important! This disables randomized embedding dropout

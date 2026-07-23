@@ -27,6 +27,10 @@ def verify_freezing():
     # Check x2_vit_block
     for p in model.x2_vit_block.parameters():
         p.requires_grad = True
+
+    # Check learned four-token aggregation
+    for p in model.x2_group_projection.parameters():
+        p.requires_grad = True
         
     if model.x2_vit_proj_in is not None:
         for p in model.x2_vit_proj_in.parameters():
@@ -56,6 +60,7 @@ def verify_freezing():
     unfrozen_params = [
         model.x2_embedder.proj.weight,
         model.x2_vit_block.norm1.weight,
+        model.x2_group_projection.weight,
         model.final_layer.linear.weight  # final_layer should be trainable
     ]
     if model.x2_vit_proj_in is not None:
