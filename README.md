@@ -9,7 +9,7 @@ Official PyTorch implementation of **DuoDiT**, published in *Multimedia Tools an
 > Mostafa Shahbazi Dil, Mohammad Mahmoudabadi, Mansoor Rezghi<br>
 > *Multimedia Tools and Applications* 85(10), article 780, 2026
 
-![DuoDiT samples](visuals/duodit_samples.jpg)
+![DuoDiT architecture](visuals/duodit_architecture.png)
 
 ## Overview
 
@@ -25,6 +25,10 @@ pre-trained DiT backbone stays frozen.
   Optional variants (`x2_fuse_every`, `x2_condition_with_c`) are in [`models.py`](models.py).
 
 Trainable parts: `x2_embedder`, `x2_cls_tokens`, `x2_vit_block` (+ projections if widths differ) and `final_layer`.
+
+## Samples
+
+![DuoDiT samples](visuals/duodit_samples.jpg)
 
 ## Repository layout
 
