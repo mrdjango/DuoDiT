@@ -8,7 +8,7 @@ sys.path.append(os.getcwd())
 
 from models import DiT_models
 
-def verify_freezing():
+def test_freezing():
     print("Initializing model...")
     model = DiT_models['DiT-XL/2'](
         input_size=32,
@@ -72,4 +72,4 @@ def verify_freezing():
     print(f"Trainable Params: {trainable_params:,} ({trainable_params/total_params:.2%})")
 
 if __name__ == "__main__":
-    verify_freezing()
+    test_freezing()

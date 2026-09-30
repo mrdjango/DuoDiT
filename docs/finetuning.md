@@ -1,6 +1,6 @@
-# DiT x2-Block Fine-Tuning Guide
+# DuoDiT Fine-Tuning Guide
 
-This repository contains a specialized script `train_x2_finetune.py` for fine-tuning **only** the secondary `x2` input stream (embedding + ViT block + projections) of a DiT model while keeping the main backbone frozen.
+This repository provides `train_x2_finetune.py` for fine-tuning **only** the secondary `x2` input stream (embedding + ViT block + projections) of a DiT model while keeping the main backbone frozen.
 
 ## Overview
 
@@ -24,7 +24,7 @@ torchrun --nnodes=1 --nproc_per_node=8 train_x2_finetune.py \
     --model DiT-XL/2 \
     --data-path /path/to/imagenet/train \
     --classes 0 1 2 3 4 5 6 7 8 9 \
-    --batch-size 32 \
+    --global-batch-size 256 \
     --epochs 100
 ```
 
@@ -69,8 +69,8 @@ restores model, EMA, optimizer, global step, and data position. Older checkpoint
 that only contain `step` are supported.
 
 ## Verification
-A test script `test_freezing.py` is included to verify that the freezing logic is working correctly (backbone gradients disabled, x2 gradients enabled).
+A test `tests/test_freezing.py` is included to verify that the freezing logic is working correctly (backbone gradients disabled, x2 gradients enabled).
 
 ```bash
-python test_freezing.py
+python -m pytest tests/test_freezing.py
 ```

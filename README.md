@@ -1,209 +1,150 @@
-## Scalable Diffusion Models with Transformers (DiT)<br><sub>Official PyTorch Implementation</sub>
+# DuoDiT: A Parameter-Efficient Dual-Stream Architecture for Image Generation in Diffusion Transformers
 
-### [Paper](http://arxiv.org/abs/2212.09748) | [Project Page](https://www.wpeebles.com/DiT) | Run DiT-XL/2 [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/wpeebles/DiT) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](http://colab.research.google.com/github/facebookresearch/DiT/blob/main/run_DiT.ipynb) <a href="https://replicate.com/arielreplicate/scalable_diffusion_with_transformers"><img src="https://replicate.com/arielreplicate/scalable_diffusion_with_transformers/badge"></a>
+Official PyTorch implementation of **DuoDiT**, published in *Multimedia Tools and Applications* (Springer, 2026).
 
-![DiT samples](visuals/sample_grid_0.png)
+[![Paper](https://img.shields.io/badge/Paper-Multimedia%20Tools%20and%20Applications-blue)](https://link.springer.com/article/10.1007/s11042-026-21926-y)
+[![DOI](https://img.shields.io/badge/DOI-10.1007%2Fs11042--026--21926--y-informational)](https://doi.org/10.1007/s11042-026-21926-y)
 
-This repo contains PyTorch model definitions, pre-trained weights and training/sampling code for our paper exploring 
-diffusion models with transformers (DiTs). You can find more visualizations on our [project page](https://www.wpeebles.com/DiT).
+> **DuoDiT: a parameter-efficient dual-stream architecture for image generation in diffusion transformers**<br>
+> Mostafa Shahbazi Dil, Mohammad Mahmoudabadi, Mansoor Rezghi<br>
+> *Multimedia Tools and Applications* 85(10), article 780, 2026
 
-> [**Scalable Diffusion Models with Transformers**](https://www.wpeebles.com/DiT)<br>
-> [William Peebles](https://www.wpeebles.com), [Saining Xie](https://www.sainingxie.com)
-> <br>UC Berkeley, New York University<br>
+![DuoDiT vs. baselines](visuals/model_comparison_grid.png)
 
-We train latent diffusion models, replacing the commonly-used U-Net backbone with a transformer that operates on 
-latent patches. We analyze the scalability of our Diffusion Transformers (DiTs) through the lens of forward pass 
-complexity as measured by Gflops. We find that DiTs with higher Gflops---through increased transformer depth/width or
-increased number of input tokens---consistently have lower FID. In addition to good scalability properties, our 
-DiT-XL/2 models outperform all prior diffusion models on the class-conditional ImageNet 512×512 and 256×256 benchmarks, 
-achieving a state-of-the-art FID of 2.27 on the latter.
+## Overview
 
-This repository contains:
+DuoDiT extends a pre-trained [DiT-XL/2](https://github.com/facebookresearch/DiT) (256×256, ImageNet) with a lightweight
+second stream and fine-tunes **only that stream and the output layer** (about 18M of 690M parameters, ≈2.6%). The
+pre-trained DiT backbone stays frozen.
 
-* 🪐 A simple PyTorch [implementation](models.py) of DiT
-* ⚡️ Pre-trained class-conditional DiT models trained on ImageNet (512x512 and 256x256)
-* 💥 A self-contained [Hugging Face Space](https://huggingface.co/spaces/wpeebles/DiT) and [Colab notebook](http://colab.research.google.com/github/facebookresearch/DiT/blob/main/run_DiT.ipynb) for running pre-trained DiT-XL/2 models
-* 🛸 A DiT [training script](train.py) using PyTorch DDP
-* 🔧 A specialized [x2 fine-tuning guide](README_x2_finetune.md) for adapting DiT with frozen backbone
+* **Main stream**: the standard DiT path (patch size 2, 28 adaLN-Zero blocks).
+* **Second stream (`x2`)**: the noisy latent is embedded with finer patches (`patch_size // 2`). A learnable CLS token is
+  appended to every group of four patches, the sequence goes through a single ViT block initialised from a pre-trained
+  timm ViT (`vit_large_patch16_224`, last block), and only the CLS outputs are kept.
+* **Fusion**: the CLS outputs are added to the main-stream tokens after the DiT blocks, just before the final layer.
+  Optional variants (`x2_fuse_every`, `x2_condition_with_c`) are in [`models.py`](models.py).
 
-An implementation of DiT directly in Hugging Face `diffusers` can also be found [here](https://github.com/huggingface/diffusers/blob/main/docs/source/en/api/pipelines/dit.mdx).
+Trainable parts: `x2_embedder`, `x2_cls_tokens`, `x2_vit_block` (+ projections if widths differ) and `final_layer`.
 
+## Repository layout
+
+| Path | Purpose |
+|------|---------|
+| [`models.py`](models.py) | DiT / DuoDiT model definition |
+| [`train_x2_finetune.py`](train_x2_finetune.py) | DuoDiT fine-tuning with a frozen backbone (DDP, resumable) |
+| [`train.py`](train.py) | Original DiT training script |
+| [`sample.py`](sample.py) | Sample a few images |
+| [`sample_ddp.py`](sample_ddp.py) | Sample 50K images for FID (writes an ADM-compatible `.npz`) |
+| [`sample_balanced_ddp.py`](sample_balanced_ddp.py) | Class-balanced sampling |
+| [`compute_classwise_fid.py`](compute_classwise_fid.py) | Class-wise FID with `clean-fid` |
+| [`checkpoint_io.py`](checkpoint_io.py), [`download.py`](download.py), [`diffusion/`](diffusion) | Checkpoint I/O, weight download, diffusion utilities |
+| [`notebooks/`](notebooks) | Evaluation notebooks (FID, KID, LPIPS, CMMD, FD-DINOv2, Vendi) and Colab fine-tuning |
+| [`final_experiments_results/`](final_experiments_results) | Raw logs behind the paper's tables (FID, KID, LPIPS, FLOPs, ablations) |
+| [`docs/`](docs) | Fine-tuning guide and PEFT method notes |
+| [`tests/`](tests) | Unit tests |
 
 ## Setup
 
-First, download and set up the repo:
-
 ```bash
-git clone https://github.com/facebookresearch/DiT.git
-cd DiT
-```
-
-We provide an [`environment.yml`](environment.yml) file that can be used to create a Conda environment. If you only want 
-to run pre-trained models locally on CPU, you can remove the `cudatoolkit` and `pytorch-cuda` requirements from the file.
-
-```bash
+git clone https://github.com/mrdjango/DuoDiT.git
+cd DuoDiT
 conda env create -f environment.yml
 conda activate DiT
 ```
 
+The pre-trained DiT-XL/2 weights and the timm ViT weights are downloaded automatically on first use.
 
-## Sampling [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/wpeebles/DiT) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](http://colab.research.google.com/github/facebookresearch/DiT/blob/main/run_DiT.ipynb)
-![More DiT samples](visuals/sample_grid_1.png)
-
-**Pre-trained DiT checkpoints.** You can sample from our pre-trained DiT models with [`sample.py`](sample.py). Weights for our pre-trained DiT model will be 
-automatically downloaded depending on the model you use. The script has various arguments to switch between the 256x256
-and 512x512 models, adjust sampling steps, change the classifier-free guidance scale, etc. For example, to sample from
-our 512x512 DiT-XL/2 model, you can use:
+## Fine-tuning
 
 ```bash
-python sample.py --image-size 512 --seed 1
+torchrun --nnodes=1 --nproc_per_node=N train_x2_finetune.py \
+    --model DiT-XL/2 \
+    --data-path /path/to/imagenet/train \
+    --classes $(seq -s ' ' 0 999) \
+    --global-batch-size 256 \
+    --pretrained-ckpt DiT-XL-2-256x256.pt
 ```
 
-For convenience, our pre-trained DiT models can be downloaded directly here as well:
+`--classes` selects the ImageNet class indices to train on. Training checkpoints can be resumed with `--resume`. See
+[`docs/finetuning.md`](docs/finetuning.md) for details.
 
-| DiT Model     | Image Resolution | FID-50K | Inception Score | Gflops | 
-|---------------|------------------|---------|-----------------|--------|
-| [XL/2](https://dl.fbaipublicfiles.com/DiT/models/DiT-XL-2-256x256.pt) | 256x256          | 2.27    | 278.24          | 119    |
-| [XL/2](https://dl.fbaipublicfiles.com/DiT/models/DiT-XL-2-512x512.pt) | 512x512          | 3.04    | 240.82          | 525    |
-
-
-**Custom DiT checkpoints.** If you've trained a new DiT model with [`train.py`](train.py) (see [below](#training-dit)), you can add the `--ckpt`
-argument to use your own checkpoint instead. For example, to sample from the EMA weights of a custom 
-256x256 DiT-L/4 model, run:
+## Sampling
 
 ```bash
-python sample.py --model DiT-L/4 --image-size 256 --ckpt /path/to/model.pt
+python sample.py --model DiT-XL/2 --image-size 256 --ckpt /path/to/duodit.pt --cfg-scale 4.0
 ```
 
+## Evaluation
 
-## Training DiT
-
-We provide a training script for DiT in [`train.py`](train.py). This script can be used to train class-conditional 
-DiT models, but it can be easily modified to support other types of conditioning. To launch DiT-XL/2 (256x256) training with `N` GPUs on 
-one node:
+Generate 50K samples and an `.npz` for [ADM's evaluation suite](https://github.com/openai/guided-diffusion/tree/main/evaluations):
 
 ```bash
-torchrun --nnodes=1 --nproc_per_node=N train.py --model DiT-XL/2 --data-path /path/to/imagenet/train
+torchrun --nnodes=1 --nproc_per_node=N sample_ddp.py \
+    --model DiT-XL/2 --ckpt /path/to/duodit.pt --num-fid-samples 50000
 ```
 
-### PyTorch Training Results
-
-We've trained DiT-XL/2 and DiT-B/4 models from scratch with the PyTorch training script
-to verify that it reproduces the original JAX results up to several hundred thousand training iterations. Across our experiments, the PyTorch-trained models give 
-similar (and sometimes slightly better) results compared to the JAX-trained models up to reasonable random variation. Some data points:
-
-| DiT Model  | Train Steps | FID-50K<br> (JAX Training) | FID-50K<br> (PyTorch Training) | PyTorch Global Training Seed |
-|------------|-------------|----------------------------|--------------------------------|------------------------------|
-| XL/2       | 400K        | 19.5                       | **18.1**                       | 42                           |
-| B/4        | 400K        | **68.4**                   | 68.9                           | 42                           |
-| B/4        | 400K        | 68.4                       | **68.3**                       | 100                          |
-
-These models were trained at 256x256 resolution; we used 8x A100s to train XL/2 and 4x A100s to train B/4. Note that FID 
-here is computed with 250 DDPM sampling steps, with the `mse` VAE decoder and without guidance (`cfg-scale=1`). 
-
-**TF32 Note (important for A100 users).** When we ran the above tests, TF32 matmuls were disabled per PyTorch's defaults. 
-We've enabled them at the top of `train.py` and `sample.py` because it makes training and sampling way way way faster on 
-A100s (and should for other Ampere GPUs too), but note that the use of TF32 may lead to some differences compared to 
-the above results.
-
-### Enhancements
-Training (and sampling) could likely be sped-up significantly by:
-- [ ] using [Flash Attention](https://github.com/HazyResearch/flash-attention) in the DiT model
-- [ ] using `torch.compile` in PyTorch 2.0
-
-Basic features that would be nice to add:
-- [ ] Monitor FID and other metrics
-- [ ] Generate and save samples from the EMA model periodically
-- [ ] Resume training from a checkpoint
-- [ ] AMP/bfloat16 support
-
-**🔥 Feature Update** Check out this repository at https://github.com/chuanyangjin/fast-DiT to preview a selection of training speed acceleration and memory saving features including gradient checkpointing, mixed precision training and pre-extrated VAE features. With these advancements, we have achieved a training speed of 0.84 steps/sec for DiT-XL/2 using just a single A100 GPU.
-
-## Evaluation (FID, Inception Score, etc.)
-
-We include a [`sample_ddp.py`](sample_ddp.py) script which samples a large number of images from a DiT model in parallel. This script 
-generates a folder of samples as well as a `.npz` file which can be directly used with [ADM's TensorFlow
-evaluation suite](https://github.com/openai/guided-diffusion/tree/main/evaluations) to compute FID, Inception Score and
-other metrics. For example, to sample 50K images from our pre-trained DiT-XL/2 model over `N` GPUs, run:
+Class-balanced sampling and class-wise FID:
 
 ```bash
-torchrun --nnodes=1 --nproc_per_node=N sample_ddp.py --model DiT-XL/2 --num-fid-samples 50000
+torchrun --nproc_per_node=N sample_balanced_ddp.py --ckpt /path/to/duodit.pt --num-samples 50000
+python compute_classwise_fid.py --real-dir /path/to/real --samples-dir /path/to/generated --output classwise_fid.json
 ```
 
-There are several additional options; see [`sample_ddp.py`](sample_ddp.py) for details. 
+Filenames of balanced samples look like `000000-class0972.png`. For other naming schemes use `--class-map` or
+`--class-regex` (see `python compute_classwise_fid.py --help`). Other metrics (KID, LPIPS, CMMD, FD-DINOv2, Vendi) are
+in [`notebooks/`](notebooks).
 
-### Class-wise clean-fid
+### Reported results
 
-Use `compute_classwise_fid.py` when real images are organized as one directory
-per class and generated images are in one flat directory with class labels in
-their filenames. Install `clean-fid` first (`pip install clean-fid`), or update
-the Conda environment from `environment.yml`:
+Logged results for the 200-epoch DuoDiT model (ImageNet 256×256, 50K samples, ADM suite; raw outputs in
+[`final_experiments_results/`](final_experiments_results)):
+
+| Model | FID ↓ | sFID ↓ | IS ↑ | Precision ↑ | Recall ↑ | KID ↓ | FLOPs | Params (trainable) |
+|-------|-------|--------|------|-------------|----------|-------|-------|--------------------|
+| DuoDiT (200 ep) | 2.22 | 5.19 | 276.7 | 0.81 | 0.59 | 0.0014 | 267.1 G | 690.4M (17.95M) |
+
+Please refer to the paper for the full comparison with DiT, LightningDiT and Fine-Diffusion, and for the ablations.
+
+## Tests
 
 ```bash
-python compute_classwise_fid.py \
-  --real-dir /path/to/real \
-  --samples-dir /path/to/generated \
-  --output classwise_fid.json
+python -m pytest tests
 ```
 
-The default parser supports balanced sampler names such as
-`000000-class0972.png`, direct ImageNet synsets such as
-`000000-classn02099601.png`, and delimited class folder names in filenames.
-If filenames use numeric ImageNet IDs while real folders use synsets such as
-`n02099601`, provide an index-to-synset map:
+## Citation
 
-```bash
-python compute_classwise_fid.py \
-  --real-dir /path/to/imagenet/train \
-  --samples-dir /path/to/generated \
-  --class-map /path/to/imagenet_class_index.json \
-  --output classwise_fid.json
-```
-
-The map may use the common Keras `imagenet_class_index.json` format, a simple
-index-to-synset JSON object, or a text file containing one synset per line in
-class-index order. For another filename format, provide a regex with a
-`class_name` capture:
-
-```bash
-python compute_classwise_fid.py \
-  --real-dir /path/to/real \
-  --samples-dir /path/to/generated \
-  --class-regex 'label_(?P<class_name>[^_]+)_' \
-  --classes cat dog \
-  --output classwise_fid.json
-```
-
-At least two real and two generated images are required per evaluated class.
-Class-wise FID based on small image sets is statistically noisy.
-
-
-## Differences from JAX
-
-Our models were originally trained in JAX on TPUs. The weights in this repo are ported directly from the JAX models. 
-There may be minor differences in results stemming from sampling with different floating point precisions. We re-evaluated 
-our ported PyTorch weights at FP32, and they actually perform marginally better than sampling in JAX (2.21 FID 
-versus 2.27 in the paper).
-
-
-## BibTeX
+If you use this code or find our work useful, please cite:
 
 ```bibtex
-@article{Peebles2022DiT,
-  title={Scalable Diffusion Models with Transformers},
-  author={William Peebles and Saining Xie},
-  year={2022},
-  journal={arXiv preprint arXiv:2212.09748},
+@article{ShahbaziDil2026DuoDiT,
+  title   = {DuoDiT: a parameter-efficient dual-stream architecture for image generation in diffusion transformers},
+  author  = {Shahbazi Dil, Mostafa and Mahmoudabadi, Mohammad and Rezghi, Mansoor},
+  journal = {Multimedia Tools and Applications},
+  volume  = {85},
+  number  = {10},
+  pages   = {780},
+  year    = {2026},
+  doi     = {10.1007/s11042-026-21926-y},
+  url     = {https://doi.org/10.1007/s11042-026-21926-y}
 }
 ```
 
+DuoDiT builds on DiT:
+
+```bibtex
+@inproceedings{Peebles2023DiT,
+  title     = {Scalable Diffusion Models with Transformers},
+  author    = {Peebles, William and Xie, Saining},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year      = {2023}
+}
+```
 
 ## Acknowledgments
-We thank Kaiming He, Ronghang Hu, Alexander Berg, Shoubhik Debnath, Tim Brooks, Ilija Radosavovic and Tete Xiao for helpful discussions. 
-William Peebles is supported by the NSF Graduate Research Fellowship.
 
-This codebase borrows from OpenAI's diffusion repos, most notably [ADM](https://github.com/openai/guided-diffusion).
-
+This codebase is built on [facebookresearch/DiT](https://github.com/facebookresearch/DiT) and borrows from OpenAI's
+[ADM](https://github.com/openai/guided-diffusion) and [timm](https://github.com/huggingface/pytorch-image-models).
 
 ## License
-The code and model weights are licensed under CC-BY-NC. See [`LICENSE.txt`](LICENSE.txt) for details.
+
+The code is released under CC-BY-NC, inherited from DiT. See [`LICENSE.txt`](LICENSE.txt).

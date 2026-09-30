@@ -15,3 +15,8 @@ results/
 pretrained_models/
 logs/
 .ipynb_checkpoints/
+.DS_Store
+**/.DS_Store
+imagenet_hf_download/
+tmp/
+*.log
