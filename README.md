@@ -9,7 +9,7 @@ Official PyTorch implementation of **DuoDiT**, published in *Multimedia Tools an
 > Mostafa Shahbazi Dil, Mohammad Mahmoudabadi, Mansoor Rezghi<br>
 > *Multimedia Tools and Applications* 85(10), article 780, 2026
 
-![DuoDiT vs. baselines](visuals/model_comparison_grid.png)
+![DuoDiT samples](visuals/duodit_samples.jpg)
 
 ## Overview
 
